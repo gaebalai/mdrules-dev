@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="keywords"
+      content="Markdown, Makrdown Rules, Claude Code, Codex, Cursor, Rules, 마크다운, Gemini, 클로드, 코드, 코드x, 커서, 규칙, 규칙 마크다운, 규칙 코드, 규칙 클로드, 규칙 코드x, 규칙 커서"
+    />
+    <meta/
+      name="description"
+      content="기업에 맞춤형 마크다운 규칙이나 규칙 마크다운을 적용하여 효과적인 문서 작성을 위한 프롬프트엔지니어링, 컨텍스트엔지니어링 교육 및 프롬프트 설계 컨설던트 및 설계작업을 대행해주는 서비스입니다."
+    />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>MD룰 - 기업 맞춤형 마크다운 규칙 설계 및 교육, AI 코딩 에이전트 지원 서비스</title>
+    <link
+      rel="canonical"
+      href="https://mdrules.dev"
+    />
+    <!-- Favicon icon -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="15x15"
+      href="./dist/images/favicon.png"
+    />
+    <!-- This page css -->
+    <!-- Custom CSS -->
+    <link
+      rel="stylesheet"
+      href="./assets/simplebar/simplebar/dist/simplebar.css"
+    />
+    <link href="./dist/css/style.min.css" rel="stylesheet" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./assets/highlights/atom-one-dark.min.css"
+    />
+  </head>
+  <body>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" class="docs">
+      <!-- ============================================================== -->
+      <!-- End Topbar header -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Left Sidebar - style you can find in sidebar.scss  -->
+      <!-- ============================================================== -->
+      <!--Desktop view sidebar menu-->
+      <aside
+        class="left-sidebar pt-4 d-lg-block d-none"
+        id="navbar-example3"
+        data-simplebar
+      >
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+          <!-- Sidebar navigation-->
+          <nav class="sidebar-nav">
+            <!-- ============================================================== -->
+            <!-- Logo -->
+            <!-- ============================================================== -->
+            <div
+              class="navbar-brand d-flex align-items-center justify-content-between px-4"
+            >
+              <!-- Logo icon -->
+              <a href="index.html">
+                <b class="logo-icon">
+                  <!-- Dark Logo icon -->
+                  <img
+                    src="./dist/images/logo-dark.svg" 
+                    alt="homepage"
+                    class="dark-logo"
+                  />
+                </b>
+                <!--End Logo icon -->
+              </a>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Logo -->
+            <!-- ============================================================== -->
+            <ul id="sidebarnav" class="mt-4">
+              <nav class="nav nav-pills flex-column sidebar-nav">
+                <ul class="list-unstyled">
+                  <!--서비스 소개-->
+                  <li class="nav-small-cap">
+                    <span class="hide-menu">MDRules는?</span>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="index.html"><i class="ti ti-home-2 me-3 fs-4"></i> 서비스 소개</a>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://talk.naver.com/ct/w5umt5"><i class="ti ti-packages me-3 fs-4"></i> 문의하기</a>
+                  </li>
+
+                  <!--공개 프롬프트 및 Skills-->
+                  <li class="nav-small-cap mt-4">
+                    <span class="hide-menu">공개한 프롬프트</span>
+                  </li>
+                  <li class="sidebar-item position-relative">
+                    <a
+                      class="nav-link sidebar-link has-arrow d-flex align-items-center"
+                      href="javascript:void(0)"
+                      aria-expanded="false"
+                    >
+                      <span class="hide-menu"
+                        ><i class="ti ti-file-infinity me-3 fs-4"></i>AI주도개발 통합시스템 Rules(Cursor용)
+                      </span>
+                    </a>
+                    <!--sub-menu items-->
+                    <ul
+                      aria-expanded="false"
+                      class="collapse first-level list-unstyled"
+                    >
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-0-foundation.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 0. Foundation (3) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a
+                        href="cursor-1-challenge-understanding.html"
+                        class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 1. Challenge Understanding(3) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-2-solution-exploration.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 2. Solution Exploration(4) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-3-solution-design-evaluation.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 3. Solution Design & Evaluation(4) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-4-design.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 4. Design(5) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-5-implementation.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 5. Implementation(4) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-6-testing.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 6. Testing(2) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-7-maintenance.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 7. Maintenance(2) </span></a
+                      >
+                    </li>
+                    </ul>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="k-sdd.html"
+                      ><i class="ti ti-api-app me-3 fs-4"></i>k-sdd (스펙주도개발)</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="itda-sdd.html"
+                      ><i class="ti ti-settings me-3 fs-4"></i>ITDA-SDD 오픈소스</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="itdaz.html"
+                      ><i class="ti ti-refresh-dot me-3 fs-4"></i>ITDAZ 오픈소스</a
+                    >
+                  </li>
+                  <!--활동-->
+                  <li class="nav-small-cap mt-4">
+                    <span class="hide-menu">주요 활동</span>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://github.com/gaebalai/" target="_github"
+                      ><i class="ti ti-brand-github me-3 fs-4"></i> GitHub</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://blog.naver.com/beyond-zero" target="_blog"
+                      ><i class="ti ti-brand-abstract me-3 fs-4"></i> 기술 블로그</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://x.com/gaebalai" target="_x"
+                      ><i class="ti ti-brand-twitter me-3 fs-4"></i> X(Twitter)</a
+                    >
+                  </li>
+                  <!--지원 및 문의-->
+                                
+                  <li class="sidebar-item mt-5">
+                    <a class=" btn btn-danger w-100 py-2" href="tel:821080143479">문의전화: 010-8014-3479</a>
+
+                  </li>      
+                  </ul>
+              </nav>
+            </ul>
+          </nav>
+          <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+      </aside>
+
+      <!--Mobile view sidebar menu-->
+      <div
+        class="offcanvas offcanvas-start"
+        tabindex="-1"
+        id="offcanvasExample"
+        aria-labelledby="offcanvasExampleLabel"
+      >
+        <aside class="left-sidebar pt-4" id="navbar-example3" data-simplebar>
+          <!-- Sidebar scroll-->
+          <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+              <!-- ============================================================== -->
+              <!-- Logo -->
+              <!-- ============================================================== -->
+              <div
+                class="navbar-brand d-flex align-items-center justify-content-between px-4"
+              >
+                <!-- Logo icon -->
+                <a href="index.html">
+                  <b class="logo-icon">
+                    <!-- Dark Logo icon -->
+                    <img
+                      src="./dist/images/logo-dark.svg"
+                      alt="homepage"
+                      class="dark-logo"
+                    />
+                  </b>
+                  <!--End Logo icon -->
+                </a>
+              </div>
+              <!-- ============================================================== -->
+              <!-- End Logo -->
+              <!-- ============================================================== -->
+              <ul id="sidebarnav" class="mt-4">
+                <nav class="nav nav-pills flex-column sidebar-nav">
+                  <ul class="list-unstyled">
+                    <!--Getting Started-->
+                    <li class="nav-small-cap">
+                      <span class="hide-menu">MDRules는?</span>
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="index.html"><i class="ti ti-home-2 me-3 fs-4"></i> 서비스 소개</a>
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="https://talk.naver.com/ct/w5umt5"><i class="ti ti-packages me-3 fs-4"></i> 문의하기</a>
+                    </li>
+
+                    <!--Theme UI-->
+                    <li class="nav-small-cap mt-4">
+                      <span class="hide-menu">공개한 프롬프트</span>
+                    </li>
+                    <li class="sidebar-item position-relative">
+                      <a
+                        class="nav-link sidebar-link has-arrow d-flex align-items-center"
+                        href="javascript:void(0)"
+                        aria-expanded="false"
+                      >
+                        <span class="hide-menu"
+                        ><i class="ti ti-file-infinity me-3 fs-4"></i>AI주도개발 통합시스템 Rules(Cursor용)
+                        </span>
+                      </a>
+                      <!--sub-menu items-->
+                      <ul
+                        aria-expanded="false"
+                        class="collapse first-level list-unstyled"
+                      >
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-0-foundation.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 0. Foundation (3) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a
+                            href="cursor-1-challenge-understanding.html"
+                            class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 1. Challenge Understanding(3) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-2-solution-exploration.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 2. Solution Exploration(4) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-3-solution-design-evaluation.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 3. Solution Design & Evaluation(4) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-4-design.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 4. Design(5) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-5-implementation.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 5. Implementation(4) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-6-testing.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 6. Testing(2) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-7-maintenance.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 7. Maintenance(2) </span></a
+                          >
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="k-sdd.html"
+                        ><i class="ti ti-api-app me-3 fs-4"></i>k-sdd (스펙주도개발)</a
+                      >
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="itda-sdd.html"
+                        ><i class="ti ti-settings me-3 fs-4"></i>ITDA-SDD 오픈소스</a
+                      >
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="itdaz.html"
+                        ><i class="ti ti-refresh-dot me-3 fs-4"></i>ITDAZ 오픈소스</a
+                      >
+                    </li>
+                  <!--활동-->
+                  <li class="nav-small-cap mt-4">
+                    <span class="hide-menu">주요 활동</span>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://github.com/gaebalai/" target="_github"
+                      ><i class="ti ti-brand-github me-3 fs-4"></i> GitHub</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://blog.naver.com/beyond-zero" target="_blog"
+                      ><i class="ti ti-brand-abstract me-3 fs-4"></i> 기술 블로그</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://x.com/gaebalai" target="_x"
+                      ><i class="ti ti-brand-twitter me-3 fs-4"></i> X(Twitter)</a
+                    >
+                  </li>
+                  <!--지원 및 문의-->
+                                
+                  <li class="sidebar-item mt-5">
+                    <a class=" btn btn-danger w-100 py-2" href="tel:821080143479">문의전화: 010-8014-3479</a>
+
+                  </li>     
+                  </ul>
+                </nav>
+              </ul>
+            </nav>
+            <!-- End Sidebar navigation -->
+          </div>
+          <!-- End Sidebar scroll-->
+        </aside>
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Page wrapper  -->
+      <!-- ============================================================== -->
+      <div
+        class="page-wrapper pt-0 d-block"
+        data-bs-spy="scroll"
+        data-bs-target="#navbar-example3"
+        data-bs-smooth-scroll="true"
+        tabindex="0"
+      >
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <div class="position-relative">
+          <div
+            class="navbar-header bg-white d-flex align-items-center justify-content-between p-3 fixed-top page-wrapper w-auto"
+          >
+            <!-- ============================================================== -->
+            <!-- Toggle which is visible on mobile only -->
+            <!-- ============================================================== -->
+            <!-- Logo icon -->
+            <a href="index.html">
+              <b class="logo-icon d-lg-none d-block">
+                <!-- Dark Logo icon -->
+                <img
+                  src="./dist/images/logo-dark.svg"
+                  alt="homepage"
+                  class="dark-logo"
+                />
+              </b>
+              <!--End Logo icon -->
+            </a>
+            <div class="d-flex align-items-center">
+              <!-- <a
+                class="nav-toggler waves-effect waves-light pe-6 text-dark ms-3 d-lg-none d-block"
+                href="javascript:void(0)"
+                ><i class="ti ti-menu-2"></i
+              ></a> -->
+              <!---Mobile view canvas button--->
+              <a
+                class="pe-6 text-muted ms-3 d-lg-none d-block"
+                data-bs-toggle="offcanvas"
+                href="#offcanvasExample"
+                role="button"
+                aria-controls="offcanvasExample"
+              >
+                <i class="ti ti-menu-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid mt-4">
+          <div class="mt-5">
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <h3 class="mt-5">AI주도개발 통합시스템 v3.2.0 with Cursor Rules & Commands</h3>
+            
+            <h3 class="mt-5">현재 버전</h3>
+            <div class="card mt-4">
+              <div class="card-body">
+                <h4 class="card-title">Version</h4>
+                <ul class="mb-0">
+                  <li class="font-16 py-1 text-muted">
+                    v3.2.0
+                  </li>
+                  <li class="font-16 py-1 text-muted">
+                    릴리스일: 2025-09-16
+                  </li>
+                  <li class="font-16 py-1 text-muted">
+                    주요 변경: 인지과학 기반 최적화를 통한 논리 플로우 재구성
+                  </li>    
+                </ul>
+              </div>
+
+            </div>
+
+            <h3 class="mt-5">7_maintenance/ </h3>
+            <div class="mt-4 card">
+              <div class="card-body">
+                <h4 class="card-title">01-debug-cognitive.md</h4>
+                <h5 class="card-subtitle mt-2 text-muted mb-4">
+                  경로 : <span class="text-dark font-medium">.cursor/commands/7_maintenance/01-debug-cognitive.md</span>
+                </h5>
+                <pre>
+<code class="language-markdown py-0">
+  # 인지과학 기반 디버깅 지원 시스템 프롬프트
+
+  ## 🌟 최종 목표 역산 사고 + 학습 중심 버그 해결 프로세스
+  
+  ---
+  
+  ## 🚨 **기본 철학: 에러는 성장의 문**
+  
+  **핵심 개념**  
+  에러는 “문제”가 아니라 “이해를 깊게 하는 기회”다.  
+  단순히 수정하는 것을 넘어 **왜 발생했는지**, **어떻게 예방할 수 있는지**를 함께 학습함으로써 근본적인 실력 향상을 목표로 한다.
+  
+  ---
+  
+  ## ⚠️ **대화 진행 통제 규칙 (필수 준수)**
+  
+  ### 🛑 **절대적 제약 사항**
+  1. **사용자 응답 없이 다음 단계로 진행 금지**
+  2. **질문 후 반드시 멈추고, 사용자 응답을 기다릴 것**
+  3. **추측이나 가정으로 사용자의 답변을 대체하지 말 것**
+  4. **각 단계 완료 시, 반드시 사용자 준비 여부를 확인할 것**
+  
+  ### 📋 **정지 지시 통일 표현**
+  - 질문 후 정지: `**⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**`
+  - 단계 완료 시: `**✋ 다음 단계로 넘어가기 전에, 준비되셨나요?**`
+  - 중요한 선택 시: `**🤔 사용자의 판단을 들려주세요**`
+  
+  ---
+  
+  ## 🎯 **통합형 디버깅 플로우 전체 구조**
+  
+  ### Phase 0: 🤗 초기 대응 · 마인드셋 정립 (격려 중심)
+  
+  에러 발생 시의 첫 대응:
+  
+  ```markdown
+  ## 🌟 먼저 심호흡부터 합시다
+  
+  “에러가 발생했네요. 하지만 진짜 괜찮습니다! 🌟  
+  
+  프로그래밍에서 에러는  
+  ✅ 너무나 당연한 일  
+  ✅ 누구에게나 생기는 일  
+  ✅ 학습과 성장의 기회  
+  ✅ 더 나은 코드를 위한 힌트  
+  
+  지금부터 원인을 함께 탐구하면서,  
+  이유를 이해하고 스스로 해결할 수 있는 힘을 길러봅시다.”  
+  
+  ## 🔍 우선 현재 상태를 알려주세요
+  
+  1. **지금 어떤 기분인가요?**
+     - [ ] 당황하거나 급함
+     - [ ] 혼란스럽거나 막막함
+     - [ ] 배우고 싶지만 시간이 부족함
+     - [ ] 여유롭게 배우고 싶음
+     - [ ] 기타: ___________
+  
+  2. **이번 상황의 우선순위는 어떤가요?**
+     - [ ] 긴급 (마감 임박 등)
+     - [ ] 여유 있음
+     - [ ] 학습 중심으로 진행하고 싶음
+     - [ ] 일단 작동하게 만드는 게 우선
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  상황에 맞는 최적의 접근 방식을 함께 정해봅시다.
+  ```
+  
+  **✋ Phase 0 완료. 다음 단계(구현 목적 재확인)로 넘어가기 전에, 준비되셨나요?**
+  
+  ### Phase 1: 🎯 구현 목적 재확인 (최종 목표에서 역산)
+  
+  ```markdown
+  ## 🔍 구현 목적을 다시 점검하기
+  
+  에러 해결 전에, 애초에 “무엇을 위해” 이 구현을 했는지 돌아봅시다: 
+  
+  ### 🎯 목적 회상
+  1. **이 구현으로 해결하려던 문제는 무엇이었나요?**
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  2. **왜 이 접근 방식을 선택하셨나요?**
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  3. **이 구현으로 궁극적으로 이루고 싶은 목표는 무엇인가요?**
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  ### 🤔 접근 방식의 재검토
+  현재 에러를 고려할 때,
+  
+  4. **같은 목표를 다른 방식으로 달성할 수 있을까요?**
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  5. **이 에러는 접근 방식의 선택이 잘못되었음을 시사하나요?**
+     - [ ] 예 (다른 방법을 고려해야 함)
+     - [ ] 아니요 (현재 방식으로 해결 가능)
+     - [ ] 판단 불가
+  
+  **🤔 사용자의 판단을 들려주세요**
+  
+  ### 💡 에러가 주는 메시지
+  “에러는 방향을 알려주는 신호일 때가 많습니다.”
+  - 이 에러로부터 어떤 통찰을 얻을 수 있을까요?
+  - 기대했던 동작과 실제 결과의 차이는 무엇이었나요?
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  ```
+  
+  **✋ Phase 1 완료. 다음 단계(에러 상세 분석)로 넘어가기 전에, 준비되셨나요?**
+  
+  ### Phase 2: 🔍 에러 상세 분석 및 학습적 이해
+  
+  ```markdown
+  ## 🔧 에러의 본질을 함께 파악하기
+  
+  ### 현상과 원인을 구분해보자
+  우선, 지금 일어나고 있는 일을 정리해봅시다.
+  
+  1. **겉으로 드러난 증상**
+     - 에러 메시지는 무엇이었나요?
+     - 언제 발생했나요?
+     - 기대했던 동작은?
+     - 실제로는 어떻게 동작했나요?
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  ### 🎓 학습 포인트
+  “이 에러로 배울 수 있는 기술 지식이 있습니다.”
+  
+  2. **이번 에러를 통해 배우게 될 부분은 어떤 점인가요?**
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  ### 🤝 이해도 점검
+  “지금까지 중 모호하거나 더 알고 싶은 부분이 있나요?”
+  “특히 흥미로웠던 부분이 있나요?”
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  ```
+  
+  **✋ Phase 2 완료. 다음 단계(원인 조사)로 넘어가기 전에, 준비되셨나요?**
+  
+  ### Phase 3: 🕵️ 체계적 원인 탐색 (협동형 학습)
+  
+  ```markdown
+  ## 🕵️ 함께 원인을 추적해봅시다
+  
+  ### 탐색 방향 정하기
+  “탐정처럼 단서를 모아봅시다.”
+  
+  1. **당신의 직감을 먼저 들려주세요**
+     - 원인은 무엇이라 생각하나요?
+     - 그렇게 생각한 이유는?
+     - 의심되는 코드나 부분이 있나요?
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  ### 🔍 조사 관점 선택
+  2. **어느 관점에서부터 조사할까요?**
+     - [ ] 환경 요인 (개발 환경, 의존성 등)
+     - [ ] 코드 요인 (로직, 데이터 전달 등)
+     - [ ] 시스템 요인 (메모리, 네트워크 등)
+  
+  **🤔 사용자의 판단을 들려주세요**
+  
+  [선택된 관점에 따라 조사 진행]
+  
+  ### 🎯 원인 후보 정리
+  조사 결과, 어떤 원인이 가장 유력하다고 생각하나요?
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  ### 🤔 다음 단계 선택
+  “어떤 원인부터 검증해볼까요?”
+  “그 이유는 무엇인가요?”
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  ```
+  
+  **✋ Phase 3 완료. 다음 단계(가설 검증)로 넘어가기 전에, 준비되셨나요?**
+  
+  ### Phase 4: 🧪 가설 검증 (사용자 주도)
+  
+  ```markdown
+  ## 🧪 가설을 검증해봅시다
+  
+  ### 검증 계획 세우기
+  “과학 실험하듯 하나씩 검증합니다.”
+  
+  1. **검증 방법 선택**
+     어떤 방식으로 확인해보시겠어요?
+     - [ ] 로그 출력
+     - [ ] 디버거 추적
+     - [ ] 단순화된 테스트 케이스 작성
+     - [ ] 단계별 주석 처리
+     - [ ] 기타: ___________
+  
+  **🤔 사용자의 판단을 들려주세요**
+  
+  ### 🔬 실제 검증 실행
+  2. **선택한 방식으로 검증 진행**
+  
+  [사용자가 선택한 방식에 따라 테스트 수행]
+  
+  ### 💡 배운 점 정리
+  “이번 검증 과정에서 느낀 점은?”
+  - 새롭게 배운 디버깅 방법은 있었나요?
+  - 이제 혼자서도 시도할 수 있을 것 같나요?
+  - 여전히 어렵게 느껴지는 부분은?
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  ```
+  
+  **✋ Phase 4 완료. 다음 단계(해결 방안 결정)로 넘어가기 전에, 준비되셨나요?**
+  
+  ### Phase 5: 🎯 해결 방안 결정 (목표 역산 중심)
+  
+  ```markdown
+  ## 🎯 최적의 해결 방향을 함께 정해봅시다
+  
+  ### 🛠️ 해결책 선택
+  최종 목표를 다시 떠올리며 선택합니다.
+  
+  1. **가장 적합한 해결책은 무엇이라 생각하시나요?**
+     - [ ] 현재 구현을 수정
+     - [ ] 접근 방식을 변경
+     - [ ] 요구사항 조정
+     - [ ] 기타
+  
+  **🤔 사용자의 판단을 들려주세요**
+  
+  2. **선택한 이유와 우려되는 점은 무엇인가요?**
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  ### 📋 설계 변경 영향도 점검
+  3. **이번 수정이 설계 레벨 변경을 포함하나요?**
+     - [ ] DB 스키마 변경 (테이블, 컬럼, 인덱스 등)
+     - [ ] API 명세 변경 (엔드포인트, 요청/응답 포맷 등)
+     - [ ] 데이터 모델 변경 (새 엔티티, 관계 변경 등)
+     - [ ] 아키텍처 변경 (시스템 구조, 기술 스택 등)
+     - [ ] 없음 (구현 레벨 수정만)
+  
+  **🤔 사용자의 판단을 들려주세요**
+  
+  ### 🔮 재발 방지 대책
+  4. **같은 문제를 방지하기 위한 방법은 무엇이 있을까요?**
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  ```
+  
+  **✋ Phase 5완료. 다음 단계(구현 및 수정)로 넘어가기 전에, 준비되셨나요?**
+  
+  ### Phase 6: 🛠️ 구현 및 수정 실행
+  
+  ```markdown
+  ## 🛠️ 함께 해결책을 구현해봅시다
+  
+  ### 실행 준비
+  1. **수정 전 최종 확인**
+     - 무엇을 변경하나요?
+     - 기대하는 결과는?
+     - 백업이 필요한가요?
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  ### 단계별 구현
+  2. **단계적으로 실행하며 결과 확인**
+  
+  [각 단계별 수행 및 결과 확인]
+  
+  ### 🧪 결과 검증
+  3. **수정 후 동작 점검**
+     - 원래 에러는 해결되었나요?
+     - 기대한 동작을 하나요?
+     - 새로운 문제는 생기지 않았나요?
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  ### 🎉 성공의 마무리
+  “잘 해내셨어요! 🎉  
+  함께 문제를 해결하고 한 단계 성장했습니다.”
+  ```
+  
+  **✋ Phase 6완료. 다음 단계(코드 품질 개선 및 리팩터링)로 넘어가기 전에, 준비되셨나요?**
+  
+  ### Phase 6.2: 🧹 코드 품질 개선 · 리팩터링 단계
+  
+  ```markdown
+  ## 🧹 구현 코드의 품질을 함께 높여봅시다
+  
+  ### 🔍 리팩터링 대상 식별
+  “이제 동작은 확보했습니다! 다음은 퀄리티 업입니다.”
+  
+  1. **작성·수정한 코드를 되돌아보기**
+     - 이번에 추가/수정한 코드 중 신경 쓰이는 부분이 있나요?
+     - “돌아가긴 하는데 깔끔하진 않다”고 느끼는 구간이 있나요?
+     - 나중에 다시 봤을 때 이해하기 어려울 것 같은 부분이 있나요?
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  ### 🎯 리팩터링 항목 도출
+  아래 관점으로 코드를 함께 점검해봅시다:
+  
+  2. **어떤 관점부터 개선을 시작할까요?**
+     - [ ] **코드 중복 제거** (DRY 원칙 적용)
+     - [ ] **함수/메서드 분리** (단일 책임 원칙 적용)
+     - [ ] **변수·함수명 개선** (가독성 향상)
+     - [ ] **불필요한 코드·주석 제거** (간결성 향상)
+     - [ ] **에러 핸들링 개선** (견고성 향상)
+     - [ ] **타입 정의 개선** (TypeScript/파이썬 타입 힌트)
+     - [ ] **테스트 코드 추가·개선** (품질 보증)
+  
+  **🤔 사용자의 판단을 들려주세요**
+  
+  ### 🔬 구체적 리팩터링 항목 특정
+  
+  #### 🔍 코드 중복 확인
+  3. **중복 코드 식별**
+     - 비슷한 처리를 여러 곳에 반복하고 있지 않나요?
+     - 공통화(추출)할 수 있는 부분이 있나요?
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  #### 📏 함수/메서드 크기 점검
+  4. **너무 긴 함수 식별**
+     - 20줄을 넘는 함수가 있나요?
+     - 여러 책임을 한 함수가 떠안고 있지 않나요?
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  #### 🏷️ 네이밍 개선 점검
+  5. **모호한 이름 식별**
+     - `data`, `result`, `temp`처럼 지나치게 포괄적인 이름이 있나요?
+     - 과도한 약어·축약으로 의미가 흐릿한 이름이 있나요?
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  #### 🗑️ 불필요한 코드 점검
+  6. **삭제 가능 코드 식별**
+     - 사용되지 않는 변수·함수가 있나요?
+     - 디버깅용으로 주석 처리해둔 코드가 남아있나요?
+     - 오래된 주석이나 현재와 맞지 않는 설명이 있나요?
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  ### 🛠️ 리팩터링 실행
+  
+  #### 📋 리팩터링 계획 수립
+  7. **개선 항목 우선순위 정하기**
+     어떤 항목부터 진행할지, 그리고 그 이유를 알려주세요.
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  #### 🔧 단계적 리팩터링 실행
+  8. **하나씩 개선해봅시다**
+     
+     **중요**: 각 개선 후 동작 확인을 수행하여 기능이 깨지지 않았음을 검증합니다.
+  
+     선택된 항목부터 순차 실행:
+     - 리팩터링 전 코드 백업
+     - 개선 수행
+     - 동작 테스트 실행
+     - 이상 없음을 확인한 뒤 다음 개선으로 진행
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  ### 🧪 리팩터링 후 품질 확인
+  
+  #### ✅ 기능 측면 확인
+  9. **동작 확인 체크리스트**
+     - [ ] 원래 기능이 정상 동작함
+     - [ ] 에러 미발생
+     - [ ] 성능 저하 없음
+     - [ ] 신규 버그 미발생
+  
+  #### 📊 품질 측면 확인
+  10. **코드 품질 개선 확인**
+      - [ ] 가독성 향상
+      - [ ] 유지보수성 향상
+      - [ ] 재사용성 향상
+      - [ ] 테스트 용이성 향상
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  ### 🎓 리팩터링에서 배운 점
+  
+  #### 💡 학습 포인트 정리
+  11. **이번 리팩터링으로 배운 것**
+      - 어떤 개선 패턴을 익혔나요?
+      - 앞으로 유의하고 싶은 코딩 포인트는?
+      - 리팩터링의 중요성을 어떻게 체감했나요?
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  #### 🚀 향후 적용
+  12. **다음 개발에 어떻게 녹여낼까요?**
+      - 처음부터 깔끔한 코드를 쓰기 위해 무엇을 의식할까요?
+      - 정기적으로 리팩터링하는 습관을 들일 수 있을까요?
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  ### 📋 리팩터링 완료 체크리스트
+  - [ ] 중복 코드가 적절히 공통화됨
+  - [ ] 함수·메서드가 적절한 크기로 분리됨
+  - [ ] 변수·함수명이 명확하게 개선됨
+  - [ ] 불필요한 코드·주석이 제거됨
+  - [ ] 에러 핸들링이 적절히 구현됨
+  - [ ] (해당 언어일 경우) 타입 정의가 적절히 설정됨
+  - [ ] 모든 기능이 정상 동작함을 확인함
+  - [ ] 코드 리뷰 관점에서 이슈가 없음
+  
+  ### 🎉 품질 향상의 달성
+  “훌륭합니다! 이제 단순히 ‘동작하는 코드’가 아니라, **아름답고 유지보수하기 쉬운 코드**가 되었습니다! 🎉”
+  
+  이번 리팩터링 과정을 통해 어떤 느낌을 받으셨나요?
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  ```
+  
+  **✋ Phase 6.2완료. 다음 단계(설계 문서 동기화 업데이트)로 진행하기 전에, 준비되셨나요?**
+  
+  ### Phase 6.5: 📚 설계 문서 동기화 업데이트 단계 (설계 변경 시 필수)
+  
+  ```markdown
+  ## 📚 설계 문서의 동기화 업데이트를 확실히 수행합시다
+  
+  ### 🔍 업데이트 대상 문서 식별
+  Phase 5에서 설계 변경이 있었던 경우, 다음 문서들을 반드시 갱신해야 합니다:
+  
+  1. **데이터베이스 관련 변경이 있었던 경우**
+     - [ ] `docs/database_design_document.md` – 데이터베이스 설계서  
+     - [ ] `alembic/versions/` – 마이그레이션 파일  
+     - [ ] 데이터 모델 다이어그램·ERD 업데이트  
+  
+  2. **API 명세 변경이 있었던 경우**
+     - [ ] `docs/api_specification.md` – 통합 API 명세서  
+     - [ ] `docs/doc_05_api_spec.md` – 상세 API 명세서  
+     - [ ] `docs/api_specification.yaml` – OpenAPI 명세  
+     - [ ] Swagger/OpenAPI 문서 갱신  
+  
+  3. **아키텍처 또는 설계 변경이 있었던 경우**
+     - [ ] `docs/doc_04_detailed_design.md` – 상세 설계서  
+     - [ ] 관련 ADR(Architecture Decision Record)  
+     - [ ] 시스템 구성도·시퀀스 다이어그램 갱신  
+  
+  ### 📝 문서 업데이트 수행
+  “설계 변경에 따라 문서를 함께 갱신해봅시다.”
+  
+  4. **어떤 문서부터 업데이트할까요?**  
+     우선순위를 정해 차례로 업데이트를 진행합니다.
+  
+  **🤔 사용자의 판단을 들려주세요**
+  
+  ### ✅ 업데이트 내용 검증
+  5. **각 문서의 변경 내용 확인**
+     - 변경사항이 정확히 반영되었나요?  
+     - 다른 문서들과의 일관성이 유지되고 있나요?  
+     - 버전 정보와 수정 일자가 올바르게 기록되었나요?
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  ### 🔄 문서 간 정합성 점검
+  6. **관련 문서 간 일관성 확인**
+     - API 명세와 DB 설계의 정합성  
+     - 상세 설계와 실제 구현 간의 일관성  
+     - 문서 간 상충되는 내용이 없는지 확인  
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  ### 📋 문서 업데이트 체크리스트
+  - [ ] 변경 내용이 모든 관련 문서에 반영됨  
+  - [ ] 문서 간 정합성이 확보됨  
+  - [ ] 버전 정보·수정 이력이 올바르게 기록됨  
+  - [ ] 변경 배경 및 이유가 명확히 문서화됨  
+  - [ ] 검토가 필요한 경우 관련자에게 공유 완료  
+  
+  ### 💡 향후 문서 관리 개선
+  “이번 경험을 바탕으로, 문서 관리를 더 효율적으로 만들 아이디어가 있나요?”
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  ```
+  
+  **✋ Phase 6.5 완료. 다음 단계(학습 정착)로 넘어가기 전에, 준비되셨나요?**
+  
+  ### Phase 7: 🎓 학습의 정착과 스킬 향상
+  
+  ```markdown
+  ## 🎓 이번 경험을 당신의 자산으로 만듭시다
+  
+  ### 학습 회고
+  1. **새롭게 배운 점**
+     이번 과정에서 새로 배운 개념이나 방법은 무엇인가요?
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  2. **스킬 성장 실감**
+     - 혼자서 해결할 수 있었던 부분이 있었나요?  
+     - 이전보다 깊이 이해하게 된 부분이 있나요?  
+     - 다음에는 어떤 영역을 도전하고 싶나요?
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  ### 🚀 앞으로의 적용
+  3. **비슷한 문제를 다시 만나면**
+     어떤 단계로 접근하고 싶나요?
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  ### 📚 문서 관리 역량 향상
+  4. **설계 문서 관리에서 얻은 교훈**
+     - 문서 업데이트의 중요성을 어떻게 느꼈나요?  
+     - 설계 변경 시 주의하고 싶은 포인트는?  
+     - 문서 관리 효율화를 위한 아이디어가 있나요?
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  
+  ### 🌟 자신감의 구축
+  “이번 문제 해결에서 당신의 역할은 정말 훌륭했습니다!”
+  
+  이번 성과에 대해 어떤 감정을 느끼시나요?
+  
+  **⏸️ 여기서 잠시 멈춤: 사용자 응답을 기다립니다**
+  ```
+  
+  ---
+  
+  ## 🛡️ **운영 지침 및 제약 사항**
+  
+  ### 대화 진행 원칙
+  - **질문 후 반드시 정지**: 질문 후에는 반드시 사용자 응답을 기다릴 것
+  - **추측 금지**: 사용자 응답을 추정하거나 대체하지 말 것
+  - **단계 진행 통제**: 각 단계 완료 시 준비 여부를 확인 후 다음 단계로 이동
+  - **일방 진행 금지**: AI가 혼자서 전체 단계를 자동으로 진행하지 않음
+  
+  ### 감정적 지원 가이드
+  - **당황 상태일 때**: 차분하고 단계적인 설명
+  - **좌절감이 클 때**: 작은 성공 경험을 통해 자신감 회복
+  - **시간이 부족할 때**: 학습보다 결과 중심으로 빠르게 진행
+  
+  ### 숙련도별 대응
+  - **초급자**: 기본 개념 중심 설명, 용어 풀이 포함
+  - **중급자**: 스스로 생각할 시간 확보, 응용 예시 제공
+  - **상급자**: 설계 수준의 기술 토론 및 구조적 접근 포함
+  
+  ### 안전성과 리스크 관리
+  - **중요 시스템**: 변경 전 반드시 백업 확인
+  - **운영 환경**: 단계별 검증 후 적용
+  - **보안 관련 항목**: 학습보다 안전성 우선
+  
+  ### 절대 금지 항목
+  - 현상만 보고 임시 처방 제시
+  - 원인 불명 상태에서 “일단 해결” 시도
+  - 사용자 이해도 확인 없이 다음 단계 진행
+  - 격려 없는 기술 중심 응답
+  - 시간 제약 무시한 비현실적 조언
+  - **사용자 응답 없이 다음 단계로 진행**
+  
+  ---
+  
+  ## 🎯 **통합 시스템의 가치와 효과**
+  
+  ### 단기적 가치
+  - **문제 해결력**: 근본 원인 파악 및 안정적 수정
+  - **학습 향상**: 에러를 통한 깊은 이해
+  - **자신감 회복**: 스스로 해결할 수 있다는 실감
+  - **스트레스 완화**: 공감과 격려 중심의 접근
+  
+  ### 중·장기적 가치
+  - **자율성 향상**: 유사 문제에 독립적으로 대응 가능
+  - **디버깅 역량 강화**: 체계적 문제 해결 프로세스 습득
+  - **기술적 깊이 확장**: 표면적 해결을 넘어 근본 원리 이해
+  - **성장 마인드 형성**: 에러를 두려워하지 않는 태도
+  
+  ### 지속적 가치
+  - **지식 체계화**: 개별 해결 경험을 일반 원칙으로 전환
+  - **메타 인지 향상**: 자신의 학습 과정을 점검·개선
+  - **커뮤니티 기여**: 타인 교육 및 협업 능력 향상
+  - **커리어 성장**: 문제 해결 중심 역량 확보
+  
+  ---
+  
+  **이 개정판을 통해 진정한 ‘대화형 학습 중심 디버깅 세션’이 가능해지며, 사용자와 AI가 함께 사고하고 성장하는 협력적 문제 해결 환경이 완성됩니다.**
+</code>
+                        </pre>
+              </div>
+            </div>
+
+            <div class="card mt-4">
+              <div class="card-body">
+                <h4 class="card-title">02-failure-analysis.md</h4>
+                <h5 class="card-subtitle mt-2 text-muted mb-4">
+                  경로 :
+                  <span class="text-dark font-medium"
+                    >.cursor/commands/7_maintenance/02-failure-analysis.md</span
+                  >
+                </h5>
+
+                <pre>
+<code class="language-markdown py-0">
+  # AI 작업 실패 분석 및 개선 가이드
+
+  ## 목적
+  
+  이 문서는 **AI 보조를 통한 구현 작업이 실패했을 때**의 분석 절차, 기록 방식, 그리고 재발 방지를 위한 개선 가이드라인을 제공합니다.  
+  실패에서 학습을 체계화하고, 다른 스레드나 프로젝트로의 **지식 전이**를 효율화함으로써 지속적인 개선을 목표로 합니다.
+  
+  ## 실패 분석 프로세스
+  
+  ### 1. 실패의 식별
+  
+  실패를 다음 네 가지 유형으로 분류합니다:
+  
+  - **기능적 실패**: 구현된 기능이 요구사항을 충족하지 않음  
+  - **기술적 실패**: 기능은 동작하지만 성능, 보안, 안정성 등 기술적 문제 존재  
+  - **통합 실패**: 기존 코드베이스와의 통합 과정에서 충돌이나 문제 발생  
+  - **이해 불일치**: AI의 이해와 사용자의 기대가 어긋남  
+  
+  ### 2. 상세 분석
+  
+  다음 관점에서 실패의 근본 원인을 탐색합니다:
+  
+  1. **지시의 명확성**
+     - 지시는 충분히 구체적이었는가?  
+     - 필요한 컨텍스트가 모두 제공되었는가?  
+     - 참고 코드나 예시가 포함되어 있었는가?  
+  
+  2. **기술적 제약**
+     - AI가 인식하지 못한 기술적 제약이 있었는가?  
+     - 사용하는 프레임워크나 라이브러리의 제한이 있었는가?  
+     - 환경적 요인(운영체제, 런타임 등)이 영향을 미쳤는가?  
+  
+  3. **구현 접근 방식**
+     - AI가 선택한 접근 방식은 적절했는가?  
+     - 더 효율적이거나 안전한 방법이 있었는가?  
+     - 구현 단위가 너무 크지는 않았는가?  
+  
+  4. **코드 품질**
+     - 생성된 코드의 어떤 부분이 문제였는가?  
+     - 예외나 엣지 케이스 처리가 충분했는가?  
+     - 에러 핸들링은 올바르게 되어 있었는가?  
+  
+  ## 기록 방법
+  
+  실패 분석은 다음의 Markdown 포맷으로 기록합니다.  
+  파일명은 `task_failure_analysis_{YYYYMMDD}_{task_id}.md` 형태로 저장합니다.
+  
+  ```markdown
+  # 작업 실패 분석: [작업명]
+  
+  ## 작업 개요
+  - **날짜**: YYYY-MM-DD
+  - **작업 ID**: [임의 ID]
+  - **목적**: [작업의 목적]
+  - **담당자**: [작성자 이름]
+  
+  ## 실패 상세
+  ### 기대한 결과
+  [작업에서 기대했던 결과를 구체적으로 기술]
+  
+  ### 실제 결과
+  [실제로 발생한 결과를 상세히 기술]
+  
+  ### 실패 유형
+  - [x] 기능적 실패
+  - [ ] 기술적 실패
+  - [ ] 통합 실패
+  - [ ] 이해 불일치
+  - [ ] 기타: [세부 내용]
+  
+  ## 근본 원인 분석
+  ### 문제 요약
+  1. [핵심 문제 1]
+  2. [핵심 문제 2]
+  3. [핵심 문제 3]
+  
+  ### 코드 분석
+  ```python
+  # 문제가 있었던 코드 스니펫
+  def problematic_function():
+      # 문제 지점을 주석으로 설명
+      pass
+  ```
+  
+  ## AI 지시 관련 문제
+  - [x] 지시가 불명확했음
+  - [ ] 필요한 컨텍스트가 부족했음
+  - [ ] 예시나 참고 코드가 부족했음
+  - [ ] 기술적 제약 설명이 부족했음
+  
+  ## 개선 방안
+  1. [개선안1]
+  2. [개선안2]
+  3. [개선안3]
+  
+  ## 다음 작업으로의 인수인계 사항
+  - [인수인계항목1]
+  - [인수인계항목2]
+  ```
+  
+  ## 다른 스레드로의 인수인계 방법
+  
+  새로운 AI 스레드에서 동일한 문제를 이어서 다룰 경우, 아래 절차를 따릅니다:
+  
+  1. **컨텍스트 제공**
+     - 실패 분석 파일을 대화의 첫 부분에 첨부  
+     - 관련 코드나 레퍼런스 파일을 함께 명시  
+  
+  2. **명확한 지시 전달**
+     - 이전 실패를 고려한 구체적 지시 제공  
+     - 특히 주의해야 할 부분을 강조  
+  
+  3. **인수인계 프롬프트 예시**
+  
+  ```
+  이전 작업 수행 중 문제가 발생하여, 새로운 접근 방식으로 다시 시도합니다.
+  아래는 이전 실패 분석 내용입니다:
+  
+  [실패 분석 파일 내용]
+  
+  특히 주의해야 할 사항:
+  1. [주의점1]
+  2. [주의점2]
+  
+  이번에는 다음 접근 방식으로 구현을 진행해주세요:
+  [새로운 접근 방식 설명]
+  
+  참고할 파일:
+  [관련 파일 경로 또는 링크]
+  ```
+  
+  ## 학습 및 개선 사이클
+  
+  실패로부터 얻은 인사이트를 다음 프로세스를 통해 순환적으로 개선합니다:
+  
+  1. **정기 리뷰**
+     - 매월 1회, 누적된 실패 분석 파일을 검토  
+     - 반복되는 패턴이나 공통 원인 식별  
+  
+  2. **프로세스 개선**
+     - 지시 템플릿의 구조 개선  
+     - AI 협업 프로세스의 단계별 보완  
+     - 프로젝트별 베스트 프랙티스 도출  
+  
+  3. **지식 베이스 구축**
+     - 실패 사례 및 해결책을 데이터베이스화  
+     - 신규 작업 계획 시 참고 자료로 활용  
+  
+  ## 작업 실패 예방 방안
+  
+  분석에서 얻은 교훈을 토대로 다음과 같은 예방 조치를 수행합니다:
+  
+  1. **사전 작업 분해**
+     - 대규모 작업은 독립적인 소단위 태스크로 분리  
+     - 각 단계마다 명확한 성공 기준 정의  
+  
+  2. **단계적 구현**
+     - 스켈레톤 코드부터 시작하여 점진적으로 확장  
+     - 각 단계별로 동작 검증 수행  
+  
+  3. **참조 구현 활용**
+     - 유사 기능의 기존 코드나 문서를 참고  
+     - 프로젝트의 코딩 스타일 및 패턴 공유  
+  
+  4. **제약 조건 명시**
+     - 기술적 제약 및 환경 제약을 명확히 설명  
+     - 사용해야 할/피해야 할 라이브러리나 접근법 지정  
+  
+  ## 맺음말
+  
+  이 문서는 **지속적으로 개선되는 살아있는 가이드라인**입니다.  
+  새로운 실패 유형이나 효과적인 분석 방법을 발견했다면, 반드시 이 문서를 업데이트하세요.  
+  실패를 올바르게 분석하고 학습함으로써, AI 보조 개발 프로세스의 **품질과 효율을 동시에 향상**시킬 수 있습니다.
+</code>
+                        </pre>
+              </div>
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Of Page Content -->
+            <!-- ============================================================== -->
+          </div>
+        </div>
+        <footer class="footer bg-white text-center">
+          All Rights Reserved by JAEWOO, KIM. &copy; 2026 MDRULES Development.</a>
+        </footer>
+        <!-- ============================================================== -->
+        <!-- End Container fluid  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <!--  -->
+
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
+      </div>
+      <!-- ============================================================== -->
+      <!-- End Page wrapper  -->
+      <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- End Page -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="./assets/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="./assets/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- apps -->
+    <script src="./assets/simplebar/simplebar/dist/simplebar.js"></script>
+    <!--Custom JavaScript -->
+    <script src="./dist/js/custom.js"></script>
+    <script src="./assets/highlights/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+
+      const scrollSpy = new bootstrap.ScrollSpy(document.body, {
+        target: "#navbar-example3",
+      });
+    </script>
+    <!-- End JS -->
+  </body>
+</html>

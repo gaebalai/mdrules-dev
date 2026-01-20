@@ -1,0 +1,2175 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="keywords"
+      content="Markdown, Makrdown Rules, Claude Code, Codex, Cursor, Rules, 마크다운, Gemini, 클로드, 코드, 코드x, 커서, 규칙, 규칙 마크다운, 규칙 코드, 규칙 클로드, 규칙 코드x, 규칙 커서"
+    />
+    <meta/
+      name="description"
+      content="기업에 맞춤형 마크다운 규칙이나 규칙 마크다운을 적용하여 효과적인 문서 작성을 위한 프롬프트엔지니어링, 컨텍스트엔지니어링 교육 및 프롬프트 설계 컨설던트 및 설계작업을 대행해주는 서비스입니다."
+    />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>MD룰 - 기업 맞춤형 마크다운 규칙 설계 및 교육, AI 코딩 에이전트 지원 서비스</title>
+    <link
+      rel="canonical"
+      href="https://mdrules.dev"
+    />
+    <!-- Favicon icon -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="15x15"
+      href="./dist/images/favicon.png"
+    />
+    <!-- This page css -->
+    <!-- Custom CSS -->
+    <link
+      rel="stylesheet"
+      href="./assets/simplebar/simplebar/dist/simplebar.css"
+    />
+    <link href="./dist/css/style.min.css" rel="stylesheet" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./assets/highlights/atom-one-dark.min.css"
+    />
+  </head>
+  <body>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" class="docs">
+      <!-- ============================================================== -->
+      <!-- End Topbar header -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Left Sidebar - style you can find in sidebar.scss  -->
+      <!-- ============================================================== -->
+      <!--Desktop view sidebar menu-->
+      <aside
+        class="left-sidebar pt-4 d-lg-block d-none"
+        id="navbar-example3"
+        data-simplebar
+      >
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+          <!-- Sidebar navigation-->
+          <nav class="sidebar-nav">
+            <!-- ============================================================== -->
+            <!-- Logo -->
+            <!-- ============================================================== -->
+            <div
+              class="navbar-brand d-flex align-items-center justify-content-between px-4"
+            >
+              <!-- Logo icon -->
+              <a href="index.html">
+                <b class="logo-icon">
+                  <!-- Dark Logo icon -->
+                  <img
+                    src="./dist/images/logo-dark.svg" 
+                    alt="homepage"
+                    class="dark-logo"
+                  />
+                </b>
+                <!--End Logo icon -->
+              </a>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Logo -->
+            <!-- ============================================================== -->
+            <ul id="sidebarnav" class="mt-4">
+              <nav class="nav nav-pills flex-column sidebar-nav">
+                <ul class="list-unstyled">
+                  <!--서비스 소개-->
+                  <li class="nav-small-cap">
+                    <span class="hide-menu">MDRules는?</span>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="index.html"><i class="ti ti-home-2 me-3 fs-4"></i> 서비스 소개</a>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://talk.naver.com/ct/w5umt5"><i class="ti ti-packages me-3 fs-4"></i> 문의하기</a>
+                  </li>
+
+                  <!--공개 프롬프트 및 Skills-->
+                  <li class="nav-small-cap mt-4">
+                    <span class="hide-menu">공개한 프롬프트</span>
+                  </li>
+                  <li class="sidebar-item position-relative">
+                    <a
+                      class="nav-link sidebar-link has-arrow d-flex align-items-center"
+                      href="javascript:void(0)"
+                      aria-expanded="false"
+                    >
+                      <span class="hide-menu"
+                        ><i class="ti ti-file-infinity me-3 fs-4"></i>AI주도개발 통합시스템 Rules(Cursor용)
+                      </span>
+                    </a>
+                    <!--sub-menu items-->
+                    <ul
+                      aria-expanded="false"
+                      class="collapse first-level list-unstyled"
+                    >
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-0-foundation.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 0. Foundation (3) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a
+                        href="cursor-1-challenge-understanding.html"
+                        class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 1. Challenge Understanding(3) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-2-solution-exploration.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 2. Solution Exploration(4) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-3-solution-design-evaluation.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 3. Solution Design & Evaluation(4) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-4-design.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 4. Design(5) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-5-implementation.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 5. Implementation(4) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-6-testing.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 6. Testing(2) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-7-maintenance.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 7. Maintenance(2) </span></a
+                      >
+                    </li>
+                    </ul>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="k-sdd.html"
+                      ><i class="ti ti-api-app me-3 fs-4"></i>k-sdd (스펙주도개발)</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="itda-sdd.html"
+                      ><i class="ti ti-settings me-3 fs-4"></i>ITDA-SDD 오픈소스</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="itdaz.html"
+                      ><i class="ti ti-refresh-dot me-3 fs-4"></i>ITDAZ 오픈소스</a
+                    >
+                  </li>
+                  <!--활동-->
+                  <li class="nav-small-cap mt-4">
+                    <span class="hide-menu">주요 활동</span>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://github.com/gaebalai/" target="_github"
+                      ><i class="ti ti-brand-github me-3 fs-4"></i> GitHub</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://blog.naver.com/beyond-zero" target="_blog"
+                      ><i class="ti ti-brand-abstract me-3 fs-4"></i> 기술 블로그</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://x.com/gaebalai" target="_x"
+                      ><i class="ti ti-brand-twitter me-3 fs-4"></i> X(Twitter)</a
+                    >
+                  </li>
+                  <!--지원 및 문의-->
+                                
+                  <li class="sidebar-item mt-5">
+                    <a class=" btn btn-danger w-100 py-2" href="tel:821080143479">문의전화: 010-8014-3479</a>
+
+                  </li>      
+                  </ul>
+              </nav>
+            </ul>
+          </nav>
+          <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+      </aside>
+
+      <!--Mobile view sidebar menu-->
+      <div
+        class="offcanvas offcanvas-start"
+        tabindex="-1"
+        id="offcanvasExample"
+        aria-labelledby="offcanvasExampleLabel"
+      >
+        <aside class="left-sidebar pt-4" id="navbar-example3" data-simplebar>
+          <!-- Sidebar scroll-->
+          <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+              <!-- ============================================================== -->
+              <!-- Logo -->
+              <!-- ============================================================== -->
+              <div
+                class="navbar-brand d-flex align-items-center justify-content-between px-4"
+              >
+                <!-- Logo icon -->
+                <a href="index.html">
+                  <b class="logo-icon">
+                    <!-- Dark Logo icon -->
+                    <img
+                      src="./dist/images/logo-dark.svg"
+                      alt="homepage"
+                      class="dark-logo"
+                    />
+                  </b>
+                  <!--End Logo icon -->
+                </a>
+              </div>
+              <!-- ============================================================== -->
+              <!-- End Logo -->
+              <!-- ============================================================== -->
+              <ul id="sidebarnav" class="mt-4">
+                <nav class="nav nav-pills flex-column sidebar-nav">
+                  <ul class="list-unstyled">
+                    <!--Getting Started-->
+                    <li class="nav-small-cap">
+                      <span class="hide-menu">MDRules는?</span>
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="index.html"><i class="ti ti-home-2 me-3 fs-4"></i> 서비스 소개</a>
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="https://talk.naver.com/ct/w5umt5"><i class="ti ti-packages me-3 fs-4"></i> 문의하기</a>
+                    </li>
+
+                    <!--Theme UI-->
+                    <li class="nav-small-cap mt-4">
+                      <span class="hide-menu">공개한 프롬프트</span>
+                    </li>
+                    <li class="sidebar-item position-relative">
+                      <a
+                        class="nav-link sidebar-link has-arrow d-flex align-items-center"
+                        href="javascript:void(0)"
+                        aria-expanded="false"
+                      >
+                        <span class="hide-menu"
+                        ><i class="ti ti-file-infinity me-3 fs-4"></i>AI주도개발 통합시스템 Rules(Cursor용)
+                        </span>
+                      </a>
+                      <!--sub-menu items-->
+                      <ul
+                        aria-expanded="false"
+                        class="collapse first-level list-unstyled"
+                      >
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-0-foundation.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 0. Foundation (3) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a
+                            href="cursor-1-challenge-understanding.html"
+                            class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 1. Challenge Understanding(3) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-2-solution-exploration.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 2. Solution Exploration(4) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-3-solution-design-evaluation.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 3. Solution Design & Evaluation(4) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-4-design.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 4. Design(5) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-5-implementation.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 5. Implementation(4) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-6-testing.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 6. Testing(2) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-7-maintenance.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 7. Maintenance(2) </span></a
+                          >
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="k-sdd.html"
+                        ><i class="ti ti-api-app me-3 fs-4"></i>k-sdd (스펙주도개발)</a
+                      >
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="itda-sdd.html"
+                        ><i class="ti ti-settings me-3 fs-4"></i>ITDA-SDD 오픈소스</a
+                      >
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="itdaz.html"
+                        ><i class="ti ti-refresh-dot me-3 fs-4"></i>ITDAZ 오픈소스</a
+                      >
+                    </li>
+                  <!--활동-->
+                  <li class="nav-small-cap mt-4">
+                    <span class="hide-menu">주요 활동</span>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://github.com/gaebalai/" target="_github"
+                      ><i class="ti ti-brand-github me-3 fs-4"></i> GitHub</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://blog.naver.com/beyond-zero" target="_blog"
+                      ><i class="ti ti-brand-abstract me-3 fs-4"></i> 기술 블로그</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://x.com/gaebalai" target="_x"
+                      ><i class="ti ti-brand-twitter me-3 fs-4"></i> X(Twitter)</a
+                    >
+                  </li>
+                  <!--지원 및 문의-->
+                                
+                  <li class="sidebar-item mt-5">
+                    <a class=" btn btn-danger w-100 py-2" href="tel:821080143479">문의전화: 010-8014-3479</a>
+
+                  </li>     
+                  </ul>
+                </nav>
+              </ul>
+            </nav>
+            <!-- End Sidebar navigation -->
+          </div>
+          <!-- End Sidebar scroll-->
+        </aside>
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Page wrapper  -->
+      <!-- ============================================================== -->
+      <div
+        class="page-wrapper pt-0 d-block"
+        data-bs-spy="scroll"
+        data-bs-target="#navbar-example3"
+        data-bs-smooth-scroll="true"
+        tabindex="0"
+      >
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <div class="position-relative">
+          <div
+            class="navbar-header bg-white d-flex align-items-center justify-content-between p-3 fixed-top page-wrapper w-auto"
+          >
+            <!-- ============================================================== -->
+            <!-- Toggle which is visible on mobile only -->
+            <!-- ============================================================== -->
+            <!-- Logo icon -->
+            <a href="index.html">
+              <b class="logo-icon d-lg-none d-block">
+                <!-- Dark Logo icon -->
+                <img
+                  src="./dist/images/logo-dark.svg"
+                  alt="homepage"
+                  class="dark-logo"
+                />
+              </b>
+              <!--End Logo icon -->
+            </a>
+            <div class="d-flex align-items-center">
+              <!-- <a
+                class="nav-toggler waves-effect waves-light pe-6 text-dark ms-3 d-lg-none d-block"
+                href="javascript:void(0)"
+                ><i class="ti ti-menu-2"></i
+              ></a> -->
+              <!---Mobile view canvas button--->
+              <a
+                class="pe-6 text-muted ms-3 d-lg-none d-block"
+                data-bs-toggle="offcanvas"
+                href="#offcanvasExample"
+                role="button"
+                aria-controls="offcanvasExample"
+              >
+                <i class="ti ti-menu-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid mt-4">
+          <div class="mt-5">
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <h3 class="mt-5">AI주도개발 통합시스템 v3.2.0 with Cursor Rules & Commands</h3>
+            
+            <h3 class="mt-5">현재 버전</h3>
+            <div class="card mt-4">
+              <div class="card-body">
+                <h4 class="card-title">Version</h4>
+                <ul class="mb-0">
+                  <li class="font-16 py-1 text-muted">
+                    v3.2.0
+                  </li>
+                  <li class="font-16 py-1 text-muted">
+                    릴리스일: 2025-09-16
+                  </li>
+                  <li class="font-16 py-1 text-muted">
+                    주요 변경: 인지과학 기반 최적화를 통한 논리 플로우 재구성
+                  </li>    
+                </ul>
+              </div>
+
+            </div>
+
+            <h3 class="mt-5">6_testing/ </h3>
+            <div class="mt-4 card">
+              <div class="card-body">
+                <h4 class="card-title">01-test-generation.md</h4>
+                <h5 class="card-subtitle mt-2 text-muted mb-4">
+                  경로 : <span class="text-dark font-medium">.cursor/commands/6_testing/01-test-generation.md</span>
+                </h5>
+                <pre>
+<code class="language-markdown py-0">
+  # 풀스택 단계적 테스트 계획서
+
+  ## 1. 프로젝트 개요
+  
+  ### 1.1 테스트 전략의 기본 방침
+  본 계획서는 **구현 분석 → 기능별 테스트 계획 수립 → 레벨별 테스트 생성**의 단계적 접근으로, 프론트엔드와 백엔드 모두에서 3단계 테스트 전략을 수행하여 풀스택 시스템의 품질을 점진적으로 보증하는 것을 목표로 합니다.
+  
+  ### 1.2 실행 페이즈 개요
+  ```mermaid
+  graph TD
+      A[Phase 0: 시스템 분석] --> B[Phase 1: 테스트 계획 수립]
+      B --> C[Phase 2: 레벨 선택 · 테스트 생성]
+      C --> D[Phase 3: 테스트 실행 · 리포트]
+      
+      A --> A1[구현 코드 분석]
+      A --> A2[명세서 분석]
+      A --> A3[API 사양 분석]
+      A --> A4[DB 설계 분석]
+      
+      B --> B1[기능별 테스트 대상 정리]
+      B --> B2[레벨별 테스트 계획]
+      B --> B3[사용자 확인 · 선택]
+      
+      C --> C1[지정 레벨 테스트 생성]
+      C --> C2[테스트 환경 준비]
+      
+      D --> D1[테스트 실행]
+      D --> D2[결과 분석 · 리포트]
+  ```
+  
+  ### 1.2 테스트 피라미드 구성(개정판)
+  ```
+          Level 3 E2E Tests (10%)
+      ─────────────────────────────────
+        Frontend E2E | Backend E2E
+     Level 2 Integration Tests (20%)
+    ───────────────────────────────────
+     Frontend Integ | Backend Integ
+   Level 1 Unit/Mock Tests (70%)
+  ────────────────────────────────────────
+  Frontend Unit   |   Backend Unit
+  ```
+  
+  ## 2. 테스트 레벨 정의(프론트엔드 · 백엔드 공통)
+  
+  ### 2.1 Level 1: 유닛/모의(Mock) 테스트
+  
+  #### 2.1.1 Backend Level 1
+  - **목적**: 비즈니스 로직 단위 검증
+  - **신뢰도**: 60-70%
+  - **실행 빈도**: 매 커밋
+  - **실행 시간**: 초 단위
+  - **기술 스택**: pytest, unittest.mock, pytest-mock
+  - **대상**: 
+    - 순수 함수, 계산 로직
+    - API 핸들러(의존성 모킹)
+    - 서비스 클래스 메서드
+    - 검증(Validation) 함수
+  
+  #### 2.1.2 Frontend Level 1  
+  - **목적**: 컴포넌트 단위 검증
+  - **신뢰도**: 60-70%
+  - **실행 빈도**: 매 커밋
+  - **실행 시간**: 초 단위
+  - **기술 스택**: Vitest, React Testing Library, happy-dom
+  - **대상**:
+    - 개별 컴포넌트 렌더링
+    - props 처리
+    - 이벤트 핸들러
+    - 커스텀 훅
+  
+  ### 2.2 Level 2: 통합 테스트
+  
+  #### 2.2.1 Backend Level 2
+  - **목적**: 컴포넌트 간 연동 검증
+  - **신뢰도**: 75-85%
+  - **실행 빈도**: 주간
+  - **실행 시간**: 분 단위
+  - **기술 스택**: pytest, TestContainers, httpx
+  - **대상**:
+    - API + 데이터베이스 연동
+    - 서비스 간 연동
+    - 외부 API 통합(테스트 환경)
+    - 트랜잭션 정합성
+  
+  #### 2.2.2 Frontend Level 2
+  - **목적**: 컴포넌트 간 연동 · API 통합 검증
+  - **신뢰도**: 75-85%
+  - **실행 빈도**: 주간
+  - **실행 시간**: 분 단위
+  - **기술 스택**: Vitest, React Testing Library, MSW
+  - **대상**:
+    - 다중 컴포넌트 연동
+    - API 통신(MSW 모킹)
+    - 상태 관리(Redux/Zustand 등)
+    - 라우팅 기능
+  
+  ### 2.3 Level 3: E2E테스트
+  
+  #### 2.3.1 Backend Level 3
+  - **목적**: 완전한 워크플로 검증
+  - **신뢰도**: 90-95%
+  - **실행 빈도**: 릴리스 전
+  - **실행 시간**: 분~시간 단위
+  - **기술 스택**: pytest, requests, 실제(스테이징) 서비스
+  - **대상**:
+    - API 기반 종단 간 플로우
+    - 운영 유사 환경 테스트
+    - 성능 검증
+    - 보안 검증
+  
+  #### 2.3.2 Frontend Level 3
+  - **목적**: 사용자 여정(User Journey) 종단 간 검증
+  - **신뢰도**: 90-95%
+  - **실행 빈도**: 릴리스 전
+  - **실행 시간**: 분 단위
+  - **기술 스택**: Playwright, Cypress
+  - **대상**:
+    - 완전한 사용자 플로우
+    - 크로스 브라우저 테스트
+    - 실제 브라우저 환경
+    - 시각적 회귀 테스트
+  
+  ## 3. 테스트 환경 구성
+  
+  ### 3.1 Level 1 테스트 환경
+  
+  #### Backend Level 1
+  ```yaml
+  backend_level1:
+    name: "Backend Mock Environment"
+    database: "In-memory SQLite"
+    external_services: "All Mocked"
+    storage: "Mock Storage"
+    setup_time: "< 1초"
+    cleanup: "자동"
+  ```
+  
+  #### Frontend Level 1
+  ```yaml
+  frontend_level1:
+    name: "Frontend Unit Environment"
+    browser: "happy-dom"
+    api_services: "All Mocked (vi.mock)"
+    components: "Isolated Testing"
+    setup_time: "< 1초"
+    cleanup: "자동"
+  ```
+  
+  ### 3.2 Level 2 테스트 환경
+  
+  #### Backend Level 2
+  ```yaml
+  backend_level2:
+    name: "Backend Integration Environment"
+    database: "TestContainers PostgreSQL"
+    external_services: "Test Services"
+    storage: "Test Bucket"
+    setup_time: "10-30초"
+    cleanup: "자동 + 수동 확인"
+  ```
+  
+  #### Frontend Level 2
+  ```yaml
+  frontend_level2:
+    name: "Frontend Integration Environment"
+    browser: "happy-dom"
+    api_services: "MSW Mock Server"
+    components: "Multi-component Testing"
+    state_management: "Real Store"
+    setup_time: "5-15초"
+    cleanup: "자동"
+  ```
+  
+  ### 3.3 Level 3 테스트 환경
+  
+  #### Backend Level 3
+  ```yaml
+  backend_level3:
+    name: "Backend E2E Environment"
+    database: "Staging Database"
+    external_services: "Staging Services"
+    storage: "Staging Bucket"
+    setup_time: "1-5분"
+    cleanup: "수동 확인 필수"
+  ```
+  
+  #### Frontend Level 3
+  ```yaml
+  frontend_level3:
+    name: "Frontend E2E Environment"
+    browser: "Real Browsers (Chrome, Firefox, Safari)"
+    api_services: "Staging Backend"
+    environment: "Full Application"
+    setup_time: "30초-2분"
+    cleanup: "자동 + 스크린샷 보관"
+  ```
+  
+  ## 4. Phase 0: 시스템 분석 · 테스트 계획 수립
+  
+  ### 4.1 구현 분석 페이즈
+  
+  #### 4.1.1 분석 대상 문서
+  ```yaml
+  required_documents:
+    implementation:
+      - backend_source_code: "API 구현, 서비스, 모델"
+      - frontend_source_code: "컴포넌트, 페이지, 훅"
+      - database_schema: "테이블 정의, 관계"
+    
+    specifications:
+      - api_specification: "OpenAPI/Swagger 사양"
+      - database_design: "ERD, 제약 정의"
+      - system_design: "아키텍처 설계서"
+      - user_requirements: "요구사항 정의서"
+    
+    optional_documents:
+      - deployment_config: "인프라 설정"
+      - security_requirements: "보안 요구사항"
+      - performance_requirements: "성능 요구사항"
+  ```
+  
+  #### 4.1.2 자동 분석 프로세스
+  ```python
+  class SystemAnalyzer:
+      def analyze_system(self, documents):
+          """시스템 전반을 분석하여 테스트 대상을 식별"""
+          analysis_result = {
+              "backend_features": self._analyze_backend(documents),
+              "frontend_features": self._analyze_frontend(documents),
+              "integration_points": self._analyze_integrations(documents),
+              "critical_paths": self._identify_critical_paths(documents),
+              "risk_assessment": self._assess_risks(documents)
+          }
+          return analysis_result
+      
+      def _analyze_backend(self, documents):
+          """Backend기능 분석"""
+          return {
+              "api_endpoints": self._extract_api_endpoints(),
+              "business_logic": self._extract_business_logic(),
+              "data_models": self._extract_data_models(),
+              "external_dependencies": self._extract_external_deps(),
+              "security_features": self._extract_security_features()
+          }
+      
+      def _analyze_frontend(self, documents):
+          """Frontend기능 분석"""
+          return {
+              "components": self._extract_components(),
+              "pages": self._extract_pages(),
+              "user_flows": self._extract_user_flows(),
+              "state_management": self._extract_state_management(),
+              "api_integrations": self._extract_api_integrations()
+          }
+  ```
+  
+  ### 4.2 기능별 테스트 계획 수립
+  
+  #### 4.2.1 테스트 대상 기능 매핑 예시
+  ```markdown
+  # 시스템 분석 결과 예시
+  
+  ## Backend 기능 목록
+  ### 인증 · 인가
+  - **Level 1 대상**: JWT 토큰 생성 로직, 비밀번호 해시
+  - **Level 2 대상**: 로그인 API + DB 연동, 권한 체크
+  - **Level 3 대상**: 완전한 인증 플로우, 세션 관리
+  
+  ### 사용자 관리
+  - **Level 1 대상**: 사용자 생성 검증, 업데이트 로직
+  - **Level 2 대상**: 사용자 CRUD API + DB, 메일 발송 연동
+  - **Level 3 대상**: 사용자 등록 ~ 인증 완료 플로우
+  
+  ### 데이터 처리
+  - **Level 1 대상**: 계산 로직, 데이터 변환 처리
+  - **Level 2 대상**: 파일 업로드 + 스토리지 연동
+  - **Level 3 대상**: 배치 처리 파이프라인
+  
+  ## Frontend 기능 목록
+  ### 인증 UI
+  - **Level 1 대상**: 로그인 폼 컴포넌트, 검증
+  - **Level 2 대상**: 인증 상태 관리, API 연동
+  - **Level 3 대상**: 로그인 ~ 대시보드 전환 플로우
+  
+  ### 사용자 관리 UI
+  - **Level 1 대상**: 사용자 목록 · 상세 컴포넌트
+  - **Level 2 대상**: CRUD + API 연동, 상태 동기화
+  - **Level 3 대상**: 사용자 관리 종단 간 워크플로
+  
+  ### 데이터 표시
+  - **Level 1 대상**: 차트 · 테이블 컴포넌트
+  - **Level 2 대상**: 데이터 조회 · 갱신, 필터링
+  - **Level 3 대상**: 대시보드 전체 인터랙션
+  ```
+  
+  #### 4.2.2 레벨별 테스트 계획 생성
+  ```python
+  class TestPlanGenerator:
+      def generate_level_plans(self, analysis_result):
+          """분석 결과에서 레벨별 테스트 계획 생성"""
+          plans = {}
+          
+          for level in [1, 2, 3]:
+              plans[f"level_{level}"] = {
+                  "backend": self._generate_backend_plan(analysis_result, level),
+                  "frontend": self._generate_frontend_plan(analysis_result, level),
+                  "estimated_time": self._estimate_time(analysis_result, level),
+                  "dependencies": self._identify_dependencies(analysis_result, level),
+                  "risks": self._assess_level_risks(analysis_result, level)
+              }
+          
+          return plans
+      
+      def _generate_backend_plan(self, analysis, level):
+          """Backend용 레벨별 계획"""
+          if level == 1:
+              return {
+                  "test_targets": analysis["backend_features"]["business_logic"],
+                  "mock_dependencies": analysis["backend_features"]["external_dependencies"],
+                  "test_count_estimate": len(analysis["backend_features"]["business_logic"]) * 3
+              }
+          elif level == 2:
+              return {
+                  "test_targets": analysis["integration_points"]["api_database"],
+                  "real_dependencies": ["database", "test_services"],
+                  "test_count_estimate": len(analysis["integration_points"]["api_database"]) * 2
+              }
+          # Level 3의 경우...
+  ```
+  
+  ### 4.3 사용자 확인 · 선택 페이즈
+  
+  #### 4.3.1 테스트 계획 제시 포맷
+  ```markdown
+  # 테스트 실시 계획(사용자 확인용)
+  
+  ## 시스템 분석 결과 요약
+  - **Backend 기능 수**: 15개
+  - **Frontend 기능 수**: 12개  
+  - **중요도 높은 기능**: 8개
+  - **외부 연동 수**: 5개 서비스
+  
+  ## 레벨별 실시 계획
+  
+  ### Level 1 (Backend + Frontend Unit Tests)
+  **추정 소요 시간**: 2–3일  
+  **테스트 건수**: Backend 45건, Frontend 36건  
+  **주요 대상 기능**:
+  - ✅ 인증 로직 (Backend: JWT 토큰 생성, Frontend: 로그인 폼)
+  - ✅ 사용자 관리 (Backend: 검증, Frontend: 사용자 목록)
+  - ✅ 데이터 처리 (Backend: 계산 로직, Frontend: 차트 표시)
+  
+  **필요 환경**: 개발 환경만  
+  **리스크**: 낮음
+  
+  ### Level 2 (Backend + Frontend Integration Tests)  
+  **추정 소요 시간**: 3–5일  
+  **테스트 건수**: Backend 30건, Frontend 24건  
+  **주요 대상 기능**:
+  - ✅ API + DB 연동 테스트
+  - ✅ 외부 서비스 통합 테스트(모킹 환경)
+  - ✅ 프론트엔드 상태 관리 + API 연동
+  
+  **필요 환경**: 테스트 DB, 모킹 서비스  
+  **리스크**: 중간
+  
+  ### Level 3 (Backend + Frontend E2E Tests)
+  **추정 소요 시간**: 5–7일  
+  **테스트 건수**: Backend 20건, Frontend 15건  
+  **주요 대상 기능**:
+  - ✅ 완전한 사용자 플로우
+  - ✅ 성능 테스트
+  - ✅ 보안 테스트
+  
+  **필요 환경**: 스테이징 환경  
+  **리스크**: 높음
+  
+  ## 권장 실행 순서
+  1. **Level 1부터 시작** → 기초 품질 확보  
+  2. **Level 2에서 통합 검증** → 서비스 간 연동 확인  
+  3. **Level 3에서 최종 검증** → 운영 릴리스 전
+  
+  ## 사용자 선택 옵션
+  - `"Level 1만 실시"` → 기본 품질 확보, 개발 단계용
+  - `"Level 1-2 실시"` → 통합 품질 확보, 테스트 단계용
+  - `"전 레벨 실시"` → 완전 품질 확보, 운영 릴리스용
+  - `"커스텀 선택"` → 특정 기능 · 레벨 조합
+  ```
+  
+  ## 5. 테스트 실행 플로우
+  
+  ### 4.1 단계적 실행 전략
+  
+  #### Level 1 실행 플로우
+  ```mermaid
+  graph TD
+      A[구현 코드 분석] --> B[Backend Level 1 생성]
+      A --> C[Frontend Level 1 생성]
+      B --> D[Backend Unit 테스트 실행]
+      C --> E[Frontend Unit 테스트 실행]
+      D --> F[Level 1 통합 리포트]
+      E --> F
+      F --> G[Level 2 실행 판정]
+  ```
+  
+  #### Level 2 실행 플로우
+  ```mermaid
+  graph TD
+      A[Level 1 성공 확인] --> B[Backend Level 2 생성]
+      A --> C[Frontend Level 2 생성]
+      B --> D[Backend 통합 테스트 실행]
+      C --> E[Frontend 통합 테스트 실행]
+      D --> F[Level 2 통합 리포트]
+      E --> F
+      F --> G[Level 3 실행 판정]
+  ```
+  
+  #### Level 3 실행 플로우
+  ```mermaid
+  graph TD
+      A[Level 2 성공 확인] --> B[Backend Level 3 생성]
+      A --> C[Frontend Level 3 생성]
+      B --> D[Backend E2E 테스트 실행]
+      C --> E[Frontend E2E 테스트 실행]
+      D --> F[Level 3 통합 리포트]
+      E --> F
+      F --> G[종합 품질 평가]
+  ```
+  
+  ## 5. 테스트 케이스 설계 방침
+  
+  ### 5.1 Level 1 테스트 케이스 설계
+  
+  #### Backend Level 1
+  ```python
+  class BackendLevel1Categories:
+      BUSINESS_LOGIC = {
+          "calculation_functions": "계산 · 변환 처리",
+          "validation_logic": "검증(Validation) 처리", 
+          "data_transformation": "데이터 변환 처리"
+      }
+      
+      API_HANDLERS = {
+          "request_processing": "요청 처리 로직(모킹 사용)",
+          "response_formatting": "응답 포맷팅",
+          "error_handling": "에러 핸들링"
+      }
+      
+      SERVICE_METHODS = {
+          "service_logic": "서비스 메서드 단위",
+          "state_transitions": "상태 전이 로직",
+          "business_rules": "비즈니스 규칙 검증"
+      }
+  ```
+  
+  #### Frontend Level 1
+  ```typescript
+  class FrontendLevel1Categories {
+    COMPONENT_RENDERING = {
+      "basic_rendering": "기본 렌더링 확인",
+      "props_handling": "props 처리 확인",
+      "conditional_rendering": "조건부 렌더링"
+    }
+    
+    EVENT_HANDLING = {
+      "click_events": "클릭 이벤트 처리",
+      "form_submission": "폼 제출 처리",
+      "input_validation": "입력값 검증"
+    }
+    
+    CUSTOM_HOOKS = {
+      "state_management": "상태 관리 훅",
+      "data_fetching": "데이터 패칭 훅(모킹)",
+      "side_effects": "부수효과 처리"
+    }
+  }
+  ```
+  
+  ### 5.2 Level 2 테스트 케이스 설계
+  
+  #### Backend Level 2
+  ```python
+  class BackendLevel2Categories:
+      API_DATABASE = {
+          "crud_operations": "CRUD 동작의 완전성",
+          "transaction_rollback": "트랜잭션 처리",
+          "constraint_validation": "DB 제약 확인"
+      }
+      
+      SERVICE_INTEGRATION = {
+          "service_chaining": "서비스 간 연동",
+          "async_processing": "비동기 처리 확인",
+          "event_handling": "이벤트 처리"
+      }
+      
+      EXTERNAL_API = {
+          "third_party_integration": "외부 API 연동(테스트 환경)",
+          "authentication": "인증 플로우",
+          "rate_limiting": "레이트 리미트 대응"
+      }
+  ```
+  
+  #### Frontend Level 2
+  ```typescript
+  class FrontendLevel2Categories {
+    COMPONENT_INTEGRATION = {
+      "parent_child_communication": "부모-자식 컴포넌트 연동",
+      "sibling_communication": "형제 컴포넌트 연동",
+      "context_providers": "Context Provider 기능"
+    }
+    
+    API_INTEGRATION = {
+      "data_fetching": "데이터 패칭(MSW 사용)",
+      "error_handling": "API 에러 핸들링",
+      "loading_states": "로딩 상태 관리"
+    }
+    
+    STATE_MANAGEMENT = {
+      "redux_integration": "Redux 상태 관리",
+      "local_storage": "로컬 스토리지",
+      "routing": "라우팅 기능"
+    }
+  }
+  ```
+  
+  ### 5.3 Level 3 테스트 케이스 설계
+  
+  #### Backend Level 3
+  ```python
+  class BackendLevel3Categories:
+      COMPLETE_WORKFLOWS = {
+          "user_registration": "사용자 가입 전체 플로우",
+          "data_processing": "데이터 처리 파이프라인",
+          "report_generation": "리포트 생성 처리"
+      }
+      
+      PERFORMANCE = {
+          "load_testing": "부하 테스트",
+          "stress_testing": "스트레스 테스트",
+          "scalability": "확장성 확인"
+      }
+      
+      SECURITY = {
+          "authentication_flow": "인증·인가 플로우",
+          "data_protection": "데이터 보호 확인",
+          "input_sanitization": "입력값 세니타이제이션"
+      }
+  ```
+  
+  #### Frontend Level 3
+  ```typescript
+  class FrontendLevel3Categories {
+    USER_JOURNEYS = {
+      "registration_flow": "사용자 가입 플로우",
+      "login_logout": "로그인·로그아웃",
+      "data_crud_flow": "데이터 CRUD 작업 플로우"
+    }
+    
+    CROSS_BROWSER = {
+      "chrome_testing": "Chrome 환경 테스트",
+      "firefox_testing": "Firefox 환경 테스트",
+      "safari_testing": "Safari 환경 테스트"
+    }
+    
+    VISUAL_REGRESSION = {
+      "component_screenshots": "컴포넌트 스크린샷",
+      "page_screenshots": "페이지 전체 스크린샷",
+      "responsive_testing": "반응형 테스트"
+    }
+  }
+  ```
+  
+  ## 6. 품질 기준(레벨·영역별)
+  
+  ### 6.1 Backend 품질 기준
+  
+  | Level | 커버리지 목표 | 성공률 기준 | 실행 시간 제한 | 품질 지표 |
+  |-------|---------------|------------|-------------|----------|
+  | Backend L1 | 90%+ | 95%+ | 각 테스트 < 1초 | 로직 품질 |
+  | Backend L2 | 80%+ | 90%+ | 각 테스트 < 30초 | 연동 품질 |
+  | Backend L3 | 70%+ | 85%+ | 각 테스트 < 5분 | 시스템 품질 |
+  
+  ### 6.2 Frontend 품질 기준
+  
+  | Level | 커버리지 목표 | 성공률 기준 | 실행 시간 제한 | 품질 지표 |
+  |-------|---------------|------------|-------------|----------|
+  | Frontend L1 | 85%+ | 95%+ | 각 테스트 < 1초 | UI 품질 |
+  | Frontend L2 | 75%+ | 90%+ | 각 테스트 < 15초 | UX 품질 |
+  | Frontend L3 | 70%+ | 85%+ | 각 테스트 < 2분 | 엔드유저 품질 |
+  
+  ### 6.3 통합 품질 지표
+  
+  #### 시스템 전체 신뢰도 계산
+  ```python
+  def calculate_system_reliability():
+      # Backend 가중치
+      backend_l1_weight = 0.25  # Backend 기반 품질
+      backend_l2_weight = 0.20  # Backend 통합 품질
+      backend_l3_weight = 0.15  # Backend E2E 품질
+      
+      # Frontend 가중치
+      frontend_l1_weight = 0.20  # Frontend 기반 품질
+      frontend_l2_weight = 0.15  # Frontend 통합 품질
+      frontend_l3_weight = 0.05  # Frontend E2E 품질
+      
+      total_reliability = (
+          backend_l1_reliability * backend_l1_weight +
+          backend_l2_reliability * backend_l2_weight +
+          backend_l3_reliability * backend_l3_weight +
+          frontend_l1_reliability * frontend_l1_weight +
+          frontend_l2_reliability * frontend_l2_weight +
+          frontend_l3_reliability * frontend_l3_weight
+      )
+      
+      return total_reliability
+  ```
+  
+  ## 7. 실행 스케줄
+  
+  ### 7.1 개발 페이즈 실행 계획
+  
+  #### Phase 1: Level 1 기반 구축(Week 1-2)
+  ```yaml
+  backend_level1:
+    - pytest 환경 구축
+    - 모의(Mock) 기능 구현
+    - 유닛 테스트 스위트 작성
+  
+  frontend_level1:
+    - Vitest + RTL 환경 구축
+    - 컴포넌트 테스트 작성
+    - 커스텀 훅 테스트
+  ```
+  
+  #### Phase 2: Level 2 통합 구축(Week 3-4)
+  ```yaml
+  backend_level2:
+    - TestContainers 환경 구축
+    - 통합 테스트 스위트 작성
+    - 테스트 데이터 관리
+  
+  frontend_level2:
+    - MSW 환경 구축
+    - API 통합 테스트 작성
+    - 상태 관리 테스트
+  ```
+  
+  #### Phase 3: Level 3 E2E 구축(Week 5-6)
+  ```yaml
+  backend_level3:
+    - 스테이징 환경 구축
+    - E2E 테스트 스위트 작성
+    - 성능 테스트
+  
+  frontend_level3:
+    - Playwright 환경 구축
+    - 사용자 여정 테스트
+    - 시각적 회귀 테스트
+  ```
+  
+  ### 7.2 지속 실행 스케줄
+  
+  #### 일일 실행
+  - Backend Level 1: 전 유닛 테스트
+  - Frontend Level 1: 전 컴포넌트 테스트
+  
+  #### 주간 실행
+  - Backend Level 2: 통합 테스트 스위트
+  - Frontend Level 2: API 통합·상태 관리 테스트
+  
+  #### 릴리스 전 실행
+  - Backend Level 3: 완전 E2E 테스트 스위트
+  - Frontend Level 3: 완전 사용자 여정 테스트
+  - 전 레벨: 종합 품질 확인
+  
+  ## 8. 실행 지시 형식
+  
+  ### 8.1 레벨·영역별 실행 지시
+  
+  #### Backend 전용 실행
+  ```
+  "Backend Level 1로 테스트 생성"
+  "Backend Level 2로 테스트 생성"
+  "Backend Level 3로 테스트 생성"
+  ```
+  
+  #### Frontend 전용 실행
+  ```
+  "Frontend Level 1로 테스트 생성"
+  "Frontend Level 2로 테스트 생성"
+  "Frontend Level 3로 테스트 생성"
+  ```
+  
+  #### 레벨별 풀스택 실행
+  ```
+  "Level 1로 전체 테스트 생성"  // Backend + Frontend Level 1
+  "Level 2로 전체 테스트 생성"  // Backend + Frontend Level 2
+  "Level 3로 전체 테스트 생성"  // Backend + Frontend Level 3
+  ```
+  
+  #### 완전 실행
+  ```
+  "풀스택 테스트 생성"         // 전 레벨 × 전 영역
+  "전 레벨로 테스트 생성"       // 단계적으로 전체
+  ```
+  
+  ### 8.2 커스터마이즈 실행 지시
+  
+  #### 특정 조합
+  ```
+  "Backend Level 1-2 + Frontend Level 1로 테스트 생성"
+  "Backend Level 3 + Frontend Level 1-2로 테스트 생성"
+  ```
+  
+  ## 9. 리포트 생성 요건
+  
+  ### 9.1 레벨·영역별 리포트
+  
+  #### 개별 리포트
+  - Backend Level 1 Report
+  - Frontend Level 1 Report
+  - Backend Level 2 Report
+  - Frontend Level 2 Report
+  - Backend Level 3 Report
+  - Frontend Level 3 Report
+  
+  #### 통합 리포트
+  - Level 1 Complete Report (Backend + Frontend)
+  - Level 2 Complete Report (Backend + Frontend)
+  - Level 3 Complete Report (Backend + Frontend)
+  - Full Stack Summary Report
+  
+  ### 9.2 품질 대시보드
+  
+  ```markdown
+  # 풀스택 품질 대시보드
+  
+  ## 개요
+  | 영역 | Level 1 | Level 2 | Level 3 | 종합 |
+  |------|---------|---------|---------|------|
+  | Backend | ✅ 95% | ✅ 88% | ⚠️ 82% | 88% |
+  | Frontend | ✅ 92% | ✅ 85% | ❌ 65% | 81% |
+  | **시스템 전체** | **93%** | **87%** | **74%** | **85%** |
+  
+  ## 권장 개선 액션
+  1. Frontend Level 3의 성공률 향상
+  2. Backend Level 3의 실행 시간 단축
+  3. 통합 테스트 케이스 추가
+  ```
+  
+  ## 11. 실제 실행 절차
+  
+  ### 11.1 Phase 0: 시스템 분석 시작
+  
+  #### Step 1: 문서 제공
+  다음 문서를 공유해 주세요:
+  
+  **필수 문서**:
+  - 구현 코드(Backend/Frontend)
+  - API 사양서(OpenAPI/Swagger 등)
+  - 데이터베이스 설계서(ERD, DDL 등)
+  
+  **권장 문서**:
+  - 시스템 설계서
+  - 요구사항 정의서
+  - 기존 테스트(있다면)
+  
+  #### Step 2: 자동 분석 실행
+  ```
+  "시스템 분석을 실행해 주세요"
+  ```
+  → 전체 문서를 분석하여 테스트 대상 기능을 식별
+  
+  #### Step 3: 테스트 계획 확인
+  분석 결과에 기반해 레벨별 테스트 계획 제시
+  → 사용자가 실행 레벨 선택
+  
+  ### 11.2 Phase 1: 테스트 생성·실행
+  
+  #### 사용자 선택에 따른 테스트 생성
+  ```
+  "Level 1로 실시"
+  "Level 1-2로 실시"  
+  "Backend Level 2만 실시"
+  "인증 기능만 Level 1-3으로 실시"
+  ```
+  
+  ### 11.3 실행 지시 예시
+  
+  #### 단계적 분석·실행
+  ```bash
+  # Step 1: 시스템 분석
+  "시스템 분석을 실행해 주세요"
+  
+  # Step 2: 분석 결과 확인 후, 레벨 선택
+  "Level 1로 실시해 주세요"
+  "Level 2까지 실시해 주세요"
+  "전 레벨로 실시해 주세요"
+  
+  # Step 3: 커스텀 선택(필요 시)
+  "인증 기능과 사용자 관리 기능만 Level 1-2로 실시"
+  "Backend Level 1-3 + Frontend Level 1-2로 실시"
+  ```
+  
+  ---
+  
+  **준비 완료입니다. 먼저 시스템 분석부터 시작하겠습니다. 
+  구현 코드, API 사양서, 데이터베이스 설계서를 공유해 주시면, 시스템 전반을 분석하여 구체적인 테스트 계획을 제시하겠습니다.**
+  
+</code>
+                        </pre>
+              </div>
+            </div>
+
+            <div class="card mt-4">
+              <div class="card-body">
+                <h4 class="card-title">02-quality-assurance.md</h4>
+                <h5 class="card-subtitle mt-2 text-muted mb-4">
+                  경로 :
+                  <span class="text-dark font-medium"
+                    >.cursor/commands/6_testing/02-quality-assurance.md</span
+                  >
+                </h5>
+
+                <pre>
+<code class="language-markdown py-0">
+  # 품질 보증·검증 프롬프트
+
+  ## 목적
+  
+  본 시스템은 구현 계획서와 테스트 계획서의 품질 보증을 자동화하여, 설계 문서에서의 누락 사항이나 문서 간 정합성 문제를 조기에 발견·수정하는 것을 목적으로 합니다. 단계적 검증 프로세스를 통해 고품질의 개발 계획 수립을 지원합니다.
+  
+  ## 검증 프레임워크 개요
+  
+  ### 검증 페이즈 구성
+  ```mermaid
+  graph TD
+      A[설계 문서군] --> B[Phase 1: 설계서 → 구현 계획서 검증]
+      B --> C[Phase 2: 구현 계획서 → 테스트 계획서 검증]
+      C --> D[Phase 3: 종합 정합성 검증]
+      D --> E[품질 보증 리포트]
+      
+      A --> A1[API 설계서]
+      A --> A2[DB 설계서]
+      A --> A3[상세 설계서]
+      A --> A4[요구사항 정의서]
+      
+      B --> B1[구조 정합성 검증]
+      B --> B2[기능 망라성 검증]
+      B --> B3[기술 정합성 검증]
+      
+      C --> C1[테스트 대상 망라성 검증]
+      C --> C2[테스트 레벨 타당성 검증]
+      C --> C3[품질 기준 정합성 검증]
+      
+      D --> D1[전체 일관성 확인]
+      D --> D2[의존관계 검증]
+      D --> D3[리스크 평가]
+  ```
+  
+  ### 품질 게이트 기준
+  ```yaml
+  quality_gates:
+    phase1_pass_criteria:
+      structural_consistency: ">= 95%"
+      functional_coverage: ">= 90%"
+      technical_alignment: ">= 85%"
+      critical_issues: "0건"
+      
+    phase2_pass_criteria:
+      test_coverage: ">= 90%"
+      level_appropriateness: ">= 85%"
+      quality_standard_alignment: ">= 90%"
+      critical_issues: "0건"
+      
+    phase3_pass_criteria:
+      overall_consistency: ">= 85%"
+      dependency_integrity: ">= 90%"
+      risk_assessment: "Low 리스크 이하"
+      blocking_issues: "0건"
+  ```
+  
+  ## Phase 1: 설계서 → 구현 계획서 검증
+  
+  ### 1.1 API 설계서 정합성 검증
+  
+  #### 검증 체크리스트
+  ```markdown
+  ### API 설계서 정합성 검증 [ ] 0/20항목 완료 (0%)
+  
+  #### 엔드포인트 망라성 [ ] 0/5항목 완료
+  - [ ] 모든 REST 엔드포인트가 구현 계획에 포함되어 있다
+  - [ ] HTTP 메서드(GET/POST/PUT/DELETE)가 올바르게 계획되어 있다
+  - [ ] Path 파라미터·Query 파라미터가 고려되어 있다
+  - [ ] 요청/응답 스키마가 구현 계획에 반영되어 있다
+  - [ ] 엔드포인트 간 의존관계가 정리되어 있다
+  
+  #### 인증·인가 요건 [ ] 0/4항목 완료
+  - [ ] 인증이 필요한 엔드포인트가 식별되어 있다
+  - [ ] 권한 레벨(admin/user/guest 등)이 구현 계획에 포함되어 있다
+  - [ ] JWT 토큰 처리 로직이 계획되어 있다
+  - [ ] 세션 관리 방식이 정의되어 있다
+  
+  #### 데이터 검증·에러 처리 [ ] 0/6항목 완료
+  - [ ] 입력값 밸리데이션 규칙이 구현 계획에 포함되어 있다
+  - [ ] 필수/옵셔널 필드가 명확하다
+  - [ ] 에러 응답 형식(4xx/5xx)이 정의되어 있다
+  - [ ] 비즈니스 에러/시스템 에러 분류가 명확하다
+  - [ ] Rate Limit/스로틀링 대응이 계획되어 있다
+  - [ ] CORS 설정이 고려되어 있다
+  
+  #### API 사양 구현 상세 [ ] 0/5항목 완료
+  - [ ] OpenAPI/Swagger 사양의 전 항목이 구현 계획에서 커버된다
+  - [ ] API 버저닝 전략이 정의되어 있다
+  - [ ] 비동기 처리(WebSocket/SSE 등)가 적절히 계획되어 있다
+  - [ ] 파일 업로드·다운로드 처리가 포함되어 있다
+  - [ ] API 모니터링·로그 출력 요건이 정의되어 있다
+  ```
+  
+  #### 자동 검증 룰
+  ```python
+  class APIDesignValidation:
+      def validate_endpoint_coverage(self, api_spec, implementation_plan):
+          """엔드포인트 망라성 자동 검증"""
+          missing_endpoints = []
+          api_endpoints = self._extract_endpoints(api_spec)
+          planned_endpoints = self._extract_planned_endpoints(implementation_plan)
+          
+          for endpoint in api_endpoints:
+              if not self._endpoint_exists_in_plan(endpoint, planned_endpoints):
+                  missing_endpoints.append({
+                      "endpoint": endpoint,
+                      "method": endpoint.method,
+                      "path": endpoint.path,
+                      "severity": "critical"
+                  })
+          
+          return {
+              "coverage_rate": len(planned_endpoints) / len(api_endpoints),
+              "missing_endpoints": missing_endpoints,
+              "status": "pass" if len(missing_endpoints) == 0 else "fail"
+          }
+      
+      def validate_schema_alignment(self, api_spec, implementation_plan):
+          """스키마 정합성 자동 검증"""
+          schema_issues = []
+          
+          for endpoint in api_spec.endpoints:
+              planned_handler = self._find_planned_handler(endpoint, implementation_plan)
+              if planned_handler:
+                  # 요청 스키마 검증
+                  if not self._request_schema_matches(endpoint.request_schema, planned_handler.input_schema):
+                      schema_issues.append({
+                          "endpoint": endpoint.path,
+                          "issue": "request_schema_mismatch",
+                          "severity": "high"
+                      })
+                  
+                  # 응답 스키마 검증
+                  if not self._response_schema_matches(endpoint.response_schema, planned_handler.output_schema):
+                      schema_issues.append({
+                          "endpoint": endpoint.path,
+                          "issue": "response_schema_mismatch", 
+                          "severity": "high"
+                      })
+          
+          return {
+              "schema_alignment_rate": self._calculate_alignment_rate(schema_issues),
+              "schema_issues": schema_issues,
+              "status": "pass" if len(schema_issues) == 0 else "fail"
+          }
+  ```
+  
+  ### 1.2 데이터베이스 설계서 정합성 검증
+  
+  #### 검증 체크리스트
+  ```markdown
+  ### 데이터베이스 설계서 정합성 검증 [ ] 0/18항목 완료 (0%)
+  
+  #### 테이블·모델 정의 [ ] 0/6항목 완료
+  - [ ] 모든 테이블에 대응하는 모델 클래스가 구현 계획에 포함되어 있다
+  - [ ] 모든 컬럼이 모델 속성으로 정의되어 있다
+  - [ ] 데이터 타입(VARCHAR/INT/DATETIME 등)이 적절히 매핑되어 있다
+  - [ ] NULL 허용/NOT NULL 제약이 구현 계획에 반영되어 있다
+  - [ ] 기본값 설정이 고려되어 있다
+  - [ ] 계산 필드·가상 컬럼이 적절히 계획되어 있다
+  
+  #### 제약·관계성 [ ] 0/6항목 완료
+  - [ ] 기본 키 제약이 구현 계획에 포함되어 있다
+  - [ ] 외래 키 제약·참조 정합성이 고려되어 있다
+  - [ ] 유니크 제약이 구현 계획에 반영되어 있다
+  - [ ] 체크 제약·업무 규칙 제약이 포함되어 있다
+  - [ ] 테이블 간 관계(1:1/1:N/N:N)가 올바르게 계획되어 있다
+  - [ ] Cascade 삭제·갱신 규칙이 정의되어 있다
+  
+  #### 인덱스·성능 [ ] 0/3항목 완료
+  - [ ] 성능 요건에 기반한 인덱스 설계가 포함되어 있다
+  - [ ] 복합 인덱스·부분 인덱스가 적절히 계획되어 있다
+  - [ ] 쿼리 최적화 전략이 구현 계획에 포함되어 있다
+  
+  #### 마이그레이션·운영 [ ] 0/3항목 완료
+  - [ ] 스키마 변경 마이그레이션 계획이 포함되어 있다
+  - [ ] 초기 데이터 투입·마스터 데이터 관리가 계획되어 있다
+  - [ ] 백업·복구 전략이 고려되어 있다
+  ```
+  
+  #### 자동 검증 룰
+  ```python
+  class DatabaseDesignValidation:
+      def validate_table_model_mapping(self, db_schema, implementation_plan):
+          """테이블·모델 매핑 자동 검증"""
+          mapping_issues = []
+          
+          for table in db_schema.tables:
+              model = self._find_corresponding_model(table, implementation_plan)
+              if not model:
+                  mapping_issues.append({
+                      "table": table.name,
+                      "issue": "missing_model",
+                      "severity": "critical"
+                  })
+                  continue
+              
+              # 컬럼·속성 매핑 검증
+              for column in table.columns:
+                  if not self._column_mapped_to_attribute(column, model):
+                      mapping_issues.append({
+                          "table": table.name,
+                          "column": column.name,
+                          "issue": "missing_attribute",
+                          "severity": "high"
+                      })
+          
+          return {
+              "mapping_coverage": self._calculate_mapping_coverage(mapping_issues),
+              "mapping_issues": mapping_issues,
+              "status": "pass" if len([i for i in mapping_issues if i["severity"] == "critical"]) == 0 else "fail"
+          }
+      
+      def validate_constraint_implementation(self, db_schema, implementation_plan):
+          """제약 구현 자동 검증"""
+          constraint_issues = []
+          
+          for table in db_schema.tables:
+              model = self._find_corresponding_model(table, implementation_plan)
+              if model:
+                  # 외래 키 제약 검증
+                  for fk in table.foreign_keys:
+                      if not self._foreign_key_implemented(fk, model):
+                          constraint_issues.append({
+                              "table": table.name,
+                              "constraint": f"FK_{fk.column}",
+                              "issue": "missing_foreign_key_implementation",
+                              "severity": "high"
+                          })
+                  
+                  # 유니크 제약 검증
+                  for unique in table.unique_constraints:
+                      if not self._unique_constraint_implemented(unique, model):
+                          constraint_issues.append({
+                              "table": table.name,
+                              "constraint": f"UNIQUE_{unique.columns}",
+                              "issue": "missing_unique_constraint",
+                              "severity": "medium"
+                          })
+          
+          return {
+              "constraint_coverage": self._calculate_constraint_coverage(constraint_issues),
+              "constraint_issues": constraint_issues,
+              "status": "pass" if len([i for i in constraint_issues if i["severity"] == "high"]) == 0 else "fail"
+          }
+  ```
+  
+  ### 1.3 상세 설계서 정합성 검증
+  
+  #### 검증 체크리스트
+  ```markdown
+  ### 상세 설계서 정합성 검증 [ ] 0/16항목 완료 (0%)
+  
+  #### 비즈니스 로직 구현 [ ] 0/6항목 완료
+  - [ ] 모든 비즈니스 룰이 구현 계획에 포함되어 있다
+  - [ ] 계산 로직·알고리즘이 상세화되어 있다
+  - [ ] 상태 전이 로직이 구현 계획에 반영되어 있다
+  - [ ] 밸리데이션 룰·업무 제약이 포함되어 있다
+  - [ ] 워크플로우·승인 프로세스가 계획되어 있다
+  - [ ] 예외 처리·에러 핸들링 전략이 정의되어 있다
+  
+  #### 비기능 요건 대응 [ ] 0/5항목 완료
+  - [ ] 성능 요건(응답 시간/처리량)이 고려되어 있다
+  - [ ] 확장성 요건이 구현 계획에 반영되어 있다
+  - [ ] 보안 요건(암호화/접근 제어)이 포함되어 있다
+  - [ ] 가용성·신뢰성 요건이 계획되어 있다
+  - [ ] 감사·로그 요건이 구현 계획에 포함되어 있다
+  
+  #### 외부 시스템 연계 [ ] 0/5항목 완료
+  - [ ] 외부 API 연계 사양이 구현 계획에 포함되어 있다
+  - [ ] 인증 방식(OAuth/API Key 등)이 정의되어 있다
+  - [ ] 데이터 변환·매핑 룰이 계획되어 있다
+  - [ ] 에러 핸들링·재시도 전략이 포함되어 있다
+  - [ ] 외부 시스템 장애 시 대체 처리(폴백)가 계획되어 있다
+  ```
+  
+  ## Phase 2: 구현 계획서 → 테스트 계획서 검증
+  
+  ### 2.1 테스트 대상 망라성 검증
+  
+  #### 검증 체크리스트
+  ```markdown
+  ### 테스트 대상 망라성 검증 [ ] 0/15항목 완료 (0%)
+  
+  #### Backend 기능 테스트 망라성 [ ] 0/5항목 완료
+  - [ ] 구현 계획의 모든 API 엔드포인트에 테스트가 정의되어 있다
+  - [ ] 모든 비즈니스 로직·서비스 클래스에 유닛 테스트가 계획되어 있다
+  - [ ] 데이터베이스 조작(CRUD)에 테스트가 포함되어 있다
+  - [ ] 외부 시스템 연계에 대한 모의(Mock)·통합 테스트가 계획되어 있다
+  - [ ] 에러 핸들링·예외 처리에 테스트가 포함되어 있다
+  
+  #### Frontend 기능 테스트 망라성 [ ] 0/5항목 완료
+  - [ ] 구현 계획의 모든 컴포넌트에 테스트가 정의되어 있다
+  - [ ] 모든 페이지·화면에 테스트가 계획되어 있다
+  - [ ] 사용자 인터랙션(클릭/입력 등)에 대한 테스트가 포함되어 있다
+  - [ ] 상태 관리·데이터 플로우에 테스트가 계획되어 있다
+  - [ ] API 연계·비동기 처리에 테스트가 포함되어 있다
+  
+  #### 통합·E2E 기능 테스트 망라성 [ ] 0/5항목 완료
+  - [ ] 구현 계획의 주요 사용자 플로우에 E2E 테스트가 정의되어 있다
+  - [ ] 시스템 간 연계에 테스트가 계획되어 있다
+  - [ ] 인증·인가 플로우에 테스트가 포함되어 있다
+  - [ ] 데이터 정합성·트랜잭션 처리에 테스트가 계획되어 있다
+  - [ ] 성능·부하 테스트가 적절히 계획되어 있다
+  ```
+  
+  #### 자동 검증 룰
+  ```python
+  class TestCoverageValidation:
+      def validate_backend_test_coverage(self, implementation_plan, test_plan):
+          """Backend 테스트 망라성 자동 검증"""
+          coverage_gaps = []
+          
+          # API 엔드포인트 테스트 망라성
+          implemented_apis = self._extract_implemented_apis(implementation_plan)
+          tested_apis = self._extract_tested_apis(test_plan)
+          
+          for api in implemented_apis:
+              if not self._api_has_tests(api, tested_apis):
+                  coverage_gaps.append({
+                      "type": "api_endpoint",
+                      "item": f"{api.method} {api.path}",
+                      "missing_test_levels": self._identify_missing_test_levels(api, test_plan),
+                      "severity": "high"
+                  })
+          
+          # 비즈니스 로직 테스트 망라성
+          business_logic = self._extract_business_logic(implementation_plan)
+          tested_logic = self._extract_tested_logic(test_plan)
+          
+          for logic in business_logic:
+              if not self._logic_has_tests(logic, tested_logic):
+                  coverage_gaps.append({
+                      "type": "business_logic",
+                      "item": logic.name,
+                      "missing_test_levels": ["level1"],
+                      "severity": "medium"
+                  })
+          
+          return {
+              "coverage_rate": self._calculate_coverage_rate(coverage_gaps, implemented_apis + business_logic),
+              "coverage_gaps": coverage_gaps,
+              "status": "pass" if len([g for g in coverage_gaps if g["severity"] == "high"]) == 0 else "fail"
+          }
+      
+      def validate_frontend_test_coverage(self, implementation_plan, test_plan):
+          """Frontend 테스트 망라성 자동 검증"""
+          coverage_gaps = []
+          
+          # 컴포넌트 테스트 망라성
+          implemented_components = self._extract_implemented_components(implementation_plan)
+          tested_components = self._extract_tested_components(test_plan)
+          
+          for component in implemented_components:
+              if not self._component_has_tests(component, tested_components):
+                  coverage_gaps.append({
+                      "type": "component",
+                      "item": component.name,
+                      "missing_test_levels": self._identify_missing_component_tests(component, test_plan),
+                      "severity": "high"
+                  })
+          
+          # 사용자 플로우 테스트 망라성
+          user_flows = self._extract_user_flows(implementation_plan)
+          tested_flows = self._extract_tested_flows(test_plan)
+          
+          for flow in user_flows:
+              if not self._flow_has_e2e_tests(flow, tested_flows):
+                  coverage_gaps.append({
+                      "type": "user_flow",
+                      "item": flow.name,
+                      "missing_test_levels": ["level3"],
+                      "severity": "medium"
+                  })
+          
+          return {
+              "coverage_rate": self._calculate_coverage_rate(coverage_gaps, implemented_components + user_flows),
+              "coverage_gaps": coverage_gaps,
+              "status": "pass" if len([g for g in coverage_gaps if g["severity"] == "high"]) == 0 else "fail"
+          }
+  ```
+  
+  ### 2.2 테스트 레벨 타당성 검증
+  
+  #### 검증 체크리스트
+  ```markdown
+  ### 테스트 레벨 타당성 검증 [ ] 0/12항목 완료 (0%)
+  
+  #### Level 1 (Unit/Mock) 타당성 [ ] 0/4항목 완료
+  - [ ] 순수 함수·계산 로직이 적절히 Level 1로 분류되어 있다
+  - [ ] 외부 의존이 없는 컴포넌트가 Level 1에 포함되어 있다
+  - [ ] 모의(Mock) 대상 외부 의존관계가 명확히 정의되어 있다
+  - [ ] Level 1 테스트 실행 시간이 적절(<1초/테스트)하게 설정되어 있다
+  
+  #### Level 2 (Integration) 타당성 [ ] 0/4항목 완료
+  - [ ] API + DB 연계가 Level 2에 적절히 분류되어 있다
+  - [ ] 컴포넌트 간 연계가 Level 2에 포함되어 있다
+  - [ ] 외부 서비스 통합(테스트 환경)이 Level 2에 계획되어 있다
+  - [ ] Level 2 테스트 실행 시간이 적절(<30초/테스트)하게 설정되어 있다
+  
+  #### Level 3 (E2E) 타당성 [ ] 0/4항목 완료
+  - [ ] 완전한 사용자 플로우가 Level 3에 적절히 분류되어 있다
+  - [ ] 시스템 전체 동작 확인이 Level 3에 포함되어 있다
+  - [ ] 실서비스 유사 환경에서의 테스트가 Level 3에 계획되어 있다
+  - [ ] Level 3 테스트 실행 시간이 적절(<5분/테스트)하게 설정되어 있다
+  ```
+  
+  ### 2.3 품질 기준 정합성 검증
+  
+  #### 검증 체크리스트
+  ```markdown
+  ### 품질 기준 정합성 검증 [ ] 0/10항목 완료 (0%)
+  
+  #### 테스트 환경 정합성 [ ] 0/3항목 완료
+  - [ ] 구현에 사용하는 기술 스택이 테스트 환경에서 고려되어 있다
+  - [ ] 데이터베이스·스토리지 요건이 테스트 환경에 반영되어 있다
+  - [ ] 외부 서비스 의존의 모의(Mock) 전략이 적절히 정의되어 있다
+  
+  #### 성능 기준 정합성 [ ] 0/4항목 완료
+  - [ ] 구현 계획의 성능 요건이 테스트 기준에 반영되어 있다
+  - [ ] 부하 테스트·스트레스 테스트 기준이 적절히 설정되어 있다
+  - [ ] 응답 시간·처리량 목표가 명확히 정의되어 있다
+  - [ ] 스케일러빌리티 테스트 기준이 구현 요건과 일치한다
+  
+  #### 보안 기준 정합성 [ ] 0/3항목 완료
+  - [ ] 구현 계획의 보안 요건이 테스트 항목에 포함되어 있다
+  - [ ] 인증·인가 테스트가 적절히 계획되어 있다
+  - [ ] 취약점 테스트·침투 테스트가 포함되어 있다
+  ```
+  
+  ## Phase 3: 종합 정합성 검증
+  
+  ### 3.1 전체 일관성 확인
+  
+  #### 검증 체크리스트
+  ```markdown
+  ### 전체 일관성 확인 [ ] 0/12항목 완료 (0%)
+  
+  #### 아키텍처 일관성 [ ] 0/4항목 완료
+  - [ ] 설계서의 아키텍처 패턴이 구현 계획에 일관되게 반영되어 있다
+  - [ ] 레이어 분리(프레젠테이션/비즈니스/데이터)가 적절히 유지되어 있다
+  - [ ] 기술 스택 선택이 전체 설계와 일치한다
+  - [ ] 보안 아키텍처가 일관되게 적용되어 있다
+  
+  #### 데이터 플로우 일관성 [ ] 0/4항목 완료
+  - [ ] 설계서의 데이터 플로우가 구현·테스트 계획과 일관된다
+  - [ ] 입력 검증·데이터 변환 처리가 적절히 계획되어 있다
+  - [ ] 데이터 영속화·캐시 전략이 일관된다
+  - [ ] 데이터 보안·프라이버시 요건이 일관되게 적용되어 있다
+  
+  #### 품질 요건 일관성 [ ] 0/4항목 완료
+  - [ ] 비기능 요건이 구현·테스트 계획 전반에서 일관되게 고려되어 있다
+  - [ ] 성능 목표가 구현·테스트 전반에서 일치한다
+  - [ ] 가용성·신뢰성 요건이 일관되게 계획되어 있다
+  - [ ] 운영·유지보수 요건이 적절히 반영되어 있다
+  ```
+  
+  ### 3.2 의존관계 검증
+  
+  #### 검증 체크리스트
+  ```markdown
+  ### 의존관계 검증 [ ] 0/9항목 완료 (0%)
+  
+  #### 구현 의존관계 [ ] 0/3항목 완료
+  - [ ] 컴포넌트 간 의존관계가 구현 계획에서 적절히 관리되고 있다
+  - [ ] 외부 라이브러리·서비스 의존이 명확히 정의되어 있다
+  - [ ] 순환 의존·부적절한 의존관계가 존재하지 않는다
+  
+  #### 테스트 의존관계 [ ] 0/3항목 완료
+  - [ ] 테스트 실행 순서·의존관계가 적절히 정의되어 있다
+  - [ ] 테스트 데이터·환경의 의존관계가 관리되고 있다
+  - [ ] 테스트 레벨 간 의존관계가 적절히 설계되어 있다
+  
+  #### 배포 의존관계 [ ] 0/3항목 완료
+  - [ ] 구현 컴포넌트의 배포 순서가 고려되어 있다
+  - [ ] DB 마이그레이션·초기화 의존관계가 정의되어 있다
+  - [ ] 환경 간(개발/테스트/운영) 의존관계가 관리되고 있다
+  ```
+  
+  ## 검증 실행·리포트 생성
+  
+  ### 실행 지시 형식
+  
+  #### 단계별 검증 실행
+  ```bash
+  # Phase 1: 설계서 → 구현 계획서 검증
+  "설계서와 구현 계획서의 정합성을 검증해 주세요"
+  "API 설계서와의 정합성만 검증해 주세요"
+  "데이터베이스 설계서와의 정합성만 검증해 주세요"
+  
+  # Phase 2: 구현 계획서 → 테스트 계획서 검증
+  "구현 계획서와 테스트 계획서의 정합성을 검증해 주세요"
+  "테스트 대상 망라성만 검증해 주세요"
+  "테스트 레벨 타당성만 검증해 주세요"
+  
+  # Phase 3: 종합 정합성 검증
+  "전체 정합성을 검증해 주세요"
+  "의존관계만 검증해 주세요"
+  
+  # 완전 검증
+  "설계서부터 구현·테스트 계획서까지 완전 검증해 주세요"
+  ```
+  
+  #### 커스텀 검증 실행
+  ```bash
+  # 특정 영역만
+  "Backend 구현 계획의 정합성만 검증해 주세요"
+  "Frontend 구현 계획의 정합성만 검증해 주세요"
+  "인증 기능의 구현·테스트 정합성을 검증해 주세요"
+  
+  # 특정 품질 관점만
+  "보안 요건의 정합성을 검증해 주세요"
+  "성능 요건의 정합성을 검증해 주세요"
+  ```
+  
+  ### 검증 리포트 형식
+  
+  #### 임원용 요약(Executive Summary)
+  ```markdown
+  # 품질 보증 검증 리포트 - YYYY/MM/DD
+  
+  ## 📊 종합 평가 요약
+  | 검증 페이즈 | 정합성 점수 | High 문제(중요) | Medium 문제 | 종합 판정 |
+  |---|---|---|---|---|
+  | Phase 1: 설계 → 구현 | 88% | 2건 | 5건 | ⚠️ 수정 필요 |
+  | Phase 2: 구현 → 테스트 | 92% | 0건 | 3건 | ✅ 합격 |
+  | Phase 3: 종합 정합성 | 85% | 1건 | 2건 | ⚠️ 수정 필요 |
+  | **전체 평가** | **88%** | **3건** | **10건** | **⚠️ 수정 후 재검증** |
+  
+  ## 🚨 중요(High/Critical) 이슈
+  1. **API 설계서**: 사용자 관리 API 3개 엔드포인트가 구현 계획에 누락
+  2. **DB 설계**: 외래 키 제약 5건이 구현 계획에서 미반영
+  3. **의존관계**: 인증 서비스 ↔ 파일 관리 서비스 간 순환 의존
+  
+  ## ⚠️ 중간급(Medium) 이슈
+  1. **테스트 망라성**: Frontend Level 2 상태관리 테스트 부족
+  2. **성능**: 부하 테스트 기준이 구현 요건과 불일치
+  3. **보안**: 입력값 검증 테스트 일부 부족
+  
+  ## 📈 품질 개선 권고
+  1. API 설계서 재점검 및 구현 계획 반영
+  2. 데이터베이스 제약 구현 계획에 추가
+  3. 테스트 계획의 망라성 보강
+  
+  ## 🎯 다음 단계
+  1. High/Critical 이슈 수정(추정 공수: 2일)
+  2. 수정 후 부분 재검증
+  3. 전체 재검증 및 최종 승인
+  ```
+  
+  #### 상세 검증 결과
+  ```markdown
+  ## 상세 검증 결과
+  
+  ### Phase 1: 설계서 → 구현 계획서 검증
+  
+  #### API 설계서 정합성 검증 [⚠️] 15/20항목 완료 (75%)
+  
+  ##### 엔드포인트 망라성 [❌] 2/5항목 완료 (40%)
+  - [❌] 모든 REST 엔드포인트가 구현 계획에 포함되어 있다
+    - **문제**: 아래 3개 엔드포인트가 구현 계획에 누락
+      - `GET /api/users/{id}/profile` 
+      - `PUT /api/users/{id}/settings`
+      - `DELETE /api/users/{id}`
+    - **영향**: 사용자 관리 기능 구현의 불완전
+    - **수정안**: `backend/app/api/users.py` 구현 계획에 상기 3개 엔드포인트 추가
+  
+  - [✅] HTTP 메서드(GET/POST/PUT/DELETE)가 올바르게 계획되어 있다
+  - [⚠️] Path·Query 파라미터가 고려되어 있다
+    - **문제**: 페이지네이션 쿼리 파라미터(page, limit) 처리가 구현 계획에서 불명확
+    - **수정안**: API 핸들러의 페이지네이션 처리 로직 명확화
+  
+  ##### 인증·인가 요건 [✅] 4/4항목 완료 (100%)
+  - [✅] 인증 필요 엔드포인트 식별
+  - [✅] 권한 레벨 포함
+  - [✅] JWT 처리 로직 계획
+  - [✅] 세션 관리 방식 정의
+  
+  #### 데이터베이스 설계서 정합성 검증 [⚠️] 12/18항목 완료 (67%)
+  
+  ##### 제약·관계성 [❌] 1/6항목 완료 (17%)
+  - [✅] 기본 키 제약 포함
+  - [❌] 외래 키 제약·참조 정합성 고려
+    - **문제**: 다음 외래 키 제약이 구현 계획에서 미반영
+      - `files.user_id -> users.id`
+      - `file_shares.file_id -> files.id`
+      - `file_shares.user_id -> users.id`
+      - `folders.parent_id -> folders.id`
+      - `folders.user_id -> users.id`
+    - **영향**: 데이터 정합성 저하, 고립 레코드 발생 위험
+    - **수정안**: `backend/app/models/schemas.py`에 ForeignKey 필드 추가
+  
+  ### Phase 2: 구현 계획서 → 테스트 계획서 검증
+  
+  #### 테스트 대상의 커버리지 검증 [✅] 13/15항목 완료 (87%)
+  
+  ##### Frontend 기능 테스트 커버리지 [⚠️] 4/5항목 완료 (80%)
+  - [✅] 구현 계획의 모든 컴포넌트에 테스트가 정의되어 있음  
+  - [✅] 모든 페이지 및 화면에 대한 테스트가 계획되어 있음  
+  - [✅] 사용자 인터랙션(클릭/입력 등)에 대한 테스트 포함  
+  - [⚠️] 상태 관리 및 데이터 플로우 테스트 계획 부족  
+    - **문제**: Zustand 상태 스토어의 Level 2 통합 테스트 부족  
+    - **수정안**: `frontend/src/stores/` 내 각 스토어에 대한 통합 테스트 추가  
+  - [✅] API 연동 및 비동기 처리 테스트 포함  
+  ```
+  
+  #### 개선 제안 생성
+  ```python
+  class ImprovementSuggestionGenerator:
+      def generate_suggestions(self, validation_results):
+          """검증 결과로부터 개선 제안 생성"""
+          suggestions = []
+          
+          for issue in validation_results.get_critical_issues():
+              suggestion = {
+                  "issue_id": issue.id,
+                  "title": issue.title,
+                  "severity": issue.severity,
+                  "affected_components": issue.affected_components,
+                  "root_cause": self._analyze_root_cause(issue),
+                  "solution_options": self._generate_solution_options(issue),
+                  "estimated_effort": self._estimate_effort(issue),
+                  "dependencies": self._identify_dependencies(issue),
+                  "risk_if_not_fixed": self._assess_risk(issue)
+              }
+              suggestions.append(suggestion)
+          
+          return self._prioritize_suggestions(suggestions)
+      
+      def _generate_solution_options(self, issue):
+          """문제에 대한 해결 옵션 생성"""
+          if issue.type == "missing_api_endpoint":
+              return [
+                  {
+                      "option": "구현 계획에 추가",
+                      "description": "API 설계서를 기반으로 엔드포인트를 구현 계획에 추가",
+                      "effort": "낮음",
+                      "risk": "낮음"
+                  },
+                  {
+                      "option": "API 설계서 수정",
+                      "description": "불필요한 엔드포인트를 API 설계서에서 제거",
+                      "effort": "낮음",
+                      "risk": "중간 (요구사항 확인 필요)"
+                  }
+              ]
+          elif issue.type == "missing_foreign_key":
+              return [
+                  {
+                      "option": "모델에 ForeignKey 추가",
+                      "description": "Django 모델에 적절한 ForeignKey 필드 추가",
+                      "effort": "중간",
+                      "risk": "낮음"
+                  },
+                  {
+                      "option": "DB 제약조건만 추가",
+                      "description": "마이그레이션으로 제약조건만 추가하고 애플리케이션 레벨에서 관리",
+                      "effort": "낮음",
+                      "risk": "중간 (데이터 정합성 관리 복잡)"
+                  }
+              ]
+  ```
+  
+  ### 품질 게이트 판정
+  
+  #### 자동 판정 규칙
+  ```python
+  class QualityGateJudgment:
+      def evaluate_overall_quality(self, validation_results):
+          """전체 품질 평가 및 다음 단계 판정"""
+          
+          # 심각도별 문제 카운트
+          critical_issues = len(validation_results.get_issues_by_severity("critical"))
+          high_issues = len(validation_results.get_issues_by_severity("high"))
+          medium_issues = len(validation_results.get_issues_by_severity("medium"))
+          
+          # 단계별 점수
+          phase1_score = validation_results.get_phase_score(1)
+          phase2_score = validation_results.get_phase_score(2)
+          phase3_score = validation_results.get_phase_score(3)
+          
+          # 종합 판정
+          if critical_issues > 0:
+              return {
+                  "status": "BLOCKED",
+                  "message": "Critical 등급 문제가 존재하여 구현 시작 불가",
+                  "required_actions": ["Critical 문제 수정", "부분 재검증"],
+                  "estimated_fix_time": self._estimate_critical_fix_time(critical_issues)
+              }
+          elif high_issues > 5 or phase1_score < 80:
+              return {
+                  "status": "MAJOR_REVISION_REQUIRED", 
+                  "message": "High 등급 문제 다수 발생, 대규모 수정 필요",
+                  "required_actions": ["High 문제 수정", "설계서 재검토", "전체 재검증"],
+                  "estimated_fix_time": self._estimate_major_fix_time(high_issues)
+              }
+          elif high_issues > 0 or phase1_score < 90:
+              return {
+                  "status": "MINOR_REVISION_REQUIRED",
+                  "message": "경미한 수정 후 구현 가능", 
+                  "required_actions": ["High 문제 수정", "부분 재검증"],
+                  "estimated_fix_time": self._estimate_minor_fix_time(high_issues)
+              }
+          else:
+              return {
+                  "status": "APPROVED",
+                  "message": "품질 기준을 충족, 구현 시작 가능",
+                  "required_actions": ["구현 시작"],
+                  "next_checkpoint": "구현 완료 후 테스트 실행"
+              }
+  ```
+  
+  ## 지속적 품질 관리
+  
+  ### 정기 검증 스케줄
+  
+  #### 개발 단계별 검증
+  ```yaml
+  development_phase_validation:
+    design_phase:
+      - trigger: "설계서 업데이트 시"
+      - validation: "Phase 1만"
+      - frequency: "즉시"
+      
+    implementation_planning:
+      - trigger: "구현 계획서 작성/업데이트 시"
+      - validation: "Phase 1-2"
+      - frequency: "계획 변경 시마다"
+      
+    test_planning:
+      - trigger: "테스트 계획서 작성/업데이트 시"
+      - validation: "Phase 2-3"
+      - frequency: "계획 변경 시마다"
+      
+    implementation_start:
+      - trigger: "구현 시작 전"
+      - validation: "전체 Phase"
+      - frequency: "시작 전 필수"
+      
+    milestone_checkpoints:
+      - trigger: "개발 마일스톤 도달 시"
+      - validation: "전체 Phase"
+      - frequency: "주간"
+  ```
+  
+  ### 품질 메트릭 모니터링
+  
+  #### KPI 정의
+  ```yaml
+  quality_kpis:
+    consistency_metrics:
+      - design_implementation_alignment: ">= 90%"
+      - implementation_test_alignment: ">= 85%"
+      - overall_consistency_score: ">= 85%"
+      
+    coverage_metrics:
+      - api_coverage_rate: ">= 95%"
+      - database_coverage_rate: ">= 90%"
+      - test_coverage_rate: ">= 90%"
+      
+    issue_metrics:
+      - critical_issues: "0건"
+      - high_severity_issues: "<= 3건"
+      - issue_resolution_time: "<= 2일"
+      
+    process_metrics:
+      - validation_execution_time: "<= 30분"
+      - false_positive_rate: "<= 5%"
+      - user_satisfaction_score: ">= 4.0/5.0"
+  ```
+  
+  ## 요약
+  
+  이 품질 보증 시스템을 통해:
+  
+  1. **누락 방지**: 설계서 요구사항이 구현 및 테스트 계획에 정확히 반영됨
+  2. **정합성 보장**: 문서 간 불일치가 조기에 발견되고 수정됨
+  3. **품질 향상**: 단계별 검증으로 고품질의 개발 계획 수립 가능
+  4. **효율화**: 자동 검증으로 수동 리뷰 부담 감소
+  5. **지속적 개선**: 정기 품질 모니터링을 통해 개발 프로세스 지속 개선
+  
+  이 시스템을 활용하면 설계부터 구현, 테스트까지 일관된 품질 보증 체계를 구축할 수 있으며, 프로젝트의 성공 확률이 크게 향상됩니다.
+</code>
+                        </pre>
+              </div>
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Of Page Content -->
+            <!-- ============================================================== -->
+          </div>
+        </div>
+        <footer class="footer bg-white text-center">
+          All Rights Reserved by JAEWOO, KIM. &copy; 2026 MDRULES Development.</a>
+        </footer>
+        <!-- ============================================================== -->
+        <!-- End Container fluid  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <!--  -->
+
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
+      </div>
+      <!-- ============================================================== -->
+      <!-- End Page wrapper  -->
+      <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- End Page -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="./assets/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="./assets/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- apps -->
+    <script src="./assets/simplebar/simplebar/dist/simplebar.js"></script>
+    <!--Custom JavaScript -->
+    <script src="./dist/js/custom.js"></script>
+    <script src="./assets/highlights/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+
+      const scrollSpy = new bootstrap.ScrollSpy(document.body, {
+        target: "#navbar-example3",
+      });
+    </script>
+    <!-- End JS -->
+  </body>
+</html>

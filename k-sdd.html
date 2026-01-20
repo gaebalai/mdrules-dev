@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="keywords"
+      content="Markdown, Makrdown Rules, Claude Code, Codex, Cursor, Rules, 마크다운, Gemini, 클로드, 코드, 코드x, 커서, 규칙, 규칙 마크다운, 규칙 코드, 규칙 클로드, 규칙 코드x, 규칙 커서"
+    />
+    <meta/
+      name="description"
+      content="기업에 맞춤형 마크다운 규칙이나 규칙 마크다운을 적용하여 효과적인 문서 작성을 위한 프롬프트엔지니어링, 컨텍스트엔지니어링 교육 및 프롬프트 설계 컨설던트 및 설계작업을 대행해주는 서비스입니다."
+    />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>MD룰 - 기업 맞춤형 마크다운 규칙 설계 및 교육, AI 코딩 에이전트 지원 서비스</title>
+    <link
+      rel="canonical"
+      href="https://mdrules.dev"
+    />
+    <!-- Favicon icon -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="15x15"
+      href="./dist/images/favicon.png"
+    />
+    <!-- This page css -->
+    <!-- Custom CSS -->
+    <link
+      rel="stylesheet"
+      href="./assets/simplebar/simplebar/dist/simplebar.css"
+    />
+    <link href="./dist/css/style.min.css" rel="stylesheet" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./assets/highlights/atom-one-dark.min.css"
+    />
+  </head>
+  <body>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" class="docs">
+      <!-- ============================================================== -->
+      <!-- End Topbar header -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Left Sidebar - style you can find in sidebar.scss  -->
+      <!-- ============================================================== -->
+      <!--Desktop view sidebar menu-->
+      <aside
+        class="left-sidebar pt-4 d-lg-block d-none"
+        id="navbar-example3"
+        data-simplebar
+      >
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+          <!-- Sidebar navigation-->
+          <nav class="sidebar-nav">
+            <!-- ============================================================== -->
+            <!-- Logo -->
+            <!-- ============================================================== -->
+            <div
+              class="navbar-brand d-flex align-items-center justify-content-between px-4"
+            >
+              <!-- Logo icon -->
+              <a href="index.html">
+                <b class="logo-icon">
+                  <!-- Dark Logo icon -->
+                  <img
+                    src="./dist/images/logo-dark.svg" 
+                    alt="homepage"
+                    class="dark-logo"
+                  />
+                </b>
+                <!--End Logo icon -->
+              </a>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Logo -->
+            <!-- ============================================================== -->
+            <ul id="sidebarnav" class="mt-4">
+              <nav class="nav nav-pills flex-column sidebar-nav">
+                <ul class="list-unstyled">
+                  <!--서비스 소개-->
+                  <li class="nav-small-cap">
+                    <span class="hide-menu">MDRules는?</span>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="index.html"><i class="ti ti-home-2 me-3 fs-4"></i> 서비스 소개</a>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://talk.naver.com/ct/w5umt5"><i class="ti ti-packages me-3 fs-4"></i> 문의하기</a>
+                  </li>
+
+                  <!--공개 프롬프트 및 Skills-->
+                  <li class="nav-small-cap mt-4">
+                    <span class="hide-menu">공개한 프롬프트</span>
+                  </li>
+                  <li class="sidebar-item position-relative">
+                    <a
+                      class="nav-link sidebar-link has-arrow d-flex align-items-center"
+                      href="javascript:void(0)"
+                      aria-expanded="false"
+                    >
+                      <span class="hide-menu"
+                        ><i class="ti ti-file-infinity me-3 fs-4"></i>AI주도개발 통합시스템 Rules(Cursor용)
+                      </span>
+                    </a>
+                    <!--sub-menu items-->
+                    <ul
+                      aria-expanded="false"
+                      class="collapse first-level list-unstyled"
+                    >
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-0-foundation.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 0. Foundation (3) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a
+                        href="cursor-1-challenge-understanding.html"
+                        class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 1. Challenge Understanding(3) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-2-solution-exploration.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 2. Solution Exploration(4) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-3-solution-design-evaluation.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 3. Solution Design & Evaluation(4) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-4-design.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 4. Design(5) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-5-implementation.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 5. Implementation(4) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-6-testing.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 6. Testing(2) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-7-maintenance.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 7. Maintenance(2) </span></a
+                      >
+                    </li>
+                    </ul>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="k-sdd.html"
+                      ><i class="ti ti-api-app me-3 fs-4"></i>k-sdd (스펙주도개발)</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="itda-sdd.html"
+                      ><i class="ti ti-settings me-3 fs-4"></i>ITDA-SDD 오픈소스</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="itdaz.html"
+                      ><i class="ti ti-refresh-dot me-3 fs-4"></i>ITDAZ 오픈소스</a
+                    >
+                  </li>
+                  <!--활동-->
+                  <li class="nav-small-cap mt-4">
+                    <span class="hide-menu">주요 활동</span>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://github.com/gaebalai/" target="_github"
+                      ><i class="ti ti-brand-github me-3 fs-4"></i> GitHub</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://blog.naver.com/beyond-zero" target="_blog"
+                      ><i class="ti ti-brand-abstract me-3 fs-4"></i> 기술 블로그</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://x.com/gaebalai" target="_x"
+                      ><i class="ti ti-brand-twitter me-3 fs-4"></i> X(Twitter)</a
+                    >
+                  </li>
+                  <!--지원 및 문의-->
+                                
+                  <li class="sidebar-item mt-5">
+                    <a class=" btn btn-danger w-100 py-2" href="tel:821080143479">문의전화: 010-8014-3479</a>
+
+                  </li>      
+                  </ul>
+              </nav>
+            </ul>
+          </nav>
+          <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+      </aside>
+
+      <!--Mobile view sidebar menu-->
+      <div
+        class="offcanvas offcanvas-start"
+        tabindex="-1"
+        id="offcanvasExample"
+        aria-labelledby="offcanvasExampleLabel"
+      >
+        <aside class="left-sidebar pt-4" id="navbar-example3" data-simplebar>
+          <!-- Sidebar scroll-->
+          <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+              <!-- ============================================================== -->
+              <!-- Logo -->
+              <!-- ============================================================== -->
+              <div
+                class="navbar-brand d-flex align-items-center justify-content-between px-4"
+              >
+                <!-- Logo icon -->
+                <a href="index.html">
+                  <b class="logo-icon">
+                    <!-- Dark Logo icon -->
+                    <img
+                      src="./dist/images/logo-dark.svg"
+                      alt="homepage"
+                      class="dark-logo"
+                    />
+                  </b>
+                  <!--End Logo icon -->
+                </a>
+              </div>
+              <!-- ============================================================== -->
+              <!-- End Logo -->
+              <!-- ============================================================== -->
+              <ul id="sidebarnav" class="mt-4">
+                <nav class="nav nav-pills flex-column sidebar-nav">
+                  <ul class="list-unstyled">
+                    <!--Getting Started-->
+                    <li class="nav-small-cap">
+                      <span class="hide-menu">MDRules는?</span>
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="index.html"><i class="ti ti-home-2 me-3 fs-4"></i> 서비스 소개</a>
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="https://talk.naver.com/ct/w5umt5"><i class="ti ti-packages me-3 fs-4"></i> 문의하기</a>
+                    </li>
+
+                    <!--Theme UI-->
+                    <li class="nav-small-cap mt-4">
+                      <span class="hide-menu">공개한 프롬프트</span>
+                    </li>
+                    <li class="sidebar-item position-relative">
+                      <a
+                        class="nav-link sidebar-link has-arrow d-flex align-items-center"
+                        href="javascript:void(0)"
+                        aria-expanded="false"
+                      >
+                        <span class="hide-menu"
+                        ><i class="ti ti-file-infinity me-3 fs-4"></i>AI주도개발 통합시스템 Rules(Cursor용)
+                        </span>
+                      </a>
+                      <!--sub-menu items-->
+                      <ul
+                        aria-expanded="false"
+                        class="collapse first-level list-unstyled"
+                      >
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-0-foundation.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 0. Foundation (3) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a
+                            href="cursor-1-challenge-understanding.html"
+                            class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 1. Challenge Understanding(3) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-2-solution-exploration.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 2. Solution Exploration(4) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-3-solution-design-evaluation.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 3. Solution Design & Evaluation(4) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-4-design.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 4. Design(5) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-5-implementation.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 5. Implementation(4) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-6-testing.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 6. Testing(2) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-7-maintenance.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 7. Maintenance(2) </span></a
+                          >
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="k-sdd.html"
+                        ><i class="ti ti-api-app me-3 fs-4"></i>k-sdd (스펙주도개발)</a
+                      >
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="itda-sdd.html"
+                        ><i class="ti ti-settings me-3 fs-4"></i>ITDA-SDD 오픈소스</a
+                      >
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="itdaz.html"
+                        ><i class="ti ti-refresh-dot me-3 fs-4"></i>ITDAZ 오픈소스</a
+                      >
+                    </li>
+                  <!--활동-->
+                  <li class="nav-small-cap mt-4">
+                    <span class="hide-menu">주요 활동</span>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://github.com/gaebalai/" target="_github"
+                      ><i class="ti ti-brand-github me-3 fs-4"></i> GitHub</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://blog.naver.com/beyond-zero" target="_blog"
+                      ><i class="ti ti-brand-abstract me-3 fs-4"></i> 기술 블로그</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://x.com/gaebalai" target="_x"
+                      ><i class="ti ti-brand-twitter me-3 fs-4"></i> X(Twitter)</a
+                    >
+                  </li>
+                  <!--지원 및 문의-->
+                                
+                  <li class="sidebar-item mt-5">
+                    <a class=" btn btn-danger w-100 py-2" href="tel:821080143479">문의전화: 010-8014-3479</a>
+
+                  </li>     
+                  </ul>
+                </nav>
+              </ul>
+            </nav>
+            <!-- End Sidebar navigation -->
+          </div>
+          <!-- End Sidebar scroll-->
+        </aside>
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Page wrapper  -->
+      <!-- ============================================================== -->
+      <div
+        class="page-wrapper pt-0 d-block"
+        data-bs-spy="scroll"
+        data-bs-target="#navbar-example3"
+        data-bs-smooth-scroll="true"
+        tabindex="0"
+      >
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <div class="position-relative">
+          <div
+            class="navbar-header bg-white d-flex align-items-center justify-content-between p-3 fixed-top page-wrapper w-auto"
+          >
+            <!-- ============================================================== -->
+            <!-- Toggle which is visible on mobile only -->
+            <!-- ============================================================== -->
+            <!-- Logo icon -->
+            <a href="index.html">
+              <b class="logo-icon d-lg-none d-block">
+                <!-- Dark Logo icon -->
+                <img
+                  src="./dist/images/logo-dark.svg"
+                  alt="homepage"
+                  class="dark-logo"
+                />
+              </b>
+              <!--End Logo icon -->
+            </a>
+            <div class="d-flex align-items-center">
+              <!-- <a
+                class="nav-toggler waves-effect waves-light pe-6 text-dark ms-3 d-lg-none d-block"
+                href="javascript:void(0)"
+                ><i class="ti ti-menu-2"></i
+              ></a> -->
+              <!---Mobile view canvas button--->
+              <a
+                class="pe-6 text-muted ms-3 d-lg-none d-block"
+                data-bs-toggle="offcanvas"
+                href="#offcanvasExample"
+                role="button"
+                aria-controls="offcanvasExample"
+              >
+                <i class="ti ti-menu-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid mt-4">
+          <div class="mt-5">
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <h3 class="mt-5">k-sdd: 팀용 워크플로를 위한 SDD(스펙주도개발) 오픈소스</h3>
+            
+            <h4 class="mt-4 lh-base">
+              Claude Code / Cursor IDE / Gemini CLI / Codex CLI / GitHub Copilot / Qwen Code / Windsurf를 프로토타입 단계에서 프로덕션 사양 기반으로 전환합니다. 요구사항·설계·태스크·프로젝트 메모리를 팀 워크플로우에 맞게 커스터마이즈할 수 있습니다.
+            </h4>
+            <h4 class="mt-4 lh-base">
+              Kiro 호환 — Kiro IDE와 유사한 Spec-Driven / AI-DLC 스타일을 제공하며, 기존 Kiro 사양 문서도 그대로 사용할 수 있습니다. 
+            </h4>
+            <div class="card mt-4">
+              <div class="card-body">
+                <h4 class="card-title">v1.0.0 기능</h4>
+                <ul class="mb-0">
+                  <li class="font-16 py-1 text-muted">
+                    ✅ 리뷰하기 쉬운 설계 문서 — 구조화 포맷과 요약 테이블로 리뷰 시간을 5배 단축
+                  </li>
+                  <li class="font-16 py-1 text-muted">
+                    ✅ Research 분리 — 조사 메모(Research.md)와 최종 설계(Design.md)를 분리 관리
+                  </li>
+                  <li class="font-16 py-1 text-muted">
+                    ✅ 품질 게이트 — validate-gap / validate-design / validate-impl 명령으로 코딩 전 통합 문제를 사전 감지
+                  </li>    
+                  <li class="font-16 py-1 text-muted">
+                    ✅ 1회성 커스터마이즈 — 템플릿을 팀 프로세스에 맞게 한 번만 조정하면 모든 에이전트에 동일 적용
+                  </li>       
+                  <li class="font-16 py-1 text-muted">
+                    ✅ 통합 워크플로우 — 7개 에이전트 × 12개 언어에서 동일한 11단계 커맨드 프로세스 공유
+                  </li>       
+                </ul>
+              </div>
+            </div>
+
+            <div class="mt-4 card">
+              <div class="card-body">
+                <h4 class="card-title">설치 방법</h4>
+
+                <pre>
+<code class="language-shell py-0">
+  # 기본 설치 (기본값: 영어, Claude Code)
+  npx k-sdd@latest
+  
+  # 언어 옵션 (기본값: --lang en)
+  npx k-sdd@latest --lang ko    # 한국어
+  npx k-sdd@latest --lang es    # 스페인어
+  ...(지원언어: en, ko, zh-TW, zh, es, pt, de, fr, ja, ru, it, ar)
+  
+  # 에이전트 옵션 (기본값: claude-code / --claude)
+  npx k-sdd@latest --claude --lang ko        # Claude Code(11가지 명령, 대응 언어는 임의)
+  npx k-sdd@latest --claude-agent --lang ko  # Claude Code Subagents(12가지 명령 + 9 서브에이전트)
+  npx k-sdd@latest --cursor --lang ko        # Cursor IDE
+  npx k-sdd@latest --gemini --lang ko        # Gemini CLI
+  npx k-sdd@latest --codex --lang ko         # Codex CLI
+  npx k-sdd@latest --copilot --lang ko       # GitHub Copilot
+  npx k-sdd@latest --qwen --lang ko          # Qwen Code
+  npx k-sdd@latest --windsurf --lang ko      # Windsurf IDE
+  
+  # 참고: 참고: @next는 향후 알파/베타 버전용
+</code>
+                        </pre>
+              </div>
+            </div>
+            <div class="card mt-4">
+              <div class="card-body">
+                <h4 class="card-title">GitHub Repository</h4>
+                <ul class="mb-0">
+                  <li class="font-16 py-1 text-muted">
+                    <a href="https://github.com/gaebalai/k-sdd" target="_github">https://github.com/gaebalai/k-sdd</a>
+                  </li>              
+                </ul>
+              </div>
+
+            </div>
+            <h3 class="mt-5">Quick Start</h3>
+            <div class="mt-4 card">
+              <div class="card-body">
+                <h4 class="card-title">신규 프로젝트인 경우</h4>
+
+                <pre>
+<code class="language-shell py-0">
+  # AI 에이전트를 실행하고, 즉시 스펙주도개발(Spec-Driven Development)을 시작
+  /kiro:spec-init OAuth로 사용자 인증 시스템 구축           # AI가 구조화된 계획을 생성
+  /kiro:spec-requirements auth-system                 # AI가 명확화를 위한 질문
+  /kiro:spec-design auth-system                       # 사람이 검증, AI가 설계
+  /kiro:spec-tasks auth-system                        # 구현 태스크로 분해
+  /kiro:spec-impl auth-system                         # TDD로 실행
+  
+  ![design.md - System Flow Diagram](https://aivibecoding.kr/design-system_flow.png)
+  *설계 단계 `design.md`에서의 시스템 플로우 예시*
+  
+  ### 기존 프로젝인 경우 (권장)
+  ```bash
+  # 먼저 프로젝트 컨텍스트를 확립한 뒤 개발을 진행
+  /kiro:steering                                      # AI가 기존 프로젝트 컨텍스트를 학습
+  
+  /kiro:spec-init 기존 인증에 OAuth 추가                  # AI가 확장 계획을 생성
+  /kiro:spec-requirements oauth-enhancement           # AI가 명확화를 위한 질문
+  /kiro:validate-gap oauth-enhancement                # 옵션: 기존 기능과 요구사항을 분석
+  /kiro:spec-design oauth-enhancement                 # 사람이 검증, AI가 설계
+  /kiro:validate-design oauth-enhancement             # 옵션: 설계 통합을 검증
+  /kiro:spec-tasks oauth-enhancement                  # 구현 태스크로 분해
+  /kiro:spec-impl oauth-enhancement                   # TDD로 실행
+</code>
+                        </pre>
+              </div>
+            </div>
+            <div class="card mt-4">
+              <div class="card-body">
+                <h4 class="card-title">k-sdd를 선택하는 이유</h4>
+                <ul class="mb-0">
+                  <li class="font-16 py-1 text-muted">
+                    1. 사양이 단일 정보원(Single Source of Truth): 요구사항, 설계, 태스크, Supporting References까지 한 세트로 정리되어 승인 속도가 빨라집니다.
+                  </li>
+                  <li class="font-16 py-1 text-muted">
+                    2. Greenfield / Brownfield 모두 대응: 신규 기능은 minutes 단위로 시작, 기존 시스템은 validate 계열 커맨드와 Project Memory로 안전하게 확장합니다.
+                  </li>
+                  <li class="font-16 py-1 text-muted">
+                    3. 여러 에이전트를 동시에 활용: Claude / Cursor / Codex / Gemini / Copilot / Qwen / Windsurf가 동일한 템플릿/룰을 공유합니다.
+                  </li>    
+                  <li class="font-16 py-1 text-muted">
+                    4. 커스터마이즈는 한 번만: .kiro/settings/templates/와 .kiro/settings/rules/를 수정하면 모든 에이전트에 즉시 반영됩니다.
+                  </li>           
+   
+                </ul>
+              </div>
+            </div>
+            <div class="card mt-4">
+              <div class="card-body">
+                <h4 class="card-title">주요 기능</h4>
+                <ul class="mb-0">
+                  <li class="font-16 py-1 text-muted">
+                    AI-DLC 방식: 사람 승인 포함 AI 네이티브 프로세스입니다. 코어 패턴: AI 실행, 사람 검증
+                  </li>
+                  <li class="font-16 py-1 text-muted">
+                    사양 우선 개발(Spec-First): 포괄적 사양을 단일 정보원으로 삼아 라이프사이클 전체를 구동
+                  </li>
+                  <li class="font-16 py-1 text-muted">
+                    ‘볼트’(스프린트가 아니라): AI-DLC로 주 단위 스프린트를 대체하는 시간/일 단위 집중 사이클입니다. 관리 오버헤드 70%에서 탈출
+                  </li>    
+                  <li class="font-16 py-1 text-muted">
+                    영속적 프로젝트 메모리: AI가 스티어링 문서를 통해 모든 세션에 걸쳐 포괄적 컨텍스트(아키텍처, 패턴, 룰, 도메인 지식)를 유지
+                  </li>           
+                  <li class="font-16 py-1 text-muted">
+                    템플릿 유연성: {{KIRO_DIR}}/settings/templates（steering / requirements / design / tasks）를 팀 문서 형식에 맞게 커스터마이즈 가능
+                  </li>    
+                  <li class="font-16 py-1 text-muted">
+                    AI 네이티브 + 사람 게이트: AI 계획 → AI 질문 → 사람 검증 → AI 구현(품질 관리 포함 고속 사이클)
+                  </li>      
+                  <li class="font-16 py-1 text-muted">
+                    팀 대응: 품질 게이트 포함 12개 언어 대응의 크로스플랫폼 표준 워크플로우
+                  </li>      
+                </ul>
+              </div>
+            </div>
+            <div class="card mt-4">
+              <div class="card-body">
+                <h4 class="card-title">지원 AI 에이전트</h4>
+                <ul class="mb-0">
+                  <li class="font-16 py-1 text-muted">
+                    Claude Code (✅ 완전 지원): 11개 슬래시 커맨드
+                  </li>
+                  <li class="font-16 py-1 text-muted">
+                    Claude Code Subagents (✅ 완전 지원): 12개 커멘드 + 9개 서브에이전트
+                  </li>
+                  <li class="font-16 py-1 text-muted">
+                    Cursor IDE (✅ 완전 지원): 11개 커맨드
+                  </li>    
+                  <li class="font-16 py-1 text-muted">
+                    Gemini CLI (✅ 완전 지원): 11개 커맨드
+                  </li>           
+                  <li class="font-16 py-1 text-muted">
+                    Codex CLI (✅ 완전 지원): 11개 프롬프트 
+                  </li>    
+                  <li class="font-16 py-1 text-muted">
+                    GitHub Copilot (✅ 완전 지원): 11개 프롬프트
+                  </li>      
+                  <li class="font-16 py-1 text-muted">
+                    Qwen Code (✅ 완전 지원): 11개 커맨드 
+                  </li>      
+                  <li class="font-16 py-1 text-muted">
+                    Windsurf IDE (✅ 완전 지원): 11개 워크플로우
+                  </li>                
+                </ul>
+              </div>
+            </div>
+
+
+
+            <!-- ============================================================== -->
+            <!-- End Of Page Content -->
+            <!-- ============================================================== -->
+          </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Container fluid  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <footer class="footer bg-white text-center">
+          All Rights Reserved by JAEWOO, KIM. &copy; 2026 MDRULES Development.</a>
+        </footer>
+
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
+      </div>
+      <!-- ============================================================== -->
+      <!-- End Page wrapper  -->
+      <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- End Page -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="./assets/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="./assets/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- apps -->
+    <script src="./assets/simplebar/simplebar/dist/simplebar.js"></script>
+    <!--Custom JavaScript -->
+    <script src="./dist/js/custom.js"></script>
+    <script src="./assets/highlights/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+
+      const scrollSpy = new bootstrap.ScrollSpy(document.body, {
+        target: "#navbar-example3",
+      });
+    </script>
+    <!-- End JS -->
+  </body>
+</html>

@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="keywords"
+      content="Markdown, Makrdown Rules, Claude Code, Codex, Cursor, Rules, 마크다운, Gemini, 클로드, 코드, 코드x, 커서, 규칙, 규칙 마크다운, 규칙 코드, 규칙 클로드, 규칙 코드x, 규칙 커서"
+    />
+    <meta/
+      name="description"
+      content="기업에 맞춤형 마크다운 규칙이나 규칙 마크다운을 적용하여 효과적인 문서 작성을 위한 프롬프트엔지니어링, 컨텍스트엔지니어링 교육 및 프롬프트 설계 컨설던트 및 설계작업을 대행해주는 서비스입니다."
+    />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>MD룰 - 기업 맞춤형 마크다운 규칙 설계 및 교육, AI 코딩 에이전트 지원 서비스</title>
+    <link
+      rel="canonical"
+      href="https://mdrules.dev"
+    />
+    <!-- Favicon icon -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="15x15"
+      href="./dist/images/favicon.png"
+    />
+    <!-- This page css -->
+    <!-- Custom CSS -->
+    <link
+      rel="stylesheet"
+      href="./assets/simplebar/simplebar/dist/simplebar.css"
+    />
+    <link href="./dist/css/style.min.css" rel="stylesheet" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./assets/highlights/atom-one-dark.min.css"
+    />
+  </head>
+  <body>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" class="docs">
+      <!-- ============================================================== -->
+      <!-- End Topbar header -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Left Sidebar - style you can find in sidebar.scss  -->
+      <!-- ============================================================== -->
+      <!--Desktop view sidebar menu-->
+      <aside
+        class="left-sidebar pt-4 d-lg-block d-none"
+        id="navbar-example3"
+        data-simplebar
+      >
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+          <!-- Sidebar navigation-->
+          <nav class="sidebar-nav">
+            <!-- ============================================================== -->
+            <!-- Logo -->
+            <!-- ============================================================== -->
+            <div
+              class="navbar-brand d-flex align-items-center justify-content-between px-4"
+            >
+              <!-- Logo icon -->
+              <a href="index.html">
+                <b class="logo-icon">
+                  <!-- Dark Logo icon -->
+                  <img
+                    src="./dist/images/logo-dark.svg" 
+                    alt="homepage"
+                    class="dark-logo"
+                  />
+                </b>
+                <!--End Logo icon -->
+              </a>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Logo -->
+            <!-- ============================================================== -->
+            <ul id="sidebarnav" class="mt-4">
+              <nav class="nav nav-pills flex-column sidebar-nav">
+                <ul class="list-unstyled">
+                  <!--서비스 소개-->
+                  <li class="nav-small-cap">
+                    <span class="hide-menu">MDRules는?</span>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="index.html"><i class="ti ti-home-2 me-3 fs-4"></i> 서비스 소개</a>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://talk.naver.com/ct/w5umt5"><i class="ti ti-packages me-3 fs-4"></i> 문의하기</a>
+                  </li>
+
+                  <!--공개 프롬프트 및 Skills-->
+                  <li class="nav-small-cap mt-4">
+                    <span class="hide-menu">공개한 프롬프트</span>
+                  </li>
+                  <li class="sidebar-item position-relative">
+                    <a
+                      class="nav-link sidebar-link has-arrow d-flex align-items-center"
+                      href="javascript:void(0)"
+                      aria-expanded="false"
+                    >
+                      <span class="hide-menu"
+                        ><i class="ti ti-file-infinity me-3 fs-4"></i>AI주도개발 통합시스템 Rules(Cursor용)
+                      </span>
+                    </a>
+                    <!--sub-menu items-->
+                    <ul
+                      aria-expanded="false"
+                      class="collapse first-level list-unstyled"
+                    >
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-0-foundation.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 0. Foundation (3) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a
+                        href="cursor-1-challenge-understanding.html"
+                        class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 1. Challenge Understanding(3) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-2-solution-exploration.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 2. Solution Exploration(4) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-3-solution-design-evaluation.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 3. Solution Design & Evaluation(4) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-4-design.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 4. Design(5) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-5-implementation.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 5. Implementation(4) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-6-testing.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 6. Testing(2) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-7-maintenance.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 7. Maintenance(2) </span></a
+                      >
+                    </li>
+                    </ul>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="k-sdd.html"
+                      ><i class="ti ti-api-app me-3 fs-4"></i>k-sdd (스펙주도개발)</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="itda-sdd.html"
+                      ><i class="ti ti-settings me-3 fs-4"></i>ITDA-SDD 오픈소스</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="itdaz.html"
+                      ><i class="ti ti-refresh-dot me-3 fs-4"></i>ITDAZ 오픈소스</a
+                    >
+                  </li>
+                  <!--활동-->
+                  <li class="nav-small-cap mt-4">
+                    <span class="hide-menu">주요 활동</span>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://github.com/gaebalai/" target="_github"
+                      ><i class="ti ti-brand-github me-3 fs-4"></i> GitHub</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://blog.naver.com/beyond-zero" target="_blog"
+                      ><i class="ti ti-brand-abstract me-3 fs-4"></i> 기술 블로그</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://x.com/gaebalai" target="_x"
+                      ><i class="ti ti-brand-twitter me-3 fs-4"></i> X(Twitter)</a
+                    >
+                  </li>
+                  <!--지원 및 문의-->
+                                
+                  <li class="sidebar-item mt-5">
+                    <a class=" btn btn-danger w-100 py-2" href="tel:821080143479">문의전화: 010-8014-3479</a>
+
+                  </li>      
+                  </ul>
+              </nav>
+            </ul>
+          </nav>
+          <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+      </aside>
+
+      <!--Mobile view sidebar menu-->
+      <div
+        class="offcanvas offcanvas-start"
+        tabindex="-1"
+        id="offcanvasExample"
+        aria-labelledby="offcanvasExampleLabel"
+      >
+        <aside class="left-sidebar pt-4" id="navbar-example3" data-simplebar>
+          <!-- Sidebar scroll-->
+          <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+              <!-- ============================================================== -->
+              <!-- Logo -->
+              <!-- ============================================================== -->
+              <div
+                class="navbar-brand d-flex align-items-center justify-content-between px-4"
+              >
+                <!-- Logo icon -->
+                <a href="index.html">
+                  <b class="logo-icon">
+                    <!-- Dark Logo icon -->
+                    <img
+                      src="./dist/images/logo-dark.svg"
+                      alt="homepage"
+                      class="dark-logo"
+                    />
+                  </b>
+                  <!--End Logo icon -->
+                </a>
+              </div>
+              <!-- ============================================================== -->
+              <!-- End Logo -->
+              <!-- ============================================================== -->
+              <ul id="sidebarnav" class="mt-4">
+                <nav class="nav nav-pills flex-column sidebar-nav">
+                  <ul class="list-unstyled">
+                    <!--Getting Started-->
+                    <li class="nav-small-cap">
+                      <span class="hide-menu">MDRules는?</span>
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="index.html"><i class="ti ti-home-2 me-3 fs-4"></i> 서비스 소개</a>
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="https://talk.naver.com/ct/w5umt5"><i class="ti ti-packages me-3 fs-4"></i> 문의하기</a>
+                    </li>
+
+                    <!--Theme UI-->
+                    <li class="nav-small-cap mt-4">
+                      <span class="hide-menu">공개한 프롬프트</span>
+                    </li>
+                    <li class="sidebar-item position-relative">
+                      <a
+                        class="nav-link sidebar-link has-arrow d-flex align-items-center"
+                        href="javascript:void(0)"
+                        aria-expanded="false"
+                      >
+                        <span class="hide-menu"
+                        ><i class="ti ti-file-infinity me-3 fs-4"></i>AI주도개발 통합시스템 Rules(Cursor용)
+                        </span>
+                      </a>
+                      <!--sub-menu items-->
+                      <ul
+                        aria-expanded="false"
+                        class="collapse first-level list-unstyled"
+                      >
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-0-foundation.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 0. Foundation (3) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a
+                            href="cursor-1-challenge-understanding.html"
+                            class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 1. Challenge Understanding(3) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-2-solution-exploration.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 2. Solution Exploration(4) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-3-solution-design-evaluation.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 3. Solution Design & Evaluation(4) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-4-design.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 4. Design(5) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-5-implementation.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 5. Implementation(4) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-6-testing.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 6. Testing(2) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-7-maintenance.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 7. Maintenance(2) </span></a
+                          >
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="k-sdd.html"
+                        ><i class="ti ti-api-app me-3 fs-4"></i>k-sdd (스펙주도개발)</a
+                      >
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="itda-sdd.html"
+                        ><i class="ti ti-settings me-3 fs-4"></i>ITDA-SDD 오픈소스</a
+                      >
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="itdaz.html"
+                        ><i class="ti ti-refresh-dot me-3 fs-4"></i>ITDAZ 오픈소스</a
+                      >
+                    </li>
+                  <!--활동-->
+                  <li class="nav-small-cap mt-4">
+                    <span class="hide-menu">주요 활동</span>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://github.com/gaebalai/" target="_github"
+                      ><i class="ti ti-brand-github me-3 fs-4"></i> GitHub</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://blog.naver.com/beyond-zero" target="_blog"
+                      ><i class="ti ti-brand-abstract me-3 fs-4"></i> 기술 블로그</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://x.com/gaebalai" target="_x"
+                      ><i class="ti ti-brand-twitter me-3 fs-4"></i> X(Twitter)</a
+                    >
+                  </li>
+                  <!--지원 및 문의-->
+                                
+                  <li class="sidebar-item mt-5">
+                    <a class=" btn btn-danger w-100 py-2" href="tel:821080143479">문의전화: 010-8014-3479</a>
+
+                  </li>     
+                  </ul>
+                </nav>
+              </ul>
+            </nav>
+            <!-- End Sidebar navigation -->
+          </div>
+          <!-- End Sidebar scroll-->
+        </aside>
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Page wrapper  -->
+      <!-- ============================================================== -->
+      <div
+        class="page-wrapper pt-0 d-block"
+        data-bs-spy="scroll"
+        data-bs-target="#navbar-example3"
+        data-bs-smooth-scroll="true"
+        tabindex="0"
+      >
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <div class="position-relative">
+          <div
+            class="navbar-header bg-white d-flex align-items-center justify-content-between p-3 fixed-top page-wrapper w-auto"
+          >
+            <!-- ============================================================== -->
+            <!-- Toggle which is visible on mobile only -->
+            <!-- ============================================================== -->
+            <!-- Logo icon -->
+            <a href="index.html">
+              <b class="logo-icon d-lg-none d-block">
+                <!-- Dark Logo icon -->
+                <img
+                  src="./dist/images/logo-dark.svg"
+                  alt="homepage"
+                  class="dark-logo"
+                />
+              </b>
+              <!--End Logo icon -->
+            </a>
+            <div class="d-flex align-items-center">
+              <!-- <a
+                class="nav-toggler waves-effect waves-light pe-6 text-dark ms-3 d-lg-none d-block"
+                href="javascript:void(0)"
+                ><i class="ti ti-menu-2"></i
+              ></a> -->
+              <!---Mobile view canvas button--->
+              <a
+                class="pe-6 text-muted ms-3 d-lg-none d-block"
+                data-bs-toggle="offcanvas"
+                href="#offcanvasExample"
+                role="button"
+                aria-controls="offcanvasExample"
+              >
+                <i class="ti ti-menu-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid mt-4">
+          <div class="mt-5">
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <h3 class="mt-5">AI주도개발 통합시스템 v3.2.0 with Cursor Rules & Commands</h3>
+            
+            <h3 class="mt-5">현재 버전</h3>
+            <div class="card mt-4">
+              <div class="card-body">
+                <h4 class="card-title">Version</h4>
+                <ul class="mb-0">
+                  <li class="font-16 py-1 text-muted">
+                    v3.2.0
+                  </li>
+                  <li class="font-16 py-1 text-muted">
+                    릴리스일: 2025-09-16
+                  </li>
+                  <li class="font-16 py-1 text-muted">
+                    주요 변경: 인지과학 기반 최적화를 통한 논리 플로우 재구성
+                  </li>    
+                </ul>
+              </div>
+
+            </div>
+
+            <h3 class="mt-5">2_solution_exploration/ </h3>
+            <div class="mt-4 card">
+              <div class="card-body">
+                <h4 class="card-title">01-market-competitor-analysis.md</h4>
+                <h5 class="card-subtitle mt-2 text-muted mb-4">
+                  경로 : <span class="text-dark font-medium">.cursor/commands/2_solution_exploration/01-market-competitor-analysis.md</span>
+                </h5>
+                <pre>
+<code class="language-markdown py-0">
+  # 시장·경쟁·기회 통합 분석
+
+  ## 목적
+  과제 해결을 위한 시장 환경을 종합적으로 분석하고, Make/Buy(직접 개발/외부 도입) 판단에 필요한 정보를 일괄적으로 수집·평가한다.
+  
+  ## 전제 조건
+  - 과제의 심층 분석 및 우선순위 설정이 완료되어 있음  
+  - 해결해야 할 과제의 범위와 요구사항이 명확히 정의되어 있음
+  - 조사 리소스 및 분석 도구가 확보되어 있음  
+  
+  ## 분석 프레임워크
+  
+  ### 1. 산업 구조 및 트렌드 분석
+  
+  #### 산업 구조 분석 (5 Forces)
+  ```markdown
+  ## 1. 경쟁 강도
+  - **경쟁사 수**: 주요 플레이어의 수와 규모
+  - **성장률**: 산업 전체의 성장 추세
+  - **차별화 요소**: 경쟁 우위의 원천
+  - **퇴출 장벽**: 산업에서 철수할 때의 비용과 리스크
+  
+  ## 2. 신규 진입자의 위협
+  - **진입 장벽**: 기술, 자본, 규제 등의 장벽 수준
+  - **규모의 경제**: 기존 기업의 비용 우위 정도
+  - **브랜드 파워**: 고객 충성도 및 인지도 강도
+  
+  ## 3. 대체재의 위협
+  - **대체 솔루션**: 다른 방식으로 동일 과제를 해결하는 수단
+  - **기술 혁신**: 파괴적 혁신의 가능성
+  - **비용 경쟁력**: 대체재의 가격 우위 여부
+  
+  ## 4. 고객 및 공급업체의 교섭력
+  - **고객 집중도**: 주요 고객의 시장 지배력
+  - **공급업체 집중도**: 핵심 공급사 수와 영향력
+  - **전환 비용**: 고객 또는 기업이 거래 상대를 바꿀 때 발생하는 비용
+  ```
+  
+  #### 산업 트렌드 분석
+  ```markdown
+  ## 기술 트렌드
+  - **디지털 전환**: RPA·AI 도입 현황  
+  - **클라우드화**: SaaS·PaaS 채택률  
+  - **데이터 활용**: 분석(Analytics)·BI 도입 수준  
+  
+  ## 시장 트렌드
+  - **시장 성장률**: 연평균 성장률(CAGR)  
+  - **고객 니즈**: 요구 수준 및 기대치 변화  
+  - **가격 동향**: 가격 경쟁 심화·가치 중심 소비 확산  
+  
+  ## 규제·사회 트렌드
+  - **법·규제**: 컴플라이언스 및 데이터 보호 요구 강화  
+  - **ESG 경영**: 환경·사회·지배구조 관련 경영 요구 확대  
+  - **근무 방식**: 원격근무 확산 및 디지털 전환(DX) 촉진  
+  ```
+  
+  ### 2. 경쟁 솔루션 분석
+  
+  #### 경쟁사 분류 및 맵핑
+  ```markdown
+  ## 직접 경쟁(Direct Competitors)
+  - **동일 과제·동일 접근법**: 같은 문제를 동일한 방식으로 해결  
+  - **동일 고객 세그먼트**: 같은 고객층을 주요 타깃으로 설정  
+  - **유사 가격대**: 비슷한 가격 구조 및 투자 규모  
+  
+  ## 간접 경쟁(Indirect Competitors)
+  - **동일 과제·상이한 접근법**: 동일한 문제를 다른 방법으로 해결  
+  - **대체 솔루션**: 다른 기술·방법론을 통한 문제 해결  
+  - **부분 중복**: 일부 기능 영역에서 경쟁하는 제품·서비스  
+  
+  ## 잠재 경쟁(Potential Competitors)
+  - **인접 영역 기업**: 사업 확장을 통해 시장 진입 가능성이 높은 기업  
+  - **신생 기업**: 신기술·신방식으로 시장에 진입하는 스타트업  
+  - **플랫폼 기업**: 기존 플랫폼에 기능을 확장하며 경쟁 구도를 형성하는 기업 
+  ```
+  
+  #### 솔루션 비교 매트릭스
+  ```markdown
+  | 비교 항목 | 경쟁사 A | 경쟁사 B | 경쟁사 C | 시장 평균 |
+  |----------|-------|-------|-------|----------|
+  | **접근 방식** | SaaS | 자체 개발 | 외주 개발 | - |
+  | **기술 기반** | 클라우드 | 온프레미스 | 하이브리드 | - |
+  | **구축 기간** | 3개월 | 12개월 | 9개월 | 6~9개월 |
+  | **초기 투자비** | 1억 원 | 5억 원 | 2억 원 | 2~3억 원 |
+  | **연간 운영비** | 8천만 원 | 3천만 원 | 6천만 원 | 5천만~8천만 원 |
+  | **커스터마이징 수준** | 중간 | 높음 | 낮음 | 중간 |
+  | **확장성** | 낮음 | 높음 | 중간 | 중간 |
+  | **유지보수/지원** | 벤더 지원 | 자체 대응 | 외부 위탁 | - |
+  ```
+  
+  ### 3. 기존 SaaS·도구 상세 조사
+  
+  #### SaaS 분류 및 평가
+  ```markdown
+  ## 엔터프라이즈용 통합 솔루션
+  ### 주요 제품
+  - **ERP**: SAP, Oracle, Microsoft Dynamics  
+  - **CRM**: Salesforce, HubSpot  
+  - **프로젝트 관리**: Asana, Monday.com, Notion  
+  
+  ### 평가 항목
+  - **기능 적합도**: 요구사항 충족률(%)  
+  - **커스터마이징성**: 설정 및 확장 가능성  
+  - **연동성**: 기존 시스템과의 통합 정도  
+  - **보안성**: 데이터 보호 및 접근 제어 수준  
+  - **지원 체계**: 도입 및 운영 지원 체계  
+  ```
+  
+  #### 비용 분석
+  ```markdown
+  ## 초기 비용
+  - **라이선스 비용**: 초기 라이선스·설정비  
+  - **도입 비용**: 커스터마이징, 데이터 이전, 교육 비용  
+  - **인프라 비용**: 하드웨어·네트워크 환경 구축  
+  
+  ## 운영 비용(연간)
+  - **라이선스 비용**: 월간·연간 구독 요금  
+  - **유지보수 및 지원 비용**: 기술 지원 및 시스템 유지  
+  - **운영 인건비**: 시스템 관리자 및 사용자 지원 인력 비용  
+  
+  ## 숨은 비용
+  - **추가 커스터마이징**: 요구사항 변경 및 기능 추가 비용  
+  - **데이터 이전**: 시스템 교체 시 데이터 마이그레이션 비용  
+  - **교육 및 트레이닝**: 사용자 교육 및 역량 강화 비용 
+  ```
+  
+  ### 4. 시장 기회 규모 추정
+  
+  #### TAM·SAM·SOM 분석
+  ```mermaid
+  graph TD
+      A[시장 기회 규모 추정] --> B[TAM: 총 접근 가능 시장 (Total Addressable Market)]
+      A --> C[SAM: 서비스 제공 가능 시장 (Serviceable Addressable Market)]
+      A --> D[SOM: 실질 확보 가능 시장 (Serviceable Obtainable Market)]
+      
+      B --> B1[이론적 최대 시장 규모]
+      C --> C1[실제 접근 가능한 시장 규모]
+      D --> D1[현실적으로 점유 가능한 시장 규모]
+  ```
+  
+  #### 시장 규모 추정 방법
+  ```markdown
+  ## 탑다운(Top-Down) 분석
+  - **산업 전체 규모**: 공개 통계자료 및 시장 조사 리포트 활용  
+  - **세그먼트별 규모**: 산업군·기업 규모별 세분 시장 분석  
+  - **성장률 예측**: 과거 실적 및 미래 성장 전망  
+  
+  ## 보텀업(Bottom-Up) 분석
+  - **고객 수 추정**: 타깃 고객군의 잠재 고객 수  
+  - **단가 추정**: 고객당 지불 의사 및 평균 예산  
+  - **보급률 추정**: 도입률 및 이용률 전망  
+  
+  ## 유사·비교(Analogical) 분석
+  - **유사 솔루션**: 기존 유사 제품의 시장 규모 참고  
+  - **대체 수단**: 기존 해결 방식의 시장 규모 파악  
+  - **인접 시장**: 관련 영역 또는 확장 가능 시장 분석  
+  ```
+  
+  ### 5. Make/Buy 판단을 위한 통합 평가
+  
+  #### 시장 환경 평가 매트릭스
+  ```markdown
+  | 평가 항목 | Make 유리 | Buy 유리 | 평가 결과 | 중요도 |
+  |----------|----------|---------|----------|--------|
+  | **경쟁 상황** | 차별화 필요 | 표준화 완료 | - | 높음 |
+  | **기술 성숙도** | 신기술 영역 | 성숙 기술 | - | 높음 |
+  | **시장 성장성** | 고성장 기대 | 안정 성장 | - | 중간 |
+  | **고객 요구** | 독자 요구사항 많음 | 표준 요구사항 중심 | - | 높음 |
+  | **진입 장벽** | 진입 장벽 높음 | 진입 장벽 낮음 | - | 중간 |
+  | **투자 회수** | 장기 회수형 | 단기 회수형 | - | 높음 |
+  ```
+  
+  #### 통합 판단 요소
+  ```markdown
+  ## Make 선택을 지지하는 요인
+  - **경쟁 우위성**: 독자 기술·노하우를 통한 차별화 가능  
+  - **시장 기회**: 성장 잠재력이 큰 시장 기회 존재  
+  - **고객 요구**: 기존 SaaS로 충족되지 않는 맞춤형 요구사항  
+  - **전략적 가치**: 핵심 사업과의 전략적 연계성 높음  
+  
+  ## Buy 선택을 지지하는 요인
+  - **성숙 시장**: 이미 표준화된 솔루션 존재  
+  - **비용 효율성**: SaaS 활용 시 총비용이 더 낮음  
+  - **시간 제약**: 빠른 도입이 필요한 경우  
+  - **리스크 회피**: 개발 리스크 및 초기 투자 위험 회피  
+  
+  # 추가로 필요한 조사 항목
+  - **기술적 실현 가능성**: Make 선택 시 예상되는 기술 리스크  
+  - **벤더 평가**: Buy 선택 시 공급업체 신뢰도 및 의존 리스크  
+  - **ROI 상세 분석**: 각 선택지별 투자 대비 수익 비교  
+  ```
+  
+  ## 산출물
+  
+  ### 1. 시장 환경 분석 보고서
+  - 산업 구조 및 트렌드 분석 결과
+  - 경쟁 솔루션 비교표
+  - 시장 기회 규모(TAM/SAM/SOM) 추정 결과
+  
+  ### 2. Make/Buy 판단 자료
+  - 통합 평가 매트릭스
+  - 각 선택지의 장단점 정리
+  - 추천 판단 및 그 근거
+  
+  ### 3. 다음 단계 실행 계획
+  - Make 선택 시: 기술 검증 및 개발 로드맵 주요 포인트
+  - Buy 선택 시: 벤더 선정 및 도입 계획 주요 포인트
+  - 추가 조사 필요 항목: 미확정 리스크 및 불확실 요인
+  
+  ## 실행 체크리스트
+  
+  ### 조사 준비
+  - [ ] 조사 대상 범위 명확화
+  - [ ] 조사 리소스 및 도구 확보
+  - [ ] 조사 일정 및 담당자 확정
+  
+  ### 산업·시장 분석
+  - [ ] 산업 구조 분석(5 Forces) 수행
+  - [ ] 산업 트렌드 및 성장성 조사
+  - [ ] 시장 규모 추정(TAM/SAM/SOM)
+  
+  ### 경쟁사·SaaS 분석
+  - [ ] 경쟁사 분류 및 맵핑
+  - [ ] 솔루션 비교 매트릭스 작성
+  - [ ] 주요 SaaS·도구 상세 조사
+  - [ ] 비용 분석(초기·운영·숨은 비용 포함)
+  
+  ### 통합 평가 및 판단
+  - [ ] Make/Buy 평가 매트릭스 작성
+  - [ ] 각 선택지의 장단점 비교 정리
+  - [ ] 추천 판단 및 근거 명확화
+  - [ ] 다음 단계 이행 계획 수립
+</code>
+                        </pre>
+              </div>
+            </div>
+
+            <div class="card mt-4">
+              <div class="card-body">
+                <h4 class="card-title">02-solution-necessity-check.md</h4>
+                <h5 class="card-subtitle mt-2 text-muted mb-4">
+                  경로 :
+                  <span class="text-dark font-medium"
+                    >.cursor/commands/2_solution_exploration/02-solution-necessity-check.md</span
+                  >
+                </h5>
+
+                <pre>
+<code class="language-markdown py-0">
+  # 솔루션 필요성 체크
+
+  ## 목적
+  확인된 과제에 대해 **정말로 솔루션 개발이 필요한가**를 객관적으로 판단하고, **투자 대비 효과(ROI)** 관점에서 최적의 대응 방안을 결정한다.
+  
+  ## 전제 조건
+  - 과제의 심층 분석이 완료되어 있음  
+  - 문제의 문맥 검증이 끝났음  
+  - 시장 기회 규모가 추정되어 있음 
+  
+  ## 필요성 판단 프레임워크
+  
+  ### 1. 과제 해결 필요성 5단계 평가
+  ```mermaid
+  graph TD
+      A[과제 해결 필요성 평가] --> B[Level 1: 방치 가능]
+      A --> C[Level 2: 기존 수단으로 대응 가능]
+      A --> D[Level 3: 개선 권장]
+      A --> E[Level 4: 해결 필수]
+      A --> F[Level 5: 긴급 대응 필요]
+      
+      B --> B1[영향이 경미하며 대체 수단 존재]
+      C --> C1[현재 방식으로 충분히 대응 가능]
+      D --> D1[효율화·최적화 여지 있음]
+      E --> E1[경쟁력 또는 컴플라이언스 상 필수]
+      F --> F1[사업 지속성과 직접적으로 연결]
+  ```
+  
+  ### 2. 판단 기준 매트릭스
+  ```markdown
+  ## 필요성 판단 매트릭스
+  | 평가 항목 | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
+  |----------|---------|---------|---------|---------|---------|
+  | **비즈니스 임팩트** | 미미함 | 작음 | 중간 | 큼 | 매우 큼 |
+  | **긴급도** | 낮음 | 낮음~중간 | 중간 | 높음 | 매우 높음 |
+  | **대체 수단 유무** | 충분히 있음 | 있음 | 제한적임 | 없음 | 없음 |
+  | **컴플라이언스 관련성** | 무관 | 권장 | 권장 | 필수 | 법적 의무 |
+  | **경쟁 우위성** | 무관 | 미미 | 보통 | 중요 | 결정적 |
+  | **ROI 기대치** | 음수 | 낮음 | 중간 | 높음 | 매우 높음 |
+  ```
+  
+  ## Level 1-2: 해결 불필요·기존 대응 판단
+  
+  ### 1. 방치 가능성 검증
+  ```python
+  # 과제 방치 가능성 평가 도구
+  class ProblemNecessityAnalyzer:
+      def __init__(self):
+          self.evaluation_criteria = {
+              'business_impact': 0,      # 비즈니스 임팩트 (1-5)
+              'urgency': 0,             # 긴급도 (1-5)
+              'alternative_solutions': 0, # 대체 수단의 충분성 (1-5, 역가중)
+              'compliance_requirement': 0, # 컴플라이언스 요구 수준 (1-5)
+              'competitive_advantage': 0,  # 경쟁 우위성 (1-5)
+              'roi_expectation': 0      # ROI 기대치 (1-5)
+          }
+      
+      def evaluate_necessity(self, criteria_scores):
+          """필요성 레벨 계산"""
+          self.evaluation_criteria.update(criteria_scores)
+          
+          # 가중치 계산
+          weights = {
+              'business_impact': 0.25,
+              'urgency': 0.20,
+              'alternative_solutions': -0.15,  # 대체 수단이 많을수록 필요성 감소
+              'compliance_requirement': 0.20,
+              'competitive_advantage': 0.15,
+              'roi_expectation': 0.15
+          }
+          
+          weighted_score = sum(
+              self.evaluation_criteria[key] * weights[key] 
+              for key in weights
+          )
+          
+          # 5단계 레벨 판정
+          if weighted_score <= 1.5:
+              return 1, "방치 가능"
+          elif weighted_score <= 2.5:
+              return 2, "기존 수단으로 대응 가능"
+          elif weighted_score <= 3.5:
+              return 3, "개선 권장"
+          elif weighted_score <= 4.5:
+              return 4, "해결 필수"
+          else:
+              return 5, "긴급 대응 필요"
+      
+      def generate_recommendation(self, level, description):
+          """추천 액션 생성"""
+          recommendations = {
+              1: {
+                  "action": "과제 대응 보류",
+                  "rationale": "비즈니스 임팩트가 제한적이며, 현상 유지가 최적임",
+                  "alternative": "6개월 후 재평가 권장",
+                  "resource_allocation": "추가 리소스 불필요"
+              },
+              2: {
+                  "action": "기존 수단 활용 및 개선",
+                  "rationale": "신규 개발보다 기존 시스템·프로세스 개선이 효율적",
+                  "alternative": "기존 시스템 커스터마이징 또는 운영 개선",
+                  "resource_allocation": "소규모 개선 예산만 필요"
+              },
+              3: {
+                  "action": "단계적 개선 접근",
+                  "rationale": "중간 수준의 개선 효과 기대, 리스크 분산형 투자 적합",
+                  "alternative": "MVP 개발, 파일럿 운영",
+                  "resource_allocation": "제한된 리소스 투입"
+              },
+              4: {
+                  "action": "본격적인 솔루션 개발",
+                  "rationale": "경쟁력 유지·컴플라이언스 대응을 위해 필수",
+                  "alternative": "Buy vs Make 상세 검토",
+                  "resource_allocation": "충분한 리소스 확보 필요"
+              },
+              5: {
+                  "action": "긴급 솔루션 개발 착수",
+                  "rationale": "사업 지속성에 직접 영향을 미치는 핵심 과제",
+                  "alternative": "가장 빠른 시일 내 해결 방안 구현",
+                  "resource_allocation": "최우선 리소스 배분"
+              }
+          }
+          
+          return recommendations.get(level, {})
+  
+  # 사용 예시
+  analyzer = ProblemNecessityAnalyzer()
+  
+  # 평가 예시: 생산 관리 시스템 개선 과제
+  criteria = {
+      'business_impact': 4,        # 비즈니스 임팩트 높음
+      'urgency': 3,               # 중간 수준의 긴급도
+      'alternative_solutions': 2,  # 대체 수단 제한적
+      'compliance_requirement': 3, # 일부 컴플라이언스 요구 존재
+      'competitive_advantage': 4,  # 경쟁 우위성 높음
+      'roi_expectation': 4        # 높은 ROI 기대
+  }
+  
+  level, description = analyzer.evaluate_necessity(criteria)
+  recommendation = analyzer.generate_recommendation(level, description)
+  
+  print(f"필요성 레벨: {level} - {description}")
+  print(f"추천 액션: {recommendation['action']}")
+  print(f"근거: {recommendation['rationale']}")
+  ```
+  
+  ### 2. 기존 수단으로의 대응 가능성
+  ```markdown
+  ## 기존 수단 체크리스트
+  ### 사내 리소스 활용
+  - [ ] 기존 시스템 커스터마이징으로 대응 가능  
+  - [ ] 운영 프로세스 개선으로 해결 가능  
+  - [ ] 인력 배치 조정 또는 조직 개편으로 대응 가능  
+  - [ ] 기존 툴 조합으로 문제 해결 가능  
+  
+  ### 외부 리소스 활용
+  - [ ] 기존 SaaS·클라우드 서비스로 대응 가능  
+  - [ ] 아웃소싱으로 해결 가능  
+  - [ ] 컨설팅 서비스 활용으로 개선 가능  
+  - [ ] 업계 표준 도구로 충분히 대체 가능  
+  
+  ### 대체 접근법
+  - [ ] 수작업 효율화로 대응 가능  
+  - [ ] 업무 프로세스 단순화로 해결 가능  
+  - [ ] 외부 파트너와의 협업으로 대응 가능  
+  - [ ] 업무 설계를 변경하여 과제 자체를 회피  
+  ```
+  
+  ## Level 3-5: 솔루션 개발 필요성 판단
+  
+  ### 1. 개선 효과의 정량화
+  ```python
+  # 개선 효과 계산 도구
+  class ImprovementImpactCalculator:
+      def __init__(self):
+          self.current_state_metrics = {}
+          self.target_state_metrics = {}
+          
+      def set_current_state(self, metrics):
+          """현황 지표 설정"""
+          self.current_state_metrics = metrics
+          
+      def set_target_state(self, metrics):
+          """목표 지표 설정"""
+          self.target_state_metrics = metrics
+      
+      def calculate_improvements(self):
+          """개선 효과 계산"""
+          improvements = {}
+          
+          for metric, current_value in self.current_state_metrics.items():
+              if metric in self.target_state_metrics:
+                  target_value = self.target_state_metrics[metric]
+                  
+                  # 개선률 계산 (지표 특성에 따라 계산 방식 변경)
+                  if metric in ['error_rate', 'processing_time', 'cost']:
+                      # 감소형 지표 (낮을수록 좋음)
+                      improvement_rate = (current_value - target_value) / current_value * 100
+                      improvement_value = current_value - target_value
+                  else:
+                      # 향상형 지표 (높을수록 좋음)
+                      improvement_rate = (target_value - current_value) / current_value * 100
+                      improvement_value = target_value - current_value
+                  
+                  improvements[metric] = {
+                      'current': current_value,
+                      'target': target_value,
+                      'improvement_rate': improvement_rate,
+                      'improvement_value': improvement_value
+                  }
+          
+          return improvements
+      
+      def calculate_business_value(self, improvements):
+          """비즈니스 가치 계산"""
+          # 지표별 금전적 환산 단가 설정
+          value_conversion = {
+              'processing_time': {
+                  'unit': 'hours_saved_per_year',
+                  'value_per_unit': 30000  # 시간당 3만원
+              },
+              'error_rate': {
+                  'unit': 'errors_reduced_per_year',
+                  'value_per_unit': 500000  # 오류 1건당 50만원
+              },
+              'customer_satisfaction': {
+                  'unit': 'satisfaction_points',
+                  'value_per_unit': 1000000  # 포인트당 100만원
+              }
+          }
+          
+          total_annual_value = 0
+          value_breakdown = {}
+          
+          for metric, data in improvements.items():
+              if metric in value_conversion:
+                  conversion = value_conversion[metric]
+                  annual_value = data['improvement_value'] * conversion['value_per_unit']
+                  total_annual_value += annual_value
+                  
+                  value_breakdown[metric] = {
+                      'improvement': data['improvement_value'],
+                      'annual_value': annual_value,
+                      'description': f"{conversion['unit']} × {conversion['value_per_unit']:,}원"
+                  }
+          
+          return {
+              'total_annual_value': total_annual_value,
+              'breakdown': value_breakdown,
+              'three_year_value': total_annual_value * 3
+          }
+  
+  # 사용 예시
+  calculator = ImprovementImpactCalculator()
+  
+  # 현황 지표
+  current_metrics = {
+      'processing_time': 8,      # 건당 8시간
+      'error_rate': 5,          # 오류율 5%
+      'customer_satisfaction': 3 # 5점 만점 중 3점
+  }
+  
+  # 목표 지표
+  target_metrics = {
+      'processing_time': 2,      # 건당 2시간 (75% 절감)
+      'error_rate': 1,          # 오류율 1% (80% 절감)
+      'customer_satisfaction': 4.5 # 고객 만족도 4.5점 (50% 향상)
+  }
+  
+  calculator.set_current_state(current_metrics)
+  calculator.set_target_state(target_metrics)
+  
+  improvements = calculator.calculate_improvements()
+  business_value = calculator.calculate_business_value(improvements)
+  
+  print("=== 개선 효과 분석 ===")
+  for metric, data in improvements.items():
+      print(f"\n{metric}:")
+      print(f"  현황: {data['current']}")
+      print(f"  목표: {data['target']}")
+      print(f"  개선률: {data['improvement_rate']:.1f}%")
+  
+  print(f"\n=== 비즈니스 가치 ===")
+  print(f"연간 가치: {business_value['total_annual_value']:,}원")
+  print(f"3년간 누적 가치: {business_value['three_year_value']:,}원")
+  ```
+  
+  ### 2. 경쟁 우위성 평가
+  ```markdown
+  ## 경쟁 우위성 분석
+  ### 현재 경쟁 포지션
+  | 평가 항목 | 자사 | 경쟁사 A | 경쟁사 B | 업계 평균 | 우위 여부 |
+  |----------|------|-------|-------|----------|--------|
+  | 기능성 | 3 | 4 | 3 | 3.5 | 열위 |
+  | 가격 경쟁력 | 4 | 3 | 4 | 3.7 | 우위 |
+  | 지원 품질 | 5 | 3 | 2 | 3.3 | 우위 |
+  | 기술 혁신성 | 2 | 4 | 5 | 3.7 | 열위 |
+  | 시장 점유율 | 2 | 5 | 3 | 3.3 | 열위 |
+  
+  ### 솔루션 개발에 따른 경쟁력 향상 효과
+  | 항목 | 현재 | 개발 후 | 개선 폭 | 경쟁사 대비 |
+  |------|------|--------|------|----------|
+  | 기능성 | 3 | 5 | +2 | 업계 최고 수준 |
+  | 기술 혁신성 | 2 | 4 | +2 | 업계 평균 이상 |
+  | 고객 만족도 | 3 | 4.5 | +1.5 | 경쟁 우위 확보 |
+  | 시장 포지션 | 열위 | 우위 | 대폭 개선 | 상위 3위 진입 가능 |
+  ```
+  
+  ## 의사결정 프레임워크
+  
+  ### 1. Go/No-Go 결정 매트릭스
+  ```python
+  # 솔루션 의사결정 지원 도구
+  class SolutionDecisionMatrix:
+      def __init__(self):
+          self.criteria_weights = {
+              'business_impact': 0.25,       # 비즈니스 임팩트
+              'technical_feasibility': 0.20, # 기술적 실현 가능성
+              'market_opportunity': 0.20,    # 시장 기회
+              'resource_availability': 0.15, # 리소스 확보 가능성
+              'competitive_advantage': 0.10, # 경쟁 우위성
+              'risk_level': -0.10            # 리스크는 감점 요소
+          }
+          
+      def evaluate_solution_necessity(self, scores):
+          """솔루션 개발 필요성 종합 평가"""
+          # 점수 검증
+          for criterion in self.criteria_weights.keys():
+              if criterion not in scores:
+                  raise ValueError(f"Missing score for {criterion}")
+          
+          # 가중치 기반 종합 점수 계산
+          total_score = sum(
+              scores[criterion] * weight 
+              for criterion, weight in self.criteria_weights.items()
+          )
+          
+          # 5단계 의사결정 결과
+          if total_score >= 4.0:
+              decision = "GO - 긴급 실행 권장"
+              confidence = "높음"
+          elif total_score >= 3.5:
+              decision = "GO - 실행 권장"
+              confidence = "중상"
+          elif total_score >= 3.0:
+              decision = "CONDITIONAL GO - 조건부 실행"
+              confidence = "중간"
+          elif total_score >= 2.5:
+              decision = "REVIEW - 재검토 권장"
+              confidence = "중하"
+          else:
+              decision = "NO GO - 실행 비권장"
+              confidence = "낮음"
+              
+          return {
+              'total_score': total_score,
+              'decision': decision,
+              'confidence': confidence,
+              'detailed_scores': scores
+          }
+      
+      def generate_action_plan(self, evaluation_result):
+          """결정 결과 기반 액션 플랜 생성"""
+          decision = evaluation_result['decision']
+          
+          if "GO - 긴급 실행" in decision:
+              return {
+                  'next_steps': [
+                      "즉시 프로젝트 팀 구성",
+                      "리소스 확보 및 예산 승인",
+                      "Make or Buy 세부 분석",
+                      "1주일 내 실행 계획 수립"
+                  ],
+                  'timeline': "1~2주 내 실행 착수",
+                  'resource_priority': "최고 우선순위"
+              }
+          elif "GO - 실행 권장" in decision:
+              return {
+                  'next_steps': [
+                      "상세 비즈니스 케이스 작성",
+                      "Make or Buy 분석 수행",
+                      "리소스 계획 수립",
+                      "이해관계자 승인 획득"
+                  ],
+                  'timeline': "1개월 내 실행 착수",
+                  'resource_priority': "높은 우선순위"
+              }
+          elif "CONDITIONAL GO" in decision:
+              return {
+                  'next_steps': [
+                      "리스크 완화 방안 검토",
+                      "파일럿 프로젝트 실행",
+                      "추가 정보 수집",
+                      "단계적 실행 계획 수립"
+                  ],
+                  'timeline': "2~3개월 내 최종 판단",
+                  'resource_priority': "중간 우선순위"
+              }
+          elif "REVIEW" in decision:
+              return {
+                  'next_steps': [
+                      "과제 재정의",
+                      "대체 접근 방식 검토",
+                      "시장 및 기술 동향 추가 조사",
+                      "3개월 후 재평가"
+                  ],
+                  'timeline': "3개월 후 재검토",
+                  'resource_priority': "낮은 우선순위"
+              }
+          else:  # NO GO
+              return {
+                  'next_steps': [
+                      "현상 유지 및 기존 수단 활용",
+                      "다른 우선 과제에 집중",
+                      "6개월 후 환경 변화 재확인",
+                      "리소스 타 영역 재배분"
+                  ],
+                  'timeline': "6개월 후 재평가",
+                  'resource_priority": "해당 없음"
+              }
+  
+  # 사용 예시
+  decision_matrix = SolutionDecisionMatrix()
+  
+  # 평가 점수 설정 (1~5점 척도)
+  evaluation_scores = {
+      'business_impact': 4,        # 비즈니스 임팩트 큼
+      'technical_feasibility': 4,  # 기술 실현 가능성 높음
+      'market_opportunity': 3,     # 시장 기회 중간
+      'resource_availability': 3,  # 리소스 확보 가능
+      'competitive_advantage': 4,  # 경쟁 우위성 높음
+      'risk_level': 2             # 리스크 낮음~중간
+  }
+  
+  result = decision_matrix.evaluate_solution_necessity(evaluation_scores)
+  action_plan = decision_matrix.generate_action_plan(result)
+  
+  print("=== 솔루션 필요성 판단 결과 ===")
+  print(f"종합 점수: {result['total_score']:.2f}")
+  print(f"판정: {result['decision']}")
+  print(f"신뢰도: {result['confidence']}")
+  
+  print("\n=== 권장 액션 플랜 ===")
+  print(f"타임라인: {action_plan['timeline']}")
+  print(f"우선순위: {action_plan['resource_priority']}")
+  print("다음 단계:")
+  for step in action_plan['next_steps']:
+      print(f"  - {step}")
+  ```
+  
+  ## 이해관계자 합의 형성
+  
+  ### 1. 의사결정 프로세스
+  ```markdown
+  ## 합의 형성 단계
+  ### Step 1: 현황 인식 공유
+  - 과제 정의 및 영향 범위 확인  
+  - 현재 대응 방식과 그 한계  
+  - 방치 시 발생할 리스크 및 기회 손실  
+  
+  ### Step 2: 선택지 제시
+  - 솔루션 개발 vs 기존 수단 활용  
+  - Make vs Buy vs Hybrid 선택 옵션  
+  - 각 선택지의 장단점 및 비용 비교  
+  
+  ### Step 3: 판단 기준 합의
+  - 성공 지표(KPI) 설정  
+  - 투자 대비 효과(ROI) 기준 수립  
+  - 리스크 허용 범위 및 제약 조건 명확화  
+  
+  ### Step 4: 의사결정 및 승인
+  - 종합 평가 결과 공유  
+  - 추천 안건 및 근거 제시  
+  - 이해관계자(Stakeholder)의 최종 승인  
+  ```
+  
+  ### 2. 합의 문서 템플릿
+  ```markdown
+  # 솔루션 필요성 판단서
+  
+  ## 1. 과제 개요
+  - **과제명**: [과제의 이름]  
+  - **영향 범위**: [영향을 받는 부서·프로세스·사용자]  
+  - **현재 대응 방식**: [현재의 해결 방법]  
+  - **과제 심각도**: [Level 1~5 평가]  
+  
+  ## 2. 필요성 평가 결과
+  - **종합 점수**: [4.2/5.0]  
+  - **판정 결과**: [GO - 실행 권장]  
+  - **주요 근거**:  
+    - 비즈니스 임팩트: [구체적인 영향·효과]  
+    - 경쟁 우위성: [경쟁사 대비 차별화 포인트]  
+    - 실현 가능성: [기술적·리소스적 제약사항]  
+  
+  ## 3. 추천 실행 방안
+  - **실행 판단**: [GO / CONDITIONAL GO / NO GO]  
+  - **다음 단계**: [Make or Buy 분석 수행]  
+  - **타임라인**: [1개월 내 상세 계획 수립]  
+  - **필요 리소스**: [인력·예산·기간 등]  
+  
+  ## 4. 이해관계자 승인
+  - **승인자**: [이름·직책]  
+  - **승인일**: [YYYY-MM-DD]  
+  - **조건·제약사항**: [승인 시 부여된 조건 및 제한]  
+  - **차기 리뷰 일정**: [진행 상황 점검 및 재평가 시점]  
+  ```
+  
+  ## 체크리스트
+  - [ ] 과제 해결 필요성 5단계 평가 완료
+  - [ ] 기존 수단 대응 가능성 검증 완료
+  - [ ] 개선 효과 정량화 완료
+  - [ ] 경쟁 우위성 평가 완료
+  - [ ] Go/No-Go 결정 매트릭스 평가 완료
+  - [ ] 비즈니스 가치 계산 완료
+  - [ ] 리스크 및 제약 요인 식별 완료
+  - [ ] 이해관계자 합의 형성 완료
+  - [ ] 의사결정 문서 작성 완료
+  - [ ] 다음 단계(Make or Buy 분석) 준비 완료
+</code>
+                        </pre>
+              </div>
+            </div>
+            <div class="card mt-4">
+              <div class="card-body">
+                <h4 class="card-title">03-make-or-buy-analysis.md</h4>
+                <h5 class="card-subtitle mt-2 text-muted mb-4">
+                  경로 :
+                  <span class="text-dark font-medium"
+                    >.cursor/commands/2_solution_exploration/03-make-or-buy-analysis.md</span
+                  >
+                </h5>
+
+                <pre>
+<code class="language-markdown py-0">
+  # Make or Buy 판단
+
+  ## 목적
+  과제 해결 과정에서 **“자체 개발(Make)”**, **“기존 솔루션 도입(Buy)”**, **“혼합형 접근(Hybrid)”** 중 어떤 방식이 가장 적합한지를 객관적으로 판단한다.
+  
+  ## 전제 조건
+  - 과제의 심층 분석이 완료되어 있음  
+  - 산업 및 시장 문맥 검증이 끝났음  
+  - 해결해야 할 과제의 우선순위가 명확히 정해져 있음  
+  
+  ## Make or Buy 판단 프레임워크
+  
+  ### 기본 선택지 정리
+  ```markdown
+  ## Make (자체 개발)
+  ### 특징
+  - **완전 맞춤화**: 요구사항을 100% 충족 가능  
+  - **경쟁 우위 확보**: 독자 기술 및 차별화 실현  
+  - **통제력 확보**: 기능, 일정, 품질 전반의 직접 관리 가능  
+  - **지식 자산화**: 내부 기술력과 노하우 축적  
+  
+  ### 적용 상황
+  - 기존 제품으로 요구사항을 충족할 수 없는 경우  
+  - 경쟁력의 핵심이 되는 기능일 때  
+  - 기밀성·보안이 매우 중요한 경우  
+  - 장기적 투자 및 개선이 필요한 경우  
+  
+  ## Buy (기존 솔루션 도입)
+  ### 특징
+  - **빠른 도입**: 단기간 내 운영 시작 가능  
+  - **검증된 안정성**: 풍부한 도입 사례와 안정된 기능  
+  - **비용 효율성**: 초기 개발비 절감  
+  - **지속 지원**: 벤더의 유지보수 및 업데이트 지원  
+  
+  ### 적용 상황
+  - 업계 표준 수준의 기능이면 충분한 경우  
+  - 빠른 효과 창출이 필요한 경우  
+  - 내부 개발 인력이 부족한 경우  
+  - 유지보수 부담을 줄이고 싶은 경우  
+  
+  ## Hybrid (혼합형 접근)
+  ### 특징
+  - **단계적 구현**: 핵심 기능부터 순차적으로 개발  
+  - **리스크 분산**: Make와 Buy의 장점을 모두 활용  
+  - **유연성 확보**: 상황 변화에 따라 전략 수정 가능  
+  - **지식 축적**: 내부 학습 및 역량 강화를 병행  
+  
+  ### 적용 상황
+  - 요구사항이 복잡하고 단일 판단이 어려운 경우  
+  - 리스크를 분산해야 하는 경우  
+  - 단계적 투자가 적합한 경우  
+  - 장기 확장성과 유연성을 중시하는 경우  
+  ```
+  
+  ### 평가 축 설정
+  ```markdown
+  ## 1. 기능 적합성 (Functional Fit)
+  - **요구사항 충족도**: 필수 요구사항을 얼마나 충족하는가  
+  - **커스터마이징성**: 개별 요구에 대한 대응 가능성  
+  - **확장성**: 향후 기능 추가·변경의 용이성  
+  - **통합성**: 기존 시스템과의 연동 수준  
+  
+  ## 2. 시간·속도 (Time to Value)
+  - **도입 기간**: 운영 시작까지 걸리는 시간  
+  - **효과 실현 시점**: 가치 창출이 시작되는 시기  
+  - **학습 비용**: 시스템 정착 및 사용자 숙련까지의 시간  
+  - **변경 대응력**: 요구사항 변경에 대한 반응 속도  
+  
+  ## 3. 비용 (Total Cost of Ownership)
+  - **초기 비용**: 도입·개발에 필요한 투자액  
+  - **운영 비용**: 유지보수 및 운영에 드는 연간 비용  
+  - **확장 비용**: 추가 기능 구현 및 변경 시의 비용  
+  - **종료 비용**: 시스템 전환·폐기 시 발생 비용  
+  
+  ## 4. 리스크 (Risk Assessment)
+  - **기술 리스크**: 기술적 난이도 및 실현 가능성  
+  - **벤더 리스크**: 공급업체 의존도 및 지속 가능성  
+  - **조직 리스크**: 내부 수용도 및 운영 체계 리스크  
+  - **시장 리스크**: 기술 변화·경쟁 심화에 따른 리스크  
+  
+  ## 5. 전략적 가치 (Strategic Value)
+  - **경쟁 우위성**: 차별화 및 독자성 확보 정도  
+  - **학습 효과**: 조직 역량 및 기술 축적 가능성  
+  - **유연성**: 변화 대응 및 전환 능력  
+  - **미래 확장성**: 향후 사업 확장 기반 제공 여부 
+  ```
+  
+  ## 상세 분석 프로세스
+  
+  ### Step 1: 요구사항 분류 및 우선순위 설정
+  ```markdown
+  ## 요구사항 분류
+  ### Must Have (필수 요구사항)
+  - **법규 준수**: 컴플라이언스 요건 충족  
+  - **보안**: 최소 수준의 정보 보안 체계  
+  - **기본 기능**: 업무 수행에 필수적인 핵심 기능  
+  - **성능**: 최소 처리 속도 및 응답 시간 확보  
+  
+  ### Should Have (중요 요구사항)
+  - **업무 효율화**: 생산성 향상에 기여하는 기능  
+  - **사용 편의성**: 직관적 UI 및 높은 접근성  
+  - **통합성**: 기존 시스템과의 연동 가능성  
+  - **확장성**: 향후 기능 추가 및 시스템 확장 대응 
+  
+  ### Could Have (선호 요구사항)
+  - **고급 분석 기능**: BI·리포팅 기능 제공  
+  - **자동화**: 고도화된 자동 처리 기능  
+  - **모바일 지원**: 스마트폰·태블릿 대응  
+  - **AI·ML**: 인공지능·머신러닝 기반 기능  
+  
+  ### Won’t Have (이번 범위 제외)
+  - **이번 프로젝트에서는 구현하지 않을 기능**  
+  - **향후 검토 예정 기능**  
+  - **다른 시스템에서 처리할 기능**  
+  ```
+  
+  ### Step 2: 기존 솔루션 조사 및 평가
+  ```markdown
+  ## 시장 조사
+  ### 주요 벤더 및 제품
+  | 벤더 | 제품명 | 강점 | 약점 | 가격대 |
+  |----------|--------|------|------|--------|
+  | A사 | Product A | 풍부한 기능 | 고가 | 높음 |
+  | B사 | Product B | 사용 편의성 | 커스터마이징 한계 | 중간 |
+  | C사 | Product C | 저비용 | 기능 부족 | 낮음 |
+  
+  ### 기능 비교 매트릭스
+  | 요구사항 | 중요도 | Product A | Product B | Product C | 자체 개발 |
+  |------|--------|-----------|-----------|-----------|----------|
+  | 기본 기능 | 높음 | ✅ | ✅ | ⚠️ | ✅ |
+  | 커스터마이징 | 높음 | ⚠️ | ❌ | ❌ | ✅ |
+  | 통합성 | 중간 | ✅ | ⚠️ | ❌ | ✅ |
+  | 가격 | 중간 | ❌ | ✅ | ✅ | ⚠️ |
+  
+  ## 평가 기준
+  - ✅: 완전 충족  
+  - ⚠️: 부분 충족 또는 추가 검토 필요  
+  - ❌: 충족 불가 또는 미흡  
+  ```
+  
+  ### Step 3: 자체 개발의 실현 가능성 평가
+  ```markdown
+  ## 기술적 실현 가능성
+  ### 필요 기술 및 역량
+  - **개발 언어**: 사내 보유 기술 스택과의 적합성  
+  - **아키텍처 설계**: 시스템 설계 및 구조화 능력  
+  - **데이터베이스**: 데이터 모델링 및 관리 역량  
+  - **보안**: 보안 설계·구현 및 운영 관리 능력 
+  
+  ### 개발 조직 구성
+  - **프로젝트 매니저**: 1명 (사내)  
+  - **시스템 엔지니어**: 2~3명 (사내/외부 혼합)  
+  - **프로그래머**: 3~5명 (외주 중심)  
+  - **테스터**: 1~2명 (외주 포함)  
+  
+  ### 개발 기간 및 비용 추정
+  - **요구사항 정의**: 2개월 · 약 5천만 원  
+  - **기본 설계**: 2개월 · 약 8천만 원  
+  - **상세 설계·개발**: 6개월 · 약 3억 원  
+  - **테스트·도입**: 2개월 · 약 7천만 원  
+  - **총합**: 약 12개월 · 5억 원 규모  
+  ```
+  
+  ### Step 4: TCO (Total Cost of Ownership, 총소유비용) 분석
+  ```markdown
+  ## 5년간 TCO 비교
+  ### Make (자체 개발)
+  - **초기 개발비**: 5억 원  
+  - **연간 운영비**: 5천만 원 × 5년 = 2억 5천만 원  
+  - **기능 추가**: 연 2천만 원 × 5년 = 1억 원  
+  - **총합**: 약 8억 5천만 원  
+  
+  ### Buy (Product A)
+  - **초기 도입비**: 1억 원  
+  - **연간 라이선스비**: 8천만 원 × 5년 = 4억 원  
+  - **커스터마이징 비용**: 1억 5천만 원  
+  - **총합**: 약 6억 5천만 원  
+  
+  ### Buy (Product B)
+  - **초기 도입비**: 5천만 원  
+  - **연간 라이선스비**: 4천만 원 × 5년 = 2억 원  
+  - **추가 개발비**: 2억 원  
+  - **총합**: 약 4억 5천만 원  
+  
+  ### Hybrid (단계적 개발)
+  - **1단계 (Buy)**: Product B 도입 = 약 2억 5천만 원  
+  - **2단계 (Make)**: 핵심 기능 자체 개발 = 약 3억 원  
+  - **총합**: 약 5억 5천만 원  
+  ```
+  
+  ## 리스크 분석
+  
+  ### Make (자체 개발)의 리스크
+  ```markdown
+  ## 주요 리스크 요인
+  - **기술 난이도**: 새로운 기술 또는 복잡한 요구사항  
+  - **일정 지연**: 개발 지연으로 인한 기회 손실  
+  - **품질 문제**: 버그·성능 저하로 인한 운영 리스크  
+  - **인력 리스크**: 핵심 인력 이탈 또는 역량 부족  
+  
+  ## 리스크 완화 방안
+  - **프로토타입 개발**: 기술 검증 및 초기 리스크 식별  
+  - **단계적 개발**: MVP·점진적 릴리스 전략  
+  - **외부 협력**: 전문 업체와의 공동 개발  
+  - **품질 관리**: 코드 리뷰·테스트 자동화 강화  
+  ```
+  
+  ### Buy (기존 솔루션)의 리스크
+  ```markdown
+  ## 주요 리스크 요인
+  - **벤더 종속**: 가격·기능·지원 정책에 대한 의존  
+  - **커스터마이징 한계**: 개별 요구사항 반영 어려움  
+  - **통합 문제**: 기존 시스템과의 연동 이슈  
+  - **벤더 리스크**: 사업 철수·인수합병 등으로 인한 불안정성  
+  
+  ## 리스크 완화 방안
+  - **복수 벤더 검토**: 대체 옵션 확보  
+  - **계약 조건 명확화**: SLA·지원 범위 구체화  
+  - **이행 계획 수립**: 다른 솔루션으로의 전환 가능성 확보  
+  - **벤더 신용 평가**: 재무 건전성·사업 지속성 검증 
+  ```
+  
+  ## 판단 기준 및 결정 프로세스
+  
+  ### 가중치 기반 평가 모델
+  ```markdown
+  ## 평가 항목 및 가중치
+  | 평가 항목 | 가중치 | Make | Buy A | Buy B | Hybrid |
+  |----------|------|------|-------|-------|---------|
+  | 기능 적합도 | 30% | 90 | 70 | 60 | 80 |
+  | 시간·속도 | 25% | 40 | 80 | 85 | 70 |
+  | 비용 | 20% | 60 | 70 | 90 | 80 |
+  | 리스크 | 15% | 50 | 80 | 75 | 70 |
+  | 전략적 가치 | 10% | 95 | 60 | 50 | 85 |
+  
+  ## 종합 평가 결과
+  - **Make**: 30%×90 + 25%×40 + 20%×60 + 15%×50 + 10%×95 = 67.5점
+  - **Buy A**: 30%×70 + 25%×80 + 20%×70 + 15%×80 + 10%×60 = 73.0점
+  - **Buy B**: 30%×60 + 25%×85 + 20%×90 + 15%×75 + 10%×50 = 74.5점
+  - **Hybrid**: 30%×80 + 25%×70 + 20%×80 + 15%×70 + 10%×85 = 76.0점
+  ```
+  
+  ### 시나리오 분석
+  ```markdown
+  ## 낙관 시나리오
+  - 개발이 계획보다 순조롭게 진행  
+  - 요구사항 변경이 최소 수준  
+  - 예상 효과를 초과하는 성과 달성  
+  
+  ## 기본 시나리오
+  - 계획 일정대로 진행  
+  - 일반적인 수준의 이슈 및 변경 발생  
+  - 예상 수준의 효과 실현  
+  
+  ## 비관 시나리오
+  - 개발 지연 또는 예산 초과  
+  - 큰 폭의 요구사항 변경  
+  - 기대했던 효과에 미치지 못함  
+  ```
+  
+  ## 권장 판단 및 다음 단계
+  
+  ### 판단 결과
+  ```markdown
+  ## 권장안: Hybrid (단계적 구현)
+  ### 이유
+  1. **리스크 분산**: 자체 개발과 외부 솔루션 도입의 위험을 균형 있게 관리  
+  2. **단계적 가치 실현**: 빠른 효과 창출과 맞춤형 개발의 병행 가능  
+  3. **학습 효과**: 점진적 지식 축적과 개선 사이클 구축  
+  4. **유연성 확보**: 환경 변화에 따른 전략 수정 용이  
+  
+  ### 실행 계획
+  - **1단계 (Phase 1)**: Product B 도입 (6개월)  
+  - **2단계 (Phase 2)**: 효과 검증 및 요구사항 정교화 (3개월)  
+  - **3단계 (Phase 3)**: 핵심 기능 자체 개발 (9개월)  
+  - **4단계 (Phase 4)**: 통합 및 최적화 (3개월)  
+  ```
+  
+  ### 의사결정에 필요한 추가 정보
+  ```markdown
+  ## 추가 검토 필요 영역
+  - **상세 요구사항**: 업무 프로세스 및 세부 요건 분석  
+  - **기술 검증**: 프로토타입(시제품) 또는 PoC 수행  
+  - **벤더 협상**: 가격·계약 조건 세부 확인  
+  - **내부 합의**: 주요 이해관계자 간 합의 형성  
+  
+  ## 의사결정 일정 및 승인 절차
+  - **결정 마감일**: X월 Y일  
+  - **승인 주체**: 경영회의 · CTO  
+  - **필요 자료**: 상세 분석 보고서 · 투자 제안서  
+  ```
+  
+  ## 산출물 (Output)
+  
+  ### Make or Buy 분석 보고서
+  ```markdown
+  # Make or Buy 판단 분석 결과
+  
+  ## 요약 (Executive Summary)
+  - **권장안**: Hybrid (단계적 구현)  
+  - **선정 이유**: 리스크 분산 및 단계별 가치 실현  
+  - **총 투자액**: 약 5억 5천만 원 (5년 기준)  
+  - **기대 효과**: 연간 약 2억 원 비용 절감  
+  
+  ## 분석 결과
+  ### 선택지 비교
+  - Make / Buy / Hybrid 세 가지 대안의 상세 비교  
+  - 각 평가 항목별 분석 결과  
+  - TCO 및 ROI 분석  
+  
+  ### 권장안 상세
+  - 선택 이유 및 근거  
+  - 실행 계획 및 일정표  
+  - 기대 효과 및 리스크 요인  
+  
+  ## 다음 실행 항목
+  - [ ] 이해관계자 합의 획득  
+  - [ ] 상세 실행 계획 수립  
+  - [ ] 벤더 선정 및 계약 협상  
+  - [ ] 프로젝트 조직 구성  
+  ```
+  
+  ## 체크리스트
+  - [ ] 선택지(Make/Buy/Hybrid) 정리 완료
+  - [ ] 평가 기준 및 가중치 설정 완료
+  - [ ] 기존 솔루션 조사·평가 완료
+  - [ ] 자체 개발 실현 가능성 평가 완료
+  - [ ] TCO 분석 완료
+  - [ ] 리스크 분석 및 완화 방안 검토 완료
+  - [ ] 가중치 기반 평가 및 판단 완료
+  - [ ] 권장안 확정 및 근거 정리 완료
+  - [ ] 분석 보고서 작성 완료
+  - [ ] 이해관계자 공유 및 승인 완료
+</code>
+                        </pre>
+              </div>
+            </div>
+            <div class="card mt-4">
+              <div class="card-body">
+                <h4 class="card-title">04-solution-concept-design.md</h4>
+                <h5 class="card-subtitle mt-2 text-muted mb-4">
+                  경로 :
+                  <span class="text-dark font-medium"
+                    >.cursor/commands/2_solution_exploration/04-solution-concept-design.md</span
+                  >
+                </h5>
+
+                <pre>
+<code class="language-markdown py-0">
+  # 솔루션 개요 설계
+
+  ## 목적
+  Make/Buy 판단 결과를 기반으로 **솔루션의 개요 수준 설계**를 수행하고, 이후 **3단계(상세 설계)**로 연결하기 위한 구체적인 방향을 정립한다.
+  
+  ## 전제 조건
+  - 시장·경쟁·기회 분석 완료  
+  - 솔루션 필요성 검증 완료  
+  - Make/Buy 판단 확정  
+  - 과제 및 요구사항 명확히 정의됨 
+  
+  ## 개요 설계 접근 방식
+  
+  ### Make 선택 시 개요 설계
+  
+  #### 1. 기술 아키텍처 개요
+  ```markdown
+  ## 시스템 구성 개요
+  ### 프론트엔드
+  - **기술 스택**: React/Vue.js + TypeScript  
+  - **UI/UX 정책**: 반응형 디자인 및 접근성 중심  
+  - **배포 방식**: CDN + SPA 구성  
+  
+  ### 백엔드
+  - **기술 스택**: Node.js/Python + Express/FastAPI  
+  - **API 설계**: RESTful API + GraphQL 병행 검토  
+  - **인증 체계**: JWT + OAuth 2.0  
+  
+  ### 데이터베이스
+  - **RDBMS**: PostgreSQL (트랜잭션 처리 중심)  
+  - **NoSQL**: MongoDB/Redis (캐시·세션 관리)  
+  - **데이터 설계**: 정규화 + 성능 최적화 고려  
+  
+  ### 인프라
+  - **클라우드 환경**: AWS / Azure / GCP  
+  - **컨테이너**: Docker + Kubernetes  
+  - **CI/CD 파이프라인**: GitHub Actions / GitLab CI  
+  ```
+  
+  #### 2. 기능 개요 설계
+  ```markdown
+  ## 주요 기능 모듈
+  ### 사용자 관리
+  - **기능**: 인증·인가·프로필 관리  
+  - **기술**: OAuth 2.0 + JWT  
+  - **예상 공수**: 40시간  
+  
+  ### 데이터 처리
+  - **기능**: 데이터 수집·변환·분석  
+  - **기술**: ETL 파이프라인 + AI/ML 기반 처리  
+  - **예상 공수**: 80시간  
+  
+  ### 리포트 및 대시보드
+  - **기능**: 데이터 시각화·리포트 생성  
+  - **기술**: Chart.js / D3.js + PDF 자동 생성  
+  - **예상 공수**: 60시간  
+  
+  ### 시스템 연동
+  - **기능**: 외부 API 연동 및 데이터 동기화  
+  - **기술**: REST API + Webhook  
+  - **예상 공수**: 50시간  
+  ```
+  
+  #### 3. 개발 조직 및 일정 개요
+  ```markdown
+  ## 개발 조직 구성
+  - **프로젝트 매니저**: 1명  
+  - **프론트엔드 개발자**: 2명  
+  - **백엔드 개발자**: 2명  
+  - **인프라 엔지니어**: 1명  
+  - **QA 엔지니어**: 1명 
+  
+  ## 개발 일정 개요
+  ### Phase 1: 기반 구축 (2개월)
+  - 개발 환경 세팅  
+  - 기본 아키텍처 구현  
+  - 인증 및 사용자 관리 기능 개발  
+  
+  ### Phase 2: 핵심 기능 개발 (3개월)
+  - 데이터 처리 모듈 구현  
+  - 리포트 및 대시보드 개발  
+  - 외부 시스템 연동 기능  
+  
+  ### Phase 3: 통합 및 테스트 (1개월)
+  - 통합 테스트 및 성능 테스트  
+  - 보안 점검  
+  - 운영 준비 및 릴리스  
+  ```
+  
+  #### 4. 개략적 비용 및 리스크
+  ```markdown
+  ## 개발비 개략 추정
+  - **인건비**: 6개월 × 7명 × 800만 원 = 약 3억 3,600만 원  
+  - **인프라 비용**: 월 300만 원 × 12개월 = 약 3,600만 원  
+  - **툴 및 라이선스 비용**: 약 2,000만 원  
+  - **총합**: 약 4억 원  
+  
+  ## 주요 리스크 요인
+  - **기술 리스크**: 신기술 도입으로 인한 학습 곡선  
+  - **일정 리스크**: 요구사항 변경 및 기술적 난관으로 인한 지연 가능성  
+  - **품질 리스크**: 테스트 부족으로 인한 품질 저하  
+  - **인력 리스크**: 핵심 인력 이탈 또는 기술 역량 부족  
+  ```
+  
+  ### Buy 선택 시 개요 설계
+  
+  #### 1. 제품 선정 및 평가 개요
+  ```markdown
+  ## 후보 제품 비교
+  | 제품명 | 적합도 | 커스터마이징성 | 비용 | 지원 품질 | 종합 평가 |
+  |--------|--------|----------------|--------|----------|----------|
+  | 제품 A | 85% | 높음 | 중간 | 우수 | A |
+  | 제품 B | 90% | 보통 | 낮음 | 양호 | A |
+  | 제품 C | 75% | 낮음 | 높음 | 보통 | B |
+  
+  ## 추천 제품
+  - **선정 제품**: 제품 B  
+  - **선정 이유**: 요구사항 적합도가 가장 높고, 비용 효율성이 우수함  
+  - **우려 사항**: 커스터마이징 제약, 벤더 종속(벤더 락인) 가능성  
+  ```
+  
+  #### 2. 커스터마이징 및 연동 개요
+  ```markdown
+  ## 커스터마이징 요구사항
+  ### 필수 커스터마이징
+  - **UI/UX 조정**: 기업 브랜드 가이드에 맞춘 인터페이스 구성  
+  - **업무 프로세스 설정**: 현행 업무 흐름에 맞춘 워크플로우 설정  
+  - **리포트 구성**: 고유 KPI 및 지표에 맞춘 맞춤형 리포트  
+  
+  ### 시스템 연동
+  - **기존 시스템 연동**: ERP·CRM·회계 시스템  
+  - **데이터 동기화**: 실시간 또는 배치 처리 방식  
+  - **SSO 연동**: 사내 인증 시스템과 통합 로그인  
+  
+  ## 연동 아키텍처
+  ```mermaid
+  graph LR
+      A[기존 ERP] --> B[데이터 연동 계층]
+      C[기존 CRM] --> B
+      B --> D[선정된 SaaS]
+      D --> E[리포트 및 대시보드]
+      F[SSO 시스템] --> D
+  ```
+  
+  #### 3. 도입 계획 및 체계 개요
+  ```markdown
+  ## 도입 조직 구성
+  - **프로젝트 매니저**: 1명  
+  - **시스템 관리자**: 1명  
+  - **업무 담당자**: 2명  
+  - **벤더 시스템 엔지니어**: 2명 (벤더 제공 인력)  
+  
+  ## 도입 일정 개요
+  ### Phase 1: 환경 구축 및 설정 (1개월)
+  - 운영 환경 구성  
+  - 기본 설정 및 커스터마이징  
+  - 시스템 연동 설정  
+  
+  ### Phase 2: 데이터 이전 및 테스트 (1개월)
+  - 기존 데이터 마이그레이션  
+  - 통합 테스트 및 사용자 테스트  
+  - 사용자 교육 및 트레이닝  
+  
+  ### Phase 3: 본격 운영 시작 (1개월)
+  - 단계적 운영 개시  
+  - 운영 모니터링 및 지원  
+  - 추가 커스터마이징 대응  
+  ```
+  
+  #### 4. 개략적 비용 및 리스크
+  ```markdown
+  ## 도입 비용 개요
+  - **초기 라이선스**: 5천만 원  
+  - **도입 및 커스터마이징**: 8천만 원  
+  - **데이터 이전**: 3천만 원  
+  - **교육 및 지원**: 2천만 원  
+  - **총합**: 약 1억 8천만 원  
+  
+  ## 연간 운영비
+  - **라이선스**: 연 6천만 원  
+  - **유지보수 및 지원**: 연 2천만 원  
+  - **운영 인건비**: 연 4천만 원  
+  - **총합**: 연간 약 1억 2천만 원  
+  
+  ## 주요 리스크 요인
+  - **벤더 리스크**: 서비스 종료, 가격 인상 등 외부 요인  
+  - **커스터마이징 리스크**: 제약으로 인해 요구 미충족 가능성  
+  - **데이터 리스크**: 이전 과정 중 데이터 손실 또는 불일치  
+  - **운영 리스크**: 내부 기술 역량 부족 및 벤더 의존도 상승 
+  ```
+  
+  ### Hybrid 선택 시 개요 설계
+  
+  #### 1. 하이브리드 구성 개요
+  ```markdown
+  ## 구성 패턴
+  ### 패턴 1: SaaS + 자체 개발 보완
+  - **기반 시스템**: 기존 SaaS를 중심으로 사용  
+  - **보완 영역**: 핵심 요구사항은 자체 개발로 구현  
+  - **연동 방식**: API 및 Webhook 기반 데이터 통합  
+  
+  ### 패턴 2: 자체 개발 + SaaS 연동
+  - **기반 시스템**: 자체 개발 시스템 중심 구조  
+  - **연동 방식**: 특정 기능을 SaaS와 연동하여 구현  
+  - **통합 방식**: 단일 UI 및 싱글사인온 통합  
+  
+  ## 추천 구성안
+  - **기반 SaaS**: 제품 B (표준 기능 활용)  
+  - **자체 개발 영역**: 고유 분석 및 리포트 기능  
+  - **연동 방식**: REST API + 실시간 데이터 동기화 
+  ```
+  
+  #### 2. 개발 및 도입 계획
+  ```markdown
+  ## 하이브리드 개발 계획
+  ### Phase 1: SaaS 도입 (2개월)
+  - SaaS 환경 구축 및 기본 설정  
+  - 기존 시스템 연동  
+  - 핵심 기능 운영 개시  
+  
+  ### Phase 2: 자체 개발 (3개월)
+  - 독자 기능 개발  
+  - SaaS 연동 기능 구현  
+  - 통합 테스트 및 품질 확보  
+  
+  ### Phase 3: 통합 운영 (1개월)
+  - 전체 통합 및 최종 테스트  
+  - 사용자 교육 및 트레이닝  
+  - 본격 운영 시작  
+  ```
+  
+  ## 개요 설계 산출물
+  
+  ### 1. 기술 아키텍처 개요
+  - 시스템 구성도
+  - 기술 스택 선정 이유
+  - 비기능 요구사항 요약
+  
+  ### 2. 기능 개요 명세
+  - 주요 기능 목록
+  - 기능 간 연동 구조
+  - 사용자 인터페이스 개요
+  
+  ### 3. 구현 계획 개요
+  - 개발 및 도입 일정표
+  - 조직 구성 및 역할 분담
+  - 마일스톤 및 주요 산출물
+  
+  ### 4. 비용 및 리스크 개요
+  - 개략적 비용 (초기비용·운영비용)
+  - 주요 리스크 및 대응 방안
+  - 성공 요인 및 전제 조건
+  
+  ## Phase 3로의 이행 항목
+  
+  ### Make 선택 시
+  - **상세 기술 설계**: 아키텍처 및 DB 설계 구체화
+  - **개발 계획 상세화**: 세부 일정 및 리소스 계획 수립
+  - **품질 관리 계획**: 테스트 계획 및 품질 기준 정의
+  
+  ### Buy 선택 시
+  - **벤더 선정**: 최종 선택 및 계약 조건 협상
+  - **도입 계획 상세화**: 세부 도입 일정 및 조직 구성
+  - **커스터마이징 설계**: 세부 커스터마이징 명세 작성
+  
+  ### Hybrid 선택 시
+  - **통합 아키텍처**: 상세 연동 설계 확정
+  - **개발·도입 병행 계획**: 병렬 실행 및 리스크 관리 체계 수립
+  - **품질·운영 계획**: 통합 품질 관리 및 운영 체계 구축
+  
+  ## 실행 체크리스트
+  
+  ### 개요 설계 준비
+  - [ ] Make/Buy 판단 결과 확인
+  - [ ] 요구사항 및 제약 조건 재검토
+  - [ ] 설계 방향 및 기준 설정
+  
+  ### Make 선택 시
+  - [ ] 기술 아키텍처 개요 설계
+  - [ ] 기능 개요 및 공수 추정
+  - [ ] 개발 조직 구성 및 일정 계획
+  - [ ] 개략적 비용·리스크 평가
+  
+  ### Buy 선택 시
+  - [ ] 제품 선정 및 비교 평가 완료
+  - [ ] 커스터마이징·연동 요구사항 정리
+  - [ ] 도입 및 운영 조직 계획 수립
+  - [ ] 개략적 비용·리스크 평가
+  
+  ### 산출물 작성
+  - [ ] 개요 설계서 작성
+  - [ ] 비용·리스크 평가 보고서
+  - [ ] Phase 3 이행 자료 작성
+  - [ ] 이해관계자 보고용 자료 준비
+</code>
+                        </pre>
+              </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Of Page Content -->
+            <!-- ============================================================== -->
+          </div>
+        </div>
+        <footer class="footer bg-white text-center">
+          All Rights Reserved by JAEWOO, KIM. &copy; 2026 MDRULES Development.</a>
+        </footer>
+        <!-- ============================================================== -->
+        <!-- End Container fluid  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+
+
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
+      </div>
+      <!-- ============================================================== -->
+      <!-- End Page wrapper  -->
+      <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- End Page -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="./assets/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="./assets/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- apps -->
+    <script src="./assets/simplebar/simplebar/dist/simplebar.js"></script>
+    <!--Custom JavaScript -->
+    <script src="./dist/js/custom.js"></script>
+    <script src="./assets/highlights/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+
+      const scrollSpy = new bootstrap.ScrollSpy(document.body, {
+        target: "#navbar-example3",
+      });
+    </script>
+    <!-- End JS -->
+  </body>
+</html>

@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="keywords"
+      content="Markdown, Makrdown Rules, Claude Code, Codex, Cursor, Rules, 마크다운, Gemini, 클로드, 코드, 코드x, 커서, 규칙, 규칙 마크다운, 규칙 코드, 규칙 클로드, 규칙 코드x, 규칙 커서"
+    />
+    <meta/
+      name="description"
+      content="기업에 맞춤형 마크다운 규칙이나 규칙 마크다운을 적용하여 효과적인 문서 작성을 위한 프롬프트엔지니어링, 컨텍스트엔지니어링 교육 및 프롬프트 설계 컨설던트 및 설계작업을 대행해주는 서비스입니다."
+    />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>MD룰 - 기업 맞춤형 마크다운 규칙 설계 및 교육, AI 코딩 에이전트 지원 서비스</title>
+    <link
+      rel="canonical"
+      href="https://mdrules.dev"
+    />
+    <!-- Favicon icon -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="15x15"
+      href="./dist/images/favicon.png"
+    />
+    <!-- This page css -->
+    <!-- Custom CSS -->
+    <link
+      rel="stylesheet"
+      href="./assets/simplebar/simplebar/dist/simplebar.css"
+    />
+    <link href="./dist/css/style.min.css" rel="stylesheet" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./assets/highlights/atom-one-dark.min.css"
+    />
+  </head>
+  <body>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" class="docs">
+      <!-- ============================================================== -->
+      <!-- End Topbar header -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Left Sidebar - style you can find in sidebar.scss  -->
+      <!-- ============================================================== -->
+      <!--Desktop view sidebar menu-->
+      <aside
+        class="left-sidebar pt-4 d-lg-block d-none"
+        id="navbar-example3"
+        data-simplebar
+      >
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+          <!-- Sidebar navigation-->
+          <nav class="sidebar-nav">
+            <!-- ============================================================== -->
+            <!-- Logo -->
+            <!-- ============================================================== -->
+            <div
+              class="navbar-brand d-flex align-items-center justify-content-between px-4"
+            >
+              <!-- Logo icon -->
+              <a href="index.html">
+                <b class="logo-icon">
+                  <!-- Dark Logo icon -->
+                  <img
+                    src="./dist/images/logo-dark.svg" 
+                    alt="homepage"
+                    class="dark-logo"
+                  />
+                </b>
+                <!--End Logo icon -->
+              </a>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Logo -->
+            <!-- ============================================================== -->
+            <ul id="sidebarnav" class="mt-4">
+              <nav class="nav nav-pills flex-column sidebar-nav">
+                <ul class="list-unstyled">
+                  <!--서비스 소개-->
+                  <li class="nav-small-cap">
+                    <span class="hide-menu">MDRules는?</span>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="index.html"><i class="ti ti-home-2 me-3 fs-4"></i> 서비스 소개</a>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://talk.naver.com/ct/w5umt5"><i class="ti ti-packages me-3 fs-4"></i> 문의하기</a>
+                  </li>
+
+                  <!--공개 프롬프트 및 Skills-->
+                  <li class="nav-small-cap mt-4">
+                    <span class="hide-menu">공개한 프롬프트</span>
+                  </li>
+                  <li class="sidebar-item position-relative">
+                    <a
+                      class="nav-link sidebar-link has-arrow d-flex align-items-center"
+                      href="javascript:void(0)"
+                      aria-expanded="false"
+                    >
+                      <span class="hide-menu"
+                        ><i class="ti ti-file-infinity me-3 fs-4"></i>AI주도개발 통합시스템 Rules(Cursor용)
+                      </span>
+                    </a>
+                    <!--sub-menu items-->
+                    <ul
+                      aria-expanded="false"
+                      class="collapse first-level list-unstyled"
+                    >
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-0-foundation.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 0. Foundation (3) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a
+                        href="cursor-1-challenge-understanding.html"
+                        class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 1. Challenge Understanding(3) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-2-solution-exploration.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 2. Solution Exploration(4) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-3-solution-design-evaluation.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 3. Solution Design & Evaluation(4) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-4-design.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 4. Design(5) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-5-implementation.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 5. Implementation(4) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-6-testing.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 6. Testing(2) </span></a
+                      >
+                    </li>
+                    <li class="sidebar-item mb-0">
+                      <a href="cursor-7-maintenance.html" class="nav-link sub-link"
+                        ><i class="ti ti-point me-3"></i>
+                        <span class="hide-menu"> 7. Maintenance(2) </span></a
+                      >
+                    </li>
+                    </ul>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="k-sdd.html"
+                      ><i class="ti ti-api-app me-3 fs-4"></i>k-sdd (스펙주도개발)</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="itda-sdd.html"
+                      ><i class="ti ti-settings me-3 fs-4"></i>ITDA-SDD 오픈소스</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="itdaz.html"
+                      ><i class="ti ti-refresh-dot me-3 fs-4"></i>ITDAZ 오픈소스</a
+                    >
+                  </li>
+                  <!--활동-->
+                  <li class="nav-small-cap mt-4">
+                    <span class="hide-menu">주요 활동</span>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://github.com/gaebalai/" target="_github"
+                      ><i class="ti ti-brand-github me-3 fs-4"></i> GitHub</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://blog.naver.com/beyond-zero" target="_blog"
+                      ><i class="ti ti-brand-abstract me-3 fs-4"></i> 기술 블로그</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://x.com/gaebalai" target="_x"
+                      ><i class="ti ti-brand-twitter me-3 fs-4"></i> X(Twitter)</a
+                    >
+                  </li>
+                  <!--지원 및 문의-->
+                                
+                  <li class="sidebar-item mt-5">
+                    <a class=" btn btn-danger w-100 py-2" href="tel:821080143479">문의전화: 010-8014-3479</a>
+
+                  </li>      
+                  </ul>
+              </nav>
+            </ul>
+          </nav>
+          <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+      </aside>
+
+      <!--Mobile view sidebar menu-->
+      <div
+        class="offcanvas offcanvas-start"
+        tabindex="-1"
+        id="offcanvasExample"
+        aria-labelledby="offcanvasExampleLabel"
+      >
+        <aside class="left-sidebar pt-4" id="navbar-example3" data-simplebar>
+          <!-- Sidebar scroll-->
+          <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+              <!-- ============================================================== -->
+              <!-- Logo -->
+              <!-- ============================================================== -->
+              <div
+                class="navbar-brand d-flex align-items-center justify-content-between px-4"
+              >
+                <!-- Logo icon -->
+                <a href="index.html">
+                  <b class="logo-icon">
+                    <!-- Dark Logo icon -->
+                    <img
+                      src="./dist/images/logo-dark.svg"
+                      alt="homepage"
+                      class="dark-logo"
+                    />
+                  </b>
+                  <!--End Logo icon -->
+                </a>
+              </div>
+              <!-- ============================================================== -->
+              <!-- End Logo -->
+              <!-- ============================================================== -->
+              <ul id="sidebarnav" class="mt-4">
+                <nav class="nav nav-pills flex-column sidebar-nav">
+                  <ul class="list-unstyled">
+                    <!--Getting Started-->
+                    <li class="nav-small-cap">
+                      <span class="hide-menu">MDRules는?</span>
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="index.html"><i class="ti ti-home-2 me-3 fs-4"></i> 서비스 소개</a>
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="https://talk.naver.com/ct/w5umt5"><i class="ti ti-packages me-3 fs-4"></i> 문의하기</a>
+                    </li>
+
+                    <!--Theme UI-->
+                    <li class="nav-small-cap mt-4">
+                      <span class="hide-menu">공개한 프롬프트</span>
+                    </li>
+                    <li class="sidebar-item position-relative">
+                      <a
+                        class="nav-link sidebar-link has-arrow d-flex align-items-center"
+                        href="javascript:void(0)"
+                        aria-expanded="false"
+                      >
+                        <span class="hide-menu"
+                        ><i class="ti ti-file-infinity me-3 fs-4"></i>AI주도개발 통합시스템 Rules(Cursor용)
+                        </span>
+                      </a>
+                      <!--sub-menu items-->
+                      <ul
+                        aria-expanded="false"
+                        class="collapse first-level list-unstyled"
+                      >
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-0-foundation.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 0. Foundation (3) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a
+                            href="cursor-1-challenge-understanding.html"
+                            class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 1. Challenge Understanding(3) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-2-solution-exploration.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 2. Solution Exploration(4) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-3-solution-design-evaluation.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 3. Solution Design & Evaluation(4) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-4-design.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 4. Design(5) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-5-implementation.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 5. Implementation(4) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-6-testing.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 6. Testing(2) </span></a
+                          >
+                        </li>
+                        <li class="sidebar-item mb-0">
+                          <a href="cursor-7-maintenance.html" class="nav-link sub-link"
+                            ><i class="ti ti-point me-3"></i>
+                            <span class="hide-menu"> 7. Maintenance(2) </span></a
+                          >
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="k-sdd.html"
+                        ><i class="ti ti-api-app me-3 fs-4"></i>k-sdd (스펙주도개발)</a
+                      >
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="itda-sdd.html"
+                        ><i class="ti ti-settings me-3 fs-4"></i>ITDA-SDD 오픈소스</a
+                      >
+                    </li>
+                    <li class="sidebar-item">
+                      <a
+                        class="nav-link sidebar-link d-flex align-items-center"
+                        href="itdaz.html"
+                        ><i class="ti ti-refresh-dot me-3 fs-4"></i>ITDAZ 오픈소스</a
+                      >
+                    </li>
+                  <!--활동-->
+                  <li class="nav-small-cap mt-4">
+                    <span class="hide-menu">주요 활동</span>
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://github.com/gaebalai/" target="_github"
+                      ><i class="ti ti-brand-github me-3 fs-4"></i> GitHub</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://blog.naver.com/beyond-zero" target="_blog"
+                      ><i class="ti ti-brand-abstract me-3 fs-4"></i> 기술 블로그</a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a
+                      class="nav-link sidebar-link d-flex align-items-center"
+                      href="https://x.com/gaebalai" target="_x"
+                      ><i class="ti ti-brand-twitter me-3 fs-4"></i> X(Twitter)</a
+                    >
+                  </li>
+                  <!--지원 및 문의-->
+                                
+                  <li class="sidebar-item mt-5">
+                    <a class=" btn btn-danger w-100 py-2" href="tel:821080143479">문의전화: 010-8014-3479</a>
+
+                  </li>     
+                  </ul>
+                </nav>
+              </ul>
+            </nav>
+            <!-- End Sidebar navigation -->
+          </div>
+          <!-- End Sidebar scroll-->
+        </aside>
+      </div>
+
+      <!-- ============================================================== -->
+      <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Page wrapper  -->
+      <!-- ============================================================== -->
+      <div
+        class="page-wrapper pt-0 d-block"
+        data-bs-spy="scroll"
+        data-bs-target="#navbar-example3"
+        data-bs-smooth-scroll="true"
+        tabindex="0"
+      >
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <div class="position-relative">
+          <div
+            class="navbar-header bg-white d-flex align-items-center justify-content-between p-3 fixed-top page-wrapper w-auto"
+          >
+            <!-- ============================================================== -->
+            <!-- Toggle which is visible on mobile only -->
+            <!-- ============================================================== -->
+            <!-- Logo icon -->
+            <a href="index.html">
+              <b class="logo-icon d-lg-none d-block">
+                <!-- Dark Logo icon -->
+                <img
+                  src="./dist/images/logo-dark.svg"
+                  alt="homepage"
+                  class="dark-logo"
+                />
+              </b>
+              <!--End Logo icon -->
+            </a>
+            <div class="d-flex align-items-center">
+              <!-- <a
+                class="nav-toggler waves-effect waves-light pe-6 text-dark ms-3 d-lg-none d-block"
+                href="javascript:void(0)"
+                ><i class="ti ti-menu-2"></i
+              ></a> -->
+              <!---Mobile view canvas button--->
+              <a
+                class="pe-6 text-muted ms-3 d-lg-none d-block"
+                data-bs-toggle="offcanvas"
+                href="#offcanvasExample"
+                role="button"
+                aria-controls="offcanvasExample"
+              >
+                <i class="ti ti-menu-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid mt-4">
+          <div class="mt-5">
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <h3 class="mt-5">AI주도개발 통합시스템 v3.2.0 with Cursor Rules & Commands</h3>
+            
+            <h3 class="mt-5">현재 버전</h3>
+            <div class="card mt-4">
+              <div class="card-body">
+                <h4 class="card-title">Version</h4>
+                <ul class="mb-0">
+                  <li class="font-16 py-1 text-muted">
+                    v3.2.0
+                  </li>
+                  <li class="font-16 py-1 text-muted">
+                    릴리스일: 2025-09-16
+                  </li>
+                  <li class="font-16 py-1 text-muted">
+                    주요 변경: 인지과학 기반 최적화를 통한 논리 플로우 재구성
+                  </li>    
+                </ul>
+              </div>
+
+            </div>
+
+            <h3 class="mt-5">1_challenge-understanding/ </h3>
+            <div class="mt-4 card">
+              <div class="card-body">
+                <h4 class="card-title">01-initial-interview.md</h4>
+                <h5 class="card-subtitle mt-2 text-muted mb-4">
+                  경로 : <span class="text-dark font-medium">.cursor/commands/1_challenge_understanding/01-initial-interview.md</span>
+                </h5>
+                <pre>
+<code class="language-markdown py-0">
+  # AI-인간 협업형 초기 과제 히어링 설계
+
+  ## 목적
+  AI와 사람이 협업하여 사전 가설을 구축하고, 그 가설을 검증하기 위한 체계적인 히어링을 설계 및 실시한다.
+  
+  ## 전제 조건
+  - 클라이언트 담당자와의 면담 시간이 확보되어 있음
+  - 기본적인 사업 개요가 파악되어 있음
+  - 녹음 및 기록에 대한 허가가 확보되어 있음
+  - AI 분석과 인간 통찰을 통합할 시간이 확보되어 있음
+  
+  ## 페이즈1: 협업 가설 구축 (사전 준비)
+  
+  ### 1.0 현황 이해 단계 (기반 정보 확보)
+  ```markdown
+  ## 기본 정보 사전 확인
+  - **사업 개요 상세 파악**: 조직 규모·사업 영역·주요 이해관계자
+  - **현재 과제 인식 수준**: 클라이언트가 이미 인지하고 있는 문제 범위
+  - **과거의 시도**: 유사 과제 대응 경험·성공/실패 사례
+  - **제약 조건 사전 확인**: 예산·시간·조직적 제약의 개요
+  - **기대치 조정**: 본 프로젝트에 대한 기대·성공 정의
+  
+  ## 현황 이해의 중요성
+  - **가설 구축의 전제**: 정확한 현황 이해 없이는 적절한 가설 불가
+  - **인지 부하 관리**: 기반 정보를 확보해 후속 단계의 효율성을 높임
+  - **리스크 회피**: 전제 오해로 인한 가설 방향성 왜곡 방지
+  ```
+  
+  ### 1.1 AI 주도 사전 정보 수집 및 분석 (망라성 중시)
+  ```markdown
+  ## AI 실행 항목 (망라성 중시)
+  - **산업 동향 분석**: 대상 분야의 시장 규모, 성장률, 주요 과제
+    - 정량 데이터 중시: 구체적인 수치·통계 정보 수집
+    - 시계열 분석: 트렌드 변화 패턴·미래 예측
+  - **경쟁 서비스 조사**: 기존 솔루션, 가격대, 기능 비교
+    - 복수 출처 활용: 공식 정보·사용자 리뷰·업계 보고서
+    - 강점·약점 분석: 경쟁사의 성공 요인·실패 요인 체계화
+  - **기술 동향 조사**: 관련 기술의 성숙도, 실현 가능성 평가
+    - 기술 성숙도 곡선: 신흥 기술의 발전 단계 평가
+    - 구현 사례: 유사 프로젝트의 기술 선택·과제
+  - **규제 환경 조사**: 법적 제약, 컴플라이언스 요구 사항
+    - 지역별 차이: 국가·지역에 따른 규제 차이
+    - 미래 동향: 규제 강화·완화 예측
+  - **사용자 행동 분석**: 예상 사용자 행동 패턴, 니즈 추정
+    - 페르소나 분석: 구체적 사용자상 구축
+    - 저니 맵: 사용자 경험 전체상 파악
+  
+  ## 분석 결과 구조화 (정보 청크: 5~7항목)
+  ### 기회 영역
+  - **시장 갭**: 미해결 과제·수요
+  - **기술 혁신 기회**: 신기술 적용 가능성
+  - **경쟁 차별화**: 기존 서비스와의 차별화 포인트
+  
+  ### 제약 조건
+  - **기술적 제약**: 실현 가능성의 한계
+  - **법적 제약**: 규제·컴플라이언스 요건
+  - **경제적 제약**: 투자·수익성의 제한
+  
+  ### 성공 요인
+  - **유사 사례**: 성공 패턴 분석
+  - **실패 요인**: 회피해야 할 리스크
+  ```
+  
+  ### 1.2 이해관계자 매핑 및 분석 (다각적 시각 확보)
+  ```markdown
+  ## 이해관계자 3계층 분류
+  ### Primary Stakeholders(주요 관계자)
+  - **경영진**: 전략 및 투자 판단 책임자
+  - **부문장**: 업무 운영 및 리소스 배분 관리자
+  - **현장 리더**: 실무 총괄 및 팀 관리 책임자
+  
+  ### Secondary Stakeholders(이차 관계자)
+  - **현장 담당자**: 일상 업무 및 구체적 과제 당사자
+  - **관련 부서**: 연계 및 협력 관계자
+  - **외부 파트너**: 거래처 및 협력사
+  
+  ### External Stakeholders(외부 관계자)
+  - **고객**: 서비스 수혜자 및 최종 가치 판단자
+  - **규제 당국**: 컴플라이언스 및 법적 제약 관리자
+  - **업계 관계자**: 시장 동향 및 경쟁 정보 제공자
+  
+  ## 영향도 및 관심도 매트릭스
+  | 이해관계자 | 영향도 | 관심도 | 우선도 | 인터뷰전략 |
+  |------------------|--------|--------|--------|------------------|
+  | 경영진 | 높음 | 높음 | 최우선 | 전략·ROI 중심 질문 |
+  | 현장 담당자 | 높음 | 높음 | 최우선 | 실무·경험 중심 질문 |
+  | 고객 | 높음 | 중간 | 높음 | 가치·만족도 중심 질문 |
+  | 규제 당국 | 중간 | 낮음 | 중간 | 컴플라이언스 중심 질문 |
+  ```
+  
+  ### 1.3 인간–AI–이해관계자 협업 가설 구축
+  ```markdown
+  ## 통합 협업 프로세스
+  1. **현황 이해 공유**
+     - 1.0의 현황 이해 + 1.2의 이해관계자 매핑
+     - 각 이해관계자의 관점 및 관심사 확인
+     - 잠재적 갈등 및 협력 관계 분석
+  
+  2. **AI 분석 결과 제시** (정보 청크: 5~7항목)
+     - "망라적 분석 결과, 다음과 같은 가설 후보가 도출됩니다"
+     - 중요도 순으로 가설 제시 (정량적 근거 포함)
+     - 이해관계자별 관련도 및 영향도 명시
+     - 복수 출처 기반의 객관적 근거 제시
+  
+  3. **이해관계자 관점의 통합**
+     - 각 이해관계자가 보는 가설의 중요도
+     - 입장 차이에 따른 인식 격차 예측
+     - 검증 시 협력 및 저항 요인 분석
+  
+  4. **인간의 통찰·경험 통합**
+     - "각 이해관계자의 시각을 고려했을 때, 어떤 가설이 가장 중요합니까?"
+     - "AI 분석·이해관계자 분석에서 드러나지 않는 현장의 과제는 무엇입니까?"
+     - "우선순위를 변경해야 할 가설이 있습니까?"
+     - "새롭게 추가해야 할 가설이 있습니까?"
+  
+  5. **통합 가설의 정교화**
+     - AI 분석 + 이해관계자 관점 + 인간 통찰 → 통합 가설 도출
+     - 이해관계자별 검증 전략 설계
+     - 대상자별 최적화된 질문 설계
+     - 검증 우선순위 결정
+  ```
+  
+  ### 1.4 통합 가설의 체계화 및 검증 설계
+  ```markdown
+  ## 최종 가설 리스트 구조
+  ### 주 가설 (가장 중요 및 긴급)
+  1. **가설명**
+     - **내용**: 구체적인 가설 설명
+     - **근거**: AI 분석 결과 + 인간 통찰
+     - **검증 방법**: 구체적 확인 절차
+     - **검증 대상**: 히어링 대상자
+     - **성공 기준**: 가설이 옳다고 판단할 수 있는 지표
+  
+  ### 부 가설 (중요하지만 검증 순위는 후순위)
+  2~5. **각 부 가설**
+     - 동일한 구조로 정리
+  
+  ## 가설 검증 매트릭스
+  | 가설 | 중요도 | 긴급도 | 검증난이도 | 검증순위 |
+  |------|--------|--------|------------|----------|
+  | 주 가설1 | 높음 | 높음 | 중간 | 1 |
+  | 주 가설2 | 높음 | 중간 | 낮음 | 2 |
+  | 부 가설3 | 중간 | 높음 | 높음 | 3 |
+  ```
+  
+  ## 페이즈2: 가설 검증형 히어링 설계
+  
+  ### 2.1 이해관계자별 검증 전략 (통합형)
+  ```markdown
+  ## 대상자별 최적화 접근법
+  ### Primary Stakeholders(최우선)
+  #### 경영진 대상 검증 전략
+  - **가설 포커스**: 전략적 가치 및 경쟁 우위, ROI 관련 가설
+  - **질문 접근법**: "사업 전략에 어떤 영향을 줍니까?」「투자 대비 효과는 무엇입니까?"
+  - **검증 중점**: 정량적 효과, 경쟁사 비교, 리스크 평가
+  - **시간 배분**: 30분 (전략 15분, 의사결정 10분, 제약 5분)
+  
+  #### 현장 담당자 대상 검証 전략
+  - **가설 포커스**: 실용성, 업무 효율, 사용 편의성 관련 가설
+  - **질문 접근법**: "일상 업무에서 어떤 불편이 있습니까?", "어떻게 개선되길 원합니까?"
+  - **검증 중점**: 구체적 사례, 빈도, 영향도, 대응 방법
+  - **시간 배분**: 45분 (사례 20분, 심층 탐구 15분, 이상적 상태 10분)
+  
+  ### Secondary Stakeholders (높은 우선순위)
+  #### 부문장·현장 리더 대상
+  - **가설 포커스**: 업무 운영, 팀 관리, 리소스 배분
+  - **질문 접근법**: "팀 전체에 어떤 영향을 줍니까?", "운영상 과제는 무엇입니까?"
+  - **검증 중점**: 관리적 시각, 구현 부담, 변경 관리
+  - **시간 배분**: 30분 (운영 15분, 구현 10분, 관리 5분)
+  
+  ### External Stakeholders (선택적)
+  #### 고객 대상 검증 전략
+  - **가설 포커스**: 가치 제공, 만족도, 경험 품질
+  - **질문 접근법**: "어떤 가치를 느끼셨습니까?", "개선할 점은 무엇입니까?"
+  - **검증 중점**: 경험, 감정, 기대, 불만
+  - **시간 배분**: 20분 (경험 10분, 가치 5분, 개선 5분)
+  
+  ## 이해관계자 간 인식 격차 검증
+  | 과제 영역 | 경영진 시각 | 현장 시각 | 고객 시각 | 격차 분석 |
+  |----------|------------|----------|----------|------------|
+  | 우선 과제 | 전략·ROI | 일상 업무 효율 | 가치·경험 | 중요도 인식 차이 |
+  | 해결 시기 | 장기 전략 | 즉각적 개선 | 지속적 개선 | 시간 축 인식 차이 |
+  | 성공 기준 | 수치 목표 | 작업 경감 | 만족도 향상 | 평가 축의 차이 |
+  ```
+  
+  ### 2.2 가설 검증형 질문 설계
+  ```markdown
+  ## 질문 설계 원칙
+  1. **가설 → 질문 전환**: 각 가설을 구체적인 질문으로 변환
+  2. **검증 가능성**: Yes/No 또는 정량적 답변이 가능한 질문
+  3. **구체성 중시**: 추상적이지 않고 구체적 사례를 이끌어내는 질문
+  4. **바이어스 회피**: 유도적이지 않고 중립적인 질문
+  
+  ## 질문 프레임워크
+  ### 가설 검증 질문
+  - **사실 확인**: "실제로 ○○에서 불편을 겪은 경험이 있습니까?"
+  - **빈도·규모**: "얼마나 자주 발생합니까?"
+  - **영향도**: "그로 인해 어떤 영향이 있었습니까?"
+  - **대처 방법**: "현재는 어떻게 대응하고 계십니까?"
+  - **이상적 해결**: "이상적으로는 어떻게 해결되기를 원하십니까?"
+  
+  ### 심층 질문 (5Why 기법)
+  1. **왜 그 과제가 발생하고 있습니까?**
+  2. **왜 그런 상황이 되었습니까?**
+  3. **왜 그것을 방지하지 못했습니까?**
+  4. **왜 그런 시스템·구조가 유지되고 있습니까?**
+  5. **왜 그것을 바꾸지 못합니까?**
+  ```
+  
+  ## 페이즈3: 가설 검증 히어링 실행
+  
+  ### 3.1 아이스브레이크 (5분)
+  ```markdown
+  "오늘 귀한 시간 내주셔서 감사합니다.  
+  사전에 몇 가지 가설을 세웠으니, 그것을 함께 검증해보고자 합니다.  
+  먼저 현재 상황에 대해 간단히 말씀해주시겠습니까?"
+  
+  - 사업의 특징 및 강점 (가설 전제 확인)
+  - 최근 변화 및 주요 이슈 (가설 타당성 확인)
+  - 업계 내 위치 (경쟁 분석 확인)
+  ```
+  
+  ### 3.2 주 가설 검증 (20분)
+  ```markdown
+  ## 가설 검증 진행 방식
+  1. **가설 제시**: "저희는 OO라는 가설을 세웠습니다"
+  2. **사실 확인**: "실제로 이런 문제가 있습니까?"
+  3. **구체화**: "구체적으로 어떤 사례가 있습니까?"
+  4. **정량화**: "어느 정도의 빈도 및 규모로 발생합니까?"
+  5. **영향 확인**: "그로 인해 어떤 영향이 있습니까?"
+  
+  ## 주 가설1 검증 질문 예시
+  - **가설 제시**: "OO가 주요 과제라고 생각합니다만"
+  - **사실 확인**: "실제로 그런 문제를 느끼십니까?"
+  - **구체화**: "최근의 구체적 사례를 말씀해주시겠습니까?"
+  - **정량화**: "월 몇 회 정도 발생합니까?"
+  - **영향 확인**: "그로 인한 손실이나 영향은 어느 정도입니까?"
+  ```
+  
+  ### 3.3 부 가설 검증 및 심층 탐구 (20분)
+  ```markdown
+  ## 부 가설 검증 (시간에 따라 우선순위 적용)
+  - 주 가설이 확인되면 관련 부 가설을 검증
+  - 주 가설이 부정되면 대체 가설을 검증
+  - 새로운 과제가 발견되면 추가 가설을 구성
+  
+  ## 심층 질문 (5Why 기법 적용)
+  1. **왜 그 가설과 같은 과제가 발생합니까?**
+  2. **왜 그런 상황이 되었습니까?**
+  3. **왜 그것을 방지하지 못했습니까?**
+  4. **왜 그런 시스템 및 구조가 유지되고 있습니까?**
+  5. **왜 그것을 바꾸지 못합니까?**
+  
+  ## 이해관계자 영향 확인
+  - **누가 가장 곤란을 겪고 있습니까?** (가설 당사자 확인)
+  - **누가 해결을 원하고 있습니까?** (추진자 식별)
+  - **누가 변화에 저항할 수 있습니까?** (저해 요인 확인)
+  ```
+  
+  ### 3.4 해결 이미지·제약 조건 확인 (10분)
+  ```markdown
+  ## 이상 상태 확인 (가설 검증 결과 기반)
+  - **가설이 맞다면, 해결되었을 때 어떤 변화가 있습니까?**
+  - **그로 인해 어떤 가치가 창출됩니까?**
+  - **해결을 위해 어느 정도의 투자가 가능합니까?**
+  
+  ## 제약 조건 확인 (가설 실현 가능성 평가)
+  - **예산 제약** (투자 가능 범위)
+  - **시간 제약** (도입 기한·긴급도)
+  - **기술적 제약** (기존 시스템·기술 수준)
+  - **조직적 제약** (의사결정 프로세스·내부 합의)
+  ```
+  
+  ## 페이즈4: 검증 결과 정리 및 분석
+  
+  ### 4.1 통합 검증 결과 기록 및 분석
+  ```markdown
+  ## 통합 가설 검증 매트릭스 (기록용)
+  | 가설 | 검증 결과 | 근거 및 사례 | 이해관계자별 반응 | 수정 필요성 | 다음 액 |
+  |------|----------|------------|----------------------|--------------|----------------|
+  | 주 가설1 | ✅확인 / ❌부정 / △부분 확인 | 구체적 근거 | 경영진: 중시 / 현장: 체감 | 수정 내용 | 추가 검증 항목 |
+  | 주 가설2 | ✅확인 / ❌부정 / △부분 확인 | 구체적 근거 | 현장: 절실 / 고객: 무관심 | 수정 내용 | 추가 검증 항목 |
+  | 부 가설3 | ✅확인 / ❌부정 / △부분 확인 | 구체적 근거 | 전체: 인식 낮음 / 관리: 우려 | 수정 내용 | 추가 검증 항목 |
+  
+  ## 과제의 계층적 분석
+  ### Level 1: 표면적 과제 (증상)
+  - 이해관계자들이 인식하고 있는 직접적 문제
+  - 일상적으로 마주치는 구체적 불편
+  
+  ### Level 2: 구조적 과제 (시스템·프로세스)
+  - 시스템·프로세스·규칙 수준의 문제
+  - 여러 이해관계자에 공통하는 근본 요인
+  
+  ### Level 3: 근본적 과제 (원인)
+  - 전략·투자·역량·조직 문화 수준의 본질적 문제
+  - 장기적 관점에서 해결이 필요한 요인
+  
+  ## 이해관계자 간 인식 격차 분석
+  | 과제 | 경영진 인식 | 관리층 인식 | 현장 인식 | 고객 인식 | 격차 영향 |
+  |------|------------|------------|----------|----------|----------------|
+  | 과제A | 전략적 중요 | 구현 난이도 | 일상적 곤란 | 가치 못 느낌 | 우선순위 불일치 |
+  | 과제B | 인식 낮음 | 예산 우려 | 절실한 문제 | 불만 요인 | 대응 지연 |
+  
+  ## 신규 발견 사항 및 통합 인사이트
+  - **예상 밖 과제**: 히어링에서 새롭게 드러난 문제
+  - **이해관계자 특유 과제**: 특정 입장에서만 인식되는 문제
+  - **인식 격차로 발생하는 과제**: 입장 차이로 인해 생기는 새로운 문제
+  - **통합적 해결 기회**: 복수 이해관계자에게 동시에 이익을 주는 해법
+  ```
+  
+  ### 4.2 통합 과제 맵 작성
+  ```mermaid
+  graph TD
+      A[검증된 주요과제] --> B[근본원인1]
+      A --> C[근본원인2]
+      B --> D[심층요인1]
+      C --> E[심층요인2]
+      D --> F[진짜과제]
+      E --> F
+      G[신규발견과제] --> H[관련요인]
+      H --> F
+  ```
+  
+  ### 4.3 우선순위 매트릭스 (가설 검증 결과 반영)
+  | 과제 | 검증 결과 | 긴급도 | 중요도 | 영향 범위 | 해결 가능성 |
+  |------|----------|--------|--------|----------|------------|
+  | 검증된 과제A | ✅확인 | 높음 | 높음 | 부서 전체 | 중간 |
+  | 검증된 과제B | △부분확인 | 중간 | 높음 | 특정 업무 | 높음 |
+  | 신규발견과제C | 추가검증필요 | 높음 | 중간 | 개인 단위 | 높음 |
+  
+  ### 4.4 이해관계자 맵 (검증 결과 반영)
+  ```markdown
+  ## 관계자 정리 (가설 검증 결과 기반)
+  ### 직접 관계자
+  - **과제 당사자**: 검증으로 확인된 실제 곤란을 겪는 사람
+  - **의사결정자**: 검증으로 확인된 결정 권한 보유자
+  - **실행 책임자**: 검증으로 확인된 구현 담당자
+  
+  ### 간접 관계자
+  - **영향을 받는 사람**: 검증으로 확인된 영향 범위 내 인물
+  - **협력이 필요한 사람**: 검증으로 확인된 협력자
+  - **반대할 가능성이 있는 사람**: 검증으로 확인된 저항 세력
+  ```
+  
+  ## 페이즈5: 다음 액션 계획 수립
+  
+  ### 5.1 추가 검증이 필요한 영역
+  ```markdown
+  ## 검증 결과에 기반한 추가 조사 항목
+  ### 확인된 가설의 심화 조사
+  - **기술적 실현 가능성 상세 조사**
+  - **도입 비용 및 ROI 구체적 산출**
+  - **경쟁사 유사 솔루션 조사**
+  
+  ### 부분 확인 및 부정된 가설의 재검증
+  - **대체 가설의 구성과 검증**
+  - **다른 이해관계자로부터의 의견 수집**
+  - **시장 조사 및 벤치마크를 통한 객관적 검증**
+  
+  ### 신규 발견 사항의 추가 조사
+  - **예상 밖 과제의 상세 조사**
+  - **관련 기술 및 업무 플로우 조사**
+  - **영향 범위 및 우선순위 재평가**
+  ```
+  
+  ### 5.2 다음 히어링 대상자 (검증 결과 기반)
+  ```markdown
+  ## 이해관계자별 추가 히어링
+  ### 가설 확인을 위한 심화 히어링
+  1. **엔드유저**: 실제 업무 담당자 (구체적 사례 수집)
+  2. **관리자**: 부서 책임자 (투자 판단 및 우선순위 확인)
+  3. **기술자**: 시스템 담당자 (기술적 제약 및 실현 가능성)
+  4. **외부 관계자**: 고객 및 파트너 (외부 영향 확인)
+  
+  ### 신규 발견 사항 검증 히어링
+  - **예상 밖 과제의 당사자**
+  - **관련 업무 및 시스템 담당자**
+  - **유사 과제를 가진 타 부서 및 타사**
+  ```
+  
+  ## 페이즈6: 아웃풋 및 보고
+  
+  ### 6.1 가설 검증 결과 요약 리포트
+  ```markdown
+  # AI-인간 협업형 초기 히어링 결과 요약
+  
+  ## 사전 구축 가설과 검증 결과
+  ### 확인된 주요 가설
+  1. **가설명**: 구체적 가설 내용
+     - **검증 결과**: ✅확인됨
+     - **근거**: 구체적 사례 및 데이터
+     - **영향**: 정량적 및 정성적 영향
+     - **긴급도**: 높음/중간/낮음
+  
+  ### 수정이 필요한 가설
+  2. **가설명**: 수정 전 가설
+     - **검증 결과**: △부분확인 및 수정 필요
+     - **수정 내용**: 새로운 가설 내용
+     - **추가 검증**: 필요한 추가 조사
+  
+  ### 신규 발견 사항
+  3. **신규 발견 과제**: 예상 밖 과제
+     - **발견 경위**: 어떻게 발견되었는가
+     - **중요도 평가**: 초기 평가 결과
+     - **다음 액션**: 추가 검증 계획
+  
+  ## 다음 액션 (우선순위 부여)
+  - [ ] 확인된 가설을 요구사항 정의로 전환
+  - [ ] 수정된 가설에 대한 추가 검증 실행
+  - [ ] 신규 발견 사항에 대한 상세 조사
+  - [ ] 이해관계자 추가 인터뷰 실행
+  - [ ] 기술적 실현 가능성 조사
+  - [ ] 투자 대비 효과 분석
+  
+  ## 리스크·우려 사항 (검증 결과 기반)
+  - **확인된 리스크**: 검증에서 명확해진 리스크
+  - **잠재적 리스크**: 가설 검증 과정에서 부상한 새로운 리스크
+  - **대응 필요성**: 리스크 대응의 우선순위
+  ```
+  
+  ### 6.2 요구사항 정의 연결 준비
+  ```markdown
+  ## 검증된 가설의 요구사항화 준비
+  ### 기능 요구사항으로의 변환 후보
+  - **확인된 과제** → **필요 기능**
+  - **제약 조건** → **비기능 요구사항**
+  - **이해관계자 니즈** → **사용자 요구사항**
+  
+  ### 추가 검증 완료 후의 요구사항화 예정
+  - **부분 확인된 가설** → **조건부 요구사항**
+  - **신규 발견 사항** → **추가 요구사항 후보**
+  ```
+  
+  ## 체크리스트 (AI-인간 협업형 및 개선판)
+  ### 페이즈1: 협업 가설 구축
+  - [ ] 현황 이해 단계 완료 (기반 정보 확보)
+  - [ ] AI의 포괄적 분석 완료 (정량 데이터·복수 정보원)
+  - [ ] 인간 통찰과의 통합 완료 (가치 판단·우선순위)
+  - [ ] 협업 가설 구축 완료 (통합 가설 체계화)
+  
+  ### 페이즈2-3: 검증 설계·실행
+  - [ ] 가설 검증형 히어링 설계 완료
+  - [ ] 가설 검증형 히어링 실행 완료
+  - [ ] 가설 검증 결과 기록 완료
+  - [ ] 신규 발견 사항 정리 완료
+  
+  ### 페이즈4-6: 분석·보고·연결
+  - [ ] 이해관계자 맵 업데이트 완료
+  - [ ] 우선순위 매트릭스 업데이트 완료
+  - [ ] 가설 검증 요약 리포트 작성 완료
+  - [ ] 다음 액션 계획 수립 완료
+  - [ ] 요구사항 정의 연결 준비 완료
+  - [ ] 클라이언트 확인·합의 취득 완료
+  
+  ### 품질 확인 항목
+  - [ ] 현황 이해의 타당성 검증
+  - [ ] AI 분석의 포괄성 검증
+  - [ ] 인간 통찰의 가치 검증
+  - [ ] 가설의 검증 가능성 확인    
+</code>
+                        </pre>
+              </div>
+            </div>
+
+            <div class="card mt-4">
+              <div class="card-body">
+                <h4 class="card-title">02-root-cause-analysis.md</h4>
+                <h5 class="card-subtitle mt-2 text-muted mb-4">
+                  경로 :
+                  <span class="text-dark font-medium"
+                    >.cursor/commands/1_challenge_understanding/02-root-cause-analysis.md</span
+                  >
+                </h5>
+
+                <pre>
+<code class="language-markdown py-0">
+  # 근본 원인 분석 (5Why 등)
+
+  ## 목적
+  겉으로 드러난 증상에서 진짜 원인을 파악하고, 근본적인 해결책의 방향성을 명확히 한다.
+  
+  ## 전제 조건
+  - 1차 및 이해관계자 인터뷰가 완료됨
+  - 과제의 전체상이 파악되어 있음
+  - 관련 데이터·자료가 수집되어 있음
+  
+  ## 분석 기법의 선택
+  
+  ### 5Why 분석 (기본 기법)
+  ```markdown
+  ## 적용 장면
+  - 단일 문제의 원인 추적
+  - 선형적 인과관계가 예상되는 경우
+  - 빠른 분석이 필요한 경우
+  
+  ## 실행 절차
+  문제: [구체적인 문제를 기술]
+  
+  1. Why? 왜 그 문제가 발생했는가?  
+     → [직접적원인]
+  
+  2. Why? 왜 그 원인이 생겼는가?  
+     → [더깊은원인]
+  
+  3. Why? 왜 그런 상황이 되었는가?  
+     → [구조적원인]
+  
+  4. Why? 왜 그런 구조가 되었는가?  
+     → [시스템적원인]
+  
+  5. Why? 왜 그 시스템이 바뀌지 않는가?  
+     → [근본적원인]
+  ```
+  
+  ### 피시본 다이어그램(Fishbone Diagram)
+  ```markdown
+  ## 적용 장면
+  - 여러 요인이 얽혀 있는 복잡한 문제
+  - 체계적인 원인 분류가 필요한 경우
+  - 팀 단위로 원인 검토가 필요한 경우
+  
+  ## 분석 카테고리
+  - **사람(Man)**: 스킬·경험·동기  
+  - **방법(Method)**: 절차·규칙·프로세스  
+  - **기계(Machine)**: 시스템·도구·설비  
+  - **재료(Material)**: 데이터·정보·리소스  
+  - **측정(Measurement)**: 평가·모니터링·피드백  
+  - **환경(Environment)**: 조직·문화·외부 환경  
+  ```
+  
+  ### 5Why 기반 다각적 원인 분석
+  ```markdown
+  ## 다각적 분석
+  ### 기술적 시각
+  - 시스템의 제약 및 한계
+  - 데이터 품질 및 가용성
+  - 인프라 및 아키텍처
+  
+  ### 업무적 시각
+  - 프로세스 및 절차 문제
+  - 역할 및 책임의 불명확성
+  - 정보 공유 및 협업의 과제
+  
+  ### 조직적 시각
+  - 의사결정 프로세스
+  - 조직 구조 및 권한
+  - 문화 및 가치관
+  
+  ### 전략적 시각
+  - 사업 전략과의 정합성
+  - 시장 및 경쟁 환경
+  - 투자 및 리소스 배분
+  ```
+  
+  ## 실천적 분석 프로세스
+  
+  ### Step 1: 문제의 명확화
+  ```markdown
+  ## 문제 정의의 정교화
+  - **What**: 무엇이 문제인가?
+  - **When**: 언제 발생하는가?
+  - **Where**: 어디에서 발생하는가?
+  - **Who**: 누구에게 영향을 미치는가?
+  - **How**: 어떤 형태로 나타나는가?
+  - **How much**: 어느 정도의 영향이 있는가?
+  ```
+  
+  ### Step 2: 사실과 데이터 수집
+  ```markdown
+  ## 객관적 사실 정리
+  ### 정량 데이터
+  - 발생 빈도·건수
+  - 처리 시간·비용
+  - 오류율·품질 지표
+  - 성능 지표
+  
+  ### 정성 정보
+  - 관계자의 증언
+  - 실제 업무 플로우
+  - 시스템 동작 상황
+  - 외부 환경 변화
+  ```
+  
+  ### Step 3: 가설 설정과 검증
+  ```markdown
+  ## 원인 가설의 구축
+  1. **가설A**: [가능한 원인1]
+     - 근거: [이를 뒷받침하는 사실 및 데이터]
+     - 검증 방법: [확인수단]
+  
+  2. **가설B**: [가능한 원인2]
+     - 근거: [이를 뒷받침하는 사실 및 데이터]
+     - 검증 방법: [확인수단]
+  
+  ## 검증 결과
+  - ✅ 확인된 원인
+  - ❌ 부정된 가설
+  - ❓ 추가 조사가 필요한 영역
+  ```
+  
+  ## 구체적 분석 예시
+  
+  ### 케이스 스터디: 시스템 처리 지연 문제
+  ```markdown
+  ## 문제: 기간계 시스템의 처리 속도가 느리다
+  
+  ### 5Why 분석
+  1. Why? 시스템이 느린 이유는?
+     → 데이터베이스 접근 시간이 오래 걸림
+  
+  2. Why? DB 접근이 느린 이유는?
+     → 인덱스가 적절히 설정되지 않음
+  
+  3. Why? 인덱스가 설정되지 않은 이유는?
+     → 설계 단계에서 성능 요구사항이 불명확했음
+  
+  4. Why? 요구사항이 불명확했던 이유는?
+     → 업무량 증가가 예측되지 않았음
+  
+  5. Why? 업무량 증가가 예측되지 않은 이유는?
+     → 사업 계획과 시스템 설계 간의 연계가 부족했음
+  
+  ### 근본 원인
+  **사업 계획과 시스템 설계의 연계 부족**
+  ```
+  
+  ### 피시본 다이어그램(Fishbone Diagram)
+  ```mermaid
+  graph LR
+      A[시스템 처리 지연] 
+      B[사람] --> A
+      C[방법] --> A  
+      D[기계] --> A
+      E[재료] --> A
+      F[측정] --> A
+      G[환경] --> A
+      
+      B1[스킬 부족] --> B
+      B2[인원 부족] --> B
+      
+      C1[설계 절차 미비] --> C
+      C2[리뷰 부족] --> C
+      
+      D1[노후 하드웨어] --> D
+      D2[부적절한 구성] --> D
+      
+      E1[데이터 품질 저하] --> E
+      E2[데이터량 증가] --> E
+      
+      F1[모니터링 부족] --> F
+      F2[KPI 미설정] --> F
+      
+      G1[사업 성장] --> G
+      G2[경쟁 압력] --> G
+  ```
+  
+  ## 근본 원인 도출
+  
+  ### 원인 분류
+  ```markdown
+  ## 직접적 원인 (증상 레벨)
+  - 시스템 리소스 부족
+  - 데이터베이스 설계 문제
+  - 네트워크 대역폭 제약
+  
+  ## 구조적 원인 (프로세스 및 시스템 레벨)
+  - 요구사항 정의 프로세스 미비
+  - 운영 모니터링 체계 부족
+  - 변경 관리 프로세스 부재
+  
+  ## 근본적 원인 (문화 및 전략 레벨)
+  - 사업과 IT 간 연계 부족
+  - 장기적 관점의 투자 부족
+  - 성능 중시 문화의 부재
+  ```
+  
+  ### 원인 우선순위화
+  | 원인 | 영향도 | 해결 가능성 | 비용 | 우선순위 |
+  |------|--------|------------|--------|---------|
+  | DB 설계 개선 | 높음 | 높음 | 중간 | 1 |
+  | 모니터링 체계 구축 | 중간 | 높음 | 낮음 | 2 |
+  | 조직 간 연계 개선 | 높음 | 낮음 | 높음 | 3 |
+  
+  ## 해결 방향성
+  
+  ### 단기 대책 (증상 완화)
+  - 긴급성이 높고 즉시 실행 가능한 조치
+  - 근본 해결은 아니지만 영향 경감
+  
+  ### 중기 대책 (구조 개선)
+  - 시스템·프로세스 개선
+  - 일정한 시간과 리소스 필요
+  
+  ### 장기 대책 (근본 해결)
+  - 조직·문화적 변혁
+  - 전략적 접근이 필요한 과제
+  
+  ## 아웃풋
+  
+  ### 근본 원인 분석 보고서
+  ```markdown
+  # 근본 원인 분석 결과
+  
+  ## 요약 (Executive Summary)
+  - **특정된 근본 원인**
+  - **영향 범위와 중요도**
+  - **권장 해결 접근법**
+  
+  ## 분석 프로세스
+  - 사용한 분석 기법
+  - 수집 및 분석된 데이터
+  - 검증한 가설
+  
+  ## 원인 계층 구조
+  - 직접적 원인
+  - 구조적 원인  
+  - 근본적 원인
+  
+  ## 해결 방향성
+  - 단기, 중기 및 장기 대책
+  - 우선순위 및 실행 순서
+  - 필요한 리소스 및 체계
+  
+  ## 다음 단계
+  - [ ] 과제 우선순위 확정
+  - [ ] 해결책 검토 시작
+  - [ ] 이해관계자 합의 형성
+  ```
+  
+  ## 체크리스트
+  - [ ] 적절한 분석 기법 선택·실행 완료
+  - [ ] 사실·데이터 기반 분석 완료
+  - [ ] 다양한 관점에서 원인 검토 완료
+  - [ ] 가설 설정 및 검증 완료
+  - [ ] 원인의 계층화·구조화 완료
+  - [ ] 근본 원인 도출 완료
+  - [ ] 해결 방향성 정리 완료
+  - [ ] 분석 보고서 작성 완료
+  - [ ] 이해관계자 공유 완료
+</code>
+                        </pre>
+              </div>
+            </div>
+            <div class="card mt-4">
+              <div class="card-body">
+                <h4 class="card-title">03-challenge-prioritization.md</h4>
+                <h5 class="card-subtitle mt-2 text-muted mb-4">
+                  경로 :
+                  <span class="text-dark font-medium"
+                    >.cursor/commands/1_challenge_understanding/03-challenge-prioritization.md</span
+                  >
+                </h5>
+
+                <pre>
+<code class="language-markdown py-0">
+  # 과제 우선순위 매트릭스
+
+  ## 목적
+  여러 과제를 체계적으로 평가하고, 제한된 리소스로 최대의 가치를 창출할 수 있는 해결 순서를 결정한다.
+  
+  ## 전제 조건
+  - 과제의 전체상이 파악되어 있음
+  - 근본 원인 분석이 완료되어 있음
+  - 이해관계자 의견이 수집되어 있음
+  
+  ## 평가 축 설정
+  
+  ### 기본 평가 축
+  ```markdown
+  ## 1. 비즈니스 임팩트 (Business Impact)
+  - **매출 영향**: 직접적인 수익 향상 및 손실 회피
+  - **비용 절감 효과**: 운영비용 및 인건비 절감
+  - **경쟁 우위**: 시장 포지션 및 차별화 기여
+  - **고객 만족도**: 고객 경험 및 충성도 영향
+  
+  ## 2. 긴급도 (Urgency)
+  - **방치 리스크**: 대응하지 않을 경우 악화 속도
+  - **법규 대응**: 컴플라이언스 요구 충족
+  - **시스템 장애**: 업무 중단 및 데이터 손실 위험
+  - **경쟁 대응**: 시장 변화에 대한 신속 대응 필요성
+  
+  ## 3. 실현 가능성 (Feasibility)
+  - **기술 난이도**: 기존 기술로의 구현 가능성
+  - **조직 수용성**: 변화 저항 및 수용 체계
+  - **리소스 요구**: 필요 인력, 시간, 예산
+  - **의존 관계**: 다른 과제 및 프로젝트와의 연계성
+  
+  ## 4. 투자 효율 (ROI)
+  - **초기 투자**: 해결에 필요한 투자 규모
+  - **운영 비용**: 지속적 유지 및 운영 비용
+  - **회수 기간**: 투자 회수까지의 기간
+  - **리스크**: 실패 및 지연 리스크와 그 영향
+  ```
+  
+  ### 업종 및 기업 특성별 조정
+  ```markdown
+  ## 스타트업
+  - **성장 속도**: 사업 확장 기여도
+  - **자금 효율성**: 제한된 자금으로 최대 효과
+  - **시장 적응력**: 시장 변화 대응 속도
+  
+  ## 대기업
+  - **조직 영향**: 전사적 파급 효과
+  - **안정성**: 기존 사업에 대한 영향 리스크
+  - **거버넌스**: 승인 및 의사결정 프로세스 반영
+  
+  ## 규제 산업
+  - **컴플라이언스**: 법규 준수 적합성
+  - **감사 대응**: 감사 및 보고 요건 충족
+  - **리스크 관리**: 규제 위반 리스크 회피
+  ```
+  
+  ## 평가 프로세스
+  
+  ### Step 1: 과제 도출 및 정리
+  ```markdown
+  ## 과제 리스트 작성
+  | ID | 과제명 | 개요 | 영향범위 | 현황 |
+  |----|--------|------|----------|------|
+  | C001 | 시스템 처리 지연 | 기간계 시스템 응답 속도 저하 | 전사 | 심각화 |
+  | C002 | 데이터 품질 문제 | 부정확 및 불완전한 데이터 | 영업부 | 지속 중 |
+  | C003 | 수작업 과다 | 정형 업무 자동화 부족 | 경리부 | 만성적 |
+  ```
+  
+  ### Step 2: 평가축별 스코어링
+  ```markdown
+  ## 스코어링 기준 (1~5점)
+  ### 비즈니스 임팩트
+  - 5: 사업 전체에 중대한 영향
+  - 4: 주요 부서에 큰 영향
+  - 3: 특정 부서에 중간 정도의 영향
+  - 2: 제한적인 영향
+  - 1: 경미한 영향
+  
+  ### 긴급도
+  - 5: 즉시 대응 필요
+  - 4: 1개월 이내 대응 필요
+  - 3: 3개월 이내 대응 필요
+  - 2: 6개월 이내 대응 필요
+  - 1: 1년 이내 대응해도 무방
+  
+  ### 실현 가능성
+  - 5: 기존 리소스로 즉시 구현 가능
+  - 4: 소규모 추가 리소스로 구현 가능
+  - 3: 중간 수준 리소스 투입으로 구현 가능
+  - 2: 대규모 리소스 투입 필요
+  - 1: 현재로서는 구현 곤란
+  
+  ### 투자 효율 (ROI)
+  - 5: 투자 회수 기간 6개월 미만
+  - 4: 투자 회수 기간 1년 미만
+  - 3: 투자 회수 기간 2년 미만
+  - 2: 투자 회수 기간 3년 미만
+  - 1: 투자 회수 기간 3년 이상
+  ```
+  
+  ### Step 3: 우선순위 매트릭스 작성
+  ```markdown
+  ## 과제 평가 매트릭스
+  | 과제ID | 과제명 | 임팩트 | 긴급도 | 실현성 | ROI | 총점 | 우선순위 |
+  |--------|--------|------------|--------|--------|-----|--------|---------|
+  | C001 | 시스템 처리 지연 | 5 | 4 | 3 | 4 | 16 | 1 |
+  | C002 | 데이터 품질 문제 | 4 | 3 | 4 | 3 | 14 | 2 |
+  | C003 | 수작업 과다 | 3 | 2 | 5 | 5 | 15 | 3 |
+  
+  ## 가중치 조정 (필요 시)
+  - 임팩트 중시: 임팩트×2, 나머지×1
+  - 긴급 대응 중시: 긴급도×2, 나머지×1
+  - 실현성 중시: 실현성×2, 나머지×1
+  ```
+  
+  ## 고도화된 우선순위 결정
+  
+  ### 포트폴리오 분석
+  ```mermaid
+  graph LR
+      A[고임팩트·고실현성<br/>Quick Win] --> B[고임팩트·저실현성<br/>Strategic Project]
+      C[저임팩트·고실현성<br/>Fill-in Project] --> D[저임팩트·저실현성<br/>Avoid]
+  ```
+  
+  ### 과제 우선순위 분석 (한국형 버전)
+  ```markdown
+  ## 1. 과제 간 의존관계
+  ### 전제조건
+  - C001 해결에는 C004(인프라 구축) 선행 필요
+  - C002 해결에는 C005(데이터 거버넌스) 전제 필요
+  
+  ### 시너지 효과
+  - C001과 C003을 동시에 해결하면 효과 극대화
+  - C002 해결이 C006(분석 정밀도 개선)을 촉진
+  
+  ### 제약조건
+  - 동일 팀 리소스 필요 과제는 병렬 수행 곤란
+  - 예산 제약으로 동시 실행 가능한 과제 수 제한
+  ```
+  
+  ### 리스크 고려
+  ```markdown
+  ## 2. 리스크 평가
+  ### 실행 리스크
+  - **기술 리스크**: 신규 기술 도입 불확실성
+  - **조직 리스크**: 변화 저항·수용성 부족
+  - **외부 리스크**: 시장 변화·경쟁사 동향
+  
+  ### 기회 손실 리스크
+  - **지연 리스크**: 대응 지연 시 손실 확대
+  - **경쟁 리스크**: 경쟁사 선점 가능성
+  - **기술 진부화 리스크**: 기술 발전으로 솔루션 무효화
+  ```
+  
+  ## 실행 계획 수립
+  
+  ### 3. 단계별 실행 계획
+  ```markdown
+  ## Phase 1: Quick Wins (0~3개월)
+  - 대상 과제: 고임팩트 및 고실현성 과제
+  - 목적: 단기 성과 확보, 조직 신뢰 및 모멘텀 확보
+  - 리소스: 기존 팀 중심
+  
+  ## Phase 2: Strategic Projects (6~12개월)
+  - 대상 과제: 고임팩트 및 중간 실현성 과제
+  - 목적: 핵심 문제 해결, 경쟁우위 강화
+  - 리소스: 추가 투자, 전문팀 구성
+  
+  ## Phase 3: Foundation Building (12~24개월)
+  - 대상 과제: 장기 기반 구축 과제
+  - 목적: 조직적 및 시스템적 기반 강화
+  - 리소스: 전략적 투자, 조직 변혁 병행
+  ```
+  
+  ### 4. 리소스 배분 계획 
+  ```markdown
+  ## 리소스 요청 분석
+  | Phase | 인원 | 예산 | 기간 | 필요 역량  |
+  |----------|------|------|------|------------|
+  | Phase 1 | 3~5명 | 5천만원 | 3개월  | 기존 기술·업무 지식 |
+  | Phase 2 | 5~8명 | 2억원  | 9개월  | 신기술·PM·데이터 관리 |
+  | Phase 3 | 8~12명| 5억원  | 18개월 | 전략 기획·조직개발 |
+  ```
+  
+  ## 이해관계자 합의 프로세스
+  
+  ### 5. 합의 형성 프로세스
+  ```markdown
+  ## 단계적 합의 
+  1. **평가 기준 합의** (무엇을 우선시할지)
+  2. **개별 과제 평가 합의** (스코어링 결과)
+  3. **최종 우선순위 합의** (실행 순서)
+  4. **실행계획 합의** (리소스·스케줄)
+  
+  ## 의견 차이 발생 시
+  - 추가 데이터 확보
+  - 외부 전문가 검증
+  - 파일럿 과제 실행으로 확인
+  
+  ## 이해상충 발생 시
+  - Win-Win 시나리오 설계
+  - 단계적 실행 조율
+  - 상위 목표(전사 전략) 기준으로 통합
+  
+  ```
+  
+  ## 최종 산출물
+  
+  ### 6. 과제 우선순위 보고서
+  ```markdown
+  # 과제 우선순위 분석 결과 
+  
+  ## 요약
+  - **최우선 과제**: [과제명 + 이유]
+  - **실행 계획**: Phase 1~3 실행 단계
+  - **기대 효과**: [정량적·정성적 효과]
+  
+  ## 우선순위 목록
+  1. **[과제명]** - 총점: XX점
+     - 이유: [선정 근거]
+     - 기대효과: [구체적 효과]
+     - 실행 시기: [예정 시점]
+  
+  ## 실행 로드맵
+  - Phase 1 (0~3개월): Quick Wins
+  - Phase 2 (3~12개월): Strategic Projects  
+  - Phase 3 (12~24개월): Foundation Building
+  
+  ## 리스크 & 대응
+  - 주요 리스크: [확인된 리스크]
+  - 대응 방안: [경감 및 회피 전략]
+  - 모니터링 지표: [성과 및 진척 측정 기준]
+  ```
+  
+  ## 체크리스트
+  - [ ] 평가축 설정 및 합의 완료
+  - [ ] 과제별 스코어링 완료
+  - [ ] 우선순위 매트릭스 작성 완료
+  - [ ] 의존관계 및 제약조건 분석 완료
+  - [ ] Phase별 실행계획 수립 완료
+  - [ ] 리소스 배분 계획 수립 완료
+  - [ ] 이해관계자 합의 확보 완료
+  - [ ] 우선순위 보고서 작성 완료
+  - [ ] 차기 단계 준비 완료
+</code>
+                        </pre>
+              </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Of Page Content -->
+            <!-- ============================================================== -->
+          </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Container fluid  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <footer class="footer bg-white text-center">
+          All Rights Reserved by JAEWOO, KIM. &copy; 2026 MDRULES Development.</a>
+        </footer>
+
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
+      </div>
+      <!-- ============================================================== -->
+      <!-- End Page wrapper  -->
+      <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- End Page -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="./assets/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="./assets/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- apps -->
+    <script src="./assets/simplebar/simplebar/dist/simplebar.js"></script>
+    <!--Custom JavaScript -->
+    <script src="./dist/js/custom.js"></script>
+    <script src="./assets/highlights/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+
+      const scrollSpy = new bootstrap.ScrollSpy(document.body, {
+        target: "#navbar-example3",
+      });
+    </script>
+    <!-- End JS -->
+  </body>
+</html>
