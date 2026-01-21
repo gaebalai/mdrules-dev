@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD룰 AI교육 - 2026 엔터프라이즈 보안 분석 AI Agent 개발 교육</title>
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="15x15"
+    href="./dist/images/favicon.png"
+    />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts (Noto Sans KR) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Chosen Palette: Corporate Trust & AI Future -->
+    <!-- Primary: #1e3a8a (Deep Blue - Trust/Security) -->
+    <!-- Secondary: #64748b (Slate - Professionalism) -->
+    <!-- Accent: #0ea5e9 (Sky Blue - AI/Innovation) -->
+    <!-- Background: #f8fafc (Light Blue Grey - Cleanliness) -->
+
+    <!-- Application Structure Plan: 
+         1. Hero Section: Course Title Options & Core Info (Duration, Target).
+         2. Perspective Switcher: Critical interaction to toggle content between 'Strategic/Executive' and 'Technical/Engineer' focus.
+         3. Dashboard: Visualizing course balance (Theory/Practice) and Competency Growth (Radar Chart).
+         4. Interactive Curriculum: A timeline/module view of the 22 chapters, grouped by Day 1 & Day 2. Clickable for details based on active perspective.
+         5. 2026 Trends: Cards highlighting why this specific 'Go + LLM + No-Framework' approach matters in 2026.
+    -->
+
+    <!-- Visualization & Content Choices:
+         - Radar Chart: To visualize the multi-disciplinary nature (Security + Dev + AI) of the course.
+         - Doughnut Chart: To show the practical workshop ratio (Execs care about discussion, Engineers care about code).
+         - Timeline/Accordion: To handle the dense 22-chapter content without overwhelming the user.
+         - Perspective Toggle: To address the mixed target audience (Executives & Engineers) in a single artifact.
+    -->
+
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            height: 300px;
+            max-height: 350px;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .active-tab {
+            border-bottom: 2px solid #0ea5e9;
+            color: #0c4a6e;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <!-- Navigation / Header -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <img src="mdrules-logo.png" alt="MD룰 AI교육" width="116px">
+
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <a href="#overview" class="border-transparent text-slate-500 hover:text-sky-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">개요</a>
+                    <a href="#analysis" class="border-transparent text-slate-500 hover:text-sky-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">학습 분석</a>
+                    <a href="#curriculum" class="border-transparent text-slate-500 hover:text-sky-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">커리큘럼</a>
+                    <a href="#environment" class="border-transparent text-slate-500 hover:text-sky-600 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">실습 환경</a>
+                    <a href="https://mdrules.dev" target="_self" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">
+                        사이트로 이동
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div id="overview" class="bg-white overflow-hidden">
+        <div class="relative max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="relative lg:grid lg:grid-cols-3 lg:gap-x-8">
+                <div class="lg:col-span-1">
+                    <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                        2026 SecOps<br>엔터프라이즈<br>보안 분석 AI Agent<br>개발 커리큘럼
+                    </h2>
+                    <p class="mt-4 text-lg text-slate-500">
+                        Go 언어로 직접 구축하는 자율 보안 관제 에이전트. 프레임워크 의존성 없이 순수 LLM API만을 활용하여 실무에 즉시 적용 가능한 보안 자동화 시스템을 구축합니다.
+                    </p>
+                    
+                    <div class="mt-8 border-t border-slate-100 pt-6">
+                        <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-3">제안 과정명</h3>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 hover:border-sky-300 cursor-pointer transition-colors" onclick="selectTitle(0)">
+                                <div class="flex items-center">
+                                    <span class="h-2 w-2 bg-sky-500 rounded-full mr-2"></span>
+                                    <p class="text-sm font-medium text-slate-700">Next-Gen SecOps: LLM 에이전트 기반 보안 관제 자동화 실무</p>
+                                </div>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 hover:border-sky-300 cursor-pointer transition-colors" onclick="selectTitle(1)">
+                                <div class="flex items-center">
+                                    <span class="h-2 w-2 bg-sky-500 rounded-full mr-2"></span>
+                                    <p class="text-sm font-medium text-slate-700">Go & AI: 자율 헌팅 보안 에이전트 아키텍처 구축</p>
+                                </div>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 hover:border-sky-300 cursor-pointer transition-colors" onclick="selectTitle(2)">
+                                <div class="flex items-center">
+                                    <span class="h-2 w-2 bg-sky-500 rounded-full mr-2"></span>
+                                    <p class="text-sm font-medium text-slate-700">2026 AI Security Insight: 엔터프라이즈 LLM 보안 에이전트 개발</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-10 lg:mt-0 lg:col-span-2">
+                    <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+                        <div class="sm:col-span-1">
+                            <dt class="text-sm font-medium text-slate-500">교육 기간</dt>
+                            <dd class="mt-1 text-2xl font-semibold text-slate-900">2일 (총 16시간)</dd>
+                        </div>
+                        <div class="sm:col-span-1">
+                            <dt class="text-sm font-medium text-slate-500">교육 대상</dt>
+                            <dd class="mt-1 text-lg text-slate-900">IT 임원(CTO/CISO) 및 시니어 엔지니어, 보안 담당자</dd>
+                            <p class="text-sm text-slate-500 mt-1">AI 트렌드 이해가 필요한 리더 & 실무 구현이 필요한 개발자</p>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <dt class="text-sm font-medium text-slate-500">강의 목표</dt>
+                            <dd class="mt-1 text-base text-slate-700 bg-sky-50 p-4 rounded-lg border border-sky-100">
+                                "LangChain 등 블랙박스 프레임워크를 배제하고, Go와 LLM API만으로 투명하고 제어 가능한 보안 에이전트를 밑바닥부터 구축합니다. 2026년 트렌드인 'Agentic Workflow'와 'MCP(Model Context Protocol)'를 보안 관제(SOC) 업무에 적용하여, 알림 분석부터 대응까지 자동화하는 실질적 기술을 습득합니다."
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Perspective Switcher (Sticky) -->
+    <div class="sticky top-16 z-40 bg-slate-50/95 backdrop-blur border-b border-slate-200 py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between">
+            <p class="text-sm text-slate-500 mb-2 sm:mb-0">아래 버튼을 눌러 관점을 전환하세요:</p>
+            <div class="bg-white rounded-lg p-1 border border-slate-200 flex shadow-sm">
+                <button id="btn-exec" onclick="setPerspective('executive')" class="px-4 py-2 rounded-md text-sm font-medium transition-colors bg-sky-600 text-white shadow-sm">
+                    💼 임원/관리자 관점 (전략 & ROI)
+                </button>
+                <button id="btn-eng" onclick="setPerspective('engineer')" class="ml-1 px-4 py-2 rounded-md text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">
+                    🛠️ 엔지니어 관점 (코드 & 아키텍처)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Analysis Dashboard -->
+    <section id="analysis" class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-slate-900">교육 과정 분석</h2>
+            <p class="text-slate-500">본 과정이 제공하는 밸런스와 핵심 역량을 시각화합니다.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Chart 1: Content Balance -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h3 class="text-lg font-semibold text-slate-800 mb-4 text-center">커리큘럼 구성 비율</h3>
+                <div class="chart-container">
+                    <canvas id="balanceChart"></canvas>
+                </div>
+                <p id="balance-desc" class="text-center text-sm text-slate-500 mt-4 px-4">
+                    실무 중심의 구현(Hands-on)과 아키텍처 설계(Design)에 집중합니다.
+                </p>
+            </div>
+
+            <!-- Chart 2: Competency Radar -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h3 class="text-lg font-semibold text-slate-800 mb-4 text-center">획득 역량 (Target Skillset)</h3>
+                <div class="chart-container">
+                    <canvas id="radarChart"></canvas>
+                </div>
+                <p id="radar-desc" class="text-center text-sm text-slate-500 mt-4 px-4">
+                    보안 도메인 지식과 최신 AI 에이전트 기술의 융합을 목표로 합니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Curriculum Section -->
+    <section id="curriculum" class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-slate-900">상세 커리큘럼 (Schedule)</h2>
+                <p class="mt-4 text-lg text-slate-500">2일간의 여정을 통해 보안 AI 에이전트를 완성합니다.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Day 1 Column -->
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="bg-sky-600 text-white font-bold rounded-full w-12 h-12 flex items-center justify-center text-xl shadow-lg">1</div>
+                        <h3 class="ml-4 text-2xl font-bold text-slate-800">Day 1: 기초 및 도구 연동</h3>
+                    </div>
+                    <div id="day1-container" class="space-y-4">
+                        <!-- JS populated items -->
+                    </div>
+                </div>
+
+                <!-- Day 2 Column -->
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="bg-sky-600 text-white font-bold rounded-full w-12 h-12 flex items-center justify-center text-xl shadow-lg">2</div>
+                        <h3 class="ml-4 text-2xl font-bold text-slate-800">Day 2: 고급 패턴 및 실전 구축</h3>
+                    </div>
+                    <div id="day2-container" class="space-y-4">
+                        <!-- JS populated items -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack & Environment -->
+    <section id="environment" class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-slate-900 mb-6">실습 환경 및 도구 (Tech Stack)</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-white p-6 rounded-lg border border-slate-200 hover:border-sky-400 transition-colors">
+                <div class="text-3xl mb-3">🐹</div>
+                <h4 class="font-bold text-lg mb-2">Go Language</h4>
+                <p class="text-sm text-slate-500">높은 동시성과 성능을 제공하는 서버 사이드 언어. 에이전트 백엔드 구축의 핵심.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg border border-slate-200 hover:border-sky-400 transition-colors">
+                <div class="text-3xl mb-3">🤖</div>
+                <h4 class="font-bold text-lg mb-2">LLM API (OpenAI/Anthropic)</h4>
+                <p class="text-sm text-slate-500">LangChain 없이 직접 API를 호출하며 Token 제어 및 Context 관리를 학습.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg border border-slate-200 hover:border-sky-400 transition-colors">
+                <div class="text-3xl mb-3">🛡️</div>
+                <h4 class="font-bold text-lg mb-2">Security Tools</h4>
+                <p class="text-sm text-slate-500">BigQuery (Log Analysis), Threat Intel API 등 실제 보안 데이터 소스 활용.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg border border-slate-200 hover:border-sky-400 transition-colors">
+                <div class="text-3xl mb-3">🔌</div>
+                <h4 class="font-bold text-lg mb-2">MCP & Function Calling</h4>
+                <p class="text-sm text-slate-500">2026 트렌드인 Model Context Protocol 및 Tool Use 패턴 적용.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <span class="text-2xl font-black tracking-tighter">AI<span class="text-sky-400">Sec</span>Ops</span>
+                <p class="text-slate-400 text-sm mt-2">© 2026 JAEWOO, KIM.</p>
+            </div>
+            <div class="flex space-x-6">
+                <span class="text-slate-400 text-sm">강의문의: jaewoo@mdrules.dev</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Data Definitions ---
+        
+        // Curriculum Data mapped from the Japanese Book TOC
+        const curriculumData = [
+            {
+                day: 1,
+                moduleTitle: "Module 1: LLM 에이전트 기초와 보안 (오전)",
+                chapters: [],
+                items: [
+                    {
+                        title: "보안 분석과 LLM 에이전트의 만남",
+                        original: "Security Alert Analysis & LLM Agents",
+                        execDesc: "보안 관제(SOC)의 병목 구간인 '알림 피로(Alert Fatigue)'를 해결하기 위한 AI 에이전트의 역할과 ROI 분석. 자동화 가능한 영역 식별.",
+                        engDesc: "기존 SIEM/SOAR의 한계와 LLM 기반 에이전트의 차별점. Go 개발 환경 셋업 및 기본 프로젝트 구조 설계.",
+                        tags: ["Intro", "Trend"]
+                    },
+                    {
+                        title: "아키텍처 설계: No-Framework 접근법",
+                        original: "Architecture & Environment",
+                        execDesc: "블랙박스형 프레임워크(LangChain 등) 배제 이유: 기업 보안 데이터 보호, 투명성, 비용 통제를 위한 자체 아키텍처 전략.",
+                        engDesc: "LangChain 없이 OpenAI API 직접 연동. Clean Architecture 기반의 Go 에이전트 서버 설계 및 사전 코드 분석.",
+                        tags: ["Architecture", "Go"]
+                    },
+                    {
+                        title: "프롬프트 엔지니어링 & 기본 분석",
+                        original: "Basics of LLM & Alert Explanation",
+                        execDesc: "AI가 보안 알림을 사람이 읽기 쉬운 보고서로 변환하는 과정 시연. 품질 관리 방안.",
+                        engDesc: "Zero-shot vs Few-shot 프롬프팅. Go 템플릿을 활용한 동적 프롬프트 생성 및 보안 알림 요약 기능 구현.",
+                        tags: ["Prompting", "Code"]
+                    }
+                ]
+            },
+            {
+                day: 1,
+                moduleTitle: "Module 2: 도구 연동과 구조화 (오후)",
+                chapters: [],
+                items: [
+                    {
+                        title: "데이터 구조화: IoC(침해지표) 추출",
+                        original: "Structured Output & IoC Extraction",
+                        execDesc: "비정형 로그 데이터에서 핵심 위협 정보(IP, Hash 등)를 추출하여 DB화하는 자동화 파이프라인.",
+                        engDesc: "JSON Mode 및 Function Calling을 이용한 정교한 엔티티 추출(NER). Go Struct 태그를 활용한 데이터 언마샬링.",
+                        tags: ["Data", "Automation"]
+                    },
+                    {
+                        title: "대화형 에이전트: 문맥(Context) 관리",
+                        original: "Conversation & History",
+                        execDesc: "보안 담당자와 AI가 협업할 수 있는 'ChatOps' 인터페이스 구축. 과거 분석 이력을 기억하는 에이전트.",
+                        engDesc: "토큰 제한을 고려한 대화 히스토리 관리 전략. Sliding Window 기법 구현 및 상태 관리(State Management).",
+                        tags: ["ChatOps", "Logic"]
+                    },
+                    {
+                        title: "외부 도구 연동 (Threat Intel)",
+                        original: "Function Calling & Threat Intelligence",
+                        execDesc: "에이전트에게 '팔'과 '다리' 달아주기. VirusTotal 등 외부 위협 정보 서비스와 자동 연동하여 판단 정확도 향상.",
+                        engDesc: "OpenAI Function Calling API 심화. 외부 API(Threat Intel)를 호출하는 Go 인터페이스 구현 및 에러 핸들링.",
+                        tags: ["Integration", "API"]
+                    }
+                ]
+            },
+            {
+                day: 2,
+                moduleTitle: "Module 3: 심화 분석 및 추론 (오전)",
+                chapters: [],
+                items: [
+                    {
+                        title: "대규모 로그 분석 (BigQuery)",
+                        original: "Real-world Tool - BigQuery Logs",
+                        execDesc: "기업의 방대한 클라우드 로그를 AI가 직접 조회하고 분석. 사람의 개입을 최소화하는 데이터 조회 자동화.",
+                        engDesc: "Google BigQuery API 연동. 자연어 질의를 SQL로 변환하거나(Text-to-SQL), 필요한 로그를 선별 조회하는 도구 구현.",
+                        tags: ["BigData", "Cloud"]
+                    },
+                    {
+                        title: "고급 추론: ReAct & Plan-Execute",
+                        original: "Advanced Prompting, AI Workflow, Plan & Execute",
+                        execDesc: "AI가 스스로 분석 계획을 수립하고 실행하는 '자율 에이전트(Autonomous Agent)' 패턴. 복잡한 보안 사고 대응 시나리오.",
+                        engDesc: "ReAct(Reason+Act) 패턴 구현. 복잡한 작업을 단계별로 나누어 처리하는 Plan & Execute 아키텍처 설계 및 서브 에이전트 패턴.",
+                        tags: ["Reasoning", "Pattern"]
+                    }
+                ]
+            },
+            {
+                day: 2,
+                moduleTitle: "Module 4: 기억과 실전 운영 (오후)",
+                chapters: [],
+                items: [
+                    {
+                        title: "장기 기억 (RAG & Vector DB)",
+                        original: "Embedding & Memory System",
+                        execDesc: "과거의 유사 침해 사고 사례를 기억하고 현재 분석에 참고하는 '지식 기반' 에이전트 구축. 조직의 노하우 자산화.",
+                        engDesc: "Vector Database(Pinecone/Weaviate 등)와 Embedding 모델 활용. 의미론적 검색(Semantic Search)을 통한 유사 티켓 검색 구현.",
+                        tags: ["RAG", "VectorDB"]
+                    },
+                    {
+                        title: "확장성: MCP & 서브 에이전트",
+                        original: "Sub-agents & MCP (Model Context Protocol)",
+                        execDesc: "2026년 표준: 다양한 AI 모델과 도구를 표준화된 방식으로 연결하는 MCP 도입. 확장 가능한 에이전트 생태계.",
+                        engDesc: "Model Context Protocol(MCP) 개념 및 구현. 특정 도메인(네트워크, 엔드포인트)에 특화된 전문가 서브 에이전트 오케스트레이션.",
+                        tags: ["MCP", "Scalability"]
+                    },
+                    {
+                        title: "프로덕션 배포 및 테스트",
+                        original: "Testing, Production, Future",
+                        execDesc: "실제 기업 환경 도입 시 고려사항. 보안, 비용 최적화, 그리고 환각(Hallucination) 방지 및 평가(Eval) 전략.",
+                        engDesc: "에이전트 성능 평가 프레임워크 구축. Go의 동시성을 활용한 고성능 서빙 및 운영 모니터링.",
+                        tags: ["DevOps", "Production"]
+                    }
+                ]
+            }
+        ];
+
+        // --- State Management ---
+        let currentPerspective = 'executive'; // 'executive' or 'engineer'
+
+        // --- DOM Elements ---
+        const day1Container = document.getElementById('day1-container');
+        const day2Container = document.getElementById('day2-container');
+        const btnExec = document.getElementById('btn-exec');
+        const btnEng = document.getElementById('btn-eng');
+
+        // --- Initialization ---
+        function init() {
+            renderCurriculum();
+            initCharts();
+        }
+
+        // --- Functions ---
+        function setPerspective(p) {
+            currentPerspective = p;
+            
+            // Toggle Button Styles
+            if (p === 'executive') {
+                btnExec.classList.add('bg-sky-600', 'text-white', 'shadow-sm');
+                btnExec.classList.remove('text-slate-500', 'hover:text-slate-900');
+                
+                btnEng.classList.remove('bg-sky-600', 'text-white', 'shadow-sm');
+                btnEng.classList.add('text-slate-500', 'hover:text-slate-900');
+            } else {
+                btnEng.classList.add('bg-sky-600', 'text-white', 'shadow-sm');
+                btnEng.classList.remove('text-slate-500', 'hover:text-slate-900');
+                
+                btnExec.classList.remove('bg-sky-600', 'text-white', 'shadow-sm');
+                btnExec.classList.add('text-slate-500', 'hover:text-slate-900');
+            }
+
+            renderCurriculum();
+            updateChartData();
+        }
+
+        function renderCurriculum() {
+            // Clear containers
+            day1Container.innerHTML = '';
+            day2Container.innerHTML = '';
+
+            curriculumData.forEach(moduleData => {
+                const moduleHtml = `
+                    <div class="bg-white rounded-lg border border-slate-200 overflow-hidden mb-6 shadow-sm">
+                        <div class="bg-slate-50 px-4 py-3 border-b border-slate-200 flex justify-between items-center">
+                            <h4 class="font-bold text-slate-700">${moduleData.moduleTitle}</h4>
+                            <span class="text-xs font-mono text-slate-400">${moduleData.chapters.join(', ')}</span>
+                        </div>
+                        <div class="divide-y divide-slate-100">
+                            ${moduleData.items.map(item => `
+                                <div class="p-4 hover:bg-slate-50 transition-colors group">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h5 class="font-bold text-slate-800 text-lg group-hover:text-sky-600 transition-colors">${item.title}</h5>
+                                        <div class="flex space-x-1">
+                                            ${item.tags.map(tag => `<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-600">${tag}</span>`).join('')}
+                                        </div>
+                                    </div>
+                                    <p class="text-slate-600 text-sm leading-relaxed">
+                                        ${currentPerspective === 'executive' ? item.execDesc : item.engDesc}
+                                    </p>
+                                    <p class="text-xs text-slate-400 mt-2 italic">Ref: ${item.original}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+
+                if (moduleData.day === 1) {
+                    day1Container.innerHTML += moduleHtml;
+                } else {
+                    day2Container.innerHTML += moduleHtml;
+                }
+            });
+        }
+
+        function selectTitle(index) {
+            alert("선택하신 과정명이 제안서 1순위로 설정되었습니다.");
+        }
+
+        // --- Charts ---
+        let balanceChart, radarChart;
+
+        function initCharts() {
+            // 1. Balance Chart (Doughnut)
+            const ctxBalance = document.getElementById('balanceChart').getContext('2d');
+            balanceChart = new Chart(ctxBalance, {
+                type: 'doughnut',
+                data: {
+                    labels: ['이론 & 트렌드', '실습 & 구현', '설계 & 토론'],
+                    datasets: [{
+                        data: [25, 55, 20],
+                        backgroundColor: ['#e2e8f0', '#0ea5e9', '#64748b'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+
+            // 2. Radar Chart (Skills)
+            const ctxRadar = document.getElementById('radarChart').getContext('2d');
+            radarChart = new Chart(ctxRadar, {
+                type: 'radar',
+                data: {
+                    labels: ['Go 개발', '보안 운영', 'AI/Prompt', '아키텍처', '데이터 분석'],
+                    datasets: [{
+                        label: '목표 역량 레벨',
+                        data: [80, 70, 90, 85, 60],
+                        fill: true,
+                        backgroundColor: 'rgba(14, 165, 233, 0.2)',
+                        borderColor: '#0ea5e9',
+                        pointBackgroundColor: '#0ea5e9',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#0ea5e9'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { display: false },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateChartData() {
+            // Dynamic updates based on perspective
+            if (currentPerspective === 'executive') {
+                // Executives perceive the value differently (more focus on strategy/design)
+                balanceChart.data.datasets[0].data = [40, 30, 30]; // Perception shift
+                radarChart.data.datasets[0].data = [40, 90, 80, 95, 70]; // Goal: Understand Archi & Ops
+                document.getElementById('balance-desc').innerText = "임원 관점: 전체적인 아키텍처 이해와 ROI, 운영 전략 비중을 높여 시각화합니다.";
+                document.getElementById('radar-desc').innerText = "임원 목표: 기술 세부사항보다는 보안 운영 전략과 아키텍처 의사결정 역량 확보.";
+            } else {
+                // Engineers focus on code
+                balanceChart.data.datasets[0].data = [20, 60, 20];
+                radarChart.data.datasets[0].data = [90, 60, 85, 80, 70];
+                document.getElementById('balance-desc').innerText = "엔지니어 관점: 직접 코드를 작성하고 디버깅하는 실습(Hands-on) 비중이 높습니다.";
+                document.getElementById('radar-desc').innerText = "엔지니어 목표: Go 언어 활용 능력과 LLM API 연동 기술의 완전한 습득.";
+            }
+            balanceChart.update();
+            radarChart.update();
+        }
+
+        // Run Init
+        init();
+
+    </script>
+</body>
+</html>

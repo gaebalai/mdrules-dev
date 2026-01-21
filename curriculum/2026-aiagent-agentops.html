@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD룰 AI교육 - AI 에이전트 & 이노베이션 Ops 교육</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f5f5f4; /* Warm neutral background */
+            color: #1c1917; /* Warm black */
+        }
+
+        /* Chart Container Utilities */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+
+        .accordion-content {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        .accordion-content.active {
+            max-height: 1000px;
+            opacity: 1;
+        }
+
+        .btn-toggle {
+            transition: all 0.2s;
+        }
+        .btn-toggle:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f5f5f4;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a8a29e;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #78716c;
+        }
+    </style>
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="15x15"
+    href="./dist/images/favicon.png"
+    />
+    <!-- Chosen Palette: Warm Neutrals (Stone) with Amber/Orange accents for a professional yet innovative feel. -->
+    <!-- Application Structure Plan:
+        1. Hero Section: Displays the 3 proposed titles with an interactive selector.
+        2. Course Overview Dashboard: Quick stats (Duration, Target, Goals) in a grid.
+        3. Interactive Curriculum Map: The core section. A 4-hour timeline where users click to reveal detailed sub-topics derived from the Japanese source books.
+        4. Key Concepts Visualization: 'Agent Architecture' and 'Autonomy Levels' using HTML/CSS diagrams and Chart.js to explain *what* will be taught.
+        5. Operations & Strategy: Summarizing the 'Innovation Ops' aspect.
+        Rationale: This structure moves from the 'Hook' (Title) to 'Logistics' (Overview) to 'Content' (Curriculum) to 'Value' (Visualizations), mirroring a proposal presentation flow.
+    -->
+    <!-- Visualization & Content Choices:
+        1. Title Selector: HTML Buttons + JS -> Engaging way to present options.
+        2. Autonomy Levels: Chart.js Bar Chart -> Visualizes the progression from RPA (Level 1) to Ecosystem (Level 5).
+        3. Course Composition: Chart.js Doughnut -> Shows the balance of Theory, Tech, and Strategy.
+        4. Architecture Diagram: HTML/Tailwind Grid -> Explains the complex AI Agent structure without SVG, using styled divs.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="bg-stone-100 text-stone-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Navigation / Header -->
+    <nav class="bg-white border-b border-stone-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-stone-800 tracking-tight"><img src="mdrules-logo.png" alt="MD룰 AI교육" width="116px"></span>
+                    <span class="ml-4 text-sm text-stone-500 hidden md:block border-l border-stone-300 pl-4">기업 임원 및 엔지니어 대상 특화 교육</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="scrollToSection('overview')" class="text-stone-600 hover:text-amber-700 px-3 py-2 rounded-md text-sm font-medium transition">개요</button>
+                    <button onclick="scrollToSection('curriculum')" class="text-stone-600 hover:text-amber-700 px-3 py-2 rounded-md text-sm font-medium transition">커리큘럼</button>
+                    <button onclick="scrollToSection('visuals')" class="text-stone-600 hover:text-amber-700 px-3 py-2 rounded-md text-sm font-medium transition">학습 모델</button>
+                    <a href="https://mdrules.dev" target="_self" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">
+                        사이트로 이동
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        
+        <!-- Hero Section: Title Proposals -->
+        <section class="bg-white py-12 border-b border-stone-200">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-amber-600 font-bold uppercase tracking-wide text-sm mb-2">2026 AI 트렌드 교육 </h2>
+                <h1 id="main-title" class="text-4xl md:text-5xl font-extrabold text-stone-900 mb-8 leading-tight transition-all duration-300">
+                   2026 AI 멀티 에이전트 & AgentOps:<br>경영 전략과 기술 로드맵
+                </h1>
+                
+                <div class="flex flex-wrap justify-center gap-4 mb-8">
+                    <button onclick="selectTitle(0)" class="title-btn bg-stone-100 hover:bg-stone-200 text-stone-600 font-semibold py-2 px-4 rounded-full border border-stone-300 transition shadow-sm ring-2 ring-amber-500 ring-offset-2">제안 1: 전략 중심</button>
+                    <button onclick="selectTitle(1)" class="title-btn bg-white hover:bg-stone-50 text-stone-600 font-semibold py-2 px-4 rounded-full border border-stone-300 transition shadow-sm">제안 2: 실무 중심</button>
+                    <button onclick="selectTitle(2)" class="title-btn bg-white hover:bg-stone-50 text-stone-600 font-semibold py-2 px-4 rounded-full border border-stone-300 transition shadow-sm">제안 3: 미래 지향</button>
+                </div>
+
+                <p class="text-lg text-stone-600 max-w-2xl mx-auto">
+                    생성형 AI를 넘어 스스로 생각하고 행동하는 <strong>'AI 에이전트'</strong>의 시대.<br>
+                    IT 리더와 엔지니어가 반드시 알아야 할 기술 구조부터 운영(Ops) 전략까지 5시간에 압축했습니다.
+                </p>
+            </div>
+        </section>
+
+        <!-- Course Overview Dashboard -->
+        <section id="overview" class="py-12 bg-stone-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-stone-800">과정 개요 Summary</h3>
+                    <p class="text-stone-600 mt-2">본 과정은 'AI 에이전트에 대한 이해'와 'AgentOps'의 핵심 내용을 한국의 IT 비즈니스 환경에 맞춰 교육합니다.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Card 1: Schedule -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-amber-100 p-3 rounded-lg text-amber-600 text-xl font-bold">📅</div>
+                            <div class="ml-4">
+                                <h4 class="text-sm font-semibold text-stone-500 uppercase">일정 및 시간</h4>
+                                <p class="text-lg font-bold text-stone-800">1일 (5시간)</p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-stone-600">집중 워크숍 형태</p>
+                    </div>
+
+                    <!-- Card 2: Target -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-amber-100 p-3 rounded-lg text-amber-600 text-xl font-bold">🎯</div>
+                            <div class="ml-4">
+                                <h4 class="text-sm font-semibold text-stone-500 uppercase">교육 대상</h4>
+                                <p class="text-lg font-bold text-stone-800">IT 임원 & 엔지니어</p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-stone-600">전략가 및 기술 리더</p>
+                    </div>
+
+                    <!-- Card 3: Goal -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 lg:col-span-2">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-amber-100 p-3 rounded-lg text-amber-600 text-xl font-bold">🚀</div>
+                            <div class="ml-4">
+                                <h4 class="text-sm font-semibold text-stone-500 uppercase">학습 목표</h4>
+                                <p class="text-lg font-bold text-stone-800">Next AI 패러다임 이해 및 도입 로드맵 수립</p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-stone-600">2026년 트렌드인 '자율형 에이전트'의 작동 원리를 이해하고, 기업 내 도입을 위한 기술적/관리적(Ops) 전략을 수립합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Curriculum Map -->
+        <section id="curriculum" class="py-12 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl font-bold text-stone-800">상세 커리큘럼 (5H)</h3>
+                    <p class="text-stone-600 mt-2">시간대별 학습 내용과 주요 다루는 기술/개념을 클릭하여 확인하세요.</p>
+                </div>
+
+                <!-- Hour 1 -->
+                <div class="mb-6 border border-stone-200 rounded-xl overflow-hidden hover:shadow-md transition bg-stone-50">
+                    <button onclick="toggleAccordion('h1')" class="w-full flex items-center justify-between p-6 text-left focus:outline-none bg-white">
+                        <div class="flex items-center">
+                            <span class="bg-stone-800 text-white text-xs font-bold px-3 py-1 rounded-full mr-4">1교시</span>
+                            <div>
+                                <h4 class="text-xl font-bold text-stone-800">AI 에이전트의 부상과 패러다임 시프트</h4>
+                                <p class="text-sm text-stone-500 mt-1">AI Agent 정의, RPA와의 차이, 분류 및 특징</p>
+                            </div>
+                        </div>
+                        <span id="icon-h1" class="text-2xl text-stone-400 transition-transform transform">+</span>
+                    </button>
+                    <div id="content-h1" class="accordion-content bg-stone-50">
+                        <div class="p-6 border-t border-stone-200 grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-bold text-amber-700 mb-2">주요 학습 내용</h5>
+                                <ul class="list-disc list-inside text-stone-700 space-y-1 text-sm">
+                                    <li><strong>AI 에이전트란?</strong>: "행동하는 AI"의 정의와 기존 생성형 AI와의 차이점</li>
+                                    <li><strong>RPA vs Agent</strong>: 규칙 기반 자동화(Level 1)와 자율적 추론(Level 3+)의 비교</li>
+                                    <li><strong>왜 지금인가?</strong>: LLM의 추론 능력 향상과 Tool Use의 결합</li>
+                                    <li><strong>유형 분류</strong>: 단일 에이전트 vs 멀티 에이전트 시스템</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-stone-700 mb-2">키워드 & 토론</h5>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-white border border-stone-300 px-2 py-1 rounded text-xs">자율성(Autonomy)</span>
+                                    <span class="bg-white border border-stone-300 px-2 py-1 rounded text-xs">추론(Reasoning)</span>
+                                    <span class="bg-white border border-stone-300 px-2 py-1 rounded text-xs">RAG vs Agent</span>
+                                    <span class="bg-white border border-stone-300 px-2 py-1 rounded text-xs">업무 자동화의 미래</span>
+                                </div>
+                                <div class="mt-4 bg-amber-50 p-3 rounded text-sm text-amber-800">
+                                    💡 <strong>Insight:</strong> 단순 대화형 챗봇에서 업무를 완결하는 에이전트로의 진화를 이해합니다.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hour 2 -->
+                <div class="mb-6 border border-stone-200 rounded-xl overflow-hidden hover:shadow-md transition bg-stone-50">
+                    <button onclick="toggleAccordion('h2')" class="w-full flex items-center justify-between p-6 text-left focus:outline-none bg-white">
+                        <div class="flex items-center">
+                            <span class="bg-stone-800 text-white text-xs font-bold px-3 py-1 rounded-full mr-4">2교시</span>
+                            <div>
+                                <h4 class="text-xl font-bold text-stone-800">에이전트 아키텍처와 기술 메커니즘</h4>
+                                <p class="text-sm text-stone-500 mt-1">LLM, 메모리, 프롬프트 엔지니어링, 도구 연동(Function Calling)</p>
+                            </div>
+                        </div>
+                        <span id="icon-h2" class="text-2xl text-stone-400 transition-transform transform">+</span>
+                    </button>
+                    <div id="content-h2" class="accordion-content bg-stone-50">
+                        <div class="p-6 border-t border-stone-200 grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-bold text-amber-700 mb-2">주요 학습 내용</h5>
+                                <ul class="list-disc list-inside text-stone-700 space-y-1 text-sm">
+                                    <li><strong>작동 원리</strong>: 인지(Perception) → 계획(Planning) → 행동(Action) 루프</li>
+                                    <li><strong>시스템 프롬프트</strong>: 에이전트의 페르소나와 제약 조건 설정 (ReAct 기법 등)</li>
+                                    <li><strong>메모리 시스템</strong>: 단기 기억(Context Window)과 장기 기억(Vector DB)</li>
+                                    <li><strong>도구 사용 (Tool Use)</strong>: API 연동과 Function Calling의 이해</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-stone-700 mb-2">실무 적용 포인트</h5>
+                                <p class="text-sm text-stone-600 mb-3">엔지니어를 위한 아키텍처 설계의 핵심 요소 분석</p>
+                                <div class="bg-white p-3 rounded border border-stone-200">
+                                    <div class="text-xs text-stone-500 font-mono">
+                                        User: "지난달 매출 보고서 이메일로 보내줘"<br>
+                                        Agent: [DB 조회] -> [데이터 요약] -> [이메일 작성] -> [전송 API 호출]
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hour 3 -->
+                <div class="mb-6 border border-stone-200 rounded-xl overflow-hidden hover:shadow-md transition bg-stone-50">
+                    <button onclick="toggleAccordion('h3')" class="w-full flex items-center justify-between p-6 text-left focus:outline-none bg-white">
+                        <div class="flex items-center">
+                            <span class="bg-stone-800 text-white text-xs font-bold px-3 py-1 rounded-full mr-4">3교시</span>
+                            <div>
+                                <h4 class="text-xl font-bold text-stone-800">산업별 활용 사례 및 AgentOps</h4>
+                                <p class="text-sm text-stone-500 mt-1">개발, 마케팅, 백오피스 적용 사례와 운영 플랫폼</p>
+                            </div>
+                        </div>
+                        <span id="icon-h3" class="text-2xl text-stone-400 transition-transform transform">+</span>
+                    </button>
+                    <div id="content-h3" class="accordion-content bg-stone-50">
+                        <div class="p-6 border-t border-stone-200 grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-bold text-amber-700 mb-2">주요 사례 분석</h5>
+                                <ul class="list-disc list-inside text-stone-700 space-y-1 text-sm">
+                                    <li><strong>SW 개발</strong>: Devin, GitHub Copilot Workspace (코딩부터 배포까지)</li>
+                                    <li><strong>엔터프라이즈</strong>: Salesforce Agentforce (고객 대응 자동화)</li>
+                                    <li><strong>PC 조작</strong>: Claude Computer Use (UI 조작 자동화)</li>
+                                    <li><strong>개인 비서</strong>: 퍼스널 에이전트의 진화</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-stone-700 mb-2">AgentOps (운영)</h5>
+                                <ul class="list-disc list-inside text-stone-700 space-y-1 text-sm">
+                                    <li><strong>모니터링</strong>: 에이전트의 행동 추적 및 로그 분석</li>
+                                    <li><strong>평가(Eval)</strong>: 할루시네이션 방지와 성능 측정 지표</li>
+                                    <li><strong>비용 관리</strong>: 토큰 사용량 최적화 전략</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hour 4 -->
+                <div class="mb-6 border border-stone-200 rounded-xl overflow-hidden hover:shadow-md transition bg-stone-50">
+                    <button onclick="toggleAccordion('h4')" class="w-full flex items-center justify-between p-6 text-left focus:outline-none bg-white">
+                        <div class="flex items-center">
+                            <span class="bg-stone-800 text-white text-xs font-bold px-3 py-1 rounded-full mr-4">4교시</span>
+                            <div>
+                                <h4 class="text-xl font-bold text-stone-800">성공적인 도입을 위한 경영 전략 & 거버넌스</h4>
+                                <p class="text-sm text-stone-500 mt-1">조직 변화, 보안, Human-in-the-Loop, 미래 전망</p>
+                            </div>
+                        </div>
+                        <span id="icon-h4" class="text-2xl text-stone-400 transition-transform transform">+</span>
+                    </button>
+                    <div id="content-h4" class="accordion-content bg-stone-50">
+                        <div class="p-6 border-t border-stone-200 grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-bold text-amber-700 mb-2">Innovation Ops 전략</h5>
+                                <ul class="list-disc list-inside text-stone-700 space-y-1 text-sm">
+                                    <li><strong>도입 로드맵</strong>: 스몰 스타트에서 전사 확산까지</li>
+                                    <li><strong>인간 협업</strong>: Human-in-the-loop (인간 개입) 설계의 중요성</li>
+                                    <li><strong>보안 및 권한</strong>: 자율적 에이전트의 접근 권한 통제</li>
+                                    <li><strong>조직의 변화</strong>: 지시하는 관리자에서 설계하는 관리자로</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-stone-700 mb-2">미래 전망 (Future)</h5>
+                                <p class="text-sm text-stone-600">
+                                    AGI(범용인공지능)로 가는 길목에서의 에이전트 경제(Agent Economy) 출현과 기업의 준비 사항 논의.
+                                </p>
+                                <div class="mt-4 p-3 bg-stone-200 rounded text-center font-bold text-stone-700">
+                                    Wrap-up & Q&A
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Visualizations Section -->
+        <section id="visuals" class="py-12 bg-stone-50 border-t border-stone-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-10 text-center">
+                    <h3 class="text-2xl font-bold text-stone-800">학습 모델 & 시각화</h3>
+                    <p class="text-stone-600 mt-2">교육 과정에서 다루는 핵심 개념을 시각적으로 미리 확인해보세요.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    
+                    <!-- Chart 1: Evolution Levels -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                        <h4 class="text-lg font-bold text-stone-800 mb-4">AI 에이전트의 진화 단계 (Level 1-5)</h4>
+                        <p class="text-sm text-stone-500 mb-4 h-10">단순 자동화에서 자율적 생태계로의 발전 단계를 설명합니다.</p>
+                        <div class="chart-container">
+                            <canvas id="levelsChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Diagram: Agent Architecture -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200 flex flex-col">
+                        <h4 class="text-lg font-bold text-stone-800 mb-4">AI 에이전트 아키텍처 구조도</h4>
+                        <p class="text-sm text-stone-500 mb-6">에이전트가 외부 세계와 상호작용하는 내부 메커니즘입니다.</p>
+                        
+                        <!-- CSS Grid Diagram (No SVG) -->
+                        <div class="flex-grow flex flex-col justify-center items-center space-y-4">
+                            <!-- Input -->
+                            <div class="w-full max-w-xs text-center border-l-4 border-stone-400 pl-4 py-2 bg-stone-50 rounded">
+                                <span class="text-xs font-bold text-stone-400 uppercase">Input</span>
+                                <div class="font-bold text-stone-700">사용자 명령 (Goal)</div>
+                            </div>
+                            
+                            <!-- Arrow Down -->
+                            <div class="text-stone-300 text-xl">▼</div>
+
+                            <!-- Brain (LLM) -->
+                            <div class="w-full max-w-md p-4 bg-amber-50 border-2 border-amber-200 rounded-lg relative">
+                                <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-amber-600 text-white text-xs px-2 py-0.5 rounded">Brain (LLM)</div>
+                                <div class="grid grid-cols-2 gap-4 text-center mt-2">
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <div class="text-xs text-amber-600 font-bold">Planning</div>
+                                        <div class="text-xs text-stone-600">추론 & 계획 분해</div>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <div class="text-xs text-amber-600 font-bold">Memory</div>
+                                        <div class="text-xs text-stone-600">맥락 & 지식 검색</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Arrow Down -->
+                            <div class="text-stone-300 text-xl">▼</div>
+
+                            <!-- Tools -->
+                            <div class="w-full max-w-xs grid grid-cols-3 gap-2">
+                                <div class="bg-stone-800 text-white text-center py-2 rounded text-xs">Web Search</div>
+                                <div class="bg-stone-800 text-white text-center py-2 rounded text-xs">Code Interpreter</div>
+                                <div class="bg-stone-800 text-white text-center py-2 rounded text-xs">API Calls</div>
+                            </div>
+
+                            <!-- Arrow Down -->
+                            <div class="text-stone-300 text-xl">▼</div>
+
+                             <!-- Output -->
+                             <div class="w-full max-w-xs text-center border-l-4 border-amber-500 pl-4 py-2 bg-stone-50 rounded">
+                                <span class="text-xs font-bold text-amber-500 uppercase">Output</span>
+                                <div class="font-bold text-stone-700">결과물 & 행동 (Action)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Environment Info -->
+                <div class="mt-8 bg-stone-800 text-white p-6 rounded-xl">
+                    <h4 class="text-lg font-bold mb-2">실습 및 교육 환경</h4>
+                    <div class="grid md:grid-cols-2 gap-4 text-sm text-stone-300">
+                        <div>
+                            <span class="block font-bold text-amber-400">사전 지식 (Prerequisites)</span>
+                            기본적인 IT 비즈니스 이해도, 생성형 AI(ChatGPT 등) 사용 경험 권장. (코딩 지식 불필요, 엔지니어 세션은 심화 Q&A 포함)
+                        </div>
+                        <div>
+                            <span class="block font-bold text-amber-400">실습 도구 (Tools)</span>
+                            최신 LLM (GPT-4o, Claude 3.5 Sonnet), No-code 에이전트 빌더 시연, AgentOps 대시보드 데모.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-stone-400 py-8 border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="mb-2">© 2026 JAEWOO, KIM.</p>
+            <p class="text-xs">email. jaewoo@mdrules.dev</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- State Management ---
+        const state = {
+            currentTitleIndex: 0,
+            titles: [
+                "AI 에이전트 & AgentOps:\n2026 경영 전략과 기술 로드맵",
+                "자율형 AI의 시대:\n기업 리더를 위한 AI 에이전트 도입 실무 A to Z",
+                "Next AI:\n생성형 AI를 넘어 '행동하는 AI' 에이전트 구축과 운영"
+            ],
+            subtitles: [
+                "경영진과 엔지니어가 함께 그리는 2026 AI 청사진",
+                "실질적인 도입 사례와 운영(Ops) 방법론 중심의 원데이 마스터 클래스",
+                "기술적 깊이와 비즈니스 임팩트를 동시에 다루는 심화 과정"
+            ]
+        };
+
+        // --- Core Functions ---
+
+        // 1. Title Selector Logic
+        function selectTitle(index) {
+            state.currentTitleIndex = index;
+            const titleElement = document.getElementById('main-title');
+            const btns = document.querySelectorAll('.title-btn');
+
+            // Fade out
+            titleElement.style.opacity = '0';
+
+            setTimeout(() => {
+                // Update text
+                titleElement.innerHTML = state.titles[index].replace(/\n/g, '<br>');
+                // Fade in
+                titleElement.style.opacity = '1';
+            }, 300);
+
+            // Update button styles
+            btns.forEach((btn, i) => {
+                if (i === index) {
+                    btn.classList.remove('bg-white', 'hover:bg-stone-50');
+                    btn.classList.add('bg-stone-100', 'ring-2', 'ring-amber-500', 'ring-offset-2');
+                } else {
+                    btn.classList.add('bg-white', 'hover:bg-stone-50');
+                    btn.classList.remove('bg-stone-100', 'ring-2', 'ring-amber-500', 'ring-offset-2');
+                }
+            });
+        }
+
+        // 2. Accordion Logic
+        function toggleAccordion(id) {
+            const content = document.getElementById(`content-${id}`);
+            const icon = document.getElementById(`icon-${id}`);
+            const isActive = content.classList.contains('active');
+
+            // Close all first (optional, kept for cleaner UI)
+            document.querySelectorAll('.accordion-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.querySelectorAll('[id^="icon-"]').forEach(el => {
+                el.style.transform = 'rotate(0deg)';
+                el.innerText = '+';
+            });
+
+            if (!isActive) {
+                content.classList.add('active');
+                icon.style.transform = 'rotate(45deg)';
+                icon.innerText = '+'; // Or change to '-'
+            }
+        }
+
+        // 3. Scroll Navigation
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // --- Chart Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Chart 1: Evolution Levels (Bar Chart)
+            const ctxLevels = document.getElementById('levelsChart').getContext('2d');
+            new Chart(ctxLevels, {
+                type: 'bar',
+                data: {
+                    labels: ['Level 1\nRPA', 'Level 2\nCopilot', 'Level 3\nAgent', 'Level 4\nMulti-Agent', 'Level 5\nEcosystem'],
+                    datasets: [{
+                        label: '자율성 (Autonomy) & 복잡도',
+                        data: [20, 40, 65, 85, 100],
+                        backgroundColor: [
+                            '#e7e5e4', // stone-200
+                            '#d6d3d1', // stone-300
+                            '#f59e0b', // amber-500 (Focus)
+                            '#b45309', // amber-700
+                            '#78350f'  // amber-900
+                        ],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const descriptions = [
+                                        "규칙 기반 반복 작업 (Rule-based)",
+                                        "인간의 지시를 받아 보조 (Human-led)",
+                                        "목표를 이해하고 스스로 도구 사용 (Goal-oriented)",
+                                        "여러 에이전트가 협업하여 문제 해결 (Collaborative)",
+                                        "조직 전체가 유기적으로 연결된 AI (Fully Autonomous)"
+                                    ];
+                                    return descriptions[context.dataIndex];
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: { display: false },
+                            grid: { display: false }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+
+            // Initialize Title
+            selectTitle(0);
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD룰 AI교육 - Raspberry Pi 5 Physical AI 교육 커리큘럼</title>
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="15x15"
+    href="./dist/images/favicon.png"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .chart-container { position: relative; width: 100%; max-width: 500px; margin: 0 auto; height: 300px; }
+        .tab-active { border-bottom: 2px solid #2563eb; color: #2563eb; font-weight: 700; }
+        .accordion-content { transition: max-height 0.3s ease-out; overflow: hidden; max-height: 0; }
+        .accordion-content.open { max-height: 1000px; }
+    </style>
+    <!-- Chosen Palette: Slate & Blue (Professional, Tech-focused) -->
+    <!-- Application Structure Plan: Dashboard style layout. 
+         1. Hero Section: Course Titles & Value Prop.
+         2. Overview Panel: Logistics (Target, Env, Goals).
+         3. Interactive Curriculum: Tabbed view for Day 1 vs Day 2 with drill-down details.
+         4. Methodology: Visualizing the shift to AI-Assisted Coding (Cursor/Claude).
+         5. Outcomes: What will be built.
+    -->
+    <!-- Visualization & Content Choices:
+         - Chart.js: Used for "Time Allocation" (Theory vs Lab vs Project) to show hands-on focus.
+         - Interactive Lists: For the curriculum details to manage information density.
+         - Layout: Grid-based for responsiveness.
+         - NO SVG/Mermaid: Using CSS/HTML for structure and flow representation.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="bg-slate-50">
+
+    <!-- Header / Nav -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <img src="mdrules-logo.png" alt="MD룰 AI교육" width="116px">
+                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">2026년 AI 교육</span>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#proposals" class="text-slate-600 hover:text-blue-600 text-sm font-medium">과정 제안</a>
+                <a href="#overview" class="text-slate-600 hover:text-blue-600 text-sm font-medium">교육 개요</a>
+                <a href="#curriculum" class="text-slate-600 hover:text-blue-600 text-sm font-medium">상세 커리큘럼</a>
+                <a href="#methodology" class="text-slate-600 hover:text-blue-600 text-sm font-medium">교육 방식</a>
+                <a href="https://mdrules.dev" target="_self" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">
+                사이트로 이동
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
+
+        <!-- Section 1: Introduction & Title Proposals -->
+        <section id="proposals" class="space-y-6">
+            <div class="text-center max-w-3xl mx-auto">
+                <h1 class="text-4xl font-bold text-slate-900 tracking-tight">Raspberry Pi 5 & Physical AI</h1>
+                <p class="mt-4 text-lg text-slate-600">
+                    IT 기업 엔지니어를 위한 엣지 컴퓨팅(Edge Computing) 및 온디바이스(On-Device) AI 실무 과정.
+                    <br>
+                    <span class="text-blue-600 font-semibold">Cursor/Claude Code</span>를 활용한 AI-Native 코딩 방식 적용.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden">
+                <div class="bg-slate-50 px-6 py-4 border-b border-slate-200">
+                    <h2 class="text-lg font-semibold text-slate-800">📋 과정명 제안 (3가지 옵션)</h2>
+                    <p class="text-sm text-slate-500">기업 교육 담당자를 위한 매력적인 과정 제목 제안입니다.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-slate-200">
+                    <!-- Proposal 1 -->
+                    <div class="p-6 hover:bg-blue-50 transition duration-300 cursor-pointer group">
+                        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold mb-3">Option 1: 트렌드 강조</span>
+                        <h3 class="text-xl font-bold text-slate-800 group-hover:text-blue-700">Raspberry Pi 5 활용: Edge AI 에이전트 개발 실무</h3>
+                        <p class="mt-2 text-sm text-slate-600">최신 하드웨어와 AI 에이전트 기술의 융합을 강조하여 엔지니어의 호기심 자극</p>
+                    </div>
+                    <!-- Proposal 2 -->
+                    <div class="p-6 hover:bg-emerald-50 transition duration-300 cursor-pointer group">
+                        <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-bold mb-3">Option 2: 기술 & 도구 강조</span>
+                        <h3 class="text-xl font-bold text-slate-800 group-hover:text-emerald-700">온디바이스 LLM 구축과 Physical Computing with Cursor</h3>
+                        <p class="mt-2 text-sm text-slate-600">LLM과 AI 코딩 도구(Cursor)의 구체적 명시를 통해 실무 효용성 강조</p>
+                    </div>
+                    <!-- Proposal 3 -->
+                    <div class="p-6 hover:bg-purple-50 transition duration-300 cursor-pointer group">
+                        <span class="inline-block px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-bold mb-3">Option 3: 아웃풋 강조</span>
+                        <h3 class="text-xl font-bold text-slate-800 group-hover:text-purple-700">Generative AI 기반 하드웨어 제어: 나만의 AIoT 솔루션 만들기</h3>
+                        <p class="mt-2 text-sm text-slate-600">생성형 AI를 물리적 제어에 적용하는 결과물 중심의 제목</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Course Overview -->
+        <section id="overview" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left: Info Cards -->
+            <div class="lg:col-span-2 space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4 border-l-4 border-blue-500 pl-3">교육 개요 및 목표</h3>
+                    <p class="text-slate-600 mb-4 leading-relaxed">
+                        본 과정은 <strong>Raspberry Pi 5</strong>의 고성능 컴퓨팅 파워를 활용하여 클라우드 없이 동작하는 <strong>로컬 LLM(Large Language Model)</strong>을 구축하고, 각종 센서 및 액추에이터와 연동하는 <strong>Physical AI</strong> 시스템을 구현합니다. 특히, <strong>Cursor</strong> 또는 <strong>Claude Code</strong>와 같은 최신 AI 코딩 도구를 전면 도입하여, 문법 암기가 아닌 <span class="bg-yellow-100 px-1 font-semibold">"설계 및 프롬프트 엔지니어링 중심"</span>의 개발 방법론을 체득합니다.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                        <div class="bg-slate-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-slate-700 text-sm">🎯 강의 대상</h4>
+                            <ul class="list-disc list-inside text-sm text-slate-600 mt-2 space-y-1">
+                                <li>IT 기업 재직 SW/HW 엔지니어</li>
+                                <li>Python 기초 문법 이해자</li>
+                                <li>Edge AI 및 IoT 디바이스 제어 관심자</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-slate-700 text-sm">💻 실습 환경</h4>
+                            <ul class="list-disc list-inside text-sm text-slate-600 mt-2 space-y-1">
+                                <li><strong>HW:</strong> Raspberry Pi 5 (8GB 권장), 카메라 모듈, 센서 키트</li>
+                                <li><strong>SW:</strong> Raspberry Pi OS (Bookworm), Ollama, Python 3.11</li>
+                                <li><strong>Tool:</strong> Cursor IDE (또는 Claude Code), SSH</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
+                        <div class="text-3xl font-bold text-blue-600">2<span class="text-sm text-slate-500 font-normal">일</span></div>
+                        <div class="text-xs text-slate-500 mt-1">총 교육 기간</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
+                        <div class="text-3xl font-bold text-blue-600">16<span class="text-sm text-slate-500 font-normal">시간</span></div>
+                        <div class="text-xs text-slate-500 mt-1">집중 교육</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
+                        <div class="text-3xl font-bold text-emerald-600">70<span class="text-sm text-slate-500 font-normal">%</span></div>
+                        <div class="text-xs text-slate-500 mt-1">실습 비중</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
+                        <div class="text-3xl font-bold text-purple-600">AI<span class="text-sm text-slate-500 font-normal">Tool</span></div>
+                        <div class="text-xs text-slate-500 mt-1">Cursor 활용</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Chart -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-center items-center">
+                <h3 class="text-lg font-bold text-slate-800 mb-2">시간 배분</h3>
+                <div class="chart-container">
+                    <canvas id="timeAllocationChart"></canvas>
+                </div>
+                <p class="text-xs text-center text-slate-400 mt-4">이론은 최소화하고, AI 도구를 활용한 문제 해결 및 구현에 집중합니다.</p>
+            </div>
+        </section>
+
+        <!-- Section 3: Interactive Curriculum -->
+        <section id="curriculum" class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="p-6 border-b border-slate-200">
+                <h3 class="text-2xl font-bold text-slate-800">📅 상세 커리큘럼 (16H)</h3>
+                <p class="text-slate-600 mt-2">탭을 클릭하여 일자별 상세 내용을 확인하세요. IT 엔지니어의 실무 적용 능력 향상에 초점을 맞췄습니다.</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex border-b border-slate-200">
+                <button onclick="switchTab('day1')" id="tab-day1" class="flex-1 py-4 text-center font-medium text-slate-600 hover:bg-slate-50 transition tab-active">
+                    Day 1: AI & Edge Computing 기초
+                </button>
+                <button onclick="switchTab('day2')" id="tab-day2" class="flex-1 py-4 text-center font-medium text-slate-600 hover:bg-slate-50 transition">
+                    Day 2: Physical AI & Integration 프로젝트
+                </button>
+            </div>
+
+            <!-- Content Day 1 -->
+            <div id="content-day1" class="p-6 space-y-4">
+                <div class="bg-blue-50 p-4 rounded-lg border border-blue-100 mb-6">
+                    <h4 class="font-bold text-blue-800 mb-1">Day 1 목표</h4>
+                    <p class="text-sm text-blue-700">라즈베리파이 5 환경을 구축하고, Cursor를 활용하여 로컬 LLM(Llama 3 등)과 Vision AI를 빠르게 구현하는 방법을 학습합니다.</p>
+                </div>
+
+                <!-- Accordion Items for Day 1 -->
+                <div class="space-y-3" id="accordion-day1">
+                    <!-- JS will populate this -->
+                </div>
+            </div>
+
+            <!-- Content Day 2 -->
+            <div id="content-day2" class="p-6 space-y-4 hidden">
+                <div class="bg-emerald-50 p-4 rounded-lg border border-emerald-100 mb-6">
+                    <h4 class="font-bold text-emerald-800 mb-1">Day 2 목표</h4>
+                    <p class="text-sm text-emerald-700">Python으로 하드웨어(GPIO)를 제어하고, AI 모델(LLM, Vision)과 센서/액추에이터를 결합한 'Physical AI 에이전트'를 제작합니다.</p>
+                </div>
+
+                <!-- Accordion Items for Day 2 -->
+                <div class="space-y-3" id="accordion-day2">
+                    <!-- JS will populate this -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Methodology & Tools -->
+        <section id="methodology" class="bg-slate-900 text-white rounded-xl shadow-lg p-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">💡 교육 방식의 혁신: AI-Assisted Coding</h3>
+                    <p class="text-slate-300 mb-6 leading-relaxed">
+                        기존의 "따라치기식" 코딩 교육을 지양합니다. <br>
+                        현업 IT 엔지니어는 이제 <strong>AI에게 코드를 요청하고, 검증하고, 통합하는 능력</strong>이 더 중요합니다.
+                        본 과정은 <strong>Cursor IDE</strong> 또는 <strong>Claude Code</strong>를 활용하여 복잡한 센서 제어 및 AI 모델 연동 코드를 단 몇 분 만에 생성하고, 하드웨어에서 테스트하는 워크플로우를 훈련합니다.
+                    </p>
+                    <div class="flex flex-col space-y-3">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center font-bold text-sm mr-3">1</div>
+                            <span class="text-slate-200">자연어 프롬프트로 하드웨어 제어 코드 생성</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center font-bold text-sm mr-3">2</div>
+                            <span class="text-slate-200">생성된 코드의 에러 디버깅 및 최적화 with AI</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center font-bold text-sm mr-3">3</div>
+                            <span class="text-slate-200">로컬 LLM과 외부 API의 하이브리드 아키텍처 설계</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-800 rounded-lg p-6 border border-slate-700">
+                    <h4 class="text-lg font-semibold text-blue-400 mb-4 text-center">개발 워크플로우 비교</h4>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-slate-400">전통적 방식</span>
+                            <span class="text-slate-400">AI 활용 방식 (본 과정)</span>
+                        </div>
+                        <div class="relative h-2 bg-slate-700 rounded-full">
+                            <div class="absolute top-0 left-0 h-2 bg-slate-500 rounded-full" style="width: 100%;"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-slate-500">
+                            <span>문법 학습 40%</span>
+                            <span>디버깅 40%</span>
+                            <span>로직 20%</span>
+                        </div>
+                        
+                        <div class="relative h-2 bg-slate-700 rounded-full mt-4">
+                            <div class="absolute top-0 left-0 h-2 bg-blue-500 rounded-full shadow-[0_0_10px_rgba(59,130,246,0.5)]" style="width: 100%;"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-blue-300 font-semibold">
+                            <span>설계 및 프롬프트 50%</span>
+                            <span>검증 30%</span>
+                            <span>구현 20%</span>
+                        </div>
+                        <p class="text-center text-sm text-yellow-400 mt-4 font-medium">🚀 개발 생산성 300% 향상 체험</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-slate-500 text-sm">
+            &copy; 2026 JAEWOO, KIM.<br>
+            email. jaewoo@mdrules.dev
+        </div>
+    </footer>
+
+    <script>
+        // Data for the Curriculum
+        const curriculumData = {
+            day1: [
+                {
+                    time: "09:00 - 11:00",
+                    module: "Module 1: 라즈베리파이 5 & AI 개발 환경 구축",
+                    content: [
+                        "Raspberry Pi 5 아키텍처 이해 및 기존 모델과의 차이점 (PCIe, AI 성능)",
+                        "Headless Setup: 모니터 없이 SSH 및 VNC 연결 설정",
+                        "<b>[실습]</b> Cursor IDE (또는 Claude Code) 연동: Remote-SSH 설정 및 AI 코딩 도구 세팅",
+                        "Python 가상환경(venv) 구성 및 필수 라이브러리 설치 자동화 (AI 활용)"
+                    ]
+                },
+                {
+                    time: "11:00 - 13:00",
+                    module: "Module 2: 온디바이스(On-Device) LLM 구축",
+                    content: [
+                        "Edge AI의 개념과 클라우드 AI와의 비교 (보안, 지연시간, 비용)",
+                        "Ollama 설치 및 라즈베리파이 최적화 (Llama 3, Phi-3 모델 구동)",
+                        "<b>[실습]</b> Local LLM API 서버 구축 및 Python으로 쿼리 날리기",
+                        "<b>[실습]</b> System Prompt 엔지니어링: 라즈베리파이를 'IoT 전문가' 페르소나로 만들기"
+                    ]
+                },
+                {
+                    time: "14:00 - 16:00",
+                    module: "Module 3: AI Vision & Voice (눈과 귀 만들기)",
+                    content: [
+                        "Camera Module 3 연결 및 libcamera 활용",
+                        "OpenCV 기초: 얼굴 인식 및 물체 감지 (Haar Cascades vs YOLOv8)",
+                        "<b>[실습]</b> Cursor를 이용해 '사람이 감지되면 사진 찍는 코드' 3분 만에 생성하기",
+                        "Whisper(STT) 모델을 활용한 음성 인식 파이프라인 구축"
+                    ]
+                },
+                {
+                    time: "16:00 - 18:00",
+                    module: "Module 4: 멀티모달 AI 에이전트 프로토타이핑",
+                    content: [
+                        "Vision(이미지) 정보를 LLM(텍스트)에게 설명하게 만들기 (LLaVA 활용)",
+                        "음성 명령 -> 텍스트 변환 -> LLM 판단 -> 응답 생성 구조 설계",
+                        "<b>[실습]</b> 미니 프로젝트: '무엇이든 물어보세요' 스마트 스피커 기본 구현"
+                    ]
+                }
+            ],
+            day2: [
+                {
+                    time: "09:00 - 11:00",
+                    module: "Module 5: Physical Computing 기초 (GPIO)",
+                    content: [
+                        "GPIO(General Purpose Input/Output) 핀맵 이해 및 전기 기초",
+                        "전자 부품 제어: LED(출력), 버튼(입력), PWM(아날로그 제어)",
+                        "<b>[실습]</b> Cursor에게 회로도를 설명하고 제어 코드 생성시키기 ('버튼을 누르면 LED가 3번 깜빡이게 해줘')",
+                        "Sensor HAT 활용: 온습도, 기압 센서 데이터 수집"
+                    ]
+                },
+                {
+                    time: "11:00 - 13:00",
+                    module: "Module 6: Actuator 제어 및 물리적 상호작용",
+                    content: [
+                        "서보 모터 및 DC 모터 제어 원리",
+                        "릴레이(Relay)를 이용한 고전압 제어 개념 (스마트 홈 예시)",
+                        "<b>[실습]</b> AI 판단에 따른 물리적 반응 구현 (예: '날씨가 덥다'고 판단하면 팬 모터 회전)",
+                        "Python `gpiozero` 라이브러리를 활용한 효율적 제어"
+                    ]
+                },
+                {
+                    time: "14:00 - 17:00",
+                    module: "Module 7: [Capstone] Physical AI 에이전트 제작",
+                    content: [
+                        "프로젝트 주제 선정: AI 보안관, 스마트 컨시어지, 감정 표현 로봇 등",
+                        "<b>[통합 실습]</b> 카메라(Vision) + 마이크(Voice) + LLM(Brain) + 모터(Action) 통합",
+                        "Cursor/Claude Code를 활용한 트러블슈팅 및 리팩토링",
+                        "예시: 카메라로 물건을 보여주면 사용법을 설명하고, 해당 물건 쪽으로 모터 회전"
+                    ]
+                },
+                {
+                    time: "17:00 - 18:00",
+                    module: "Module 8: 회고 및 확장 가능성",
+                    content: [
+                        "프로젝트 시연 및 코드 리뷰 (AI가 짠 코드의 품질 평가)",
+                        "Edge AI의 미래: NPU 활용(Hailo) 및 전력 최적화 방안",
+                        "Q&A 및 수료식"
+                    ]
+                }
+            ]
+        };
+
+        // Render Functions
+        function renderAccordion(day, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            curriculumData[day].forEach((item, index) => {
+                const isOpen = index === 0 ? 'open' : ''; // Open first item by default
+                const rotateClass = index === 0 ? 'rotate-180' : '';
+                
+                const html = `
+                    <div class="border border-slate-200 rounded-lg overflow-hidden">
+                        <button class="w-full flex items-center justify-between p-4 bg-white hover:bg-slate-50 transition text-left focus:outline-none" onclick="toggleAccordion(this)">
+                            <div>
+                                <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded border border-blue-100 mr-2">${item.time}</span>
+                                <span class="font-semibold text-slate-800">${item.module}</span>
+                            </div>
+                            <svg class="w-5 h-5 text-slate-400 transform transition-transform duration-200 ${rotateClass}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="accordion-content bg-slate-50 px-4 ${isOpen}">
+                            <ul class="list-disc list-inside space-y-2 py-4 text-sm text-slate-600 ml-2">
+                                ${item.content.map(point => `<li class="pl-2 -indent-2">${point}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += html;
+            });
+        }
+
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('svg');
+            
+            // Toggle current
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                icon.classList.remove('rotate-180');
+            } else {
+                content.classList.add('open');
+                icon.classList.add('rotate-180');
+            }
+        }
+
+        function switchTab(day) {
+            // Update Tab Styles
+            document.getElementById('tab-day1').classList.remove('tab-active');
+            document.getElementById('tab-day2').classList.remove('tab-active');
+            document.getElementById(`tab-${day}`).classList.add('tab-active');
+
+            // Show/Hide Content
+            document.getElementById('content-day1').classList.add('hidden');
+            document.getElementById('content-day2').classList.add('hidden');
+            document.getElementById(`content-${day}`).classList.remove('hidden');
+        }
+
+        // Initialize Chart
+        document.addEventListener('DOMContentLoaded', function() {
+            renderAccordion('day1', 'accordion-day1');
+            renderAccordion('day2', 'accordion-day2');
+
+            const ctx = document.getElementById('timeAllocationChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['이론 및 개념', 'AI 도구 활용 실습', '캡스톤 프로젝트'],
+                    datasets: [{
+                        data: [30, 40, 30],
+                        backgroundColor: [
+                            '#94a3b8', // Slate 400
+                            '#3b82f6', // Blue 500
+                            '#8b5cf6'  // Violet 500
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { font: { family: "'Noto Sans KR', sans-serif", size: 12 }, boxWidth: 12 }
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,646 @@
+<!-- Chosen Palette: Executive Navy & Warm Sand (Trust, Professionalism, Clarity) -->
+<!-- Application Structure Plan:
+    1.  **Executive Summary & Identity:** A dashboard-style header presenting the course identity (Titles, Goals, Target). This sets the context for the decision-maker (Education Manager).
+    2.  **Strategic Value (ROI Simulator):** An interactive "Why this course?" section using a chart to visualize the cost-saving potential of Performance Engineering. This hooks the user with business value before diving into content.
+    3.  **Interactive Curriculum Map:** A tabbed interface (Day 1 / Day 2) allowing users to explore the schedule. Each module expands to show "Executive Insight" (Business relevance) vs. "Technical Scope" (What engineers actually do), bridging the gap between the source material's technical depth and the target audience's strategic needs.
+    4.  **Environment Feasibility Analysis:** A dedicated section answering the "Colab" question with a comparative visual (Traffic Light system) for different curriculum components, advising on the practical setup.
+    5.  **Action Plan:** Simple footer for next steps.
+    This structure transforms a list of technical topics into a business proposal.
+-->
+<!-- Visualization & Content Choices:
+    1.  **ROI Impact Chart (Chart.js):**
+        * *Goal:* Demonstrate the business value of the course content.
+        * *Method:* Line chart comparing "Standard Scaling costs" vs. "Optimized costs" over time.
+        * *Interaction:* Sliders to adjust "Optimization Efficiency" and see projected savings.
+        * *Justification:* Executives care about cost and efficiency. A dynamic chart proves the course's worth instantly.
+    2.  **Curriculum Tabs & Accordions (HTML/JS):**
+        * *Goal:* Organize 2 days of dense content without overwhelming.
+        * *Method:* Tab switching for days; Accordion expansion for modules.
+        * *Interaction:* Click to reveal details.
+        * *Justification:* Allows high-level scanning of the agenda while providing access to specific learning points.
+    3.  **Environment Feasibility Matrix (HTML/Grid):**
+        * *Goal:* Answer the specific "Colab" technical query.
+        * *Method:* A grid comparing "Google Colab Free", "Colab Pro", and "On-Prem/Cloud GPU" against course requirements (Nsight, Multi-GPU, etc.).
+        * *Interaction:* Hover for specific technical limitations.
+        * *Justification:* Provides a nuanced answer (Yes/No/Maybe) required by the prompt in a visual format.
+-->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD룰 AI교육 - AI 퍼포먼스 엔지니어링 전략 과정</title>
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="15x15"
+    href="./dist/images/favicon.png"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f5f5f4; /* Warm Stone-100 */
+            color: #1c1917; /* Stone-900 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 350px;
+            margin: 0 auto;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(231, 229, 228, 1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+        .active-tab {
+            border-bottom: 3px solid #0f172a; /* Slate-900 */
+            color: #0f172a;
+            font-weight: 700;
+        }
+        .inactive-tab {
+            color: #78716c; /* Stone-500 */
+            border-bottom: 3px solid transparent;
+        }
+        .inactive-tab:hover {
+            color: #44403c; /* Stone-700 */
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Header / Navigation -->
+    <nav class="bg-slate-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-3">
+                    <img src="mdrules-logo.png" alt="MD룰 AI교육" width="116px">
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-stone-300">
+                    <a href="#proposal" class="hover:text-white transition">제안 개요</a>
+                    <a href="#curriculum" class="hover:text-white transition">커리큘럼</a>
+                    <a href="#environment" class="hover:text-white transition">실습 환경 분석</a>
+                    <a href="#roi" class="hover:text-white transition">기대 효과</a>
+                    <a href="https://mdrules.dev" target="_self" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">
+                        사이트로 이동
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- Section 1: Proposal Overview & Identity -->
+        <section id="proposal" class="space-y-6">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <h1 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4">
+                    2026 AI 트렌드: <br class="hidden md:block" />
+                    <span class="text-blue-700">임원 및 리더를 위한</span> 퍼포먼스 엔지니어링 전략 과정
+                </h1>
+                <p class="text-lg text-stone-600 leading-relaxed">
+                    AI 모델의 거대화로 인한 비용 증가와 추론 지연 문제를 해결하는 기술적 해법을 이해하고,
+                    조직 차원의 최적화 전략을 수립하기 위한 의사결정자 맞춤형 커리큘럼입니다.
+                </p>
+            </div>
+
+            <!-- Title Proposals Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-panel p-6 rounded-xl border-l-4 border-blue-600 hover:shadow-lg transition cursor-pointer group">
+                    <div class="text-xs font-bold text-blue-600 mb-2 uppercase tracking-wide">Option 1: 직관적/성과중심</div>
+                    <h3 class="text-xl font-bold text-slate-900 group-hover:text-blue-700 transition">AI 비용 절감과 성능 혁신의 열쇠</h3>
+                    <p class="text-sm text-stone-500 mt-2">경영진을 위한 AI 퍼포먼스 엔지니어링 전략</p>
+                </div>
+                <div class="glass-panel p-6 rounded-xl border-l-4 border-emerald-600 hover:shadow-lg transition cursor-pointer group">
+                    <div class="text-xs font-bold text-emerald-600 mb-2 uppercase tracking-wide">Option 2: 트렌드/리더십</div>
+                    <h3 class="text-xl font-bold text-slate-900 group-hover:text-emerald-700 transition">2026 AI 트렌드 마스터</h3>
+                    <p class="text-sm text-stone-500 mt-2">LLM 고속화와 인프라 최적화 리더십 과정</p>
+                </div>
+                <div class="glass-panel p-6 rounded-xl border-l-4 border-indigo-600 hover:shadow-lg transition cursor-pointer group">
+                    <div class="text-xs font-bold text-indigo-600 mb-2 uppercase tracking-wide">Option 3: 의사결정/전략</div>
+                    <h3 class="text-xl font-bold text-slate-900 group-hover:text-indigo-700 transition">성공적 AI 도입을 위한 기술적 의사결정</h3>
+                    <p class="text-sm text-stone-500 mt-2">AI 성능 최적화와 효율성 극대화 전략</p>
+                </div>
+            </div>
+
+            <!-- Key Specs -->
+            <div class="glass-panel rounded-xl p-6 mt-6">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center md:text-left divide-y md:divide-y-0 md:divide-x divide-stone-200">
+                    <div class="px-4 py-2">
+                        <div class="text-stone-500 text-sm mb-1">교육 대상</div>
+                        <div class="font-bold text-slate-900">CTO, IT 본부장, 팀장급 리더</div>
+                    </div>
+                    <div class="px-4 py-2">
+                        <div class="text-stone-500 text-sm mb-1">교육 시간</div>
+                        <div class="font-bold text-slate-900">2일 (총 16시간)</div>
+                    </div>
+                    <div class="px-4 py-2">
+                        <div class="text-stone-500 text-sm mb-1">선수 지식</div>
+                        <div class="font-bold text-slate-900">AI 기본 용어 이해, IT 인프라 운영 경험</div>
+                    </div>
+                    <div class="px-4 py-2">
+                        <div class="text-stone-500 text-sm mb-1">핵심 목표</div>
+                        <div class="font-bold text-slate-900">기술적 의사결정 역량 및 ROI 극대화</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: ROI Visualization -->
+        <section id="roi" class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 md:p-8">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-slate-900">Why Performance Engineering?</h2>
+                <p class="text-stone-600 mt-2">
+                    단순한 하드웨어 증설(Scale-up)과 퍼포먼스 엔지니어링을 적용했을 때의 비용 차이를 시뮬레이션합니다. 
+                    <span class="font-semibold text-blue-600">리더가 최적화 기술을 이해해야 하는 이유</span>가 여기에 있습니다.
+                </p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-8 items-start">
+                <div class="w-full md:w-1/3 space-y-6 bg-stone-50 p-6 rounded-xl">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">예상 사용자 증가율 (월별)</label>
+                        <input type="range" min="5" max="50" value="20" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600" id="growthRateInput">
+                        <div class="flex justify-between text-xs text-stone-500 mt-1">
+                            <span>보수적 (5%)</span>
+                            <span id="growthRateValue" class="font-bold text-blue-600">20%</span>
+                            <span>급성장 (50%)</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">최적화 적용 효율 (비용 절감율)</label>
+                        <input type="range" min="10" max="80" value="40" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-600" id="optEffInput">
+                        <div class="flex justify-between text-xs text-stone-500 mt-1">
+                            <span>기초 (10%)</span>
+                            <span id="optEffValue" class="font-bold text-emerald-600">40%</span>
+                            <span>혁신 (80%)</span>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-white border border-stone-200 rounded-lg">
+                        <h4 class="font-bold text-sm text-slate-800 mb-2">인사이트</h4>
+                        <p class="text-sm text-stone-600" id="insightText">
+                            사용자가 빠르게 증가할수록 하드웨어 비용은 기하급수적으로 늘어납니다. 최적화 전략 수립 시 6개월 차 비용을 <span class="font-bold text-emerald-600">40%</span> 절감할 수 있습니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="w-full md:w-2/3">
+                    <div class="chart-container">
+                        <canvas id="roiChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Interactive Curriculum -->
+        <section id="curriculum" class="scroll-mt-20">
+            <h2 class="text-2xl font-bold text-slate-900 mb-4">상세 커리큘럼</h2>
+            <p class="text-stone-600 mb-6">
+                엔지니어링 실무 내용을 경영진의 관점으로 재해석했습니다. <br>
+                탭을 클릭하여 일자별 내용을 확인하고, 각 항목을 눌러 <span class="text-blue-600 font-semibold">비즈니스 핵심 포인트</span>를 확인하세요.
+            </p>
+
+            <!-- Tabs -->
+            <div class="flex space-x-8 border-b border-stone-300 mb-6">
+                <button onclick="switchTab('day1')" id="tab-day1" class="active-tab pb-3 text-lg transition-colors">Day 1: 전략 및 기초 (Strategy)</button>
+                <button onclick="switchTab('day2')" id="tab-day2" class="inactive-tab pb-3 text-lg transition-colors">Day 2: 적용 및 사례 (Application)</button>
+            </div>
+
+            <!-- Day 1 Content -->
+            <div id="content-day1" class="space-y-4">
+                <!-- Module 1 -->
+                <div class="group border border-stone-200 rounded-xl overflow-hidden bg-white transition hover:shadow-md">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none bg-slate-50" onclick="toggleAccordion('d1m1')">
+                        <div>
+                            <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Module 1 | 09:00 - 12:00</span>
+                            <h3 class="text-lg font-bold text-slate-800">퍼포먼스 엔지니어링 개론: 왜 지금 속도인가?</h3>
+                        </div>
+                        <span id="icon-d1m1" class="text-2xl text-stone-400 transform transition-transform">+</span>
+                    </button>
+                    <div id="content-d1m1" class="hidden px-6 py-6 bg-white border-t border-stone-100">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-900 mb-2 flex items-center">👨‍💼 경영진/리더 핵심 (Executive Takeaway)</h4>
+                                <ul class="list-disc list-inside text-sm text-stone-600 space-y-1">
+                                    <li>AI 모델 규모 확대와 인프라 비용의 상관관계 이해</li>
+                                    <li>속도(Latency)가 사용자 경험(UX)과 매출에 미치는 영향</li>
+                                    <li>"추측하지 말고 계측하라" - 데이터 기반 의사결정 문화</li>
+                                    <li>USE(사용률) 및 RED(속도/에러) 분석법을 통한 KPI 설정</li>
+                                </ul>
+                            </div>
+                            <div class="bg-stone-50 p-4 rounded-lg">
+                                <h4 class="text-sm font-bold text-stone-500 mb-2 flex items-center">⚙️ 엔지니어 실무 내용 (Technical Scope)</h4>
+                                <p class="text-xs text-stone-500 leading-relaxed">
+                                    Llama3, BEVFusion 등 최신 모델 아키텍처 이해, 하드웨어(GPU/Memory) 동작 원리, 성능 엔지니어링 5단계 프로세스 상세.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 2 -->
+                <div class="group border border-stone-200 rounded-xl overflow-hidden bg-white transition hover:shadow-md">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none bg-slate-50" onclick="toggleAccordion('d1m2')">
+                        <div>
+                            <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Module 2 | 13:00 - 15:00</span>
+                            <h3 class="text-lg font-bold text-slate-800">측정의 미학: 보이지 않는 비용 찾기</h3>
+                        </div>
+                        <span id="icon-d1m2" class="text-2xl text-stone-400 transform transition-transform">+</span>
+                    </button>
+                    <div id="content-d1m2" class="hidden px-6 py-6 bg-white border-t border-stone-100">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-900 mb-2">👨‍💼 경영진/리더 핵심</h4>
+                                <ul class="list-disc list-inside text-sm text-stone-600 space-y-1">
+                                    <li>이론 성능 vs 실효 성능의 격차 (Gap) 분석</li>
+                                    <li>병목 구간(Bottleneck)이 발생하는 비즈니스 로직 식별</li>
+                                    <li>성능 지표(Metrics) 해석 방법: 우리 시스템은 어디서 돈을 낭비하는가?</li>
+                                </ul>
+                            </div>
+                            <div class="bg-stone-50 p-4 rounded-lg">
+                                <h4 class="text-sm font-bold text-stone-500 mb-2">⚙️ 엔지니어 실무 내용</h4>
+                                <p class="text-xs text-stone-500 leading-relaxed">
+                                   Nsight Systems, Nsight Compute, PyTorch Profiler 사용법 데모. GPU 커널 실행 시간 측정 및 메모리 대역폭 분석 실습.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Module 3 -->
+                 <div class="group border border-stone-200 rounded-xl overflow-hidden bg-white transition hover:shadow-md">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none bg-slate-50" onclick="toggleAccordion('d1m3')">
+                        <div>
+                            <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Module 3 | 15:20 - 18:00</span>
+                            <h3 class="text-lg font-bold text-slate-800">성능 개선의 4가지 계층과 전략적 투자</h3>
+                        </div>
+                        <span id="icon-d1m3" class="text-2xl text-stone-400 transform transition-transform">+</span>
+                    </button>
+                    <div id="content-d1m3" class="hidden px-6 py-6 bg-white border-t border-stone-100">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-900 mb-2">👨‍💼 경영진/리더 핵심</h4>
+                                <ul class="list-disc list-inside text-sm text-stone-600 space-y-1">
+                                    <li>개선 우선순위 설정: S/W 최적화 vs H/W 증설</li>
+                                    <li>데이터/모델 층위의 최적화: MLOps 파이프라인 효율화</li>
+                                    <li>알고리즘 및 프레임워크 선정의 중요성 (Vendor Lock-in 회피 전략)</li>
+                                </ul>
+                            </div>
+                            <div class="bg-stone-50 p-4 rounded-lg">
+                                <h4 class="text-sm font-bold text-stone-500 mb-2">⚙️ 엔지니어 실무 내용</h4>
+                                <p class="text-xs text-stone-500 leading-relaxed">
+                                    데이터 로딩 최적화, 분산 병렬 처리 기법, 메모리 풋프린트 감소, 텐서 차원 최적화, 커스텀 커널 도입의 득과 실.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 2 Content -->
+            <div id="content-day2" class="hidden space-y-4">
+                 <!-- Module 4 -->
+                 <div class="group border border-stone-200 rounded-xl overflow-hidden bg-white transition hover:shadow-md">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none bg-slate-50" onclick="toggleAccordion('d2m1')">
+                        <div>
+                            <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Module 4 | 09:00 - 12:00</span>
+                            <h3 class="text-lg font-bold text-slate-800">Case Study 1: LLM 추론 및 학습 최적화</h3>
+                        </div>
+                        <span id="icon-d2m1" class="text-2xl text-stone-400 transform transition-transform">+</span>
+                    </button>
+                    <div id="content-d2m1" class="hidden px-6 py-6 bg-white border-t border-stone-100">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-900 mb-2">👨‍💼 경영진/리더 핵심</h4>
+                                <ul class="list-disc list-inside text-sm text-stone-600 space-y-1">
+                                    <li>LLM 서비스 비용의 주범: 추론(Inference) 비용 절감 전략</li>
+                                    <li>양자화(Quantization) 도입의 비즈니스 트레이드오프 (정확도 vs 비용)</li>
+                                    <li>vLLM 등 고속 추론 엔진 도입 효과 분석</li>
+                                    <li>학습 시간 단축을 통한 모델 출시 주기(Time-to-market) 가속화</li>
+                                </ul>
+                            </div>
+                            <div class="bg-stone-50 p-4 rounded-lg">
+                                <h4 class="text-sm font-bold text-stone-500 mb-2">⚙️ 엔지니어 실무 내용</h4>
+                                <p class="text-xs text-stone-500 leading-relaxed">
+                                    PyTorch Profiler를 이용한 LLM 병목 분석, 양자화 적용 실습, vLLM 벤치마크, 배치 사이즈 및 하이퍼파라미터 튜닝이 성능에 미치는 영향.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 5 -->
+                <div class="group border border-stone-200 rounded-xl overflow-hidden bg-white transition hover:shadow-md">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none bg-slate-50" onclick="toggleAccordion('d2m2')">
+                        <div>
+                            <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Module 5 | 13:00 - 15:00</span>
+                            <h3 class="text-lg font-bold text-slate-800">Case Study 2: 엣지/실시간 AI와 자율주행</h3>
+                        </div>
+                        <span id="icon-d2m2" class="text-2xl text-stone-400 transform transition-transform">+</span>
+                    </button>
+                    <div id="content-d2m2" class="hidden px-6 py-6 bg-white border-t border-stone-100">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-900 mb-2">👨‍💼 경영진/리더 핵심</h4>
+                                <ul class="list-disc list-inside text-sm text-stone-600 space-y-1">
+                                    <li>제한된 자원(Edge Device)에서의 AI 구동 전략</li>
+                                    <li>실시간성(Real-time) 확보를 위한 하드웨어 가속기 활용</li>
+                                    <li>모델 경량화와 배포(Deployment) 파이프라인 최적화</li>
+                                </ul>
+                            </div>
+                            <div class="bg-stone-50 p-4 rounded-lg">
+                                <h4 class="text-sm font-bold text-stone-500 mb-2">⚙️ 엔지니어 실무 내용</h4>
+                                <p class="text-xs text-stone-500 leading-relaxed">
+                                    자동운전 AI(BEVFusion) 데이터 로더 병목 해결, TensorRT 등을 활용한 에지 디바이스 배포, CUDA 커널 최적화 사례 분석.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 6 -->
+                <div class="group border border-stone-200 rounded-xl overflow-hidden bg-white transition hover:shadow-md">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none bg-slate-50" onclick="toggleAccordion('d2m3')">
+                        <div>
+                            <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Module 6 | 15:20 - 17:00</span>
+                            <h3 class="text-lg font-bold text-slate-800">조직 문화와 실행 전략 (Action Plan)</h3>
+                        </div>
+                        <span id="icon-d2m3" class="text-2xl text-stone-400 transform transition-transform">+</span>
+                    </button>
+                    <div id="content-d2m3" class="hidden px-6 py-6 bg-white border-t border-stone-100">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-900 mb-2">👨‍💼 경영진/리더 핵심</h4>
+                                <ul class="list-disc list-inside text-sm text-stone-600 space-y-1">
+                                    <li>조직 내 'Performance Culture' 심기</li>
+                                    <li>개발 단계부터 성능을 고려하는 Shift-Left 전략</li>
+                                    <li>지속적 성능 관리(Continuous Performance Engineering) 시스템 구축</li>
+                                </ul>
+                            </div>
+                            <div class="bg-stone-50 p-4 rounded-lg">
+                                <h4 class="text-sm font-bold text-stone-500 mb-2">⚙️ 엔지니어 실무 내용</h4>
+                                <p class="text-xs text-stone-500 leading-relaxed">
+                                    성능 회귀(Regression) 테스트 자동화 방안, CI/CD 파이프라인 내 벤치마크 통합 전략, 팀 간 협업 프로토콜.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Environment Feasibility Analysis (Colab) -->
+        <section id="environment" class="bg-slate-900 text-stone-100 rounded-2xl p-8">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                <span class="mr-2">🛠️</span> 실습 환경 검토 (Feasibility Analysis)
+            </h2>
+            <p class="text-stone-300 mb-8 max-w-3xl">
+                본 교육의 실습 예제(특히 Profiling 및 Hardware Optimization)를 <span class="text-yellow-400 font-bold">Google Colab</span>에서 진행 가능한지에 대한 기술 검토 결과입니다. 
+                <br><span class="text-sm text-stone-400">*경영진/리더 과정은 강사 시연(Demo) 위주로 진행되나, 실무자 교육 확산 시 아래 제약사항을 고려해야 합니다.</span>
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <!-- Colab Free -->
+                <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                    <h3 class="font-bold text-lg mb-4 text-stone-200">Google Colab (Free)</h3>
+                    <div class="text-4xl mb-4">⚠️</div>
+                    <ul class="text-sm text-stone-400 space-y-3 text-left">
+                        <li class="flex items-start"><span class="text-red-500 mr-2">✗</span> Nsight Systems (Root 권한 제한으로 불가)</li>
+                        <li class="flex items-start"><span class="text-yellow-500 mr-2">△</span> LLM 파인튜닝 (VRAM 부족 빈번)</li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> PyTorch Profiler 기초 실습</li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> 기본 양자화 실습</li>
+                    </ul>
+                    <div class="mt-6 text-xs text-slate-500 border-t border-slate-700 pt-3">
+                        입문용으로는 가능하나 심화 분석 불가
+                    </div>
+                </div>
+
+                <!-- Colab Pro / Cloud VM -->
+                <div class="bg-slate-800 rounded-xl p-6 border-2 border-blue-600 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-blue-600 text-white text-xs px-3 py-1 font-bold rounded-bl-lg">추천 (실무자용)</div>
+                    <h3 class="font-bold text-lg mb-4 text-white">AWS / GCP Instance</h3>
+                    <div class="text-4xl mb-4">✅</div>
+                    <ul class="text-sm text-stone-300 space-y-3 text-left">
+                        <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> <strong>Nsight Systems/Compute 완전 지원</strong></li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> Multi-GPU 학습 환경 구성 가능</li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> vLLM 등 고성능 엔진 구동 원활</li>
+                    </ul>
+                    <div class="mt-6 text-xs text-blue-200 border-t border-slate-700 pt-3">
+                        심층적인 하드웨어 레벨 프로파일링에 필수
+                    </div>
+                </div>
+
+                <!-- Executive Course Setup -->
+                <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                    <h3 class="font-bold text-lg mb-4 text-stone-200">임원 과정 권장 환경</h3>
+                    <div class="text-4xl mb-4">🖥️</div>
+                    <ul class="text-sm text-stone-400 space-y-3 text-left">
+                        <li class="flex items-start"><span class="text-blue-400 mr-2">ℹ</span> <strong>실습보다는 Demo 중심</strong></li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> Colab 노트북 (결과 확인용 뷰어)</li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2">✓</span> 웹 기반 대시보드 시뮬레이션</li>
+                    </ul>
+                    <div class="mt-6 text-xs text-slate-500 border-t border-slate-700 pt-3">
+                        별도의 복잡한 환경 설정 없이 웹 브라우저로 참여
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA / Footer -->
+        <section class="text-center py-10">
+            <p class="text-stone-500 mb-6">귀사의 AI 인프라 효율화를 위한 첫 걸음, 지금 시작하십시오.</p>
+                <div>
+                     <a href="https://mdrules.dev" target="_self" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">
+                        사이트로 이동
+                    </a>
+                </div>
+            <p class="text-stone-500 mb-6">&copy; 2026 JAEWOO, KIM.</p>
+        </section>
+
+    </main>
+
+    <!-- Scripts -->
+    <script>
+        // State
+        const state = {
+            growthRate: 20,
+            optEfficiency: 40
+        };
+
+        // DOM Elements
+        const growthInput = document.getElementById('growthRateInput');
+        const optInput = document.getElementById('optEffInput');
+        const growthVal = document.getElementById('growthRateValue');
+        const optVal = document.getElementById('optEffValue');
+        const insightText = document.getElementById('insightText');
+
+        // Chart Initialization
+        let roiChart;
+
+        function initChart() {
+            const ctx = document.getElementById('roiChart').getContext('2d');
+            roiChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
+                    datasets: [
+                        {
+                            label: '단순 증설 비용 (Scale-up Cost)',
+                            data: [],
+                            borderColor: '#ef4444', // Red-500
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            borderWidth: 2,
+                            tension: 0.3,
+                            fill: true
+                        },
+                        {
+                            label: '최적화 적용 비용 (Optimized Cost)',
+                            data: [],
+                            borderColor: '#10b981', // Emerald-500
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            borderWidth: 2,
+                            tension: 0.3,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { font: { family: "'Noto Sans KR', sans-serif" } }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed.y);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { borderDash: [2, 2], color: '#e7e5e4' },
+                            title: { display: true, text: 'Projected Infra Cost ($)' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    },
+                    interaction: {
+                        mode: 'nearest',
+                        axis: 'x',
+                        intersect: false
+                    }
+                }
+            });
+            updateData();
+        }
+
+        // Calculation Logic
+        function calculateCosts(growth, efficiency) {
+            const baseCost = 1000; // Starting baseline
+            const growthFactor = 1 + (growth / 100);
+            const efficiencyFactor = 1 - (efficiency / 100);
+
+            let standardCosts = [];
+            let optimizedCosts = [];
+            let currentStandard = baseCost;
+
+            for (let i = 0; i < 6; i++) {
+                // Standard: Compounds with growth
+                currentStandard = currentStandard * growthFactor;
+                standardCosts.push(Math.round(currentStandard));
+
+                // Optimized: Growth is dampened by engineering efficiency applied progressively
+                // Assumption: Optimization effort keeps efficiency gains relative to the raw growth
+                let currentOptimized = (currentStandard * efficiencyFactor); 
+                optimizedCosts.push(Math.round(currentOptimized));
+            }
+            return { standardCosts, optimizedCosts };
+        }
+
+        function updateData() {
+            const growth = parseInt(growthInput.value);
+            const efficiency = parseInt(optInput.value);
+
+            // Update UI Labels
+            growthVal.innerText = `${growth}%`;
+            optVal.innerText = `${efficiency}%`;
+
+            // Update Insight Text
+            insightText.innerHTML = `사용자가 빠르게 증가할수록 하드웨어 비용은 기하급수적으로 늘어납니다. 최적화 전략 수립 시 6개월 차 비용을 <span class="font-bold text-emerald-600">${efficiency}%</span> 이상 절감하여, 누적 비용 격차를 크게 벌릴 수 있습니다.`;
+
+            // Calculate Data
+            const { standardCosts, optimizedCosts } = calculateCosts(growth, efficiency);
+
+            // Update Chart
+            roiChart.data.datasets[0].data = standardCosts;
+            roiChart.data.datasets[1].data = optimizedCosts;
+            roiChart.update();
+        }
+
+        // Event Listeners
+        growthInput.addEventListener('input', updateData);
+        optInput.addEventListener('input', updateData);
+
+        // Tab Logic
+        function switchTab(day) {
+            const day1Btn = document.getElementById('tab-day1');
+            const day2Btn = document.getElementById('tab-day2');
+            const day1Content = document.getElementById('content-day1');
+            const day2Content = document.getElementById('content-day2');
+
+            if (day === 'day1') {
+                day1Btn.classList.replace('inactive-tab', 'active-tab');
+                day2Btn.classList.replace('active-tab', 'inactive-tab');
+                day1Content.classList.remove('hidden');
+                day2Content.classList.add('hidden');
+            } else {
+                day2Btn.classList.replace('inactive-tab', 'active-tab');
+                day1Btn.classList.replace('active-tab', 'inactive-tab');
+                day2Content.classList.remove('hidden');
+                day1Content.classList.add('hidden');
+            }
+        }
+
+        // Accordion Logic
+        function toggleAccordion(id) {
+            const content = document.getElementById(`content-${id}`);
+            const icon = document.getElementById(`icon-${id}`);
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.innerText = '-';
+            } else {
+                content.classList.add('hidden');
+                icon.innerText = '+';
+            }
+        }
+
+        // Initialize on Load
+        window.addEventListener('load', initChart);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgentOps: AI 에이전트 운영 및 거버넌스</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8fafc; /* Warm Gray/Slate */
+            color: #1e293b;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+
+        .card-hover {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-active {
+            border-bottom: 2px solid #2563eb;
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+    
+    <!-- Chosen Palette: Warm Professional Slate & Blue (Slate-800, Blue-600, Amber-50) -->
+    <!-- Application Structure Plan: 
+        1. Hero Section: AgentOps의 정의와 중요성을 요약 제시.
+        2. Evolution Timeline (Interactive): DevOps부터 AgentOps까지의 변천사를 버튼 클릭으로 비교.
+        3. The 5 Pillars (Cycle Dashboard): 설계, 평가, 전개, 감시, 개선의 5개 영역을 탭 인터페이스로 상세 분석.
+        4. Risk & Mitigation Center (Grid View): 4대 주요 과제와 이에 대한 구체적인 완화책을 카드 형태로 배치.
+        5. Summary & Ecosystem: 주요 툴셋과 마무리 인사이트.
+        - 선정 이유: 사용자가 선형적인 보고서 읽기에서 벗어나, 자신의 관심사에 맞춰 '변천사-구조-리스크'를 유연하게 탐색할 수 있도록 설계함.
+    -->
+    <!-- Visualization & Content Choices:
+        - Ops Evolution -> Compare -> Interactive Bar Chart & Detail List.
+        - Evaluation Radar -> Inform -> Radar Chart (Chart.js) showing multi-dimensional metrics.
+        - Lifecycle Cycle -> Organize -> Interactive Tabs with Contextual Text Blocks.
+        - Challenges -> Relationships -> Side-by-side Layout (Grid) with JS-based detail display.
+        - NO SVG used. Icons and visual cues handled via Unicode and Tailwind CSS properties.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-2">
+                    <span class="text-blue-600 text-2xl font-bold">◈</span>
+                    <span class="text-xl font-bold tracking-tight text-slate-800 uppercase">AgentOps Insight</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <button onclick="scrollToId('intro')" class="text-slate-600 hover:text-blue-600 font-medium transition">정의</button>
+                    <button onclick="scrollToId('evolution')" class="text-slate-600 hover:text-blue-600 font-medium transition">변천사</button>
+                    <button onclick="scrollToId('cycle')" class="text-slate-600 hover:text-blue-600 font-medium transition">구성요소</button>
+                    <button onclick="scrollToId('challenges')" class="text-slate-600 hover:text-blue-600 font-medium transition">과제/대응</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="intro" class="relative bg-slate-900 py-20 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">
+                    AI 에이전트 시대의 <span class="text-blue-400">거버넌스</span>
+                </h1>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+                    자율형 AI 에이전트의 행동을 통제하고 관측하여 신뢰성, 투명성, 안전성을 확보하는 
+                    새로운 운영 패러다임, **AgentOps**에 오신 것을 환영합니다.
+                </p>
+                <div class="mt-10 flex justify-center space-x-4">
+                    <button onclick="scrollToId('evolution')" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-700 transition shadow-lg">보고서 탐색하기</button>
+                </div>
+            </div>
+        </div>
+        <!-- Background Accent -->
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-blue-600/10 blur-3xl rounded-full"></div>
+    </header>
+
+    <!-- Ops Evolution Section -->
+    <section id="evolution" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold text-slate-900">Ops의 진화: 왜 AgentOps인가?</h2>
+                <p class="mt-4 text-slate-600">
+                    기술이 발전함에 따라 관리 대상과 목적이 변화해 왔습니다. 에이전트는 단순한 코드나 모델을 넘어 '동적 행동'을 관리해야 합니다.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-10">
+                <div class="lg:col-span-5 space-y-4">
+                    <div id="ops-btns" class="flex flex-col space-y-2">
+                        <!-- Navigation Buttons generated by JS -->
+                    </div>
+                    <div id="ops-content" class="mt-6 p-6 bg-slate-50 rounded-2xl border border-slate-100 min-h-[200px]">
+                        <!-- Content updated by JS -->
+                    </div>
+                </div>
+                <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 flex flex-col items-center">
+                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">Ops별 관리 복잡도 비교</h3>
+                    <div class="chart-container">
+                        <canvas id="evolutionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AgentOps Components (Cycle) Section -->
+    <section id="cycle" class="py-20 bg-slate-50 border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900">AgentOps의 5대 핵심 사이클</h2>
+                <p class="mt-4 text-slate-600 max-w-2xl mx-auto">에이전트 시스템 최적화를 위해 설계부터 개선까지 반복되는 핵심 워크플로우입니다.</p>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="flex border-b border-slate-200 overflow-x-auto no-scrollbar">
+                    <button onclick="updateCycleTab(0)" id="tab-0" class="flex-1 px-6 py-4 text-sm font-bold uppercase transition tab-active whitespace-nowrap">1. 설계 (Design)</button>
+                    <button onclick="updateCycleTab(1)" id="tab-1" class="flex-1 px-6 py-4 text-sm font-bold uppercase transition text-slate-500 whitespace-nowrap">2. 평가 (Evaluation)</button>
+                    <button onclick="updateCycleTab(2)" id="tab-2" class="flex-1 px-6 py-4 text-sm font-bold uppercase transition text-slate-500 whitespace-nowrap">3. 전개 (Deployment)</button>
+                    <button onclick="updateCycleTab(3)" id="tab-3" class="flex-1 px-6 py-4 text-sm font-bold uppercase transition text-slate-500 whitespace-nowrap">4. 감시 (Monitoring)</button>
+                    <button onclick="updateCycleTab(4)" id="tab-4" class="flex-1 px-6 py-4 text-sm font-bold uppercase transition text-slate-500 whitespace-nowrap">5. 개선 (Improvement)</button>
+                </div>
+                <div class="p-8 lg:p-12">
+                    <div id="cycle-detail" class="grid lg:grid-cols-2 gap-12 items-center">
+                        <!-- Content injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Challenges & Mitigations Section -->
+    <section id="challenges" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold text-slate-900">핵심 과제 및 완화책</h2>
+                <p class="mt-4 text-slate-600">자율형 에이전트가 마주하는 4대 기술적/경제적 위기와 이를 해결하기 위한 전략입니다.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8" id="challenge-grid">
+                <!-- Cards generated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex justify-center mb-8">
+                <span class="bg-blue-600 p-3 rounded-xl text-2xl">⚡</span>
+            </div>
+            <h2 class="text-2xl font-bold mb-4">자기 수복적 Ops를 향한 도전</h2>
+            <p class="text-slate-400 max-w-xl mx-auto mb-8">
+                미래의 에이전트는 자신의 운용을 스스로 감시하고 최적화할 것입니다. 
+                그 이전에 인간이 AI의 행동을 이해하고 신뢰할 수 있는 견고한 프레임워크 구축이 필수입니다.
+            </p>
+            <div class="text-slate-500 text-sm">
+                &copy; 2025 JAEWOO KIM.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Implementation -->
+    <script>
+        // Data Objects
+        const opsEvolution = [
+            {
+                name: "DevOps",
+                year: "2007~",
+                target: "앱 코드, 인프라(IaC)",
+                purpose: "릴리스 사이클 가속화 및 신뢰성 향상",
+                monitoring: "가동 상황 (Four Keys 등)",
+                complexity: 40
+            },
+            {
+                name: "MLOps",
+                year: "2015~",
+                target: "데이터셋, ML 모델",
+                purpose: "모델 재현성 및 품질 보증, 배포 효율화",
+                monitoring: "입출력, 모델 정밀도, 드리프트",
+                complexity: 65
+            },
+            {
+                name: "LLMOps",
+                year: "2020~",
+                target: "프롬프트, 벡터 스토어, LLM",
+                purpose: "LLM 기반 앱의 고유 라이프사이클 관리",
+                monitoring: "토큰 사용량, 유해성, RAG 품질",
+                complexity: 80
+            },
+            {
+                name: "AgentOps",
+                year: "2023~",
+                target: "자율 에이전트, 이용 툴, 의사결정 프로세스",
+                purpose: "자율 행동 통제/관측, 안전성 확보",
+                monitoring: "의사결정 트레이스, 툴 호출 성공률",
+                complexity: 100
+            }
+        ];
+
+        const cycleSteps = [
+            {
+                title: "동적인 행동 계획 설계",
+                desc: "복잡한 목표 달성을 위한 자율 행동의 메커니즘을 설계합니다. 싱글/멀티 에이전트 아키텍처와 논리적/보안 가드레일 도입이 핵심입니다.",
+                points: ["아키텍처 패턴 검토 (계층형, 협조형, 메쉬)", "가드레일 도입 (유해 콘텐츠 방지, API 호출 제한)", "책임 있는 설계"],
+                vizType: "list"
+            },
+            {
+                title: "프로세스 타당성 평가",
+                desc: "결과뿐만 아니라 결과에 이르는 과정(CoT)의 타당성, 효율성, 안전성을 다각도로 평가합니다. 벤치마크 데이터셋 활용이 권장됩니다.",
+                points: ["효율성/코스트 (지연시간, 단계수)", "안전성/신뢰성 (가드레일 발동률)", "타스크 퍼포먼스 (완료율, 정확성)"],
+                vizType: "chart",
+                chartData: [85, 90, 75, 80, 70] // Dummy Radar Data
+            },
+            {
+                title: "툴 연계의 동적 관리",
+                desc: "여러 툴과 API가 연계된 환경을 효율적으로 전개합니다. 에이전트가 툴과 상호작용할 때의 동적 오케스트레이션을 관리합니다.",
+                points: ["API 서빙 효율화", "툴 연동 인터페이스 관리", "동적 자원 할당"],
+                vizType: "list"
+            },
+            {
+                title: "가드레일 및 안전성 모니터링",
+                desc: "의도치 않은 행동이나 비용 초과를 방지하기 위해 정책을 실시간으로 감시합니다. 단순 메트릭을 넘어 '관측 가능성(Observability)'을 확보합니다.",
+                points: ["의사결정 프로세스 트레이싱", "실시간 코스트 모니터링", "가드레일 발동 감시"],
+                vizType: "list"
+            },
+            {
+                title: "리얼타임 피드백 루프 개선",
+                desc: "운영에서 얻은 로그와 피드백을 통해 모델을 미세 조정하거나 프롬프트를 개선하여 성능을 지속적으로 향상시킵니다.",
+                points: ["명시적/암시적 피드백 수집", "LLM 성능 개선 (파인튜닝)", "프롬프트 엔지니어링 최적화"],
+                vizType: "list"
+            }
+        ];
+
+        const challenges = [
+            {
+                id: "A",
+                title: "재현성의 위기",
+                icon: "🎲",
+                problem: "LLM의 확률적 특성과 외부 환경 변화로 인해 동일 입력에도 다른 결과가 도출될 수 있음.",
+                mitigation: "통계적 평가(성공률 분포 측정), 관측 가능성 확보(세션 리플레이 도입)."
+            },
+            {
+                id: "B",
+                title: "병적 루프 (Pathological Loops)",
+                icon: "♾️",
+                problem: "에이전트 사고가 막다른 길에 빠지는 무한 루프나 과도한 타스크 분해 현상 발생.",
+                mitigation: "서킷 브레이커 패턴 도입, LLM-as-a-Judge를 통한 프로세스 최적화, HITL(인간 개입) 구조 설계."
+            },
+            {
+                id: "C",
+                title: "경제적 불안정성",
+                icon: "💰",
+                problem: "제어가 어려운 에이전트의 '토큰 폭발'로 인한 예기치 못한 비용 증가 위험.",
+                mitigation: "타스크별 토큰/단계 상한 설정, 실시간 비용 감시 및 알림, 캐싱 기반 최적화."
+            },
+            {
+                id: "D",
+                title: "새로운 보안 위협",
+                icon: "🛡️",
+                problem: "프롬프트 인젝션, 과도한 권한 행사(Excessive Agency), 데이터 유출 위험.",
+                mitigation: "Policy-as-Code 기반 권한 강제, 에이전트 전용 레드팀 테스트, 트레이서빌리티(추적성) 확보."
+            }
+        ];
+
+        // State
+        let currentOpsIndex = 3;
+        let evolutionChart = null;
+        let radarChart = null;
+
+        // Navigation
+        function scrollToId(id) {
+            const el = document.getElementById(id);
+            if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+        }
+
+        // Section 1: Evolution
+        function initEvolution() {
+            const btnContainer = document.getElementById('ops-btns');
+            opsEvolution.forEach((ops, idx) => {
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left px-4 py-3 rounded-xl border transition-all ${idx === currentOpsIndex ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-slate-600 border-slate-200 hover:border-blue-300'}`;
+                btn.innerHTML = `<div class="text-xs font-bold opacity-70">${ops.year}</div><div class="font-bold">${ops.name}</div>`;
+                btn.onclick = () => updateOps(idx);
+                btnContainer.appendChild(btn);
+            });
+            updateOps(3);
+        }
+
+        function updateOps(index) {
+            currentOpsIndex = index;
+            const data = opsEvolution[index];
+            const content = document.getElementById('ops-content');
+            
+            // UI Update
+            const btns = document.querySelectorAll('#ops-btns button');
+            btns.forEach((btn, i) => {
+                if(i === index) {
+                    btn.classList.add('bg-blue-600', 'text-white', 'border-blue-600');
+                    btn.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
+                } else {
+                    btn.classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
+                    btn.classList.add('bg-white', 'text-slate-600', 'border-slate-200');
+                }
+            });
+
+            content.innerHTML = `
+                <h4 class="text-blue-600 font-bold mb-2">핵심 관리 대상: ${data.target}</h4>
+                <p class="text-sm text-slate-800 mb-4"><strong>목적:</strong> ${data.purpose}</p>
+                <div class="bg-white p-3 rounded-lg border border-slate-200 text-xs">
+                    <div class="text-slate-400 font-bold mb-1 uppercase tracking-tighter">모니터링 지표</div>
+                    <div class="text-slate-700">${data.monitoring}</div>
+                </div>
+            `;
+
+            updateEvolutionChart();
+        }
+
+        function updateEvolutionChart() {
+            const ctx = document.getElementById('evolutionChart').getContext('2d');
+            const data = opsEvolution.map(o => o.complexity);
+            const labels = opsEvolution.map(o => o.name);
+            const bgColors = opsEvolution.map((_, i) => i === currentOpsIndex ? '#2563eb' : '#e2e8f0');
+
+            if (evolutionChart) evolutionChart.destroy();
+            evolutionChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '상대적 운영 복잡도',
+                        data: data,
+                        backgroundColor: bgColors,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { x: { display: false }, y: { grid: { display: false } } },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        // Section 2: Cycle Tabs
+        function updateCycleTab(index) {
+            const tabs = document.querySelectorAll('[id^="tab-"]');
+            tabs.forEach((tab, i) => {
+                if(i === index) tab.className = "flex-1 px-6 py-4 text-sm font-bold uppercase transition tab-active whitespace-nowrap";
+                else tab.className = "flex-1 px-6 py-4 text-sm font-bold uppercase transition text-slate-500 whitespace-nowrap";
+            });
+
+            const step = cycleSteps[index];
+            const detailContainer = document.getElementById('cycle-detail');
+            
+            let vizHTML = '';
+            if(step.vizType === 'chart') {
+                vizHTML = `<div class="bg-slate-50 p-6 rounded-2xl flex flex-col items-center">
+                    <span class="text-xs font-bold text-slate-400 mb-4">에이전트 평가 다차원 지표 예시</span>
+                    <div class="w-full h-[250px]"><canvas id="radarChart"></canvas></div>
+                </div>`;
+            } else {
+                vizHTML = `<div class="bg-blue-600 rounded-3xl p-8 text-white">
+                    <div class="text-5xl mb-6">⚙️</div>
+                    <h4 class="text-xl font-bold mb-2">실무 적용 체크리스트</h4>
+                    <ul class="space-y-3 opacity-90 text-sm">
+                        ${step.points.map(p => `<li>- ${p}</li>`).join('')}
+                    </ul>
+                </div>`;
+            }
+
+            detailContainer.innerHTML = `
+                <div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4">${step.title}</h3>
+                    <p class="text-slate-600 leading-relaxed mb-6">${step.desc}</p>
+                    <div class="space-y-3">
+                        ${step.points.map(p => `
+                            <div class="flex items-center space-x-3 p-3 bg-slate-50 rounded-lg">
+                                <span class="text-blue-600 font-bold">✓</span>
+                                <span class="text-sm font-medium text-slate-700">${p}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                ${vizHTML}
+            `;
+
+            if(step.vizType === 'chart') initRadarChart();
+        }
+
+        function initRadarChart() {
+            const ctx = document.getElementById('radarChart').getContext('2d');
+            if (radarChart) radarChart.destroy();
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['지연시간', '코스트', '안전성', '완료율', '정확성'],
+                    datasets: [{
+                        label: '점수',
+                        data: [85, 90, 75, 80, 70],
+                        backgroundColor: 'rgba(37, 99, 235, 0.2)',
+                        borderColor: '#2563eb',
+                        pointBackgroundColor: '#2563eb'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { r: { beginAtZero: true, max: 100 } },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        // Section 3: Challenges
+        function initChallenges() {
+            const grid = document.getElementById('challenge-grid');
+            challenges.forEach(c => {
+                const card = document.createElement('div');
+                card.className = "card-hover bg-slate-50 border border-slate-200 rounded-3xl p-8";
+                card.innerHTML = `
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="text-3xl">${c.icon}</span>
+                        <span class="text-xs font-bold px-2 py-1 bg-white border border-slate-200 rounded text-slate-400">과제 ${c.id}</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">${c.title}</h3>
+                    <p class="text-sm text-slate-500 mb-6 leading-relaxed">${c.problem}</p>
+                    <div class="pt-6 border-t border-slate-200">
+                        <div class="text-[10px] font-bold text-blue-600 uppercase mb-2 tracking-widest">운영 완화책</div>
+                        <p class="text-sm font-bold text-slate-800">${c.mitigation}</p>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Initialization
+        window.onload = () => {
+            initEvolution();
+            updateCycleTab(0);
+            initChallenges();
+        };
+    </script>
+</body>
+</html>

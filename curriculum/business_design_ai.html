@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD룰 AI교육 - AI 기반 차세대 업무 설계 전략 제안</title>
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="15x15"
+    href="./dist/images/favicon.png"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Pretendard', sans-serif; background-color: #f9fafb; color: #1f2937; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin: 0 auto; height: 350px; }
+        .gradient-text { background: linear-gradient(90deg, #2563eb, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .tab-active { border-bottom: 2px solid #2563eb; color: #2563eb; font-weight: 700; }
+        .card-hover:hover { transform: translateY(-5px); transition: all 0.3s ease; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); }
+    </style>
+    <!-- Chosen Palette: Slate & Blue Professional (Clean Corporate Look) -->
+    <!-- Application Structure Plan: 
+         - Hero Section: "김재우의 실무 업무 설계" 철학 소개
+         - Comparison: Traditional vs AI-Enhanced Design (Radar Chart)
+         - Core Methodology: The 5 Steps of AI Business Design (Interactive Cards)
+         - Case Story: Summary of "JAEWOO Kim" scenario
+         - Tools & Worksheets: Implementation Roadmap
+    -->
+    <!-- Visualization & Content Choices:
+         - Radar Chart: Compare "Control", "Scalability", "Efficiency", "Agility" between old and new methods.
+         - Interactive Steps: Use HTML/JS to toggle details for each design phase.
+         - Progress Timeline: For the implementation roadmap.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="antialiased">
+
+    <!-- Header Navigation -->
+    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <img src="mdrules-logo.png" alt="MD룰 AI교육" width="116px">
+            </div>
+            <div class="hidden md:flex gap-8 text-sm font-medium text-slate-600">
+                <button onclick="scrollToId('principles')" class="hover:text-blue-600">설계 철학</button>
+                <button onclick="scrollToId('strategy')" class="hover:text-blue-600">AI 전략</button>
+                <button onclick="scrollToId('story')" class="hover:text-blue-600">성공 스토리</button>
+                <a href="https://mdrules.dev" target="_self" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">
+                사이트로 이동
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-white py-20 border-b border-slate-100">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+                기술이 아닌 <span class="gradient-text">업무가 주도하는</span><br>차세대 비즈니스 혁신
+            </h1>
+            <p class="text-xl text-slate-500 max-w-2xl mx-auto mb-10">
+                시스템 도입 전 "업무의 지도"를 먼저 그려야 합니다. 업무 설계의 본질적 철학과 최신 AI 에이전트 기술이 만납니다.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100 flex-1">
+                    <h3 class="font-bold text-blue-800 text-lg mb-2">업무 파편화 해소</h3>
+                    <p class="text-sm text-blue-600">개인에 의존하던 업무를 시스템화된 자산으로 전환</p>
+                </div>
+                <div class="bg-purple-50 p-6 rounded-2xl border border-purple-100 flex-1">
+                    <h3 class="font-bold text-purple-800 text-lg mb-2">전체 최적화 달성</h3>
+                    <p class="text-sm text-purple-600">부서 간 칸막이를 허물고 매끄러운 정보 흐름 구축</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Comparison Section -->
+    <section id="principles" class="py-20 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">왜 새로운 설계 방법론인가?</h2>
+                <p class="text-slate-600">기존의 수동적 설계를 넘어 자율적으로 진화하는 업무 체계를 지향합니다.</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="bg-white p-8 rounded-3xl shadow-sm">
+                    <h3 class="text-lg font-bold mb-6 text-center text-slate-400 uppercase tracking-widest">역량 비교 분석</h3>
+                    <div class="chart-container">
+                        <canvas id="strategyRadar"></canvas>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="p-6 bg-white rounded-2xl border border-slate-200 card-hover">
+                        <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+                            <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold">1</span>
+                            암묵지의 형식지화
+                        </h4>
+                        <p class="text-sm text-slate-500 leading-relaxed">
+                            현장의 '장인'만이 알던 노하우를 '업무 정의 시트'와 '업무의 지도'로 구체화하여 누구나 성과를 낼 수 있는 조직적 시퀀스로 만듭니다.
+                        </p>
+                    </div>
+                    <div class="p-6 bg-white rounded-2xl border border-slate-200 card-hover">
+                        <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+                            <span class="w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-sm font-bold">2</span>
+                            기술의 병참화 (Logistics)
+                        </h4>
+                        <p class="text-sm text-slate-500 leading-relaxed">
+                            IT는 화려한 도구가 아니라 업무의 흐름을 지탱하는 강력한 보급망이어야 합니다. AI 에이전트가 데이터의 흐름을 가속화합니다.
+                        </p>
+                    </div>
+                    <div class="p-6 bg-white rounded-2xl border border-slate-200 card-hover">
+                        <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+                            <span class="w-8 h-8 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-sm font-bold">3</span>
+                            애자일한 지속적 개선
+                        </h4>
+                        <p class="text-sm text-slate-500 leading-relaxed">
+                            설계는 한 번으로 끝나지 않습니다. AI가 수집한 실행 로그를 바탕으로 비효율이 발생하는 즉시 프로세스를 재구성합니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Enhanced Methodology -->
+    <section id="strategy" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">AI 기반 차세대 업무 설계 5단계</h2>
+                <p class="text-slate-600">업무 설계의 기초 워크시트에 AI의 지능을 더한 실전 로드맵입니다.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                <button onclick="updateStep(0)" id="step-btn-0" class="p-4 rounded-xl border text-center transition step-btn bg-blue-600 text-white font-bold">
+                    STEP 1<br><span class="text-xs font-normal">업무 식별</span>
+                </button>
+                <button onclick="updateStep(1)" id="step-btn-1" class="p-4 rounded-xl border text-center transition step-btn bg-white text-slate-600">
+                    STEP 2<br><span class="text-xs font-normal">지능형 맵핑</span>
+                </button>
+                <button onclick="updateStep(2)" id="step-btn-2" class="p-4 rounded-xl border text-center transition step-btn bg-white text-slate-600">
+                    STEP 3<br><span class="text-xs font-normal">ECRS+AI</span>
+                </button>
+                <button onclick="updateStep(3)" id="step-btn-3" class="p-4 rounded-xl border text-center transition step-btn bg-white text-slate-600">
+                    STEP 4<br><span class="text-xs font-normal">에이전트 도입</span>
+                </button>
+                <button onclick="updateStep(4)" id="step-btn-4" class="p-4 rounded-xl border text-center transition step-btn bg-white text-slate-600">
+                    STEP 5<br><span class="text-xs font-normal">추적 및 개선</span>
+                </button>
+            </div>
+
+            <div id="step-content" class="mt-8 bg-slate-50 p-10 rounded-3xl min-h-[300px] border border-slate-200">
+                <!-- Content injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Study / Story -->
+    <section id="story" class="py-20 bg-slate-900 text-white">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-12 h-1 bg-blue-500"></div>
+                <h2 class="text-2xl font-bold">성공 스토리: 김재우가 실무에 적용한 혁신</h2>
+            </div>
+            <div class="space-y-8">
+                <div class="relative pl-8 border-l border-slate-700">
+                    <div class="absolute -left-1.5 top-0 w-3 h-3 bg-blue-500 rounded-full"></div>
+                    <h4 class="text-blue-400 font-bold mb-2">발단: 중단된 DX 프로젝트</h4>
+                    <p class="text-slate-400 text-sm">준비 없는 요건 정의와 현장의 저항으로 붕괴 직전의 위기 발생.</p>
+                </div>
+                <div class="relative pl-8 border-l border-slate-700">
+                    <div class="absolute -left-1.5 top-0 w-3 h-3 bg-slate-500 rounded-full"></div>
+                    <h4 class="text-slate-300 font-bold mb-2">전환: 업무 설계라는 빛</h4>
+                    <p class="text-slate-400 text-sm">시스템 선정이 아닌, '업무 정의 시트'와 '현장의 낭비 발견'으로의 회귀.</p>
+                </div>
+                <div class="relative pl-8 border-l border-slate-700">
+                    <div class="absolute -left-1.5 top-0 w-3 h-3 bg-emerald-500 rounded-full"></div>
+                    <h4 class="text-emerald-400 font-bold mb-2">결과: 끊임없는 개선의 여정</h4>
+                    <p class="text-slate-400 text-sm">단순 전산화를 넘어, 조직 전체가 변화에 대응하는 '최적화 근육'을 획득.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white py-12 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-sm text-slate-400 mb-4">Copyright &copy;2026 JAEWOO, KIM.</p>
+            <div class="flex justify-center gap-8 text-xs font-bold text-slate-600 uppercase tracking-widest">
+                <span>Working 1-10</span>
+                <span>ECRS Method</span>
+                <span>AgentOps Ready</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Data for Methodology
+        const steps = [
+            {
+                title: "AI-Ready 업무 식별 (Discovery)",
+                desc: "단순히 업무를 나열하는 것이 아닙니다. AI가 판단하거나 실행할 수 있는 '정형적 데이터'와 '판단 로직'을 중심으로 업무 정의 시트를 재구성합니다.",
+                tool: "업무 정의 시트 v2.0 (AI 필드 추가)"
+            },
+            {
+                title: "지능형 업무 지도 구축 (Intelligent Mapping)",
+                desc: "전체 프로세스 연결망에서 병목 구간을 탐지합니다. AI 에이전트가 개입했을 때 수작업 대비 10배 이상의 효율을 낼 수 있는 지점을 '데이터 흐름' 기반으로 도출합니다.",
+                tool: "업무의 지도 (Information Flow Map)"
+            },
+            {
+                title: "ECRS+AI 최적화 (Optimization)",
+                desc: "ECRS 원칙(Eliminate, Combine, Rearrange, Simplify)을 적용하되, '결합(Combine)' 단계에서 AI 에이전트가 여러 사람의 손을 거치던 작업을 한 번에 처리하도록 설계합니다.",
+                tool: "낭비 탐지 프레임워크"
+            },
+            {
+                title: "에이전틱 워크플로우 도입 (Implementation)",
+                desc: "기술이 업무를 대체하는 것이 아니라 보조하도록 설계합니다. AI 에이전트가 인간의 판단이 필요한 부분만 에스컬레이션하는 'Human-in-the-loop' 구조를 확립합니다.",
+                tool: "개별 정의 시트 (Agent Role Profile)"
+            },
+            {
+                title: "실시간 추적 및 자동 진화 (Evolution)",
+                desc: "AgentOps를 구축하여 실시간 실행 로그를 분석합니다. 업무가 변함에 따라 발생하는 새로운 낭비를 AI가 먼저 찾아내어 재설계를 제안합니다.",
+                tool: "업무 설계 애자일 대시보드"
+            }
+        ];
+
+        function updateStep(index) {
+            // Update buttons
+            document.querySelectorAll('.step-btn').forEach((btn, i) => {
+                if(i === index) {
+                    btn.className = "p-4 rounded-xl border text-center transition step-btn bg-blue-600 text-white font-bold";
+                } else {
+                    btn.className = "p-4 rounded-xl border text-center transition step-btn bg-white text-slate-600";
+                }
+            });
+
+            // Update content
+            const content = document.getElementById('step-content');
+            const step = steps[index];
+            content.innerHTML = `
+                <div class="flex flex-col md:flex-row gap-10 items-center">
+                    <div class="flex-1">
+                        <span class="text-blue-600 font-bold uppercase tracking-widest text-sm">Step 0${index + 1}</span>
+                        <h3 class="text-2xl font-bold mb-4 mt-2">${step.title}</h3>
+                        <p class="text-slate-600 leading-relaxed mb-6">${step.desc}</p>
+                        <div class="inline-block px-4 py-2 bg-white border border-slate-200 rounded-lg text-sm font-medium text-slate-700">
+                            활용 도구: ${step.tool}
+                        </div>
+                    </div>
+                    <div class="w-full md:w-48 h-48 bg-white rounded-3xl border border-slate-100 flex items-center justify-center text-5xl shadow-inner">
+                        ${['🔍', '🗺️', '✂️', '🤖', '📈'][index]}
+                    </div>
+                </div>
+            `;
+        }
+
+        function scrollToId(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        window.onload = () => {
+            updateStep(0);
+
+            // Radar Chart for Strategy
+            const ctx = document.getElementById('strategyRadar').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['통제력', '확장성', '효율성', '민첩성', '표준화'],
+                    datasets: [{
+                        label: '기존 수동 설계',
+                        data: [70, 40, 50, 30, 60],
+                        borderColor: '#94a3b8',
+                        backgroundColor: 'rgba(148, 163, 184, 0.2)',
+                    }, {
+                        label: 'AI 기반 업무설계',
+                        data: [90, 95, 90, 85, 90],
+                        borderColor: '#2563eb',
+                        backgroundColor: 'rgba(37, 99, 235, 0.2)',
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { display: false },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    },
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+        };
+    </script>
+</body>
+</html>

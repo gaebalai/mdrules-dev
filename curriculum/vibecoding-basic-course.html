@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD룰 AI교육 - 비개발자를 위한 바이브코딩(Vibe Coding) 교육 </title>
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="15x15"
+    href="./dist/images/favicon.png"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Chosen Palette: Warm Neutrals & Professional Slate -->
+    <!-- Background: bg-stone-50 (Warm White) -->
+    <!-- Primary Text: text-slate-800 -->
+    <!-- Accents: Orange (Energy/Creation), Slate (Professionalism) -->
+
+    <style>
+        /* Custom Chart Container Styling as per requirements */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; /* Base height */
+            max-height: 400px;
+        }
+        
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        body {
+            font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+            background-color: #fafaf9; /* stone-50 */
+            color: #1e293b; /* slate-800 */
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .active-tab {
+            background-color: #f97316; /* orange-500 */
+            color: white;
+            border-color: #f97316;
+        }
+
+        .inactive-tab {
+            background-color: white;
+            color: #64748b; /* slate-500 */
+            border-color: #e2e8f0;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- HEADER Section -->
+    <header class="bg-slate-900 text-white py-12 px-4 shadow-lg">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-3xl md:text-5xl font-bold mb-4">비개발자를 위한 AI 앱 개발: <span class="text-orange-500">바이브코딩</span> 마스터</h1>
+            <p class="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto mb-8">
+                코딩 지식 없이도 자연어로 앱을 기획, 구축, 배포하는 실무형 AI 개발 교육 
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 text-sm md:text-base">
+                <span class="bg-slate-800 px-4 py-2 rounded-full border border-slate-700"><i class="fas fa-clock mr-2 text-orange-400"></i>총 16시간 (2일)</span>
+                <span class="bg-slate-800 px-4 py-2 rounded-full border border-slate-700"><i class="fas fa-laptop-code mr-2 text-orange-400"></i>실습 중심 (63%)</span>
+                <span class="bg-slate-800 px-4 py-2 rounded-full border border-slate-700"><i class="fas fa-rocket mr-2 text-orange-400"></i>프로젝트 3개 완성</span>
+                <a href="https://mdrules.dev" target="_self" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">
+                사이트로 이동
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Application Structure Plan:
+         The app is divided into 3 main interactive zones:
+         1. "Effectiveness Analysis": Radar chart showing skill transformation. Justifies the investment.
+         2. "Interactive Curriculum Map": The core interactive element. Users toggle between Day 1/2 and click modules for details.
+         3. "Methodology & Tools": Pie chart for theory/practice balance and tool grid.
+         
+         Flow: Context (Why) -> Content (What) -> Method (How).
+    -->
+
+    <main class="max-w-6xl mx-auto px-4 py-12 space-y-16">
+
+        <!-- SECTION 1: EXPECTED OUTCOMES (Why this course?) -->
+        <section>
+            <div class="mb-6 border-l-4 border-orange-500 pl-4">
+                <h2 class="text-2xl font-bold text-slate-900">1. 기대 효과 및 역량 변화</h2>
+                <p class="text-slate-600 mt-2">
+                    본 과정은 단순한 툴 사용법 교육이 아닙니다. 기획자, PM, 마케터 등 비개발 직군이 
+                    AI(bolt.new)와 협업하여 실제 업무 도구를 스스로 제작할 수 있는 '바이브코딩(Vibe Coding)' 역량을 함양하는 것을 목표로 합니다.
+                    아래 차트는 수강 전후의 예상 역량 변화를 나타냅니다.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <!-- Text Insights -->
+                <div class="space-y-6">
+                    <div class="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                        <h3 class="font-bold text-lg mb-2"><i class="fas fa-bullseye text-orange-500 mr-2"></i>핵심 목표</h3>
+                        <ul class="list-disc list-inside space-y-2 text-slate-700 text-sm">
+                            <li>자연어(프롬프트)로 요구사항을 정의하고 앱으로 시각화</li>
+                            <li>AI 주도 개발(AI-Driven) 흐름 이해 및 에러 대응 능력 확보</li>
+                            <li>영업 시뮬레이션, 재고 관리 등 <strong>현업 즉시 적용 가능한 앱</strong> 제작</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center p-4 bg-orange-50 rounded-lg">
+                            <div class="text-3xl font-bold text-orange-600 mb-1">0%</div>
+                            <div class="text-xs text-slate-500 font-medium">필요한 코딩 지식</div>
+                        </div>
+                        <div class="text-center p-4 bg-blue-50 rounded-lg">
+                            <div class="text-3xl font-bold text-blue-600 mb-1">100%</div>
+                            <div class="text-xs text-slate-500 font-medium">자연어 기반 개발</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Radar Chart Container -->
+                <div class="bg-white p-4 rounded-lg flex flex-col items-center justify-center">
+                    <h4 class="text-center text-sm font-semibold text-slate-500 mb-4">역량 향상 시뮬레이션</h4>
+                    <div class="chart-container">
+                        <canvas id="competencyChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: CURRICULUM ROADMAP (The Core Content) -->
+        <section>
+            <div class="mb-6 border-l-4 border-orange-500 pl-4">
+                <h2 class="text-2xl font-bold text-slate-900">2. 커리큘럼 로드맵</h2>
+                <p class="text-slate-600 mt-2">
+                    이틀간 진행되는 바이브코딩 마스터 과정의 상세 일정입니다. 
+                    <strong>1일차</strong>는 기초와 환경 구축에 집중하며, <strong>2일차</strong>는 심화 로직 구현과 실제 배포까지 진행합니다.
+                    아래 탭을 클릭하여 일자별 상세 모듈을 확인하세요.
+                </p>
+            </div>
+
+            <!-- Day Toggles -->
+            <div class="flex justify-center mb-8">
+                <button id="btnDay1" onclick="switchDay(1)" class="px-8 py-3 rounded-l-lg border font-bold text-lg active-tab transition-colors">
+                    1일차: 기초 & 비즈니스 앱
+                </button>
+                <button id="btnDay2" onclick="switchDay(2)" class="px-8 py-3 rounded-r-lg border font-bold text-lg inactive-tab transition-colors">
+                    2일차: 심화 & 배포
+                </button>
+            </div>
+
+            <!-- Dynamic Content Area -->
+            <div id="curriculumContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Content injected via JS -->
+            </div>
+        </section>
+
+        <!-- SECTION 3: METHODOLOGY & TOOLS (How it works) -->
+        <section>
+            <div class="mb-6 border-l-4 border-orange-500 pl-4">
+                <h2 class="text-2xl font-bold text-slate-900">3. 교육 방법론 및 도구</h2>
+                <p class="text-slate-600 mt-2">
+                    본 과정은 이론을 최소화하고 실습을 극대화하여 학습자가 몸으로 익히도록 설계되었습니다.
+                    최신 AI 개발 도구인 <strong>bolt.new</strong>를 중심으로 GitHub, Figma 등 실무 툴체인을 경험합니다.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Theory vs Practice Chart -->
+                <div class="md:col-span-1 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-center mb-4 text-slate-800">이론 vs 실습 비중</h3>
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="ratioChart"></canvas>
+                    </div>
+                    <p class="text-center text-xs text-slate-500 mt-4">
+                        총 16시간 중 10시간(63%)이 <br>직접 만드는 핸즈온 실습으로 구성됨
+                    </p>
+                </div>
+
+                <!-- Tool Stack & Projects -->
+                <div class="md:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold mb-4 text-slate-800">사용 도구 및 실습 프로젝트</h3>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Tools -->
+                        <div class="bg-stone-50 p-4 rounded-lg">
+                            <h4 class="text-sm font-bold text-orange-600 mb-3 uppercase">Tech Stack</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-center">
+                                    <span class="w-8 h-8 flex items-center justify-center bg-black text-white rounded-md mr-3 text-xs font-bold">B</span>
+                                    <div>
+                                        <p class="font-bold text-sm">bolt.new</p>
+                                        <p class="text-xs text-slate-500">AI 웹 개발/배포 플랫폼</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-8 h-8 flex items-center justify-center bg-slate-700 text-white rounded-md mr-3"><i class="fab fa-github"></i></span>
+                                    <div>
+                                        <p class="font-bold text-sm">GitHub</p>
+                                        <p class="text-xs text-slate-500">코드 저장 및 버전 관리</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-8 h-8 flex items-center justify-center bg-purple-600 text-white rounded-md mr-3"><i class="fab fa-figma"></i></span>
+                                    <div>
+                                        <p class="font-bold text-sm">Figma</p>
+                                        <p class="text-xs text-slate-500">UI/UX 기획 (계정 필요)</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Projects -->
+                        <div class="bg-stone-50 p-4 rounded-lg">
+                            <h4 class="text-sm font-bold text-blue-600 mb-3 uppercase">Key Projects</h4>
+                            <div class="space-y-3">
+                                <div class="p-3 bg-white rounded border border-stone-200 shadow-sm">
+                                    <p class="font-bold text-sm text-slate-800">1. 사내 비품 관리 앱</p>
+                                    <p class="text-xs text-slate-500">CRUD 기본 및 데이터 구조 이해</p>
+                                </div>
+                                <div class="p-3 bg-white rounded border border-stone-200 shadow-sm">
+                                    <p class="font-bold text-sm text-slate-800">2. 영업 수익 시뮬레이션</p>
+                                    <p class="text-xs text-slate-500">차트 시각화 및 동적 수식 계산</p>
+                                </div>
+                                <div class="p-3 bg-white rounded border border-stone-200 shadow-sm">
+                                    <p class="font-bold text-sm text-slate-800">3. 경영/PM 대시보드</p>
+                                    <p class="text-xs text-slate-500">복잡한 데이터 연동 및 배포</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-8 text-center text-sm">
+        <div class="flex justify-center items-center">
+            <img src="mdrules-logo.png" alt="MD룰 AI교육" width="116px">
+        </div>
+            <p class="text-slate-400 text-sm mb-4">Copyright &copy;2026 JAEWOO, KIM.</p>
+            <p class="text-slate-400 text-xs">Email: jaewoo@mdrules.dev</p>
+    </footer>
+
+    <!-- Visualization & Content Choices:
+         1. Competency Radar Chart: Needed to visually prove the value proposition of "Non-dev to Dev-capable". 
+            Comparing 'Before' (Traditional) vs 'After' (Vibe Coding) is the strongest sales argument.
+         2. Theory/Practice Doughnut: Supports the claim of "Practical Training". 
+            Users need to see the 63% practice number visually to believe it's not a boring lecture.
+         3. Dynamic Cards (JS): The curriculum is dense. Listing it all at once creates cognitive overload. 
+            Hiding details behind clicks allows users to scan the flow first, then drill down.
+         CONFIRMATION: NO SVG graphics used (FontAwesome/HTML/Canvas only). NO Mermaid JS used.
+    -->
+
+    <script>
+        // --- DATA STORAGE ---
+        // Curriculum Data extracted directly from the PDF
+        const curriculumData = {
+            1: [
+                {
+                    time: "1H",
+                    type: "이론",
+                    title: "바이브코딩 개요 & 트렌드",
+                    desc: "기존 개발과 AI 주도 개발의 차이점 및 프롬프트 엔지니어링의 관계 이해",
+                    details: [
+                        "AI 개발 트렌드와 바이브코딩 정의",
+                        "기존 개발 vs AI 주도 개발의 차이점",
+                        "프롬프트 엔지니어링과 바이브코딩의 관계"
+                    ]
+                },
+                {
+                    time: "2H",
+                    type: "이론+실습",
+                    title: "개발환경 구축 & Todo 앱",
+                    desc: "bolt.new 계정 생성 및 간단한 채팅 기반 개발 흐름 체험",
+                    details: [
+                        "[기본] bolt.new 소개 및 계정 생성",
+                        "[실습] 간단한 Todo 리스트 만들기",
+                        "인터페이스 익히기 및 채팅 기반 개발 흐름 이해"
+                    ]
+                },
+                {
+                    time: "2H",
+                    type: "이론+실습",
+                    title: "미니 핸즈온: 비품 관리 앱",
+                    desc: "데이터 구조 이해 및 기본적인 CRUD(생성, 읽기, 수정, 삭제) 기능 구현",
+                    details: [
+                        "데이터 구조의 이해 (AI에게 데이터 요청하기)",
+                        "기본적인 CRUD 기능 구현",
+                        "[실습] 사내 비품 관리 앱 만들기 완성"
+                    ]
+                },
+                {
+                    time: "2H",
+                    type: "이론+실습",
+                    title: "Project 1: 영업용 수익 시뮬레이션",
+                    desc: "클라이언트 니즈 분석, 동적 데이터 처리, 차트/그래프 시각화 구현",
+                    details: [
+                        "수익 계획 시뮬레이션 앱 개발",
+                        "클라이언트 니즈 분석 및 프롬프트 작성",
+                        "차트/그래프 시각화 구현 요청",
+                        "동적 데이터 처리 및 수식 계산 로직 적용"
+                    ]
+                },
+                {
+                    time: "1H",
+                    type: "이론+실습",
+                    title: "Project 2: PM용 앱 (기획)",
+                    desc: "복잡한 요구사항을 정의서로 변환하고 AI 수주/재고 관리 시스템 기획",
+                    details: [
+                        "[실습] AI 수주/재고 관리 시스템 (기획 단계)",
+                        "복잡한 요구사항을 정의서로 변환하는 방법"
+                    ]
+                }
+            ],
+            2: [
+                {
+                    time: "2H",
+                    type: "이론+실습",
+                    title: "Project 2: PM용 앱 (구현)",
+                    desc: "데이터베이스 연동 개념(Supabase 등) 및 관계형 데이터 처리 구조 이해",
+                    details: [
+                        "[실습] AI 수주/재고 관리 시스템 (구현 단계)",
+                        "관계형 데이터 처리 구조의 이해",
+                        "Supabase 등 외부 DB 연동 개념 학습"
+                    ]
+                },
+                {
+                    time: "3H",
+                    type: "이론+실습",
+                    title: "Project 3: 경영/인사 대시보드",
+                    desc: "사내 공지, 일정, 결재 시스템 통합 대시보드 개발 및 UI/UX 개선",
+                    details: [
+                        "[실습] 사내 통합 관리 대시보드 만들기",
+                        "게시판, 일정관리, 전자결재 흐름 구현",
+                        "UI/UX 심미성 개선 요청 (Tailwind 활용)",
+                        "사용자 권한 관리 기초"
+                    ]
+                },
+                {
+                    time: "2H",
+                    type: "이론+실습",
+                    title: "배포 및 에러 핸들링",
+                    desc: "Netlify/Vercel을 통한 실제 웹 배포 및 AI와 협업하여 버그 수정하기",
+                    details: [
+                        "Netlify/Vercel을 활용한 원클릭 배포",
+                        "배포 후 발생하는 에러 로그 확인법",
+                        "AI에게 에러 로그 전달하고 수정 요청하는 법",
+                        "유지보수 가이드"
+                    ]
+                },
+                {
+                    time: "1H",
+                    type: "이론",
+                    title: "종합 리뷰 & Q&A",
+                    desc: "전체 과정 복습, 포트폴리오 정리 가이드, 질의응답",
+                    details: [
+                        "만들어진 3가지 앱 포트폴리오 정리",
+                        "향후 학습 로드맵 제안",
+                        "종합 Q&A"
+                    ]
+                }
+            ]
+        };
+
+        // --- DOM ELEMENTS ---
+        const container = document.getElementById('curriculumContainer');
+        const btnDay1 = document.getElementById('btnDay1');
+        const btnDay2 = document.getElementById('btnDay2');
+
+        // --- RENDER FUNCTION ---
+        function renderModules(day) {
+            // Update Tab Styles
+            if(day === 1) {
+                btnDay1.className = "px-8 py-3 rounded-l-lg border font-bold text-lg active-tab transition-colors";
+                btnDay2.className = "px-8 py-3 rounded-r-lg border font-bold text-lg inactive-tab transition-colors";
+            } else {
+                btnDay1.className = "px-8 py-3 rounded-l-lg border font-bold text-lg inactive-tab transition-colors";
+                btnDay2.className = "px-8 py-3 rounded-r-lg border font-bold text-lg active-tab transition-colors";
+            }
+
+            // Clear Container
+            container.innerHTML = '';
+
+            // Generate Cards
+            const modules = curriculumData[day];
+            modules.forEach((mod, index) => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-6 rounded-xl shadow-sm border border-slate-200 card-hover cursor-pointer relative overflow-hidden group";
+                
+                // Content HTML
+                let detailsHtml = mod.details.map(d => `<li class="text-sm text-slate-600 mb-1 flex items-start"><span class="text-orange-500 mr-2">•</span>${d}</li>`).join('');
+
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="inline-block px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-full border border-slate-200">
+                            ${mod.time} | ${mod.type}
+                        </span>
+                        <span class="text-slate-300 group-hover:text-orange-400 transition-colors"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">${mod.title}</h3>
+                    <p class="text-slate-500 text-sm mb-4 leading-relaxed">${mod.desc}</p>
+                    
+                    <div class="details-content hidden mt-4 pt-4 border-t border-slate-100 bg-stone-50 -mx-6 -mb-6 p-6">
+                        <h4 class="text-xs font-bold text-slate-400 uppercase mb-2">상세 학습 내용</h4>
+                        <ul class="">
+                            ${detailsHtml}
+                        </ul>
+                    </div>
+                `;
+
+                // Add Click Event for Expand/Collapse
+                card.addEventListener('click', () => {
+                    const details = card.querySelector('.details-content');
+                    const icon = card.querySelector('.fa-chevron-down');
+                    if (details.classList.contains('hidden')) {
+                        details.classList.remove('hidden');
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                        card.classList.add('ring-2', 'ring-orange-200');
+                    } else {
+                        details.classList.add('hidden');
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                        card.classList.remove('ring-2', 'ring-orange-200');
+                    }
+                });
+
+                container.appendChild(card);
+            });
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Render Day 1 by default
+            renderModules(1);
+
+            // 1. Radar Chart (Competency)
+            const ctxRadar = document.getElementById('competencyChart').getContext('2d');
+            new Chart(ctxRadar, {
+                type: 'radar',
+                data: {
+                    labels: ['기획/요구사항 정의', '코딩 지식', 'AI 협업/프롬프트', '에러 해결', '앱 배포/운영'],
+                    datasets: [{
+                        label: '기존 비개발자',
+                        data: [50, 10, 20, 10, 0],
+                        fill: true,
+                        backgroundColor: 'rgba(148, 163, 184, 0.2)', // slate-400
+                        borderColor: 'rgb(148, 163, 184)',
+                        pointBackgroundColor: 'rgb(148, 163, 184)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(148, 163, 184)'
+                    }, {
+                        label: '바이브코딩 수료 후',
+                        data: [90, 30, 95, 80, 85],
+                        fill: true,
+                        backgroundColor: 'rgba(249, 115, 22, 0.2)', // orange-500
+                        borderColor: 'rgb(249, 115, 22)',
+                        pointBackgroundColor: 'rgb(249, 115, 22)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(249, 115, 22)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    elements: {
+                        line: { borderWidth: 3 }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: { display: true },
+                            suggestedMin: 0,
+                            suggestedMax: 100,
+                            ticks: { backdropColor: 'transparent' } // Hide backdrop for cleaner look
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+
+            // 2. Doughnut Chart (Theory vs Practice)
+            const ctxDoughnut = document.getElementById('ratioChart').getContext('2d');
+            new Chart(ctxDoughnut, {
+                type: 'doughnut',
+                data: {
+                    labels: ['이론 (Theory)', '실습 (Hands-on)'],
+                    datasets: [{
+                        data: [6, 10], // 6 hours theory, 10 hours practice
+                        backgroundColor: [
+                            '#e2e8f0', // slate-200
+                            '#f97316'  // orange-500
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) { label += ': '; }
+                                    let value = context.raw;
+                                    let total = context.chart._metasets[context.datasetIndex].total;
+                                    let percentage = Math.round((value / total) * 100) + '%';
+                                    return label + value + '시간 (' + percentage + ')';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

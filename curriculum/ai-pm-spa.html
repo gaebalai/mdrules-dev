@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD룰 AI교육 - AI PM Architecture 과정</title>
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="15x15"
+    href="./dist/images/favicon.png"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom Font Setup */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: #F5F5F4; /* Warm Neutral - Stone 100 */ color: #1C1917; /* Stone 900 */ }
+        
+        /* Chart Container Styling - Mandatory */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container { height: 350px; }
+        }
+
+        /* Interactive Elements */
+        .module-card { transition: all 0.3s ease; }
+        .module-card:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .nav-btn.active { border-bottom: 2px solid #0F766E; color: #0F766E; font-weight: 700; }
+        
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        
+        .hidden-section { display: none; }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-stone-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <img src="mdrules-logo.png" alt="MD룰 AI교육" width="116px">
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <button onclick="navigateTo('dashboard')" id="nav-dashboard" class="nav-btn active px-3 py-2 text-sm font-medium text-stone-600 hover:text-stone-900">대시보드</button>
+                    <button onclick="navigateTo('curriculum')" id="nav-curriculum" class="nav-btn px-3 py-2 text-sm font-medium text-stone-600 hover:text-stone-900">커리큘럼 상세</button>
+                    <button onclick="navigateTo('region')" id="nav-region" class="nav-btn px-3 py-2 text-sm font-medium text-stone-600 hover:text-stone-900">국가별 전략 (US vs JP)</button>
+                    <button onclick="navigateTo('simulation')" id="nav-simulation" class="nav-btn px-3 py-2 text-sm font-medium text-stone-600 hover:text-stone-900">아키텍처 시뮬레이션</button>
+                    <a href="https://mdrules.dev" target="_self" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">
+                        사이트로 이동
+                    </a>
+                </nav>
+                <!-- Mobile menu button placeholder -->
+                <div class="md:hidden">
+                    <button class="text-stone-500 hover:text-stone-900" onclick="alert('데스크탑 뷰에 최적화되어 있습니다.')">☰</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+        <!-- DASHBOARD SECTION -->
+        <div id="dashboard" class="section-view animate-fade-in space-y-8">
+            <!-- Intro -->
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-stone-100">
+                <h1 class="text-3xl font-bold text-stone-800 mb-2">AI PM 아키텍트 양성 과정 개요</h1>
+                <p class="text-stone-600 leading-relaxed">
+                    본 커리큘럼은 3차례의 전문가 리뷰 및 개선 과정을 거쳐 완성되었습니다. 단순한 프롬프트 엔지니어링을 넘어, 
+                    <span class="font-semibold text-teal-700">시스템 아키텍처, 데이터 파이프라인, ROI 전략, 그리고 글로벌 컴플라이언스</span>를 아우르는 
+                    "Architect-Level" PM을 양성하는 것을 목표로 합니다. 일본과 미국의 테크 기업 환경을 모두 고려하여 설계되었습니다.
+                </p>
+                <div class="mt-4 flex gap-4 text-sm">
+                    <span class="bg-stone-100 text-stone-600 px-3 py-1 rounded-full">Target: Senior PM+</span>
+                    <span class="bg-stone-100 text-stone-600 px-3 py-1 rounded-full">Duration: 12 Weeks</span>
+                    <span class="bg-stone-100 text-stone-600 px-3 py-1 rounded-full">Format: Hybrid</span>
+                </div>
+            </div>
+
+            <!-- Top Metrics/Methodology Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Evolution Summary -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-100 col-span-1 lg:col-span-1">
+                    <h3 class="text-lg font-bold mb-4 text-stone-700">📋 커리큘럼 개선 이력 (3 Iterations)</h3>
+                    <div class="space-y-4">
+                        <div class="relative pl-4 border-l-2 border-stone-200">
+                            <div class="absolute -left-[5px] top-1 w-2 h-2 rounded-full bg-stone-300"></div>
+                            <h4 class="text-sm font-semibold text-stone-500">v1.0: 기초 ML 중심</h4>
+                            <p class="text-xs text-stone-400">알고리즘 이해도 위주. 실무 적용성 부족하다는 피드백.</p>
+                        </div>
+                        <div class="relative pl-4 border-l-2 border-teal-200">
+                            <div class="absolute -left-[5px] top-1 w-2 h-2 rounded-full bg-teal-300"></div>
+                            <h4 class="text-sm font-semibold text-stone-600">v2.0: 시스템 디자인 추가</h4>
+                            <p class="text-xs text-stone-500">LLM Ops 및 RAG 아키텍처 추가. 국가별 법적 이슈 부재.</p>
+                        </div>
+                        <div class="relative pl-4 border-l-2 border-teal-600">
+                            <div class="absolute -left-[5px] top-1 w-2 h-2 rounded-full bg-teal-600"></div>
+                            <h4 class="text-sm font-bold text-teal-800">v3.0 (Final): 아키텍트 통합</h4>
+                            <p class="text-xs text-stone-600">US/JP 현지화 전략, ROI 분석, 윤리적 거버넌스 통합.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart: Skill Distribution -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-100 col-span-1">
+                    <h3 class="text-lg font-bold mb-2 text-stone-700">🎯 핵심 역량 구성 (Weighting)</h3>
+                    <p class="text-xs text-stone-500 mb-4">기술적 깊이와 전략적 비즈니스 마인드의 균형</p>
+                    <div class="chart-container">
+                        <canvas id="skillDistChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart: Difficulty Progression -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-100 col-span-1">
+                    <h3 class="text-lg font-bold mb-2 text-stone-700">📈 학습 난이도 곡선</h3>
+                    <p class="text-xs text-stone-500 mb-4">주차별 아키텍처 복잡도 증가 추이</p>
+                    <div class="chart-container">
+                        <canvas id="difficultyChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CURRICULUM SECTION -->
+        <div id="curriculum" class="section-view hidden-section animate-fade-in">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-stone-800 mb-2">상세 커리큘럼 모듈</h2>
+                <p class="text-stone-600">총 4개의 대주제와 12개의 세부 모듈로 구성되어 있습니다. 각 카드를 클릭하여 세부 학습 목표를 확인하세요.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Navigation Sidebar for Modules -->
+                <div class="lg:col-span-4 space-y-4">
+                    <button onclick="showModule('mod1')" class="module-selector w-full text-left p-4 rounded-lg bg-white border border-teal-500 shadow-md transition hover:bg-teal-50">
+                        <span class="text-xs font-bold text-teal-600 block mb-1">MODULE 01</span>
+                        <h3 class="font-bold text-stone-800">AI 인프라 & 아키텍처</h3>
+                        <p class="text-xs text-stone-500 mt-1">LLM, RAG, Vector DB 구조론</p>
+                    </button>
+                    <button onclick="showModule('mod2')" class="module-selector w-full text-left p-4 rounded-lg bg-white border border-stone-200 hover:border-teal-300 transition">
+                        <span class="text-xs font-bold text-stone-400 block mb-1">MODULE 02</span>
+                        <h3 class="font-bold text-stone-800">LLMOps & 데이터 전략</h3>
+                        <p class="text-xs text-stone-500 mt-1">평가(Eval), 파이프라인, 파인튜닝</p>
+                    </button>
+                    <button onclick="showModule('mod3')" class="module-selector w-full text-left p-4 rounded-lg bg-white border border-stone-200 hover:border-teal-300 transition">
+                        <span class="text-xs font-bold text-stone-400 block mb-1">MODULE 03</span>
+                        <h3 class="font-bold text-stone-800">비즈니스 모델 & ROI</h3>
+                        <p class="text-xs text-stone-500 mt-1">토큰 경제학, Build vs Buy</p>
+                    </button>
+                    <button onclick="showModule('mod4')" class="module-selector w-full text-left p-4 rounded-lg bg-white border border-stone-200 hover:border-teal-300 transition">
+                        <span class="text-xs font-bold text-stone-400 block mb-1">MODULE 04</span>
+                        <h3 class="font-bold text-stone-800">글로벌 거버넌스 & 윤리</h3>
+                        <p class="text-xs text-stone-500 mt-1">EU AI Act, 저작권, Risk 관리</p>
+                    </button>
+                </div>
+
+                <!-- Content Area -->
+                <div class="lg:col-span-8">
+                    <div id="mod1" class="module-content bg-white p-8 rounded-xl border border-stone-200 shadow-sm h-full">
+                        <div class="flex justify-between items-start mb-6">
+                            <div>
+                                <h3 class="text-2xl font-bold text-stone-800">AI 인프라 & 아키텍처</h3>
+                                <p class="text-stone-500 mt-2">PM이 개발자와 아키텍처 수준에서 대화하기 위한 필수 기술 스택 이해</p>
+                            </div>
+                            <span class="bg-teal-100 text-teal-800 text-xs font-bold px-3 py-1 rounded-full">Weeks 1-3</span>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <div class="bg-stone-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-stone-700 mb-2">🔑 Key Topics</h4>
+                                <ul class="list-disc list-inside text-sm text-stone-600 space-y-1">
+                                    <li>Transformer 구조의 이해와 Context Window</li>
+                                    <li>RAG (Retrieval Augmented Generation) 패턴</li>
+                                    <li>Vector Database의 원리와 선택 기준</li>
+                                    <li>Agentic Workflows (Reasoning & Action)</li>
+                                </ul>
+                            </div>
+                            <div class="bg-stone-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-stone-700 mb-2">🎯 Learning Goals</h4>
+                                <ul class="list-disc list-inside text-sm text-stone-600 space-y-1">
+                                    <li>서비스 요구사항에 따른 모델 사이즈(7B vs 70B) 결정</li>
+                                    <li>RAG vs Long Context Window 트레이드오프 분석</li>
+                                    <li>Latency와 Cost를 고려한 시스템 설계</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-stone-100 pt-6">
+                            <h4 class="font-bold text-stone-800 mb-4">Architecture Case Study: Smart CS Bot</h4>
+                            <div class="flex items-center justify-between bg-stone-100 p-4 rounded-lg overflow-x-auto">
+                                <!-- Simple Visualization of Architecture flow using Flex/Text -->
+                                <div class="flex flex-col items-center min-w-[80px]">
+                                    <span class="text-2xl">👤</span>
+                                    <span class="text-xs font-bold mt-1">User</span>
+                                </div>
+                                <div class="text-stone-400">→</div>
+                                <div class="flex flex-col items-center bg-white p-2 rounded shadow-sm border border-stone-200 min-w-[100px]">
+                                    <span class="text-xs font-bold text-blue-600">Orchestrator</span>
+                                    <span class="text-[10px] text-stone-500">Intent Analysis</span>
+                                </div>
+                                <div class="text-stone-400">→</div>
+                                <div class="flex flex-col items-center bg-white p-2 rounded shadow-sm border border-stone-200 min-w-[100px]">
+                                    <span class="text-xs font-bold text-green-600">RAG System</span>
+                                    <span class="text-[10px] text-stone-500">Vector Search</span>
+                                </div>
+                                <div class="text-stone-400">→</div>
+                                <div class="flex flex-col items-center bg-white p-2 rounded shadow-sm border border-stone-200 min-w-[100px]">
+                                    <span class="text-xs font-bold text-purple-600">LLM (GPT-4)</span>
+                                    <span class="text-[10px] text-stone-500">Generation</span>
+                                </div>
+                            </div>
+                            <p class="text-xs text-stone-500 mt-2 text-center">* 이 흐름에서 PM이 결정해야 할 Latency 목표와 Fallback 전략을 설계합니다.</p>
+                        </div>
+                    </div>
+                    <!-- Modules 2, 3, 4 will be populated via JS to keep HTML clean, structure same as above -->
+                </div>
+            </div>
+        </div>
+
+        <!-- REGIONAL STRATEGY SECTION -->
+        <div id="region" class="section-view hidden-section animate-fade-in">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Text Context -->
+                <div class="space-y-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-stone-800 mb-2">국가별 AI PM 전략 비교 (US vs JP)</h2>
+                        <p class="text-stone-600">
+                            미국과 일본은 AI 도입의 속도, 규제 환경, 그리고 기업 문화에서 뚜렷한 차이를 보입니다. 
+                            본 커리큘럼은 두 시장에서 모두 통용될 수 있는 <strong>Hybrid Competency</strong>를 지향하되, 
+                            각 시장 진출 시 고려해야 할 가중치를 분석합니다.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-100">
+                        <h3 class="font-bold text-lg mb-4 flex items-center">
+                            <span class="mr-2">🇺🇸</span> United States: Speed & Scale
+                        </h3>
+                        <ul class="space-y-2 text-sm text-stone-700">
+                            <li class="flex items-start"><span class="text-teal-600 mr-2">✓</span><strong>Innovation First:</strong> "Ship fast, fix later" 문화에 맞춘 MLOps 파이프라인.</li>
+                            <li class="flex items-start"><span class="text-teal-600 mr-2">✓</span><strong>Fair Use:</strong> 학습 데이터 저작권에 대한 광범위한 공정이용 주장과 소송전 대비.</li>
+                            <li class="flex items-start"><span class="text-teal-600 mr-2">✓</span><strong>Talent War:</strong> 고임금 AI 엔지니어 리텐션 전략이 PM의 핵심 KPI.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-100">
+                        <h3 class="font-bold text-lg mb-4 flex items-center">
+                            <span class="mr-2">🇯🇵</span> Japan: Trust & Integration
+                        </h3>
+                        <ul class="space-y-2 text-sm text-stone-700">
+                            <li class="flex items-start"><span class="text-indigo-600 mr-2">✓</span><strong>Anshin (안심):</strong> Hallucination 제로에 가까운 엄격한 품질 기준과 Human-in-the-loop.</li>
+                            <li class="flex items-start"><span class="text-indigo-600 mr-2">✓</span><strong>Copyright Act Art. 30-4:</strong> 세계적으로 유연한 AI 학습 저작권법 활용 전략.</li>
+                            <li class="flex items-start"><span class="text-indigo-600 mr-2">✓</span><strong>DX Integration:</strong> 레거시 시스템(SI)과 최신 AI의 매끄러운 통합 능력 중시.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Interactive Comparison Chart -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-100 flex flex-col justify-center">
+                    <h3 class="text-center font-bold text-stone-700 mb-4">시장별 PM 역량 중요도 차이</h3>
+                    <div class="chart-container">
+                        <canvas id="regionRadarChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <button onclick="updateRegionData('us')" class="px-4 py-1 text-xs bg-stone-100 hover:bg-stone-200 rounded-l-lg border-r border-stone-300 transition">🇺🇸 US Focus</button>
+                        <button onclick="updateRegionData('jp')" class="px-4 py-1 text-xs bg-stone-100 hover:bg-stone-200 border-r border-stone-300 transition">🇯🇵 JP Focus</button>
+                        <button onclick="updateRegionData('mix')" class="px-4 py-1 text-xs bg-teal-100 text-teal-800 rounded-r-lg font-bold transition">🌏 Hybrid</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIMULATION SECTION -->
+        <div id="simulation" class="section-view hidden-section animate-fade-in">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-stone-800">PM 아키텍처 결정 시뮬레이션</h2>
+                    <p class="text-stone-600">실제 현업에서 발생하는 트레이드오프 상황에서 어떤 결정을 내리시겠습니까?</p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-stone-200">
+                    <div class="p-6 bg-stone-800 text-white flex justify-between items-center">
+                        <h3 id="sim-scenario-title" class="font-bold text-lg">Scenario 1: 금융사 고객 상담 챗봇</h3>
+                        <span id="sim-score" class="text-teal-400 font-mono">Score: 0</span>
+                    </div>
+                    
+                    <div class="p-8">
+                        <div id="sim-question" class="mb-8 text-lg font-medium text-stone-800">
+                            고객사는 금융 상품 약관에 대해 100% 정확한 답변을 요구합니다. 그러나 GPT-4를 사용하니 응답 속도가 5초 이상 걸려 UX가 저하되고 있습니다. 가장 적절한 아키텍처 변경 전략은?
+                        </div>
+
+                        <div id="sim-options" class="grid grid-cols-1 gap-4">
+                            <!-- Options will be injected via JS -->
+                        </div>
+
+                        <div id="sim-feedback" class="hidden mt-6 p-4 bg-teal-50 border border-teal-200 rounded-lg text-sm text-stone-700">
+                            <!-- Feedback injected here -->
+                        </div>
+                    </div>
+                    
+                    <div class="p-4 bg-stone-50 border-t border-stone-200 flex justify-end">
+                        <button id="next-btn" onclick="nextScenario()" class="hidden px-6 py-2 bg-stone-800 text-white rounded-lg hover:bg-stone-700 transition">다음 시나리오 →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-100 border-t border-stone-200 mt-auto py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-stone-500 text-sm">
+            <p>&copy; 2025 JAEWOO, KIM.</p>
+            <a href="https://mdrules.dev" target="_self" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">
+                사이트로 이동
+            </a>
+        </div>
+    </footer>
+
+    <!-- PLACEHOLDER COMMENTS -->
+    <!-- Chosen Palette: Warm Neutrals (Stone) with Deep Teal/Charcoal accents for a professional, academic, yet modern tech feel. -->
+    
+    <!-- Application Structure Plan: 
+         1. Dashboard: Provides a high-level executive summary of the curriculum's evolution and core metrics (skills, difficulty). This establishes authority and gives a quick overview.
+         2. Curriculum Explorer: The core content. Uses a tab/accordion sidebar layout to allow deep dives into specific modules without overwhelming the user.
+         3. Regional Strategy: A specialized view comparing US and Japan markets. This directly addresses the prompt's request to target "Japan or US" and provides unique value.
+         4. Simulation: An interactive element to demonstrate "Architecture-level" thinking, moving beyond passive reading to active engagement. 
+    -->
+
+    <!-- Visualization & Content Choices:
+         1. Doughnut Chart (Skill Dist): To visually represent the balance between Tech, Business, and Ethics.
+         2. Line Chart (Difficulty): To show the learning curve, managing user expectations.
+         3. Radar Chart (Region): To clearly contrast the differing priorities of US vs Japan markets (e.g., Speed vs Safety).
+         4. Interactive Quiz (Simulation): Uses DOM manipulation to create a scenario-based learning experience, proving the practical application of the curriculum.
+         NO SVG graphics used. NO Mermaid JS used. All charts are Chart.js.
+    -->
+
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <script>
+        // --- DATA STORAGE ---
+
+        // Curriculum Module Details
+        const modulesData = {
+            mod1: {
+                title: "AI 인프라 & 아키텍처",
+                weeks: "Weeks 1-3",
+                desc: "PM이 개발자와 아키텍처 수준에서 대화하기 위한 필수 기술 스택 이해",
+                topics: [
+                    "Transformer 구조의 이해와 Context Window",
+                    "RAG (Retrieval Augmented Generation) 패턴",
+                    "Vector Database의 원리와 선택 기준",
+                    "Agentic Workflows (Reasoning & Action)"
+                ],
+                goals: [
+                    "서비스 요구사항에 따른 모델 사이즈(7B vs 70B) 결정",
+                    "RAG vs Long Context Window 트레이드오프 분석",
+                    "Latency와 Cost를 고려한 시스템 설계"
+                ],
+                caseStudy: "Smart CS Bot 아키텍처 설계"
+            },
+            mod2: {
+                title: "LLMOps & 데이터 전략",
+                weeks: "Weeks 4-6",
+                desc: "지속 가능한 AI 서비스를 위한 운영 파이프라인과 데이터 품질 관리",
+                topics: [
+                    "Data Flywheel 구축 전략",
+                    "Fine-tuning vs Prompt Engineering 결정 프레임워크",
+                    "Evaluation Framework (LLM-as-a-Judge)",
+                    "Deployment Strategies (Quantization, Distillation)"
+                ],
+                goals: [
+                    "Golden Dataset 구축 및 관리 프로세스 수립",
+                    "환각(Hallucination) 탐지 및 완화 파이프라인 설계",
+                    "모델 성능 모니터링 대시보드 기획"
+                ],
+                caseStudy: "이커머스 추천 시스템의 LLM 도입과 A/B 테스트"
+            },
+            mod3: {
+                title: "비즈니스 모델 & ROI",
+                weeks: "Weeks 7-9",
+                desc: "AI 기술을 수익화하기 위한 경제성 분석 및 전략 수립",
+                topics: [
+                    "Tokenomics: 토큰 기반 원가 분석",
+                    "Build (자체구축) vs Buy (API) 의사결정",
+                    "AI Native UX 설계와 Retention",
+                    "B2B vs B2C AI Pricing Strategies"
+                ],
+                goals: [
+                    "단위 유닛 이코노믹스(Unit Economics) 계산 및 마진 확보",
+                    "GPU 비용 최적화 및 Capex/Opex 계획",
+                    "경쟁 우위 확보를 위한 기술 해자(Moat) 구축"
+                ],
+                caseStudy: "SaaS 제품의 Generative AI 기능 유료화 전환 전략"
+            },
+            mod4: {
+                title: "글로벌 거버넌스 & 윤리",
+                weeks: "Weeks 10-12",
+                desc: "미국, 일본, EU 등 글로벌 시장의 규제 대응 및 리스크 관리",
+                topics: [
+                    "EU AI Act 및 글로벌 규제 동향",
+                    "일본 저작권법 제30조의 4와 AI 학습",
+                    "Red Teaming 및 Adversarial Attack 방어",
+                    "Responsible AI: 편향성 제거 및 투명성"
+                ],
+                goals: [
+                    "국가별 법적 리스크 평가 및 진출 전략 수립",
+                    "AI 윤리 가이드라인 작성 및 내부 거버넌스 구축",
+                    "IP(지식재산권) 보호 및 데이터 보안 프로토콜 수립"
+                ],
+                caseStudy: "헬스케어 AI 서비스의 글로벌 런칭과 컴플라이언스 체크리스트"
+            }
+        };
+
+        // Simulation Data
+        const scenarios = [
+            {
+                id: 1,
+                title: "Scenario 1: 금융 챗봇의 정확도 vs 속도",
+                question: "금융사 고객은 100% 정확한 약관 답변을 원합니다. GPT-4는 정확하지만 5초가 걸려 이탈률이 높습니다. 아키텍트 PM으로서 최적의 선택은?",
+                options: [
+                    { text: "GPT-3.5로 모델을 교체하여 속도를 0.5초로 줄인다.", correct: false, feedback: "속도는 빠르지만, 금융 약관 해석의 복잡성을 감당하기 어려워 환각 위험이 큽니다. 신뢰도가 생명인 금융권에 부적절합니다." },
+                    { text: "답변 스트리밍(Streaming)을 적용하고, 약관 검색은 RAG + Caching을 활용한다.", correct: true, feedback: "정답! 스트리밍으로 체감 대기시간을 줄이고, 정적 데이터(약관)는 캐싱된 RAG로 처리하여 속도와 정확도를 모두 잡는 아키텍처입니다." },
+                    { text: "사용자에게 '정확한 답변을 위해 시간이 걸립니다'라는 로딩 문구를 보여준다.", correct: false, feedback: "UX적인 미봉책입니다. 기술적 아키텍처 개선 없이 사용자 인내심에만 의존하는 것은 장기적인 해결책이 아닙니다." }
+                ]
+            },
+            {
+                id: 2,
+                title: "Scenario 2: 일본 시장 진출 데이터 전략",
+                question: "미국에서 개발된 AI 모델을 일본 시장에 런칭하려 합니다. 일본어 성능이 떨어지는 상황입니다. 가장 효과적인 시장 진입 전략은?",
+                options: [
+                    { text: "처음부터 일본어 전용 LLM을 자체 개발(Pre-training)한다.", correct: false, feedback: "비용과 시간이 너무 많이 소요됩니다. ROI 관점에서 위험한 결정입니다." },
+                    { text: "미국 모델을 그대로 출시하고, 프롬프트만 일본어로 번역한다.", correct: false, feedback: "일본 비즈니스 뉘앙스와 문화를 반영하지 못해 '품질이 낮다'는 인식을 줄 수 있습니다. 일본 시장의 높은 품질 기준을 간과했습니다." },
+                    { text: "검증된 글로벌 모델에 일본어 고품질 데이터로 Fine-tuning 및 RAG를 결합한다.", correct: true, feedback: "정답! Base 모델의 지능을 활용하면서, 일본 특유의 뉘앙스와 최신 정보는 Fine-tuning과 RAG로 보완하는 효율적인 전략입니다." }
+                ]
+            }
+        ];
+
+        let currentScenarioIndex = 0;
+        let score = 0;
+
+        // --- CHART INSTANCES ---
+        let skillChart = null;
+        let difficultyChart = null;
+        let regionChart = null;
+
+        // --- NAVIGATION LOGIC ---
+        function navigateTo(sectionId) {
+            // Update Nav Buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active', 'border-bottom-2', 'border-teal-700', 'text-teal-700', 'font-bold'));
+            document.getElementById(`nav-${sectionId}`).classList.add('active');
+
+            // Show Section
+            document.querySelectorAll('.section-view').forEach(el => el.classList.add('hidden-section'));
+            document.getElementById(sectionId).classList.remove('hidden-section');
+
+            // Trigger Chart Resize if needed
+            if(sectionId === 'region' && regionChart) regionChart.resize();
+        }
+
+        // --- CURRICULUM LOGIC ---
+        function showModule(modId) {
+            const data = modulesData[modId];
+            const contentArea = document.querySelector('.lg\\:col-span-8');
+            
+            // Highlight selected button
+            document.querySelectorAll('.module-selector').forEach(btn => {
+                btn.classList.remove('bg-teal-50', 'border-teal-500');
+                btn.classList.add('border-stone-200');
+            });
+            event.currentTarget.classList.remove('border-stone-200');
+            event.currentTarget.classList.add('bg-teal-50', 'border-teal-500');
+
+            // Update Content HTML
+            contentArea.innerHTML = `
+                <div class="module-content bg-white p-8 rounded-xl border border-stone-200 shadow-sm h-full animate-fade-in">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <h3 class="text-2xl font-bold text-stone-800">${data.title}</h3>
+                            <p class="text-stone-500 mt-2">${data.desc}</p>
+                        </div>
+                        <span class="bg-teal-100 text-teal-800 text-xs font-bold px-3 py-1 rounded-full">${data.weeks}</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-stone-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-stone-700 mb-2">🔑 Key Topics</h4>
+                            <ul class="list-disc list-inside text-sm text-stone-600 space-y-1">
+                                ${data.topics.map(t => `<li>${t}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div class="bg-stone-50 p-4 rounded-lg">
+                            <h4 class="font-bold text-stone-700 mb-2">🎯 Learning Goals</h4>
+                            <ul class="list-disc list-inside text-sm text-stone-600 space-y-1">
+                                ${data.goals.map(g => `<li>${g}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-stone-100 pt-6">
+                        <h4 class="font-bold text-stone-800 mb-4">Architecture Case Study: ${data.caseStudy.split(':')[0]}</h4>
+                        <div class="bg-stone-100 p-6 rounded-lg text-center">
+                            <p class="text-stone-600 font-medium">"${data.caseStudy}"</p>
+                            <p class="text-xs text-stone-500 mt-2">이 케이스 스터디를 통해 수강생은 실제 Business Problem을 기술 아키텍처로 해결하는 문서를 작성하고 방어(Defense)해야 합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- SIMULATION LOGIC ---
+        function loadScenario(index) {
+            if (index >= scenarios.length) {
+                document.getElementById('sim-question').innerHTML = `🎉 시뮬레이션 종료! 최종 점수: ${score}점`;
+                document.getElementById('sim-options').innerHTML = `<button onclick="location.reload()" class="w-full p-4 bg-teal-600 text-white rounded-lg font-bold">다시 시작하기</button>`;
+                document.getElementById('sim-feedback').classList.add('hidden');
+                document.getElementById('next-btn').classList.add('hidden');
+                return;
+            }
+
+            const scenario = scenarios[index];
+            document.getElementById('sim-scenario-title').innerText = scenario.title;
+            document.getElementById('sim-question').innerText = scenario.question;
+            
+            const optionsHtml = scenario.options.map((opt, i) => `
+                <button onclick="checkAnswer(${i})" class="option-btn w-full text-left p-4 bg-stone-50 border border-stone-200 rounded-lg hover:bg-stone-100 transition">
+                    ${opt.text}
+                </button>
+            `).join('');
+            
+            document.getElementById('sim-options').innerHTML = optionsHtml;
+            document.getElementById('sim-feedback').classList.add('hidden');
+            document.getElementById('next-btn').classList.add('hidden');
+        }
+
+        function checkAnswer(optionIndex) {
+            const scenario = scenarios[currentScenarioIndex];
+            const isCorrect = scenario.options[optionIndex].correct;
+            const feedbackEl = document.getElementById('sim-feedback');
+            
+            // Disable buttons
+            document.querySelectorAll('.option-btn').forEach(btn => btn.disabled = true);
+
+            // Update UI
+            if (isCorrect) {
+                score += 10;
+                document.getElementById('sim-score').innerText = `Score: ${score}`;
+                feedbackEl.className = "mt-6 p-4 bg-teal-50 border border-teal-200 rounded-lg text-sm text-teal-800 animate-fade-in block";
+                feedbackEl.innerHTML = `<strong>✅ 정답입니다!</strong><br>${scenario.options[optionIndex].feedback}`;
+            } else {
+                feedbackEl.className = "mt-6 p-4 bg-red-50 border border-red-200 rounded-lg text-sm text-red-800 animate-fade-in block";
+                feedbackEl.innerHTML = `<strong>❌ 아쉽네요.</strong><br>${scenario.options[optionIndex].feedback}`;
+            }
+
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextScenario() {
+            currentScenarioIndex++;
+            loadScenario(currentScenarioIndex);
+        }
+
+        // --- REGION CHART LOGIC ---
+        function updateRegionData(type) {
+            let newData;
+            if (type === 'us') newData = [90, 60, 95, 85, 50]; // High Speed, Innovation
+            else if (type === 'jp') newData = [50, 95, 60, 50, 90]; // High Quality, Process
+            else newData = [80, 85, 80, 75, 80]; // Hybrid
+
+            regionChart.data.datasets[0].data = newData;
+            regionChart.data.datasets[0].label = type === 'us' ? 'US Focus' : (type === 'jp' ? 'JP Focus' : 'Hybrid Strategy');
+            regionChart.update();
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Skill Distribution Chart (Doughnut)
+            const ctxSkill = document.getElementById('skillDistChart').getContext('2d');
+            skillChart = new Chart(ctxSkill, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Tech Architecture', 'Business Strategy', 'Ethics & Law', 'Data Ops'],
+                    datasets: [{
+                        data: [35, 30, 15, 20],
+                        backgroundColor: ['#0F766E', '#F59E0B', '#EF4444', '#3B82F6'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 12, padding: 20, font: {family: "'Noto Sans KR', sans-serif"} } }
+                    }
+                }
+            });
+
+            // 2. Difficulty Chart (Line)
+            const ctxDiff = document.getElementById('difficultyChart').getContext('2d');
+            difficultyChart = new Chart(ctxDiff, {
+                type: 'line',
+                data: {
+                    labels: ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8', 'W9', 'W10', 'W11', 'W12'],
+                    datasets: [{
+                        label: 'Complexity Level',
+                        data: [20, 30, 45, 50, 60, 65, 55, 70, 80, 85, 90, 100],
+                        borderColor: '#57534E',
+                        backgroundColor: 'rgba(87, 83, 78, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { display: false },
+                        x: { grid: { display: false } }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            // 3. Region Radar Chart
+            const ctxRegion = document.getElementById('regionRadarChart').getContext('2d');
+            regionChart = new Chart(ctxRegion, {
+                type: 'radar',
+                data: {
+                    labels: ['Speed/Innovation', 'Quality/Reliability', 'Talent Competition', 'Risk Tolerance', 'Integration(SI)'],
+                    datasets: [{
+                        label: 'Hybrid Strategy',
+                        data: [80, 85, 80, 75, 80],
+                        backgroundColor: 'rgba(20, 184, 166, 0.2)',
+                        borderColor: '#0D9488',
+                        pointBackgroundColor: '#0D9488'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: '#E5E7EB' },
+                            grid: { color: '#E5E7EB' },
+                            pointLabels: { font: { size: 11, family: "'Noto Sans KR', sans-serif" }, color: '#4B5563' },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    },
+                    plugins: { legend: { display: true } }
+                }
+            });
+
+            // Load Initial Sim
+            loadScenario(0);
+        });
+    </script>
+</body>
+</html>

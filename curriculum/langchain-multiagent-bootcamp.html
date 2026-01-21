@@ -1,0 +1,519 @@
+<!-- Chosen Palette: Corporate Serenity (Slate-50 background, Indigo-600 primary, Emerald-500 accent for growth, Slate-800 text) -->
+
+<!-- Application Structure Plan: 
+    The SPA is designed as a "Strategic Proposal Dashboard" for decision-makers and developers.
+    1. Structure:
+       - Sidebar Navigation: Persistent, allowing quick jumping between the four key pillars of the proposal.
+       - "Executive Brief": High-level justification (ROI, Market Trends) using external data synthesis to support the PDF's value.
+       - "Curriculum Roadmap": The core PDF content (16-hour schedule) presented as an interactive timeline.
+       - "Tech Architecture": Explains the technical shift (LangChain -> LangGraph) using an interactive block diagram (No SVG).
+       - "Output & Stack": What the team takes home (Tools, Capstone results).
+    2. Key Interactions:
+       - Tabbed Timeline: Toggling between Day 1 and Day 2 curriculum details.
+       - Interactive ROI Chart: Toggling between "Time Savings" and "Cost Reduction" metrics.
+       - Architecture Explorer: Clicking on HTML-based nodes (Agent, State, Edge) to reveal technical definitions from the syllabus.
+    3. User Flow: Starts with the "Why" (Business Case), moves to "What" (Curriculum), then "How" (Architecture), ensuring a logical persuasion path.
+-->
+
+<!-- Visualization & Content Choices:
+    1. Market Growth (Chart.js Line): Shows external market context for Agentic AI to justify the training investment.
+    2. ROI Calculator (Chart.js Bar - Interactive): Compares "Single LLM" vs "Multi-Agent" efficiency, directly supporting the "Why take this course" argument.
+    3. LangGraph Visualizer (HTML Grid + JS Interaction): Represents the cyclic graph concept (Node/Edge/State) without SVGs. Clicking nodes updates description text.
+    4. Curriculum Timeline (Styled HTML List): Organizes the dense Day 1/Day 2 PDF text into a digestible, collapsible format.
+    5. Tech Stack Cards (Flexbox): Visual summary of the tools (Claude Code, LangSmith) mentioned in the PDF.
+    6. Confirmation: NO SVG or Mermaid used. All visuals are Canvas or HTML/CSS.
+-->
+
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD룰 AI교육 - LangChain 1.x 멀티에이전트 부트캠프</title>
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="15x15"
+    href="./dist/images/favicon.png"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            height: 350px;
+            max-height: 400px;
+        }
+        .nav-item { transition: all 0.2s; border-left: 4px solid transparent; }
+        .nav-item:hover { background-color: #f1f5f9; }
+        .nav-item.active { background-color: #e0e7ff; border-left-color: #4f46e5; color: #4338ca; }
+        .fade-in { animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .node-box { transition: all 0.3s; cursor: pointer; }
+        .node-box:hover { transform: scale(1.02); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        .node-box.active { ring: 2px solid #4f46e5; background-color: #e0e7ff; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 h-screen flex flex-col md:flex-row overflow-hidden">
+
+    <!-- Sidebar Navigation -->
+    <nav class="w-full md:w-64 bg-white shadow-lg z-20 flex flex-col flex-shrink-0">
+        <div class="p-6 border-b border-slate-100">
+            <img src="mdrules-logo.png" alt="MD룰 AI교육" width="116px">
+            <h1 class="text-xl font-bold text-slate-900 tracking-tight">LangChain 1.x 멀티에이전트 <span class="text-indigo-600">개발 교육</span> </h1>
+
+            <p class="text-xs text-slate-500 mt-1">jaewoo@mdrules.dev</p>
+        </div>
+        <div class="flex-1 overflow-y-auto py-4">
+            <button onclick="navigate('executive')" id="nav-executive" class="nav-item active w-full text-left px-6 py-4 text-sm font-medium text-slate-600">
+                📊 경영진 브리핑 (ROI)
+            </button>
+            <button onclick="navigate('curriculum')" id="nav-curriculum" class="nav-item w-full text-left px-6 py-4 text-sm font-medium text-slate-600">
+                📅 교육 커리큘럼 (16H)
+            </button>
+            <button onclick="navigate('architecture')" id="nav-architecture" class="nav-item w-full text-left px-6 py-4 text-sm font-medium text-slate-600">
+                ⚙️ LangGraph 아키텍처
+            </button>
+            <button onclick="navigate('stack')" id="nav-stack" class="nav-item w-full text-left px-6 py-4 text-sm font-medium text-slate-600">
+                🛠️ 기술 스택 & 결과물
+            </button><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="https://mdrules.dev" target="_self" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">
+                사이트로 이동
+            </a>
+        </div>
+        <div class="p-4 bg-slate-50 border-t border-slate-100">
+            <div class="text-xs text-slate-400 font-medium">&copy22026 JAEWOO, KIM.</div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto relative p-6 md:p-10" id="main-content">
+        <!-- Dynamic Content Injected Here -->
+    </main>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Data Store (Synthesized from PDF + External Context)
+        const appData = {
+            executive: {
+                growth: [12, 19, 35, 60, 95], // Projected Agent Market (Billions)
+                labels: ['2023', '2024', '2025 (E)', '2026 (E)', '2027 (E)'],
+                roi_time: [100, 25], // Hours: Manual vs Agent
+                roi_cost: [100, 40], // Cost Index: Manual vs Agent
+            },
+            curriculum: {
+                day1: [
+                    { time: "09:00 - 10:00", title: "AI 에이전트와 LangChain 1.x", desc: "단일 LLM의 한계를 넘어서는 에이전트의 필요성. Chains에서 Agents로의 패러다임 변화 이해. (LCEL 기초)" },
+                    { time: "10:00 - 12:00", title: "LangGraph 아키텍처 입문", desc: "순환 그래프(Cyclic Graph) 구조 이해. Node(작업), Edge(흐름), State(상태) 핵심 컴포넌트 실습." },
+                    { time: "13:00 - 16:00", title: "Tool Use & ReAct 패턴", desc: "검색(Search), 계산기 등 도구 사용 능력 구현. 생각-행동-관찰(ReAct) 루프 실습." },
+                    { time: "16:00 - 17:00", title: "Persistence (기억과 지속성)", desc: "Postgres Checkpointer 활용. 대화가 끊겨도 맥락을 유지하고 상태를 저장하는 메모리 시스템 구현." },
+                    { time: "17:00 - 18:00", title: "Claude Code 활용", desc: "AI가 코드를 작성하고 실행하는 '코딩 에이전트' 개발. 최신 개발 도구 활용법." }
+                ],
+                day2: [
+                    { time: "09:00 - 11:00", title: "멀티 에이전트 패턴 (Supervisor)", desc: "계층적 구조의 에이전트 오케스트레이션. 관리자(Supervisor) 에이전트가 하위 작업자를 조율하는 패턴." },
+                    { time: "11:00 - 12:00", title: "심화 패턴 (Plan-and-Execute)", desc: "복잡한 작업을 계획(Plan)과 실행(Execute) 단계로 분리하여 처리하는 고급 전략." },
+                    { time: "13:00 - 15:00", title: "LangSmith 모니터링 & 평가", desc: "LLM 애플리케이션의 디버깅, 추적(Tracing), 데이터셋 관리 및 자동화된 평가 시스템 구축." },
+                    { time: "15:00 - 18:00", title: "Capstone: 엔터프라이즈 비서", desc: "종합 실습: RAG(검색) + 분석 + 이메일 작성을 통합 수행하는 업무 자동화 에이전트 구축." }
+                ]
+            }
+        };
+
+        // State Management
+        let currentState = {
+            view: 'executive',
+            day: 'day1',
+            roiMetric: 'time' // 'time' or 'cost'
+        };
+
+        // Router
+        function navigate(viewId) {
+            currentState.view = viewId;
+            
+            // Update Nav UI
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.getElementById(`nav-${viewId}`).classList.add('active');
+            
+            // Render Content
+            const main = document.getElementById('main-content');
+            main.innerHTML = ''; // Clear current
+            
+            // Scroll to top
+            main.scrollTop = 0;
+
+            switch(viewId) {
+                case 'executive': renderExecutive(main); break;
+                case 'curriculum': renderCurriculum(main); break;
+                case 'architecture': renderArchitecture(main); break;
+                case 'stack': renderStack(main); break;
+            }
+        }
+
+        // --- Render Functions ---
+
+        function renderExecutive(container) {
+            const html = `
+                <div class="max-w-6xl mx-auto space-y-8 fade-in">
+                    <!-- Header Section -->
+                    <div class="bg-white rounded-xl p-8 border border-slate-200 shadow-sm">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h2 class="text-3xl font-bold text-slate-800 mb-2">왜 '멀티 에이전트'인가?</h2>
+                                <p class="text-slate-600 max-w-2xl">
+                                    단순 챗봇의 시대는 끝났습니다. 본 과정은 LangChain 1.x와 LangGraph를 활용하여 
+                                    <strong>"스스로 계획하고, 도구를 사용하며, 협업하는 AI"</strong>를 구축하는 실전형 부트캠프입니다.
+                                </p>
+                            </div>
+
+                            <span class="px-4 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm font-semibold">2026 핵심 기술</span>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                            <div class="p-4 bg-slate-50 rounded-lg border border-slate-100">
+                                <div class="text-sm text-slate-500 mb-1">Target Audience</div>
+                                <div class="font-semibold text-slate-800">백엔드/AI 개발자 & 엔지니어</div>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-lg border border-slate-100">
+                                <div class="text-sm text-slate-500 mb-1">Duration</div>
+                                <div class="font-semibold text-slate-800">2일 (총 16시간 집중 교육)</div>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-lg border border-slate-100">
+                                <div class="text-sm text-slate-500 mb-1">Prerequisites</div>
+                                <div class="font-semibold text-slate-800">Python 중급, LLM 기초</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Grid -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        
+                        <!-- Market Growth -->
+                        <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
+                            <h3 class="text-lg font-bold text-slate-800 mb-2">📈 AI 에이전트 시장 성장성 (예측)</h3>
+                            <p class="text-sm text-slate-500 mb-6">단순 자동화를 넘어선 자율 에이전트 도입의 가속화</p>
+                            <div class="chart-container">
+                                <canvas id="growthChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- ROI Analysis -->
+                        <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
+                            <div class="flex justify-between items-center mb-2">
+                                <h3 class="text-lg font-bold text-slate-800">⚡ 도입 효과 분석 (ROI)</h3>
+                                <div class="bg-slate-100 rounded-lg p-1 flex text-xs">
+                                    <button onclick="updateRoi('time')" id="btn-time" class="px-3 py-1 bg-white shadow-sm text-indigo-600 rounded-md font-medium transition">시간 절감</button>
+                                    <button onclick="updateRoi('cost')" id="btn-cost" class="px-3 py-1 text-slate-500 rounded-md font-medium transition hover:text-slate-800">비용 효율</button>
+                                </div>
+                            </div>
+                            <p class="text-sm text-slate-500 mb-6">기존 워크플로우 대비 멀티 에이전트 시스템 효율성</p>
+                            <div class="chart-container">
+                                <canvas id="roiChart"></canvas>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <!-- Key Takeaways -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-100">
+                            <h4 class="font-bold text-indigo-900 mb-2">🔄 LangGraph 마이그레이션</h4>
+                            <p class="text-sm text-indigo-800">기존 LangChain의 한계를 극복하는 순환형 그래프 아키텍처 완벽 이해.</p>
+                        </div>
+                        <div class="bg-emerald-50 p-6 rounded-xl border border-emerald-100">
+                            <h4 class="font-bold text-emerald-900 mb-2">🤖 멀티 에이전트 협업</h4>
+                            <p class="text-sm text-emerald-800">Supervisor 및 Hierarchical 패턴을 통한 복잡한 업무 자동화 구현.</p>
+                        </div>
+                        <div class="bg-amber-50 p-6 rounded-xl border border-amber-100">
+                            <h4 class="font-bold text-amber-900 mb-2">🛠️ 실전 프로덕션 역량</h4>
+                            <p class="text-sm text-amber-800">LangSmith를 이용한 평가/디버깅 및 Persistence(메모리) 구현.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+            initCharts();
+        }
+
+        function renderCurriculum(container) {
+            const list = appData.curriculum[currentState.day];
+            
+            const html = `
+                <div class="max-w-4xl mx-auto space-y-8 fade-in">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold text-slate-800">커리큘럼 상세 로드맵</h2>
+                        <p class="text-slate-500 mt-2">이론(30%)과 실습(70%)의 황금비율로 구성된 16시간 집중 과정</p>
+                    </div>
+
+                    <!-- Day Toggles -->
+                    <div class="flex justify-center mb-8">
+                        <div class="bg-slate-100 p-1 rounded-xl inline-flex">
+                            <button onclick="switchDay('day1')" class="${currentState.day === 'day1' ? 'bg-white shadow text-indigo-600' : 'text-slate-500 hover:text-slate-700'} px-6 py-2 rounded-lg font-semibold text-sm transition-all duration-200">
+                                Day 1: Foundation & Architecture
+                            </button>
+                            <button onclick="switchDay('day2')" class="${currentState.day === 'day2' ? 'bg-white shadow text-indigo-600' : 'text-slate-500 hover:text-slate-700'} px-6 py-2 rounded-lg font-semibold text-sm transition-all duration-200">
+                                Day 2: Multi-Agent & Production
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Timeline -->
+                    <div class="relative border-l-2 border-indigo-100 ml-3 space-y-8 pb-12">
+                        ${list.map((item, index) => `
+                            <div class="relative pl-8 group">
+                                <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full border-4 border-indigo-500 bg-white group-hover:scale-110 transition-transform"></div>
+                                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-2">
+                                        <h3 class="text-lg font-bold text-slate-800">${item.title}</h3>
+                                        <span class="text-xs font-mono text-indigo-500 bg-indigo-50 px-2 py-1 rounded mt-1 sm:mt-0 w-fit">${item.time}</span>
+                                    </div>
+                                    <p class="text-slate-600 text-sm leading-relaxed">${item.desc}</p>
+                                    ${item.title.includes('실습') || item.desc.includes('실습') || item.desc.includes('구현') ? 
+                                        `<div class="mt-3 inline-block px-2 py-1 bg-amber-50 text-amber-700 text-xs rounded border border-amber-100">💻 Hands-on Lab</div>` 
+                                        : ''}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        function renderArchitecture(container) {
+            const html = `
+                <div class="max-w-6xl mx-auto fade-in h-full flex flex-col">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold text-slate-800">LangGraph 아키텍처 심층 분석</h2>
+                        <p class="text-slate-500">기존의 선형적인 Chain 구조에서 벗어나, 상태(State)를 기반으로 순환하는 Graph 구조를 시각화했습니다.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 flex-1">
+                        <!-- Interactive Diagram -->
+                        <div class="lg:col-span-2 bg-slate-50 rounded-xl border border-slate-200 p-8 relative flex items-center justify-center min-h-[400px]">
+                            <!-- Grid Representation of Graph -->
+                            <div class="grid grid-cols-3 gap-8 w-full max-w-lg relative z-10">
+                                <!-- Nodes -->
+                                <div onclick="showArchDetail('node')" class="node-box col-start-2 bg-white border-2 border-emerald-400 p-4 rounded-lg text-center shadow-sm">
+                                    <div class="text-2xl mb-1">🤖</div>
+                                    <div class="font-bold text-slate-800">Agent Node</div>
+                                    <div class="text-xs text-slate-400">LLM / Tool</div>
+                                </div>
+
+                                <div class="col-start-2 text-center text-slate-400 text-2xl font-bold">⬇️ ⬆️</div>
+
+                                <div onclick="showArchDetail('state')" class="node-box col-start-2 bg-white border-2 border-indigo-500 p-6 rounded-lg text-center shadow-lg ring-4 ring-indigo-50">
+                                    <div class="text-3xl mb-1">🧠</div>
+                                    <div class="font-bold text-indigo-900">Shared State</div>
+                                    <div class="text-xs text-slate-400">Context Memory</div>
+                                </div>
+
+                                <div class="col-start-2 text-center text-slate-400 text-2xl font-bold">⬇️ ⬆️</div>
+
+                                <div onclick="showArchDetail('edge')" class="node-box col-start-1 bg-white border-2 border-amber-400 p-4 rounded-lg text-center shadow-sm">
+                                    <div class="text-2xl mb-1">⚡</div>
+                                    <div class="font-bold text-slate-800">Action</div>
+                                </div>
+
+                                <div onclick="showArchDetail('checkpointer')" class="node-box col-start-3 bg-white border-2 border-blue-400 p-4 rounded-lg text-center shadow-sm">
+                                    <div class="text-2xl mb-1">💾</div>
+                                    <div class="font-bold text-slate-800">Persistence</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Loop Indicators -->
+                            <div class="absolute inset-0 border-4 border-slate-200 rounded-3xl m-4 pointer-events-none opacity-30"></div>
+                            <div class="absolute bottom-8 text-slate-400 text-sm font-mono">Cycle Loop Enabled</div>
+                        </div>
+
+                        <!-- Info Panel -->
+                        <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm flex flex-col">
+                            <h3 class="font-bold text-slate-800 border-b border-slate-100 pb-2 mb-4">Component Detail</h3>
+                            <div id="arch-detail" class="flex-1">
+                                <div class="bg-indigo-50 p-4 rounded-lg text-indigo-800 text-sm">
+                                    👈 왼쪽 다이어그램의 요소를 클릭하여<br>LangGraph의 핵심 작동 원리를 확인하세요.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        function renderStack(container) {
+            const html = `
+                <div class="max-w-5xl mx-auto space-y-8 fade-in">
+                    <div class="bg-white rounded-xl p-8 border border-slate-200 shadow-sm">
+                        <h2 class="text-2xl font-bold text-slate-800 mb-4">기술 스택 & 학습 도구</h2>
+                        <p class="text-slate-600 mb-8">본 부트캠프는 단순 이론이 아닌, 현업에서 즉시 사용 가능한 Modern AI Stack을 다룹니다.</p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <!-- Stack Card 1 -->
+                            <div class="p-4 border border-slate-200 rounded-lg hover:border-indigo-300 transition bg-slate-50">
+                                <div class="font-bold text-slate-800 mb-1">🦜🔗 LangChain 1.x</div>
+                                <p class="text-xs text-slate-500">최신 Stable 버전. LCEL 문법 및 생태계 기초.</p>
+                            </div>
+                            <!-- Stack Card 2 -->
+                            <div class="p-4 border border-slate-200 rounded-lg hover:border-indigo-300 transition bg-emerald-50 border-emerald-100">
+                                <div class="font-bold text-emerald-800 mb-1">🕸️ LangGraph</div>
+                                <p class="text-xs text-emerald-600">Multi-Agent Orchestration을 위한 핵심 라이브러리.</p>
+                            </div>
+                            <!-- Stack Card 3 -->
+                            <div class="p-4 border border-slate-200 rounded-lg hover:border-indigo-300 transition bg-blue-50 border-blue-100">
+                                <div class="font-bold text-blue-800 mb-1">🛠️ LangSmith</div>
+                                <p class="text-xs text-blue-600">LLM 앱 디버깅, 로깅, 평가(Evaluation) 플랫폼.</p>
+                            </div>
+                            <!-- Stack Card 4 -->
+                            <div class="p-4 border border-slate-200 rounded-lg hover:border-indigo-300 transition bg-slate-50">
+                                <div class="font-bold text-slate-800 mb-1">🤖 Claude Code</div>
+                                <p class="text-xs text-slate-500">AI 코딩 어시스턴트를 활용한 개발 생산성 극대화.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Capstone Project -->
+                    <div class="bg-slate-900 rounded-xl p-8 text-white shadow-lg relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-32 bg-indigo-600 rounded-full blur-3xl opacity-20 -mr-16 -mt-16"></div>
+                        <h3 class="text-xl font-bold mb-4 relative z-10">🏆 최종 결과물: Enterprise Assistant</h3>
+                        <p class="text-slate-300 mb-6 max-w-2xl relative z-10">
+                            모든 학습 내용을 통합하여, 실제 업무에 투입 가능한 수준의 에이전트를 구축합니다.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
+                            <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                                <div class="text-indigo-400 font-bold mb-1">Step 1. 검색 (RAG)</div>
+                                <div class="text-xs text-slate-400">사내 문서 및 웹 검색을 통해 정보 수집</div>
+                            </div>
+                            <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                                <div class="text-indigo-400 font-bold mb-1">Step 2. 분석 & 추론</div>
+                                <div class="text-xs text-slate-400">수집된 정보를 바탕으로 인사이트 도출</div>
+                            </div>
+                            <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                                <div class="text-indigo-400 font-bold mb-1">Step 3. 실행 (Action)</div>
+                                <div class="text-xs text-slate-400">이메일 작성, 보고서 생성 등 실제 업무 수행</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        // --- Interaction Logic ---
+
+        function updateRoi(metric) {
+            currentState.roiMetric = metric;
+            const btnTime = document.getElementById('btn-time');
+            const btnCost = document.getElementById('btn-cost');
+            
+            if (metric === 'time') {
+                btnTime.className = "px-3 py-1 bg-white shadow-sm text-indigo-600 rounded-md font-medium transition";
+                btnCost.className = "px-3 py-1 text-slate-500 rounded-md font-medium transition hover:text-slate-800";
+            } else {
+                btnCost.className = "px-3 py-1 bg-white shadow-sm text-indigo-600 rounded-md font-medium transition";
+                btnTime.className = "px-3 py-1 text-slate-500 rounded-md font-medium transition hover:text-slate-800";
+            }
+            initCharts(); // Re-render with new data
+        }
+
+        function switchDay(day) {
+            currentState.day = day;
+            renderCurriculum(document.getElementById('main-content'));
+        }
+
+        function showArchDetail(type) {
+            const panel = document.getElementById('arch-detail');
+            let title = "";
+            let content = "";
+            
+            if(type === 'node') {
+                title = "Agent Node (노드)";
+                content = "작업의 수행 단위입니다. LLM 호출, 파이썬 함수 실행, 또는 외부 API 호출 등이 포함됩니다. 각 노드는 작업을 마치고 상태(State)를 업데이트합니다.";
+            } else if (type === 'state') {
+                title = "Shared State (상태)";
+                content = "모든 에이전트가 공유하는 기억 공간(Memory)입니다. TypedDict 형태로 정의되며, 대화 내역(Messages)과 중간 결과값들을 저장하여 일관성을 유지합니다.";
+            } else if (type === 'edge') {
+                title = "Edge & Conditional Edge (엣지)";
+                content = "노드 간의 연결선입니다. 특히 'Conditional Edge'는 LLM의 판단 결과에 따라 다음 단계로 어디를 갈지 동적으로 결정(분기 처리)하는 핵심 로직입니다.";
+            } else if (type === 'checkpointer') {
+                title = "Persistence (체크포인터)";
+                content = "PostgreSQL 등의 DB에 그래프의 상태를 저장합니다. 이를 통해 시스템이 멈추거나 재시작되어도 이전 대화 맥락을 완벽하게 복구할 수 있습니다 (Human-in-the-loop 지원).";
+            }
+
+            panel.innerHTML = `
+                <div class="fade-in">
+                    <h4 class="text-lg font-bold text-indigo-700 mb-2">${title}</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">${content}</p>
+                </div>
+            `;
+        }
+
+        // --- Chart Logic ---
+
+        function initCharts() {
+            // Growth Chart
+            const ctxGrowth = document.getElementById('growthChart');
+            if (ctxGrowth) {
+                new Chart(ctxGrowth.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: appData.executive.labels,
+                        datasets: [{
+                            label: '시장 규모 ($B)',
+                            data: appData.executive.growth,
+                            borderColor: '#4f46e5',
+                            backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { beginAtZero: true } }
+                    }
+                });
+            }
+
+            // ROI Chart
+            const ctxRoi = document.getElementById('roiChart');
+            if (ctxRoi) {
+                const isTime = currentState.roiMetric === 'time';
+                const data = isTime ? appData.executive.roi_time : appData.executive.roi_cost;
+                const label = isTime ? '소요 시간 (Hours)' : '운영 비용 (Index)';
+                
+                new Chart(ctxRoi.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['기존 (Single LLM)', '도입 후 (Multi-Agent)'],
+                        datasets: [{
+                            label: label,
+                            data: data,
+                            backgroundColor: ['#94a3b8', '#10b981'],
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { beginAtZero: true, max: 120 } }
+                    }
+                });
+            }
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', () => {
+            renderExecutive(document.getElementById('main-content'));
+        });
+
+    </script>
+</body>
+</html>

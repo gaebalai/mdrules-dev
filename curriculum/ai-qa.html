@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD룰 AI교육 - AI 기반 소프트웨어 품질 및 테스트 엔지니어링 과정</title>
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="15x15"
+    href="./dist/images/favicon.png"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #e2e8f0;
+            transform: translateX(-50%);
+        }
+        
+        /* Card Hover Effects */
+        .curriculum-card {
+            transition: all 0.3s ease;
+        }
+        .curriculum-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .tab-active {
+            border-bottom: 2px solid #3b82f6;
+            color: #1d4ed8;
+            font-weight: 600;
+        }
+        .tab-inactive {
+            color: #64748b;
+        }
+        .tab-inactive:hover {
+            color: #334155;
+        }
+    </style>
+    <!-- Chosen Palette: Warm Neutrals & Professional Blue -->
+    <!-- Application Structure Plan:
+         1. Hero Section: Catchy titles and key course info (Duration, Target).
+         2. Overview Dashboard: 'Why this course?', Learning Objectives, and Prerequisites visualization.
+         3. Interactive Curriculum Map: A timeline-based view for Day 1 and Day 2. Clicking modules reveals detailed content (Theory vs. Practice with Cursor/Claude).
+         4. AI Quality Model Visualization: Interactive Radar Chart explaining the dimensions of AI quality (Reliability, Transparency, etc.).
+         5. Tool Focus: Section explaining how Cursor/Claude Code are integrated into the workflow.
+         This structure moves from "High-level Appeal" to "Detailed Syllabus" to "Technical Deep Dive", suitable for corporate decision-makers.
+    -->
+    <!-- Visualization & Content Choices:
+         - Radar Chart: To visualize ISO/IEC 25059 Quality Model attributes (Goal: Inform/Analyze).
+         - Doughnut Chart: To show the ratio of Theory vs. Hands-on Practice (Goal: Inform).
+         - Timeline Layout: For the 2-day schedule (Goal: Organize).
+         - Interactive Cards: For curriculum details to keep the UI clean (Goal: Engagement).
+         - NO SVG/Mermaid confirmed.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <!-- Header / Hero Section -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="mdrules-logo.png" alt="MD룰 AI교육" width="116px">
+            </div>
+            <nav class="flex space-x-6">
+                <button onclick="switchTab('overview')" id="nav-overview" class="tab-active py-2 px-1 transition-colors">과정 개요</button>
+                <button onclick="switchTab('curriculum')" id="nav-curriculum" class="tab-inactive py-2 px-1 transition-colors">상세 커리큘럼</button>
+                <button onclick="switchTab('tools')" id="nav-tools" class="tab-inactive py-2 px-1 transition-colors">실습 환경 (Cursor/Claude)</button>
+                <a href="https://mdrules.dev" target="_self" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">
+                사이트로 이동
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- SECTION: OVERVIEW -->
+        <div id="section-overview" class="space-y-8 animate-fade-in">
+            
+            <!-- Intro Text -->
+            <div class="bg-white rounded-xl shadow-sm p-8 border border-slate-100">
+                <h1 class="text-3xl font-extrabold text-slate-900 mb-4">신뢰할 수 있는 AI 시스템 구축과 테스트 엔지니어링</h1>
+                <p class="text-lg text-slate-600 leading-relaxed mb-6">
+                    본 과정은 전통적인 소프트웨어 테스트 기법을 넘어, AI 시스템이 갖는 불확실성을 검증하고, 
+                    <span class="font-semibold text-blue-600">Cursor</span>와 <span class="font-semibold text-blue-600">Claude Code</span> 같은 최신 AI 도구를 활용하여 
+                    테스트 생산성을 극대화하는 실무형 엔지니어링 교육입니다.
+                </p>
+
+                <!-- Course Title Suggestions -->
+                <div class="grid md:grid-cols-3 gap-4 mt-8">
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                        <span class="text-xs font-bold text-blue-500 uppercase tracking-wide">제안 제목 1 (직관형)</span>
+                        <h3 class="font-bold text-lg mt-1 text-slate-800">AI x QA: 신뢰할 수 있는 시스템 구축과 테스트 자동화 실무</h3>
+                    </div>
+                    <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100">
+                        <span class="text-xs font-bold text-indigo-500 uppercase tracking-wide">제안 제목 2 (트렌드형)</span>
+                        <h3 class="font-bold text-lg mt-1 text-slate-800">엔지니어를 위한 AI 페어 프로그래밍 & 품질 보증 마스터 클래스</h3>
+                    </div>
+                    <div class="bg-emerald-50 p-4 rounded-lg border border-emerald-100">
+                        <span class="text-xs font-bold text-emerald-500 uppercase tracking-wide">제안 제목 3 (가치 중심)</span>
+                        <h3 class="font-bold text-lg mt-1 text-slate-800">AI Native QA: 테스트 케이스 설계부터 시스템 검증까지</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Info Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                    <div class="text-slate-400 text-sm font-semibold uppercase mb-2">교육 기간</div>
+                    <div class="text-2xl font-bold text-slate-800">2일 <span class="text-lg font-normal text-slate-500">(16시간)</span></div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                    <div class="text-slate-400 text-sm font-semibold uppercase mb-2">교육 대상</div>
+                    <div class="text-base font-medium text-slate-800">IT 기업 SW 엔지니어,<br>QA 담당자, PM</div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                    <div class="text-slate-400 text-sm font-semibold uppercase mb-2">선수 지식</div>
+                    <div class="text-base font-medium text-slate-800">기본 프로그래밍(Python/Java),<br>SW 테스트 기초 이해</div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                    <div class="text-slate-400 text-sm font-semibold uppercase mb-2">실습 도구</div>
+                    <div class="text-base font-medium text-slate-800">Cursor Editor,<br>Claude Code (API)</div>
+                </div>
+            </div>
+
+            <!-- Learning Goals & Chart -->
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Text Content -->
+                <div class="lg:col-span-2 bg-white rounded-xl shadow-sm p-8 border border-slate-100">
+                    <h2 class="text-xl font-bold text-slate-800 mb-4">강의 목표</h2>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 h-6 w-6 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 font-bold text-sm mt-0.5">1</span>
+                            <span class="ml-3 text-slate-600">AI 시스템의 특성(불확실성, 편향성)을 이해하고, 이에 따른 품질 리스크를 식별할 수 있습니다.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 h-6 w-6 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 font-bold text-sm mt-0.5">2</span>
+                            <span class="ml-3 text-slate-600">메타모픽 테스트, 적대적 테스트 등 머신러닝 시스템에 특화된 테스트 기법을 적용할 수 있습니다.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 h-6 w-6 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 font-bold text-sm mt-0.5">3</span>
+                            <span class="ml-3 text-slate-600"><strong>Cursor</strong>와 <strong>Claude Code</strong>를 활용하여 단위 테스트 코드 생성, 리팩토링, 버그 분석을 자동화하는 실무 역량을 확보합니다.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Chart: Theory vs Practice -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-slate-100 flex flex-col items-center justify-center">
+                    <h3 class="text-sm font-bold text-slate-500 uppercase mb-4 w-full text-center">교육 구성 비율</h3>
+                    <div class="chart-container" style="height: 200px; max-height: 200px;">
+                        <canvas id="compositionChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center text-sm text-slate-500">
+                        실무 중심의 AI 활용 능력 배양에 집중
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: CURRICULUM -->
+        <div id="section-curriculum" class="hidden space-y-8 animate-fade-in">
+            
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-8">
+                <p class="text-blue-800">
+                    <strong>💡 인터랙티브 가이드:</strong> 아래 타임라인의 각 세션을 클릭하면 상세 학습 내용과 실습 포인트를 확인할 수 있습니다.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Day 1 Column -->
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="bg-slate-800 text-white font-bold px-4 py-2 rounded-lg shadow-md">Day 1</div>
+                        <h2 class="ml-4 text-xl font-bold text-slate-800">AI 품질 이해 및 테스트 기초</h2>
+                    </div>
+                    
+                    <div class="relative space-y-4 pl-8 border-l-2 border-slate-200" id="day1-container">
+                        <!-- Dynamic Content Loaded via JS -->
+                    </div>
+                </div>
+
+                <!-- Day 2 Column -->
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="bg-blue-600 text-white font-bold px-4 py-2 rounded-lg shadow-md">Day 2</div>
+                        <h2 class="ml-4 text-xl font-bold text-slate-800">AI 테스트 기법 및 자동화 심화</h2>
+                    </div>
+
+                    <div class="relative space-y-4 pl-8 border-l-2 border-slate-200" id="day2-container">
+                        <!-- Dynamic Content Loaded via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Details Panel (Initially Hidden) -->
+            <div id="details-panel" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+                <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transform transition-all scale-100">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <span id="detail-badge" class="px-2 py-1 rounded text-xs font-bold bg-blue-100 text-blue-800">Module</span>
+                                <h3 id="detail-title" class="text-2xl font-bold text-slate-800 mt-2">Module Title</h3>
+                            </div>
+                            <button onclick="closeDetails()" class="text-slate-400 hover:text-slate-600">
+                                <span class="text-2xl">&times;</span>
+                            </button>
+                        </div>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="font-bold text-slate-700 mb-2 border-b pb-1">학습 내용</h4>
+                                <ul id="detail-points" class="list-disc list-inside text-slate-600 space-y-1"></ul>
+                            </div>
+                            
+                            <div class="bg-slate-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-slate-700 mb-2">🔧 실습 (Hands-on)</h4>
+                                <p id="detail-practice" class="text-slate-600"></p>
+                                <div id="detail-tools" class="mt-2 flex gap-2"></div>
+                            </div>
+
+                            <div>
+                                <h4 class="font-bold text-slate-700 mb-2">기대 효과</h4>
+                                <p id="detail-outcome" class="text-slate-600 text-sm"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 px-6 py-4 rounded-b-2xl border-t flex justify-end">
+                        <button onclick="closeDetails()" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">닫기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: TOOLS & ENVIRONMENT -->
+        <div id="section-tools" class="hidden space-y-8 animate-fade-in">
+            <div class="bg-white rounded-xl shadow-sm p-8 border border-slate-100">
+                <h2 class="text-2xl font-bold text-slate-800 mb-4">실습 환경 및 도구 활용 전략</h2>
+                <p class="text-slate-600 mb-8">
+                    본 과정은 단순한 이론 교육을 넘어, <span class="font-bold">Cursor (AI Code Editor)</span>와 <span class="font-bold">Claude Code</span>를 활용해 실제 업무 효율을 혁신하는 방법을 다룹니다.
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Tool 1: Cursor -->
+                    <div class="border border-slate-200 rounded-xl p-6 hover:shadow-md transition-shadow">
+                        <div class="flex items-center mb-4">
+                            <div class="h-10 w-10 bg-black rounded-lg flex items-center justify-center text-white font-bold mr-3">C</div>
+                            <h3 class="text-xl font-bold text-slate-800">Cursor Editor</h3>
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-500 uppercase mb-2">활용 시나리오</h4>
+                        <ul class="text-slate-600 space-y-2 text-sm mb-4">
+                            <li>• <strong>AI 기반 코드 리뷰:</strong> 기존 코드의 잠재적 버그 및 취약점 자동 탐지</li>
+                            <li>• <strong>테스트 코드 생성:</strong> `@Test` 어노테이션 기반의 단위 테스트 자동 작성</li>
+                            <li>• <strong>코드 설명 및 문서화:</strong> 레거시 코드의 로직 분석 및 주석 생성</li>
+                        </ul>
+                        <div class="bg-slate-100 rounded p-3 text-xs font-mono text-slate-600">
+                            User: "이 함수의 경계값 테스트 케이스를 JUnit5로 작성해줘."<br>
+                            Cursor: [테스트 코드 자동 생성...]
+                        </div>
+                    </div>
+
+                    <!-- Tool 2: Claude Code -->
+                    <div class="border border-slate-200 rounded-xl p-6 hover:shadow-md transition-shadow">
+                        <div class="flex items-center mb-4">
+                            <div class="h-10 w-10 bg-orange-600 rounded-lg flex items-center justify-center text-white font-bold mr-3">A</div>
+                            <h3 class="text-xl font-bold text-slate-800">Claude Code (Analysis)</h3>
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-500 uppercase mb-2">활용 시나리오</h4>
+                        <ul class="text-slate-600 space-y-2 text-sm mb-4">
+                            <li>• <strong>복잡한 로직 검증:</strong> 기획서/요구사항 기반의 시나리오 도출</li>
+                            <li>• <strong>메타모픽 관계 설정:</strong> AI 모델 테스트를 위한 변환 관계 제안</li>
+                            <li>• <strong>오류 로그 분석:</strong> 스택 트레이스 분석 및 수정 제안</li>
+                        </ul>
+                        <div class="bg-slate-100 rounded p-3 text-xs font-mono text-slate-600">
+                            User: "이 AI 모델의 출력이 특정 입력에서 편향되는지 검증할 시나리오를 짜줘."<br>
+                            Claude: [시나리오 및 데이터셋 제안...]
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quality Model Visualization -->
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1 bg-white rounded-xl shadow-sm p-6 border border-slate-100">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4">AI 품질 모델 (ISO/IEC 25059)</h3>
+                    <p class="text-sm text-slate-600 mb-4">
+                        AI 시스템 검증 시 고려해야 할 핵심 품질 속성을 시각화했습니다. 본 과정에서는 특히 <strong>기능 적합성, 강건성, 설명 가능성</strong>을 중점적으로 다룹니다.
+                    </p>
+                    <div class="text-xs text-slate-400 mt-8">
+                        * 마우스를 차트 위에 올려 상세 항목을 확인하세요.
+                    </div>
+                </div>
+                <div class="lg:col-span-2 bg-white rounded-xl shadow-sm p-6 border border-slate-100 flex justify-center">
+                    <div class="chart-container">
+                        <canvas id="qualityRadarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // State Management
+        let currentTab = 'overview';
+        
+        // Data Store
+        const curriculumData = {
+            day1: [
+                {
+                    time: "10:00 - 12:00",
+                    title: "AI 시스템과 품질의 변화",
+                    type: "Theory",
+                    points: [
+                        "AI 개발 패러다임의 변화 (Rule-based vs Data-driven)",
+                        "AI 테스트의 난제: 오라클 문제, 비결정성, 불확실성",
+                        "AI 품질 모델 (ISO/IEC 25059) 이해: 기능 적합성, 신뢰성, 유연성"
+                    ],
+                    practice: "다양한 AI 실패 사례(자율주행, 챗봇 등)를 분석하고 품질 리스크 매트릭스 작성",
+                    outcome: "AI 시스템의 특성을 이해하고 품질 목표를 수립할 수 있다.",
+                    tools: []
+                },
+                {
+                    time: "13:00 - 15:00",
+                    title: "신뢰할 수 있는 AI: 편향과 공정성",
+                    type: "Theory & Case",
+                    points: [
+                        "AI 편향의 종류: 데이터 편향, 알고리즘 편향, 인지 편향",
+                        "심슨의 역설과 통계적 함정",
+                        "AI 규제 동향 (EU AI Act, GDPR)과 한국의 AI 윤리 가이드라인"
+                    ],
+                    practice: "[토론] 실제 기업 데이터를 가정하여 잠재적 편향 리스크 식별",
+                    outcome: "데이터 및 모델의 윤리적 리스크를 식별하고 완화 전략을 수립할 수 있다.",
+                    tools: []
+                },
+                {
+                    time: "15:00 - 17:00",
+                    title: "AI 코딩 어시스턴트 활용 기초",
+                    type: "Hands-on",
+                    points: [
+                        "Cursor 에디터 설치 및 환경 설정",
+                        "Claude Code 연동 및 기본 프롬프트 엔지니어링",
+                        "테스트 설계를 위한 AI와의 대화 기법"
+                    ],
+                    practice: "Cursor를 활용해 간단한 Python 함수의 결함 찾기 및 테스트 케이스 초안 생성",
+                    outcome: "AI 도구를 개발 및 테스트 환경에 통합할 수 있다.",
+                    tools: ["Cursor", "Claude"]
+                }
+            ],
+            day2: [
+                {
+                    time: "10:00 - 12:00",
+                    title: "머신러닝 시스템 테스트 기법",
+                    type: "Theory & Practice",
+                    points: [
+                        "메타모픽 테스트 (Metamorphic Testing): 오라클 문제 해결",
+                        "적대적 테스트 (Adversarial Testing): 강건성 검증",
+                        "모델 성능 평가 메트릭 (Precision, Recall, F1, Confusion Matrix)의 올바른 해석"
+                    ],
+                    practice: "이미지 분류 모델에 노이즈를 주입하여 강건성을 테스트하는 시나리오 설계",
+                    outcome: "ML 모델 특성에 맞는 전문 테스트 기법을 적용할 수 있다.",
+                    tools: ["Python"]
+                },
+                {
+                    time: "13:00 - 15:00",
+                    title: "AI 기반 단위 테스트 자동화",
+                    type: "Hands-on (Deep Dive)",
+                    points: [
+                        "Cursor를 활용한 단위 테스트(Unit Test) 코드 자동 생성",
+                        "경계값 분석 및 예외 처리를 위한 테스트 케이스 보강",
+                        "테스트 커버리지 분석 및 AI를 활용한 커버리지 개선"
+                    ],
+                    practice: "레거시 코드(결제 모듈 등)를 가져와 Cursor로 테스트 코드를 작성하고 리팩토링 수행",
+                    outcome: "테스트 코드 작성 시간을 50% 이상 단축하고 코드 품질을 개선한다.",
+                    tools: ["Cursor", "JUnit/PyTest"]
+                },
+                {
+                    time: "15:00 - 17:00",
+                    title: "미래의 QA: Shift-Right & AIOps",
+                    type: "Theory & Practice",
+                    points: [
+                        "Shift-Left(조기 테스트)에서 Shift-Right(운영 단계 모니터링)로의 확장",
+                        "AIOps: 운영 로그 분석 및 이상 탐지 자동화",
+                        "디지털 트윈과 메타버스 환경에서의 테스트 전망"
+                    ],
+                    practice: "로그 데이터를 Claude Code에 입력하여 에러 패턴 분석 및 RCA(근본 원인 분석) 수행",
+                    outcome: "개발 이후 운영 단계까지 품질 보증 영역을 확장할 수 있다.",
+                    tools: ["Claude"]
+                }
+            ]
+        };
+
+        // Navigation Logic
+        function switchTab(tabId) {
+            // Update Tab Styles
+            ['overview', 'curriculum', 'tools'].forEach(id => {
+                const btn = document.getElementById(`nav-${id}`);
+                const section = document.getElementById(`section-${id}`);
+                
+                if (id === tabId) {
+                    btn.className = 'tab-active py-2 px-1 transition-colors';
+                    section.classList.remove('hidden');
+                } else {
+                    btn.className = 'tab-inactive py-2 px-1 transition-colors';
+                    section.classList.add('hidden');
+                }
+            });
+            currentTab = tabId;
+
+            // Trigger Chart Rendering if needed
+            if (tabId === 'overview') {
+                renderDoughnut();
+            } else if (tabId === 'tools') {
+                setTimeout(renderRadar, 100); // Slight delay for rendering context
+            }
+        }
+
+        // Render Curriculum Logic
+        function renderCurriculum() {
+            ['day1', 'day2'].forEach(day => {
+                const container = document.getElementById(`${day}-container`);
+                container.innerHTML = '';
+                
+                curriculumData[day].forEach((module, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'relative pl-8 py-2 group cursor-pointer';
+                    div.onclick = () => showDetails(day, index);
+                    
+                    // Timeline dot
+                    const dotColor = module.type.includes('Hands-on') ? 'bg-orange-500' : 'bg-blue-500';
+                    div.innerHTML = `
+                        <div class="absolute -left-[9px] top-4 h-4 w-4 rounded-full border-2 border-white ${dotColor} shadow group-hover:scale-125 transition-transform"></div>
+                        <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm group-hover:border-blue-300 group-hover:shadow-md transition-all">
+                            <div class="flex justify-between items-start mb-1">
+                                <span class="text-sm font-bold text-slate-500">${module.time}</span>
+                                <span class="text-xs font-semibold px-2 py-0.5 rounded-full ${module.type.includes('Hands-on') ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700'}">${module.type}</span>
+                            </div>
+                            <h3 class="font-bold text-lg text-slate-800">${module.title}</h3>
+                            <p class="text-slate-500 text-sm mt-1 truncate">${module.points[0]}</p>
+                            <div class="mt-2 text-xs text-blue-600 font-medium opacity-0 group-hover:opacity-100 transition-opacity">클릭하여 상세 보기 →</div>
+                        </div>
+                    `;
+                    container.appendChild(div);
+                });
+            });
+        }
+
+        // Modal Logic
+        function showDetails(day, index) {
+            const data = curriculumData[day][index];
+            document.getElementById('detail-title').innerText = data.title;
+            document.getElementById('detail-points').innerHTML = data.points.map(p => `<li>${p}</li>`).join('');
+            document.getElementById('detail-practice').innerText = data.practice;
+            document.getElementById('detail-outcome').innerText = data.outcome;
+            
+            const toolsContainer = document.getElementById('detail-tools');
+            toolsContainer.innerHTML = '';
+            data.tools.forEach(tool => {
+                const badge = document.createElement('span');
+                badge.className = 'px-2 py-1 bg-slate-800 text-white text-xs rounded font-bold';
+                badge.innerText = tool;
+                toolsContainer.appendChild(badge);
+            });
+
+            document.getElementById('details-panel').classList.remove('hidden');
+        }
+
+        function closeDetails() {
+            document.getElementById('details-panel').classList.add('hidden');
+        }
+
+        // Chart.js Logic
+        let doughnutChart = null;
+        let radarChart = null;
+
+        function renderDoughnut() {
+            if (doughnutChart) return;
+            const ctx = document.getElementById('compositionChart').getContext('2d');
+            doughnutChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['이론 & 개념', '실습 (Hands-on)', '사례 분석'],
+                    datasets: [{
+                        data: [35, 50, 15],
+                        backgroundColor: ['#94a3b8', '#3b82f6', '#cbd5e1'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+        }
+
+        function renderRadar() {
+            if (radarChart) return;
+            const ctx = document.getElementById('qualityRadarChart').getContext('2d');
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        '기능 적합성\n(Functional Suitability)', 
+                        '신뢰성\n(Reliability)', 
+                        '설명 가능성\n(Explainability)', 
+                        '강건성\n(Robustness)', 
+                        '공정성\n(Fairness)', 
+                        '안전성\n(Safety)'
+                    ],
+                    datasets: [{
+                        label: 'AI 시스템 중점 품질 속성',
+                        data: [90, 80, 70, 85, 75, 95],
+                        fill: true,
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgb(59, 130, 246)',
+                        pointBackgroundColor: 'rgb(59, 130, 246)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(59, 130, 246)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { display: true },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        // Initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCurriculum();
+            renderDoughnut();
+            
+            // Setup simple fade animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.add('opacity-100', 'translate-y-0');
+                        entry.target.classList.remove('opacity-0', 'translate-y-4');
+                    }
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>

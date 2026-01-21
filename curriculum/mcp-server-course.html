@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD룰 AI교육 - Cursor & MCP 서버 개발</title>
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="15x15"
+    href="./dist/images/favicon.png"
+    />
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8fafc; /* Warm neutral background based on inspiration */
+            color: #334155;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            margin: 0 auto;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .tab-active {
+            border-bottom: 2px solid #3b82f6;
+            color: #1d4ed8;
+            font-weight: 700;
+        }
+        .tab-inactive {
+            color: #64748b;
+        }
+        .tab-inactive:hover {
+            color: #334155;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Header / Hero Section -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <img src="mdrules-logo.png" alt="MD룰 AI교육" width="116px">
+                <h1 class="text-xl font-bold text-slate-900 tracking-tight">Cursor & MCP 서버 개발 <span class="text-blue-600 font-normal">| 교육</span></h1>
+            </div>
+            <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#overview" class="hover:text-blue-600 transition">개요</a>
+                <a href="#curriculum" class="hover:text-blue-600 transition">커리큘럼 상세</a>
+                <a href="#impact" class="hover:text-blue-600 transition">기대효과</a>
+                <a href="https://mdrules.dev" target="_self" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">
+                사이트로 이동
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+        <!-- Section 1: Introduction & Value Prop -->
+        <section id="overview" class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <div class="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold tracking-wide uppercase">New Standard</div>
+                <h2 class="text-4xl md:text-5xl font-black text-slate-900 leading-tight">
+                    AI 에이전트에 <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">손과 발을 달다</span>
+                </h2>
+                <p class="text-lg text-slate-600 leading-relaxed">
+                    단순 대화형 AI를 넘어, 사내 DB와 API를 제어하는 <strong>실무형 에이전트</strong>를 구축합니다.
+                    <strong>Cursor</strong>의 AI 코딩 능력과 <strong>MCP</strong> 표준 프로토콜을 결합하여, 
+                    단 2일 만에 안전하고 강력한 사내 시스템 연동 서버를 완성하세요.
+                </p>
+                <div class="flex flex-wrap gap-4 pt-4">
+                    <div class="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-lg shadow-sm">
+                        <span class="text-indigo-500 font-bold">⏱️ 16시간</span>
+                        <span class="text-sm text-slate-500">집중 과정</span>
+                    </div>
+                    <div class="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-lg shadow-sm">
+                        <span class="text-indigo-500 font-bold">🛠️ Cursor + MCP</span>
+                        <span class="text-sm text-slate-500">최신 기술 스택</span>
+                    </div>
+                    <div class="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-lg shadow-sm">
+                        <span class="text-indigo-500 font-bold">🛡️ 보안/테스트</span>
+                        <span class="text-sm text-slate-500">프로덕션 레벨</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-100">
+                <h3 class="text-lg font-bold mb-4 text-center">이론 vs 실습 비중 분석</h3>
+                <div class="chart-container">
+                    <canvas id="ratioChart"></canvas>
+                </div>
+                <p class="text-center text-sm text-slate-500 mt-4">
+                    실무 적용력을 극대화하기 위해 <strong class="text-blue-600">70% 이상</strong>을 핸즈온 실습에 할애합니다.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 2: Why This Course? (Key Features) -->
+        <section class="bg-slate-100 rounded-3xl p-8 md:p-12">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h3 class="text-2xl font-bold text-slate-900 mb-4">왜 이 과정이 필요한가요?</h3>
+                <p class="text-slate-600">
+                    기존 LLM 개발 방식의 한계(Siloed Data)를 극복하고, 
+                    최신 표준(MCP)을 도입하여 유지보수 가능한 시스템을 구축합니다.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm card-hover">
+                    <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-4 text-2xl">🔗</div>
+                    <h4 class="font-bold text-lg mb-2">표준 프로토콜 (MCP)</h4>
+                    <p class="text-sm text-slate-600">
+                        Anthropic이 제정한 개방형 표준 MCP를 학습하여, 
+                        파편화된 연결 방식에서 벗어나 확장성 있는 시스템 아키텍처를 설계합니다.
+                    </p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm card-hover">
+                    <div class="w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center mb-4 text-2xl">⚡</div>
+                    <h4 class="font-bold text-lg mb-2">Cursor 기반 가속화</h4>
+                    <p class="text-sm text-slate-600">
+                        반복적인 보일러플레이트 코드는 AI 에디터 Cursor에게 맡깁니다. 
+                        개발자는 복잡한 비즈니스 로직과 워크플로 설계에 집중합니다.
+                    </p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm card-hover">
+                    <div class="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center mb-4 text-2xl">🏗️</div>
+                    <h4 class="font-bold text-lg mb-2">프로덕션 품질 확보</h4>
+                    <p class="text-sm text-slate-600">
+                        단순 데모가 아닙니다. 4계층 테스트(단위/연동 등) 전략과 
+                        보안(Auth) 설정을 통해 실제 서비스 가능한 수준을 목표로 합니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Detailed Curriculum (Interactive) -->
+        <section id="curriculum">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-8 border-b border-slate-200 pb-4">
+                <div>
+                    <h3 class="text-2xl font-bold text-slate-900">상세 커리큘럼</h3>
+                    <p class="text-slate-500 mt-2">탭을 클릭하여 일자별 상세 내용을 확인하세요.</p>
+                </div>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <button id="btn-day1" class="text-lg pb-2 tab-active transition" onclick="switchTab('day1')">Day 1: 연결과 기초</button>
+                    <button id="btn-day2" class="text-lg pb-2 tab-inactive transition" onclick="switchTab('day2')">Day 2: 심화와 배포</button>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-12 gap-8">
+                <!-- Left: Content List -->
+                <div class="md:col-span-7 space-y-4" id="curriculum-content">
+                    <!-- Dynamic Content populated by JS -->
+                </div>
+
+                <!-- Right: Visualizer / Context -->
+                <div class="md:col-span-5">
+                    <div class="bg-slate-900 text-white p-6 rounded-xl shadow-lg h-full flex flex-col">
+                        <h4 class="text-indigo-300 font-bold mb-4 uppercase text-xs tracking-wider">Learning Focus</h4>
+                        <div class="flex-grow flex items-center justify-center">
+                            <div class="chart-container" style="height: 250px;">
+                                <canvas id="skillChart"></canvas>
+                            </div>
+                        </div>
+                        <div id="dynamic-desc" class="mt-6 p-4 bg-slate-800 rounded-lg text-sm leading-relaxed text-slate-300">
+                            <!-- Context text changes here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Target Audience -->
+        <section class="border-t border-slate-200 pt-16">
+            <h3 class="text-2xl font-bold text-slate-900 mb-8 text-center">이런 분들에게 최적화되어 있습니다</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="p-4 border border-slate-100 rounded-lg">
+                    <div class="text-3xl mb-2">💻</div>
+                    <div class="font-bold">백엔드 개발자</div>
+                    <div class="text-xs text-slate-500 mt-1">사내 API/DB 연동 니즈</div>
+                </div>
+                <div class="p-4 border border-slate-100 rounded-lg">
+                    <div class="text-3xl mb-2">🤖</div>
+                    <div class="font-bold">AI 엔지니어</div>
+                    <div class="text-xs text-slate-500 mt-1">RAG 시스템 고도화</div>
+                </div>
+                <div class="p-4 border border-slate-100 rounded-lg">
+                    <div class="text-3xl mb-2">🔍</div>
+                    <div class="font-bold">QA 담당자</div>
+                    <div class="text-xs text-slate-500 mt-1">에이전트 품질 보증</div>
+                </div>
+                <div class="p-4 border border-slate-100 rounded-lg">
+                    <div class="text-3xl mb-2">🏗️</div>
+                    <div class="font-bold">인프라 담당자</div>
+                    <div class="text-xs text-slate-500 mt-1">사내 보안/배포 파이프라인</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-20 py-8 border-t border-slate-200 text-center text-slate-500 text-sm">
+                        <p class="text-slate-400 text-sm mb-4">Copyright &copy;2026 JAEWOO, KIM.</p>
+            <p class="text-slate-400 text-xs">Email: jaewoo@mdrules.dev</p>
+        </footer>
+
+    </main>
+
+    <!-- JS Logic -->
+    <script>
+        // Data Store
+        const curriculumData = {
+            day1: [
+                {
+                    time: "1H",
+                    category: "이론",
+                    title: "AI의 새로운 표준: MCP",
+                    desc: "MCP(Model Context Protocol)의 등장 배경과 아키텍처(Host-Client-Server) 이해. 기존 Custom Connector 방식과의 비교.",
+                    highlight: "표준화"
+                },
+                {
+                    time: "3H",
+                    category: "실습",
+                    title: "[구현 1] DB 연동 서버 (Resource)",
+                    desc: "사내 MySQL/PostgreSQL 데이터를 LLM에게 '읽기 전용 자원'으로 제공하는 서버 구축. 프롬프트 인젝션 방지 등 보안 기초.",
+                    highlight: "데이터 연결"
+                },
+                {
+                    time: "1H",
+                    category: "실습",
+                    title: "[구현 2] API 연동 서버 (Tool)",
+                    desc: "Cursor를 활용하여 사내 레거시 API 명세서(Swagger)를 기반으로 MCP 도구(Tool) 자동 생성 및 연동.",
+                    highlight: "Action 수행"
+                },
+                {
+                    time: "2H",
+                    category: "심화",
+                    title: "[심화] 복잡한 워크플로 설계",
+                    desc: "DB 조회 결과로 API를 호출하는 'Cascade 패턴' 구현. 단일 요청으로 연쇄 작업을 처리하는 파이프라인 설계.",
+                    highlight: "워크플로"
+                },
+                {
+                    time: "1H",
+                    category: "디버깅",
+                    title: "MCP Inspector 활용",
+                    desc: "MCP Inspector를 통해 LLM과 서버 간의 JSON-RPC 메시지 흐름을 시각화하고 에러를 추적하는 기법.",
+                    highlight: "가시성"
+                }
+            ],
+            day2: [
+                {
+                    time: "2H",
+                    category: "패턴",
+                    title: "Knowledge Base 패턴",
+                    desc: "사내 위키, PDF 문서를 MCP로 서빙하여 RAG(검색 증강 생성) 시스템을 대체하거나 보완하는 아키텍처 구현.",
+                    highlight: "지식 관리"
+                },
+                {
+                    time: "2H",
+                    category: "배포",
+                    title: "Docker 컨테이너화 및 배포",
+                    desc: "구축한 MCP 서버를 Docker Image로 빌드하고, 사내 클라우드/온프레미스 환경에 배포하는 전략.",
+                    highlight: "확장성"
+                },
+                {
+                    time: "2H",
+                    category: "보안",
+                    title: "보안 및 인증 (Auth)",
+                    desc: "API Key, OAuth 등을 활용한 인증 미들웨어 구현. 민감 정보 마스킹 및 접근 제어(ACL) 설정.",
+                    highlight: "보안"
+                },
+                {
+                    time: "2H",
+                    category: "QA",
+                    title: "4계층 테스트 전략",
+                    desc: "단위 테스트(Unit)부터 프로토콜 준수, 시스템 연동, E2E 테스트까지. 신뢰할 수 있는 에이전트를 위한 QA 프로세스.",
+                    highlight: "신뢰성"
+                }
+            ]
+        };
+
+        const chartConfigs = {
+            day1: {
+                labels: ['MCP 이해', 'DB 연결', 'API 제어', '디버깅'],
+                data: [20, 30, 30, 20],
+                desc: "Day 1은 <strong>'연결(Connectivity)'</strong>에 집중합니다. <br>Cursor를 도구로 사용하여 사내의 정적인 데이터(DB)와 기능(API)을 AI가 이해할 수 있는 형태(MCP)로 변환하는 핵심 기술을 습득합니다."
+            },
+            day2: {
+                labels: ['지식베이스', '배포/운영', '보안', '테스트(QA)'],
+                data: [25, 25, 25, 25],
+                desc: "Day 2는 <strong>'신뢰성(Reliability)'</strong>에 집중합니다. <br>단순히 작동하는 것을 넘어, 실제 기업 환경에서 운영 가능한 수준의 보안, 테스트, 배포 파이프라인을 구축합니다."
+            }
+        };
+
+        // DOM Elements
+        const contentList = document.getElementById('curriculum-content');
+        const dynamicDesc = document.getElementById('dynamic-desc');
+        let skillChart = null;
+        let ratioChart = null;
+
+        // Initialize Charts
+        function initCharts() {
+            // 1. Ratio Chart (Donut)
+            const ctxRatio = document.getElementById('ratioChart').getContext('2d');
+            ratioChart = new Chart(ctxRatio, {
+                type: 'doughnut',
+                data: {
+                    labels: ['실습 (Hands-on)', '이론 (Theory)'],
+                    datasets: [{
+                        data: [70, 30],
+                        backgroundColor: ['#3b82f6', '#cbd5e1'],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: { 
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.raw + '%';
+                                }
+                            }
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+
+            // 2. Skill Chart (Radar or Bar - choosing Bar for clarity in small space)
+            const ctxSkill = document.getElementById('skillChart').getContext('2d');
+            skillChart = new Chart(ctxSkill, {
+                type: 'bar', // Changed from radar to bar for better readability in card
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Skill Focus',
+                        data: [],
+                        backgroundColor: '#6366f1',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: { beginAtZero: true, max: 40, display: false },
+                        y: { 
+                            ticks: { color: '#e2e8f0', font: { size: 11 } },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        // Render Function
+        function renderCurriculum(dayKey) {
+            const data = curriculumData[dayKey];
+            const config = chartConfigs[dayKey];
+
+            // 1. Update List
+            contentList.innerHTML = '';
+            data.forEach((item, index) => {
+                const el = document.createElement('div');
+                el.className = 'flex gap-4 p-4 border border-slate-100 rounded-lg bg-white hover:border-blue-200 transition group';
+                el.innerHTML = `
+                    <div class="flex-shrink-0 w-16 text-center">
+                        <span class="block font-bold text-slate-800">${item.time}</span>
+                        <span class="text-xs text-slate-400 bg-slate-100 px-2 py-0.5 rounded mt-1 inline-block">${item.category}</span>
+                    </div>
+                    <div>
+                        <h5 class="font-bold text-slate-800 text-lg group-hover:text-blue-600 transition">${item.title}</h5>
+                        <p class="text-sm text-slate-600 mt-1 leading-relaxed">${item.desc}</p>
+                    </div>
+                `;
+                contentList.appendChild(el);
+            });
+
+            // 2. Update Skill Chart
+            skillChart.data.labels = config.labels;
+            skillChart.data.datasets[0].data = config.data;
+            skillChart.update();
+
+            // 3. Update Description
+            dynamicDesc.innerHTML = config.desc;
+        }
+
+        // Tab Switching Logic
+        window.switchTab = function(dayKey) {
+            const btn1 = document.getElementById('btn-day1');
+            const btn2 = document.getElementById('btn-day2');
+
+            if (dayKey === 'day1') {
+                btn1.className = 'text-lg pb-2 tab-active transition';
+                btn2.className = 'text-lg pb-2 tab-inactive transition';
+            } else {
+                btn1.className = 'text-lg pb-2 tab-inactive transition';
+                btn2.className = 'text-lg pb-2 tab-active transition';
+            }
+            
+            // Add fade animation effect
+            contentList.style.opacity = 0;
+            setTimeout(() => {
+                renderCurriculum(dayKey);
+                contentList.style.opacity = 1;
+            }, 200);
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initCharts();
+            renderCurriculum('day1');
+        });
+
+    </script>
+
+    <!-- Placeholder Comments Required -->
+    <!-- Chosen Palette: Warm Neutrals (Slate-50/100) with Blue/Indigo Accents for Tech/Trust feel. -->
+    <!-- Application Structure Plan: 
+         1. Hero: Immediate value prop and 'Theory vs Practice' chart to emphasize the hands-on nature.
+         2. Features: 3-column grid explaining the 'Why' (MCP, Cursor, Quality) to justify the investment.
+         3. Curriculum (Interactive): A Tab-based view separating Day 1 (Foundation) and Day 2 (Production). 
+            This reduces cognitive load. Clicking tabs updates a dynamic list AND a side context panel (Bar chart + Text) 
+            that explains the focus of that day.
+         4. Target: Simple grid icons.
+         This structure moves from "High-level concept" -> "Detailed Syllabus" -> "Who is it for", mirroring a proposal flow.
+    -->
+    <!-- Visualization & Content Choices: 
+         - Theory/Practice Ratio (Doughnut): Goal is to show this is a WORKSHOP, not a lecture.
+         - Skill Focus (Horizontal Bar): Goal is to show the qualitative balance of each day (e.g., Day 1 is connecting, Day 2 is securing). 
+           Updated dynamically via JS to keep the user engaged.
+         - NO SVG/Mermaid: Used Chart.js for dataviz and HTML/CSS/Tailwind for layout and icons.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+</body>
+</html>

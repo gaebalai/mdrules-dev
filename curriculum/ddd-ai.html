@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD룰 AI교육 - DDD x AI: 차세대 비즈니스 설계 전략</title>
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="15x15"
+    href="./dist/images/favicon.png"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Pretendard', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin: 0 auto; height: 300px; }
+        .card-hover:hover { transform: translateY(-4px); transition: all 0.2s ease-in-out; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .tab-active { border-bottom: 2px solid #2563eb; color: #2563eb; font-weight: 700; }
+    </style>
+    <!-- Chosen Palette: Slate Blue & Emerald (Trust & Growth) -->
+    <!-- Application Structure Plan:
+         1. Hero Section: Book Title & DDD Philosophy
+         2. Transition Section: From Traditional DDD to AI-Driven Design
+         3. Interactive Methodology: 4 Core Pillars of AI Business Design
+         4. Roadmap Visualizer: Implementation steps using TypeScript
+    -->
+    <!-- Visualization & Content Choices:
+         - Radar Chart: Comparing Traditional DDD vs AI-Enhanced DDD.
+         - Interactive Cards: Detailed pillars of the new methodology.
+         - Process Flow: Visualizing the Event-Driven AI path.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-2">
+                    <img src="mdrules-logo.png" alt="MD룰 AI교육" width="116px">
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
+                    <button onclick="scrollToId('book-intro')" class="hover:text-blue-600">교육 소개</button>
+                    <button onclick="scrollToId('ai-strategy')" class="hover:text-blue-600">AI 설계 전략</button>
+                    <button onclick="scrollToId('methodology')" class="hover:text-blue-600">방법론</button>
+                    <a href="https://mdrules.dev" target="_self" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">
+                    사이트로 이동
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-gradient-to-r from-slate-900 to-slate-800 py-20 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-6">
+                복잡한 비즈니스를 <span class="text-emerald-400">도메인</span>으로 정복하고,<br>
+                <span class="text-blue-400">AI</span>로 자동화하십시오.
+            </h1>
+            <p class="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed mb-10">
+                'AI로 진행하는 Domain-Driven Deisng: 실전 모델링, 설계 부트캠프'의 정수와<br>
+                최신 AI 에이전트 설계 기법의 결합 제안서입니다.
+            </p>
+            <button onclick="scrollToId('ai-strategy')" class="bg-emerald-500 text-white px-8 py-3 rounded-lg font-bold hover:bg-emerald-600 transition shadow-lg">전략 요약 보기</button>
+        </div>
+    </header>
+
+    <!-- Book Summary Section -->
+    <section id="book-intro" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6 underline decoration-emerald-400 decoration-4">교육 핵심 요약</h2>
+                    <p class="text-slate-600 mb-8 leading-relaxed">
+                        TypeScript를 활용하여 <strong>온라인 서점 카탈로그 관리</strong>라는 구체적인 도메인을 구현하며 DDD의 모든 것을 배웁니다. 
+                        단순 코딩이 아닌, 비즈니스 가치를 어떻게 코드로 보호하고 지속 가능하게 만들 것인지에 대한 실전 가이드입니다.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-xl">
+                            <span class="text-xl">📘</span>
+                            <div>
+                                <h4 class="font-bold text-slate-800">전략적 설계</h4>
+                                <p class="text-sm text-slate-500">Bounded Context를 통한 비즈니스 경계 설정</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-xl">
+                            <span class="text-xl">🛠️</span>
+                            <div>
+                                <h4 class="font-bold text-slate-800">전술적 설계</h4>
+                                <p class="text-sm text-slate-500">Aggregate, Entity, Value Object를 통한 견고한 구현</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-xl">
+                            <span class="text-xl">🛡️</span>
+                            <div>
+                                <h4 class="font-bold text-slate-800">지속 가능한 아키텍처</h4>
+                                <p class="text-sm text-slate-500">EDA, Outbox 패턴, 이벤트 소싱 등 고급 패턴</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200">
+                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6 text-center">설계 패러다임 변화</h3>
+                    <div class="chart-container">
+                        <canvas id="paradigmChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Enhanced Methodology -->
+    <section id="ai-strategy" class="py-20 bg-slate-100 border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900">AI 기반 차세대 비즈니스 설계 방법론</h2>
+                <p class="mt-4 text-slate-600">DDD의 견고함 위에 AI의 유연함을 더합니다.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8" id="methodology">
+                <!-- Pillar 1 -->
+                <div class="card-hover bg-white p-8 rounded-2xl border border-slate-200 shadow-sm transition">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center text-2xl mb-6">🤖</div>
+                    <h3 class="text-xl font-bold mb-4">AI-Native Bounded Context</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-6">
+                        전통적인 하위 도메인 분리에서 더 나아가, AI 에이전트가 독자적인 판단과 행동을 수행할 수 있는 '자율 경계'를 설정합니다.
+                    </p>
+                    <ul class="text-xs text-slate-400 space-y-2">
+                        <li>• AI 워크플로우 전용 도메인 모델</li>
+                        <li>• 인간-AI 협업 인터페이스 정의</li>
+                    </ul>
+                </div>
+                <!-- Pillar 2 -->
+                <div class="card-hover bg-white p-8 rounded-2xl border border-slate-200 shadow-sm transition">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-lg flex items-center justify-center text-2xl mb-6">📝</div>
+                    <h3 class="text-xl font-bold mb-4">Prompt Modeling</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-6">
+                        도메인 모델 자체가 AI의 지시서가 됩니다. 모델의 스키마와 제약 조건을 LLM이 즉시 이해할 수 있는 형태로 직렬화합니다.
+                    </p>
+                    <ul class="text-xs text-slate-400 space-y-2">
+                        <li>• 모델 스키마의 프롬프트 임베딩</li>
+                        <li>• 비즈니스 규칙의 자연어 명세화</li>
+                    </ul>
+                </div>
+                <!-- Pillar 3 -->
+                <div class="card-hover bg-white p-8 rounded-2xl border border-slate-200 shadow-sm transition">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center text-2xl mb-6">⚡</div>
+                    <h3 class="text-xl font-bold mb-4">Event-Driven AI</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-6">
+                        Outbox 패턴과 EDA를 활용하여 도메인 이벤트 발생 시 AI 에이전트가 비동기적으로 복잡한 분석이나 추론을 수행하게 합니다.
+                    </p>
+                    <ul class="text-xs text-slate-400 space-y-2">
+                        <li>• 비동기 AI 분석 파이프라인</li>
+                        <li>• 이벤트 기반 자율 액션 트리거</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white py-12 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-slate-400 text-sm mb-4">Copyright &copy;2026 JAEWOO, KIM.</p>
+            <p class="text-slate-400 text-xs">Email: jaewoo@mdrules.dev</p>
+            <div class="flex justify-center space-x-6 text-slate-500 text-xs font-bold uppercase tracking-widest">
+                <span>TypeScript</span>
+                <span>DDD</span>
+                <span>AI Agents</span>
+                <span>Outbox Pattern</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function scrollToId(id) {
+            const el = document.getElementById(id);
+            if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+        }
+
+        window.onload = function() {
+            const ctx = document.getElementById('paradigmChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['도메인 로직 독립성', '데이터 일관성', '확장성', 'AI 자동화 용이성', '유지보수 효율'],
+                    datasets: [{
+                        label: '전통적 데이터 중심 개발',
+                        data: [40, 60, 50, 30, 45],
+                        backgroundColor: 'rgba(148, 163, 184, 0.2)',
+                        borderColor: '#94a3b8',
+                        pointBackgroundColor: '#94a3b8',
+                    }, {
+                        label: 'DDD x AI 전략 설계',
+                        data: [90, 85, 95, 80, 90],
+                        backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                        borderColor: '#10b981',
+                        pointBackgroundColor: '#10b981',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>

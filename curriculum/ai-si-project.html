@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD룰 AI교육 - AI 기반 SI 프로젝트: 맨먼스(MM) 및 팀 구성 전략</title>
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="15x15"
+    href="./dist/images/favicon.png"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 350px;
+            margin: 0 auto;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .tab-active {
+            border-bottom: 2px solid #4F46E5;
+            color: #4F46E5;
+            font-weight: 700;
+        }
+        .tab-inactive {
+            color: #6B7280;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Chosen Palette: Warm Neutrals (Slate/Gray) with Indigo/Violet Accents for AI themes and Blue for Traditional themes. -->
+    <!-- Application Structure Plan: 
+         1. Hero Section: Sets the context of the paradigm shift in SI.
+         2. Simulation Dashboard: Allows users to interactively calculate the "AI Effect" on Man-Months (MM), visualizing the trade-off between headcount reduction and efficiency.
+         3. Comparative Case Study (Japan vs US): A toggle-based visual layout comparing team compositions. This uses CSS Grids to represent team slots, adhering to the "No SVG" rule.
+         4. Methodology Section: Explains the new calculation logic textually.
+         5. Why this structure? It moves from "Impact" (Simulator) to "Implementation" (Team Structure) to "Theory" (Methodology), facilitating a logical learning curve for decision-makers. -->
+    <!-- Visualization & Content Choices: 
+         1. MM Simulator: Bar Charts (Chart.js) to compare Traditional vs AI timelines and costs. Goal: Inform & Compare.
+         2. Team Composition: HTML/Tailwind Grid Layouts. Goal: Organize & Inform. Shows hierarchy without external image dependencies.
+         3. Interaction: Sliders for efficiency inputs, Tabs for regional switching. Goal: Engagement & Change. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Navigation / Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold">AI</div>
+                <h1 class="text-xl font-bold text-slate-800 tracking-tight">SI Project <span class="text-indigo-600">Transformation</span></h1>
+            </div>
+            <nav class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
+                <a href="#simulator" class="hover:text-indigo-600 transition">MM 시뮬레이터</a>
+                <a href="#teams" class="hover:text-indigo-600 transition">국가별 팀 구성</a>
+                <a href="#methodology" class="hover:text-indigo-600 transition">산정 방식</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+        <!-- Intro Section -->
+        <section class="text-center space-y-4 max-w-3xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight">
+                AI 코딩 에이전트와 <br>
+                <span class="text-indigo-600">SI 프로젝트의 미래</span>
+            </h2>
+            <p class="text-lg text-slate-600">
+                전통적인 맨먼스(Man-Month) 투입 방식은 AI 도입으로 인해 근본적인 변화를 맞이하고 있습니다.
+                AI가 주니어 개발자의 업무를 대체할 때, 프로젝트 비용과 팀 구성은 어떻게 변화해야 할까요?
+                일본과 미국의 사례를 통해 새로운 전략을 탐색해 보세요.
+            </p>
+        </section>
+
+        <!-- Section 1: Interactive MM Simulator -->
+        <section id="simulator" class="scroll-mt-20">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-6 border-b pb-4">
+                <div class="max-w-2xl">
+                    <h3 class="text-2xl font-bold text-slate-800">1. AI 도입 효과 시뮬레이터</h3>
+                    <p class="text-slate-600 mt-2">
+                        프로젝트 규모와 AI 도구의 성숙도를 설정하여, 전통적인 방식 대비 <strong>기간 단축</strong>과 <strong>비용 효율성</strong>을 비교해 보세요.
+                        AI 에이전트가 단순 코딩 업무를 자동화함에 따라 총 투입 MM이 어떻게 변화하는지 시각화합니다.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Controls -->
+                <div class="lg:col-span-4 space-y-6 bg-white p-6 rounded-xl shadow-md border border-slate-100 h-fit">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">프로젝트 규모 (기능 점수 기준)</label>
+                        <input type="range" id="projectScope" min="100" max="1000" step="50" value="500" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
+                        <div class="flex justify-between text-xs text-slate-500 mt-1">
+                            <span>소형 (100)</span>
+                            <span id="scopeValue" class="font-bold text-indigo-600 text-base">500</span>
+                            <span>대형 (1000)</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">AI 에이전트 성숙도 (자동화율)</label>
+                        <p class="text-xs text-slate-500 mb-2">AI가 보일러플레이트 및 기본 로직을 작성하는 비율입니다.</p>
+                        <input type="range" id="aiMaturity" min="10" max="80" step="10" value="40" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
+                        <div class="flex justify-between text-xs text-slate-500 mt-1">
+                            <span>보조 (10%)</span>
+                            <span id="maturityValue" class="font-bold text-indigo-600 text-base">40%</span>
+                            <span>자율 (80%)</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-indigo-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-indigo-900 text-sm mb-2">예상 결과 요약</h4>
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-sm text-indigo-700">기존 MM:</span>
+                            <span id="statTraditional" class="font-bold text-slate-800">60 MM</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-sm text-indigo-700">AI 도입 MM:</span>
+                            <span id="statAI" class="font-bold text-indigo-600">36 MM</span>
+                        </div>
+                        <div class="border-t border-indigo-200 my-2"></div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-indigo-900 font-bold">효율성 증가:</span>
+                            <span id="statEfficiency" class="font-bold text-indigo-600">+40%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="lg:col-span-8 bg-white p-6 rounded-xl shadow-md border border-slate-100">
+                    <div class="chart-container">
+                        <canvas id="mmComparisonChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Regional Case Studies -->
+        <section id="teams" class="scroll-mt-20">
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold text-slate-800">2. 국가별 개발팀 구성 모델 (Japan vs US)</h3>
+                <p class="text-slate-600 mt-2 max-w-3xl">
+                    AI 도입 시 팀 구성 방식은 문화와 비즈니스 관행에 따라 다르게 나타납니다. 
+                    <strong>일본</strong>은 프로세스 안정성을 중시하며 하이브리드 모델을 채택하는 반면, 
+                    <strong>미국</strong>은 소수 정예와 AI의 극대화(Super-Coder) 전략을 취합니다.
+                </p>
+            </div>
+
+            <!-- Custom Tabs -->
+            <div class="flex border-b border-slate-200 mb-6">
+                <button id="btnJapan" class="px-6 py-3 text-sm font-medium tab-active focus:outline-none transition" onclick="switchTab('japan')">
+                    🇯🇵 일본 모델 (Japan Model)
+                </button>
+                <button id="btnUS" class="px-6 py-3 text-sm font-medium tab-inactive focus:outline-none transition" onclick="switchTab('us')">
+                    🇺🇸 미국 모델 (US Model)
+                </button>
+            </div>
+
+            <!-- Content Area -->
+            <div class="bg-white rounded-xl shadow-lg border border-slate-100 overflow-hidden min-h-[500px] relative">
+                
+                <!-- Japan Content -->
+                <div id="contentJapan" class="p-8 transition-opacity duration-300">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <div>
+                            <h4 class="text-xl font-bold text-slate-800 mb-4 flex items-center">
+                                <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded mr-2">특징</span>
+                                하이브리드 안정형 (Process Stability)
+                            </h4>
+                            <ul class="space-y-3 text-slate-600 text-sm mb-6">
+                                <li class="flex items-start">
+                                    <span class="text-green-500 mr-2">✔</span>
+                                    <span><strong>주니어 대체:</strong> 초급 코더 역할을 AI가 수행하고, 인간 주니어는 'AI 오퍼레이터'로 역할 변경.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-green-500 mr-2">✔</span>
+                                    <span><strong>QA/검증 강화:</strong> AI가 생성한 코드의 품질을 보증하기 위해 시니어 리뷰어와 QA 비중 증가.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-green-500 mr-2">✔</span>
+                                    <span><strong>맨먼스 유지 전략:</strong> 전체 MM은 크게 줄이지 않되, 산출물의 퀄리티와 납기를 획기적으로 개선하는 방식으로 계약 유지.</span>
+                                </li>
+                            </ul>
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                <p class="text-xs font-bold text-slate-500 uppercase mb-2">Key Metric</p>
+                                <p class="text-lg font-bold text-slate-800">품질 보증 비용 증가, 코딩 시간 단축</p>
+                            </div>
+                        </div>
+
+                        <!-- Visualization: Japan Org Chart using HTML Grid -->
+                        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                            <h5 class="text-center text-sm font-bold text-slate-500 mb-4">팀 구조 시각화</h5>
+                            <div class="flex flex-col items-center space-y-4">
+                                <!-- PM -->
+                                <div class="w-32 py-2 bg-slate-800 text-white text-center rounded text-sm font-bold shadow">PM / PL</div>
+                                <!-- Line -->
+                                <div class="h-4 w-0.5 bg-slate-300"></div>
+                                <!-- Middle Layer -->
+                                <div class="flex space-x-4">
+                                    <div class="w-28 py-2 bg-blue-600 text-white text-center rounded text-xs font-bold shadow">설계/아키텍트</div>
+                                    <div class="w-28 py-2 bg-blue-600 text-white text-center rounded text-xs font-bold shadow">코드 리뷰어</div>
+                                </div>
+                                <!-- Line -->
+                                <div class="h-4 w-0.5 bg-slate-300"></div>
+                                <!-- Bottom Layer (AI Augmented) -->
+                                <div class="grid grid-cols-2 gap-4 w-full p-4 bg-indigo-50 rounded-lg border border-dashed border-indigo-200">
+                                    <div class="text-center col-span-2 text-indigo-600 text-xs font-bold mb-1">AI-Augmented Zone</div>
+                                    <div class="bg-white p-2 rounded text-center border border-slate-200 shadow-sm">
+                                        <div class="text-xs font-bold text-slate-700">AI 오퍼레이터</div>
+                                        <div class="text-[10px] text-slate-500">프롬프트 제어</div>
+                                    </div>
+                                    <div class="bg-white p-2 rounded text-center border border-slate-200 shadow-sm">
+                                        <div class="text-xs font-bold text-slate-700">AI 오퍼레이터</div>
+                                        <div class="text-[10px] text-slate-500">코드 생성/수정</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- US Content -->
+                <div id="contentUS" class="p-8 transition-opacity duration-300 hidden absolute top-0 left-0 w-full h-full bg-white">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <div>
+                            <h4 class="text-xl font-bold text-slate-800 mb-4 flex items-center">
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mr-2">특징</span>
+                                엘리트 소수정예 (Elite Squad)
+                            </h4>
+                            <ul class="space-y-3 text-slate-600 text-sm mb-6">
+                                <li class="flex items-start">
+                                    <span class="text-green-500 mr-2">✔</span>
+                                    <span><strong>10x Engineer:</strong> 1명의 시니어가 5~10개의 AI 에이전트를 지휘하며 전체 기능을 구현.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-green-500 mr-2">✔</span>
+                                    <span><strong>Service as Software:</strong> 인건비(MM)가 아닌 '기능 단위' 혹은 '구독형' 과금 모델로 전환 시도.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-green-500 mr-2">✔</span>
+                                    <span><strong>조직 슬림화:</strong> 중간 관리자와 단순 코더 계층이 사라지고, 'Product Engineer' 중심으로 재편.</span>
+                                </li>
+                            </ul>
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                <p class="text-xs font-bold text-slate-500 uppercase mb-2">Key Metric</p>
+                                <p class="text-lg font-bold text-slate-800">속도(Velocity) 극대화, 인원 최소화</p>
+                            </div>
+                        </div>
+
+                        <!-- Visualization: US Org Chart using HTML Grid -->
+                        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                            <h5 class="text-center text-sm font-bold text-slate-500 mb-4">팀 구조 시각화</h5>
+                            <div class="flex flex-col items-center justify-center h-full space-y-6">
+                                <!-- Central Core -->
+                                <div class="relative">
+                                    <div class="w-40 py-4 bg-indigo-600 text-white text-center rounded-full text-sm font-bold shadow-lg z-10 relative">
+                                        Super Engineer
+                                        <div class="text-[10px] font-normal opacity-80">Full-Stack + AI Arch</div>
+                                    </div>
+                                    
+                                    <!-- Satellites (AI Agents) -->
+                                    <div class="absolute -top-6 -left-8 w-20 py-1 bg-white border border-indigo-200 text-indigo-600 text-[10px] font-bold text-center rounded shadow-sm">Frontend AI</div>
+                                    <div class="absolute -top-6 -right-8 w-20 py-1 bg-white border border-indigo-200 text-indigo-600 text-[10px] font-bold text-center rounded shadow-sm">Backend AI</div>
+                                    <div class="absolute -bottom-6 -left-8 w-20 py-1 bg-white border border-indigo-200 text-indigo-600 text-[10px] font-bold text-center rounded shadow-sm">Test AI</div>
+                                    <div class="absolute -bottom-6 -right-8 w-20 py-1 bg-white border border-indigo-200 text-indigo-600 text-[10px] font-bold text-center rounded shadow-sm">Doc AI</div>
+                                </div>
+                                
+                                <div class="text-center mt-4">
+                                    <span class="text-xs text-slate-400">vs 전통 방식 대비 인원 70% 감소</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Section 3: Calculation Methodology -->
+        <section id="methodology" class="scroll-mt-20 pb-20">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6">3. 새로운 맨먼스(MM) 산정 및 제안 방식</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 card-hover">
+                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold mb-4">1</div>
+                    <h4 class="font-bold text-slate-800 mb-2">기능 점수(FP)의 재해석</h4>
+                    <p class="text-sm text-slate-600">
+                        단순 LOC(라인 수) 기반 산정은 무의미합니다. AI는 코드를 빨리 짤 뿐, 비즈니스 로직의 복잡도는 해결하지 못합니다. 
+                        <strong>'AI 난이도 가중치'</strong>를 적용한 기능 점수(Function Point)로 전환해야 합니다.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 card-hover">
+                    <div class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold mb-4">2</div>
+                    <h4 class="font-bold text-slate-800 mb-2">역할별 단가 재조정</h4>
+                    <p class="text-sm text-slate-600">
+                        주니어 개발자의 MM 단가는 낮추거나 제거하고, AI 도구를 능숙하게 다루는 <strong>시니어 및 아키텍트의 MM 단가를 상향</strong> 조정하여 전체 프로젝트 예산의 균형을 맞춰야 합니다.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 card-hover">
+                    <div class="w-10 h-10 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center font-bold mb-4">3</div>
+                    <h4 class="font-bold text-slate-800 mb-2">결과물 기반 과금 (Outcome)</h4>
+                    <p class="text-sm text-slate-600">
+                        "몇 명이 몇 달 일했는가"보다 "어떤 기능을 언제까지 완료했는가"로 제안합니다. 
+                        미국식 <strong>스토리 포인트(Story Point)당 단가</strong> 계약이 AI 시대에 가장 적합한 모델입니다.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Calculation Formula Box -->
+            <div class="mt-8 bg-slate-800 text-white p-8 rounded-xl shadow-lg">
+                <h4 class="font-bold text-lg mb-4 text-indigo-300">💡 AI 시대의 제안 산정 공식 (예시)</h4>
+                <div class="font-mono text-sm md:text-base space-y-2 bg-slate-900 p-4 rounded border border-slate-700">
+                    <p><span class="text-green-400">Total_Cost</span> = (<span class="text-yellow-400">Senior_MM</span> × <span class="text-blue-300">High_Rate</span>) + (<span class="text-purple-400">AI_Tool_Cost</span>)</p>
+                    <p class="text-slate-500 py-2">// 주니어 MM은 0 또는 최소화, 대신 AI 도구 라이선스 비용 청구</p>
+                    <p><span class="text-green-400">Project_Duration</span> = <span class="text-pink-400">Traditional_Duration</span> × (1 - <span class="text-indigo-400">AI_Efficiency_Index</span>)</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-slate-500 text-sm">
+            &copy; 2025 JAEWOO KIM. 
+        </div>
+    </footer>
+
+    <script>
+        // --- State Management ---
+        const state = {
+            scope: 500,
+            maturity: 40, // percentage
+            baseProductivity: 10, // points per MM (Traditional)
+        };
+
+        // --- DOM Elements ---
+        const els = {
+            scopeInput: document.getElementById('projectScope'),
+            maturityInput: document.getElementById('aiMaturity'),
+            scopeVal: document.getElementById('scopeValue'),
+            maturityVal: document.getElementById('maturityValue'),
+            statTrad: document.getElementById('statTraditional'),
+            statAI: document.getElementById('statAI'),
+            statEff: document.getElementById('statEfficiency'),
+            tabJapan: document.getElementById('btnJapan'),
+            tabUS: document.getElementById('btnUS'),
+            contentJapan: document.getElementById('contentJapan'),
+            contentUS: document.getElementById('contentUS'),
+        };
+
+        // --- Chart Initialization ---
+        let mmChart;
+
+        function initChart() {
+            const ctx = document.getElementById('mmComparisonChart').getContext('2d');
+            
+            // Chart.js Configuration
+            mmChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['전통적 방식 (Traditional)', 'AI 도입 방식 (AI-Augmented)'],
+                    datasets: [
+                        {
+                            label: '개발 기간 (개월)',
+                            data: [0, 0],
+                            backgroundColor: ['#94a3b8', '#4f46e5'],
+                            borderRadius: 6,
+                            barPercentage: 0.6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.raw + ' 개월 (예상)';
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: '프로젝트 예상 기간 비교',
+                            font: { size: 16 }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: '개월 (Months)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- Logic & Updates ---
+        function calculateMetrics() {
+            // Traditional Logic:
+            // 500 points / 10 points per MM = 50 MM.
+            // Assuming 5 person team = 10 months.
+            const traditionalMM = state.scope / state.baseProductivity;
+            const teamSize = 5; // Standard team assumption
+            const traditionalDuration = (traditionalMM / teamSize).toFixed(1);
+
+            // AI Logic:
+            // Productivity increases based on maturity.
+            // E.g., 40% maturity => 1.4x productivity multiplier? 
+            // Or reduced complexity. Let's use efficiency multiplier.
+            // Maturity 10% -> 1.1x speed. Maturity 80% -> 2.5x speed.
+            const aiMultiplier = 1 + (state.maturity / 100 * 2.5); 
+            const aiMM = (traditionalMM / aiMultiplier).toFixed(1);
+            const aiDuration = (aiMM / teamSize).toFixed(1); // Assuming same team size for direct comparison of "Time"
+
+            // Update DOM text
+            els.scopeVal.innerText = state.scope;
+            els.maturityVal.innerText = state.maturity + '%';
+            els.statTrad.innerText = Math.round(traditionalMM) + ' MM';
+            els.statAI.innerText = Math.round(aiMM) + ' MM';
+            
+            const efficiencyGain = Math.round(((traditionalMM - aiMM) / traditionalMM) * 100);
+            els.statEff.innerText = '+' + efficiencyGain + '%';
+
+            // Update Chart
+            mmChart.data.datasets[0].data = [traditionalDuration, aiDuration];
+            mmChart.update();
+        }
+
+        // --- Event Listeners ---
+        els.scopeInput.addEventListener('input', (e) => {
+            state.scope = parseInt(e.target.value);
+            calculateMetrics();
+        });
+
+        els.maturityInput.addEventListener('input', (e) => {
+            state.maturity = parseInt(e.target.value);
+            calculateMetrics();
+        });
+
+        // --- Tab Logic ---
+        window.switchTab = function(region) {
+            if (region === 'japan') {
+                els.tabJapan.className = "px-6 py-3 text-sm font-medium tab-active focus:outline-none transition";
+                els.tabUS.className = "px-6 py-3 text-sm font-medium tab-inactive focus:outline-none transition";
+                
+                els.contentJapan.classList.remove('hidden', 'absolute');
+                els.contentUS.classList.add('hidden', 'absolute');
+            } else {
+                els.tabUS.className = "px-6 py-3 text-sm font-medium tab-active focus:outline-none transition";
+                els.tabJapan.className = "px-6 py-3 text-sm font-medium tab-inactive focus:outline-none transition";
+                
+                els.contentUS.classList.remove('hidden', 'absolute');
+                els.contentJapan.classList.add('hidden', 'absolute');
+            }
+        };
+
+        // --- Init ---
+        document.addEventListener('DOMContentLoaded', () => {
+            initChart();
+            calculateMetrics();
+        });
+
+    </script>
+</body>
+</html>

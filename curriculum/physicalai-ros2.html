@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD룰 AI교육 - 2026 Physical AI ROS2 로봇개발 기업교육</title>
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="15x15"
+    href="./dist/images/favicon.png"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom Font Import */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f5f5f4; /* stone-100 - Warm neutral */
+            color: #1c1917; /* stone-900 */
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .active-tab {
+            border-bottom: 2px solid #ea580c; /* orange-600 */
+            color: #ea580c;
+            font-weight: 700;
+        }
+
+        .inactive-tab {
+            color: #78716c; /* stone-500 */
+            font-weight: 500;
+        }
+        
+        /* Hide scrollbar for clean look in lists */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+    <!-- Chosen Palette: Stone (Warm Neutrals) with Orange Accent for energy/action -->
+    <!-- Application Structure Plan: 
+         1. Hero Section: Sets the context of 2026 Physical AI trend.
+         2. Dashboard Controller: Allows switching between "Engineer Track" and "Executive Track".
+         3. Title Proposals: Interactive cards showing the 3 requested titles.
+         4. Analytics View: Charts showing skill composition and time allocation (Chart.js).
+         5. Curriculum Timeline: A vertical interactive timeline that maps the Book's chapters to a 2-day schedule. 
+            Detailed interaction allows users to click specific modules to see "Tech Details" (e.g., why Whisper? why Cyclone DDS?).
+         6. Tool Stack Visualization: Explains the Claude Code + Cursor environment.
+         Rationale: This structure allows HR/Training managers to quickly grasp the "Why" and "How" of the course, 
+         switching perspectives between technical implementation and business strategy. 
+    -->
+    <!-- Visualization & Content Choices:
+         - Doughnut Chart: To show the balance of Theory vs. Practice vs. Project.
+         - Radar Chart: To show the skill expansion (Traditional Coding vs. AI-Assisted Robotics).
+         - Interactive Timeline: Replaces static text lists, allowing for detailed drill-downs without clutter.
+         - Tech Cards: Highlight specific technologies (Whisper, Nav2) mentioned in the source book.
+         - Logic: JS handles the data switching between Engineer and Executive views dynamically.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Navigation / Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="mdrules-logo.png" alt="MD룰 AI교육" width="116px">
+                <h1 class="text-xl font-bold text-stone-800">2026 Physical AI ROS2 로봇개발 기업교육</h1>
+            </div>
+            <div class="flex space-x-4">
+                <button id="btn-engineer" onclick="switchMode('engineer')" class="px-4 py-2 rounded-lg text-sm transition-colors active-tab">
+                    👨‍💻 엔지니어 과정
+                </button>
+                <button id="btn-executive" onclick="switchMode('executive')" class="px-4 py-2 rounded-lg text-sm transition-colors inactive-tab hover:bg-stone-100">
+                    👔 임원/리더 과정
+                </button>
+                <a href="https://mdrules.dev" target="_self" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">
+                사이트로 이동
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+        <!-- Left Column: Context & Overview (lg:col-span-4) -->
+        <div class="lg:col-span-4 space-y-6">
+            
+            <!-- Introduction Block -->
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-stone-200">
+                <h2 class="text-lg font-bold text-stone-800 mb-3">📌 제안 배경 및 개요</h2>
+                <p class="text-sm text-stone-600 leading-relaxed mb-4">
+                    본 커리큘럼은 <strong>ROS2와 Python 언어를 기반으로 AI로봇 입무</strong>을 기반으로 구성되었습니다. 
+                    2026년 IT 트렌드의 핵심인 <strong>Physical AI</strong> 구현을 위해 최신 <strong>ROS 2 Humble</strong> 버전과 
+                    <strong>Cyclone DDS</strong>, <strong>Whisper</strong>, <strong>Nav2</strong> 등 현업 표준 기술을 채택했습니다.
+                    특히 <span class="text-orange-600 font-bold">Claude Code & Cursor</span> 기반의 AI 코딩 환경을 도입하여 학습 효율을 극대화합니다.
+                </p>
+                <div class="grid grid-cols-2 gap-4 text-center">
+                    <div class="bg-stone-50 p-3 rounded-lg">
+                        <div class="text-2xl font-bold text-orange-600">2일</div>
+                        <div class="text-xs text-stone-500">교육 기간 (16H)</div>
+                    </div>
+                    <div class="bg-stone-50 p-3 rounded-lg">
+                        <div class="text-2xl font-bold text-stone-700">ROS 2</div>
+                        <div class="text-xs text-stone-500">Core Framework</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course Title Options -->
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-stone-200">
+                <h3 class="text-md font-bold text-stone-800 mb-4">💡 과정명 제안 (3안)</h3>
+                <div class="space-y-3" id="title-container">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Analytics Chart -->
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-stone-200">
+                <h3 class="text-md font-bold text-stone-800 mb-2">📊 커리큘럼 구성비</h3>
+                <p class="text-xs text-stone-500 mb-4">이론과 실습, 프로젝트의 배분 비율입니다.</p>
+                <div class="chart-container">
+                    <canvas id="compositionChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Radar Chart -->
+             <div class="bg-white rounded-xl p-6 shadow-sm border border-stone-200">
+                <h3 class="text-md font-bold text-stone-800 mb-2">🎯 역량 변화 예측</h3>
+                <div class="chart-container">
+                    <canvas id="skillChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Column: Detailed Curriculum (lg:col-span-8) -->
+        <div class="lg:col-span-8 space-y-6">
+
+            <!-- Environment Setup Banner -->
+            <div class="bg-gradient-to-r from-stone-800 to-stone-700 rounded-xl p-6 text-white shadow-md flex flex-col md:flex-row items-start md:items-center justify-between">
+                <div>
+                    <h3 class="text-lg font-bold mb-1">🚀 차세대 개발 환경: AI Native</h3>
+                    <p class="text-sm text-stone-300">
+                        기존의 하드코딩 방식에서 벗어나, <strong>Claude Code</strong>와 <strong>Cursor IDE</strong>를 활용하여 
+                        복잡한 ROS 2 노드와 알고리즘을 빠르게 구현하고 검증하는 방법론을 학습합니다.
+                    </p>
+                </div>
+                <div class="mt-4 md:mt-0 flex space-x-2">
+                    <span class="px-3 py-1 bg-stone-600 rounded text-xs">Python 3.10+</span>
+                    <span class="px-3 py-1 bg-orange-600 rounded text-xs font-bold">Cursor</span>
+                </div>
+            </div>
+
+            <!-- Curriculum Tabs -->
+            <div class="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+                <div class="border-b border-stone-100 flex">
+                    <button class="flex-1 py-4 text-center font-bold text-stone-800 bg-stone-50 hover:bg-white transition-colors border-b-2 border-orange-500" id="tab-day1" onclick="switchDay(1)">
+                        Day 1: AI 로봇 기초 및 인식
+                    </button>
+                    <button class="flex-1 py-4 text-center font-medium text-stone-500 hover:text-stone-800 transition-colors" id="tab-day2" onclick="switchDay(2)">
+                        Day 2: 자율주행 및 제어 심화
+                    </button>
+                </div>
+
+                <!-- Timeline Container -->
+                <div class="p-6 bg-stone-50 min-h-[500px]" id="curriculum-content">
+                    <!-- Dynamic Content Inserted Here -->
+                </div>
+            </div>
+
+            <!-- Detail View / Interaction Panel -->
+            <div id="detail-panel" class="hidden bg-orange-50 rounded-xl p-6 border border-orange-100 transition-all duration-300">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                        <div class="w-6 h-6 rounded-full bg-orange-200 text-orange-700 flex items-center justify-center font-bold text-xs">!</div>
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="text-md font-bold text-orange-900" id="detail-title">모듈 상세 정보</h4>
+                        <p class="text-sm text-orange-800 mt-1" id="detail-desc">타임라인의 항목을 클릭하거나 마우스를 올려 상세 내용을 확인하세요.</p>
+                        <div class="mt-3 flex gap-2 flex-wrap" id="detail-tags">
+                            <!-- Tags go here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="bg-white border-t border-stone-200 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-stone-400">
+            <p>Copyright &copy;2026 JAEWOO, KIM.</p>
+            <p>email. jaewoo@mdrules.dev</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Data ---
+        const courseTitles = {
+            engineer: [
+                "2026 AI 트렌드: Physical AI와 ROS 2 Humble 기반 자율주행 로봇 완전 정복",
+                "LLM 코딩(Claude+Cursor)으로 가속화하는 ROS 2 로봇 제어 실무",
+                "차세대 AI 로보틱스: Whisper, Nav2, MoveIt을 활용한 지능형 로봇 개발 2일 완성"
+            ],
+            executive: [
+                "경영진을 위한 2026 Physical AI 기술 트렌드와 도입 전략",
+                "AI 로보틱스 비즈니스 인사이트: ROS 2 생태계와 활용 사례",
+                "제조/서비스 혁신을 위한 AI 기반 로봇 제어 기술의 이해"
+            ]
+        };
+
+        const chartData = {
+            engineer: {
+                composition: [30, 40, 30], // Theory, Practice, Project
+                skills: [20, 90, 85, 80, 70] // Start vs End skills (mock logic for display)
+            },
+            executive: {
+                composition: [60, 20, 20], // Theory (Strategy), Demo, Discussion
+                skills: [30, 80, 90, 60, 50] // Strategy, Tech Insight, Market, etc.
+            }
+        };
+
+        const curriculumData = {
+            engineer: {
+                day1: [
+                    {
+                        time: "09:00 - 10:30",
+                        title: "Physical AI와 ROS 2 Humble 개요",
+                        desc: "AI 로봇 트렌드 분석 및 ROS 2 Humble의 새로운 기능(Foxy 대비 변경점) 이해.",
+                        tags: ["Chapter 1", "Trend", "Humble"],
+                        detail: "기존 Foxy 버전의 지원 종료(2023.06)에 따른 Humble(LTS) 전환의 필요성과 2026년 Physical AI 시장 전망을 다룹니다."
+                    },
+                    {
+                        time: "10:30 - 12:00",
+                        title: "AI Native 개발 환경 구축 (Claude + Cursor)",
+                        desc: "Cursor IDE 설정 및 Claude Code를 활용한 코드 생성/리팩토링 워크플로우 실습.",
+                        tags: ["Environment", "LLM", "Productivity"],
+                        detail: "전통적인 타이핑 방식이 아닌, LLM에게 논리적 설계를 명령하여 ROS 노드를 생성하는 최신 개발 패러다임을 익힙니다."
+                    },
+                    {
+                        time: "13:00 - 14:30",
+                        title: "ROS 2 핵심 통신: Action & DDS",
+                        desc: "Service 통신을 대체하는 Action 통신과 Cyclone DDS 설정 실습.",
+                        tags: ["Chapter 2", "Cyclone DDS", "Action"],
+                        detail: "개정판 핵심: Fast DDS 대신 Cyclone DDS를 도입하여 통신 지연을 줄이고, 동적 환경에서의 안정성을 확보하는 방법을 배웁니다."
+                    },
+                    {
+                        time: "14:30 - 16:00",
+                        title: "AI 음성 인식/합성 (Whisper)",
+                        desc: "OpenAI Whisper 모델을 활용한 고성능 음성 인식 로봇 구현.",
+                        tags: ["Chapter 3", "Whisper", "HRI"],
+                        detail: "기존의 구식 라이브러리를 대체하여, 소음 환경에서도 정확하게 작동하는 Whisper 기반의 음성 인터페이스를 구축합니다."
+                    },
+                    {
+                        time: "16:00 - 18:00",
+                        title: "AI 비전 & 사물 인식",
+                        desc: "카메라 데이터 처리 및 딥러닝 기반 물체 세그멘테이션 실습.",
+                        tags: ["Chapter 5", "Vision", "Segmentation"],
+                        detail: "단순 인식(Detection)을 넘어 사물의 영역을 정확히 분할(Segmentation)하여 로봇이 파지(Grasping)하기 쉬운 데이터를 생성합니다."
+                    }
+                ],
+                day2: [
+                    {
+                        time: "09:00 - 10:30",
+                        title: "자율주행 내비게이션 (Nav2)",
+                        desc: "Nav2 Simple Commander API를 활용한 파이썬 기반 주행 제어.",
+                        tags: ["Chapter 4", "Nav2", "SLAM"],
+                        detail: "복잡한 C++ 설정 없이 파이썬 코드로 목적지 설정, 경유지 지정, 회피 기동을 구현하는 Nav2 Simple Commander를 집중 학습합니다."
+                    },
+                    {
+                        time: "10:30 - 12:00",
+                        title: "로봇 팔 제어 (MoveIt)",
+                        desc: "MoveIt 프레임워크를 활용한 모션 플래닝 및 역운동학 해결.",
+                        tags: ["Chapter 6", "MoveIt", "Manipulation"],
+                        detail: "장애물을 회피하여 물체를 잡는 경로를 생성하고 시뮬레이션 상에서 로봇 팔을 제어하는 MoveIt 활용법을 다룹니다."
+                    },
+                    {
+                        time: "13:00 - 14:30",
+                        title: "행동 계획 및 상태 머신 (FlexBE)",
+                        desc: "GUI 기반 행동 엔진 FlexBE를 활용한 복합 미션 설계.",
+                        tags: ["Chapter 7", "FlexBE", "Planning"],
+                        detail: "단순 코딩을 넘어, 그래픽 인터페이스에서 로봇의 상태(대기, 이동, 작업, 에러)를 설계하고 모니터링하는 시스템 엔지니어링을 경험합니다."
+                    },
+                    {
+                        time: "14:30 - 17:00",
+                        title: "Capstone: Physical AI 서비스 로봇 구현",
+                        desc: "음성 명령으로 물체를 찾아 가져오는 '심부름 로봇' 통합 프로젝트.",
+                        tags: ["Project", "Integration", "Portfolio"],
+                        detail: "Voice(Whisper) + Vision(Segmentation) + Nav2 + Manipulation을 하나의 시나리오로 통합하여 실제 문제를 해결합니다."
+                    },
+                    {
+                        time: "17:00 - 18:00",
+                        title: "회고 및 Q&A",
+                        desc: "프로젝트 코드 리뷰 (Claude 활용) 및 현업 적용 가이드.",
+                        tags: ["Review", "Feedback"],
+                        detail: "작성한 코드를 AI로 최적화하는 팁을 공유하고, 현업 도입 시 고려사항을 논의합니다."
+                    }
+                ]
+            },
+            executive: {
+                day1: [
+                    {
+                        time: "09:00 - 12:00",
+                        title: "Physical AI 시대의 도래와 비즈니스 기회",
+                        desc: "생성형 AI가 하드웨어를 만났을 때의 파괴적 혁신 사례 분석.",
+                        tags: ["Trend", "Strategy", "Market"],
+                        detail: "Tesla Bot, Figure AI 등 글로벌 휴머노이드 및 서비스 로봇 시장 동향과 우리 기업의 대응 전략을 모색합니다."
+                    },
+                    {
+                        time: "13:00 - 15:00",
+                        title: "ROS 2 생태계와 오픈소스 전략",
+                        desc: "왜 글로벌 기업들은 ROS 2를 표준으로 채택하는가?",
+                        tags: ["Ecosystem", "Open Source", "Standard"],
+                        detail: "폐쇄형 로봇 시스템 대비 ROS 2가 갖는 확장성, 유연성, 인재 확보의 용이성을 경영학적 관점에서 분석합니다."
+                    },
+                    {
+                        time: "15:00 - 18:00",
+                        title: "AI 로봇 기술 데모 및 체험",
+                        desc: "Nav2 자율주행 및 Whisper 음성 대화 시연 참관.",
+                        tags: ["Demo", "Experience"],
+                        detail: "실제 기술이 어떻게 작동하는지 시연을 통해 확인하고, 기술의 한계와 가능성을 직관적으로 이해합니다."
+                    }
+                ],
+                day2: [
+                    {
+                        time: "09:00 - 12:00",
+                        title: "AI 로봇 도입 성공/실패 사례 연구",
+                        desc: "스마트 팩토리, 물류, 서비스 분야의 실제 도입 Case Study.",
+                        tags: ["Case Study", "ROI", "Risk"],
+                        detail: "성공적인 디지털 전환(DX)을 위한 로봇 도입 로드맵 수립과 리스크 관리 방안을 논의합니다."
+                    },
+                    {
+                        time: "13:00 - 16:00",
+                        title: "워크숍: 우리 기업 맞춤형 로봇 서비스 기획",
+                        desc: "Claude Code를 활용한 로봇 서비스 시나리오 프로토타이핑.",
+                        tags: ["Workshop", "Ideation"],
+                        detail: "임원진이 직접 AI 도구를 활용해 비즈니스 아이디어를 구체화하고 기술 타당성을 검토해보는 워크숍입니다."
+                    },
+                    {
+                        time: "16:00 - 18:00",
+                        title: "종합 토론 및 네트워킹",
+                        desc: "사내 AI/로봇 인재 양성 및 조직 구성 전략.",
+                        tags: ["HR Strategy", "Networking"],
+                        detail: "AI 엔지니어와 로봇 엔지니어의 협업 문화를 어떻게 만들 것인가에 대한 인사이트를 공유합니다."
+                    }
+                ]
+            }
+        };
+
+        // --- State Management ---
+        let currentMode = 'engineer'; // 'engineer' or 'executive'
+        let currentDay = 1;
+        let compChartInstance = null;
+        let skillChartInstance = null;
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            initCharts();
+            updateUI();
+        });
+
+        // --- Interaction Logic ---
+        function switchMode(mode) {
+            currentMode = mode;
+            
+            // Toggle Buttons
+            const btnEng = document.getElementById('btn-engineer');
+            const btnExec = document.getElementById('btn-executive');
+            
+            if (mode === 'engineer') {
+                btnEng.className = "px-4 py-2 rounded-lg text-sm transition-colors active-tab";
+                btnExec.className = "px-4 py-2 rounded-lg text-sm transition-colors inactive-tab hover:bg-stone-100";
+            } else {
+                btnExec.className = "px-4 py-2 rounded-lg text-sm transition-colors active-tab";
+                btnEng.className = "px-4 py-2 rounded-lg text-sm transition-colors inactive-tab hover:bg-stone-100";
+            }
+
+            // Reset to Day 1
+            currentDay = 1;
+            updateUI();
+            updateCharts();
+        }
+
+        function switchDay(day) {
+            currentDay = day;
+            
+            const btn1 = document.getElementById('tab-day1');
+            const btn2 = document.getElementById('tab-day2');
+
+            if (day === 1) {
+                btn1.classList.add('border-b-2', 'border-orange-500', 'font-bold', 'text-stone-800', 'bg-stone-50');
+                btn1.classList.remove('font-medium', 'text-stone-500');
+                btn2.classList.remove('border-b-2', 'border-orange-500', 'font-bold', 'text-stone-800', 'bg-stone-50');
+                btn2.classList.add('font-medium', 'text-stone-500');
+            } else {
+                btn2.classList.add('border-b-2', 'border-orange-500', 'font-bold', 'text-stone-800', 'bg-stone-50');
+                btn2.classList.remove('font-medium', 'text-stone-500');
+                btn1.classList.remove('border-b-2', 'border-orange-500', 'font-bold', 'text-stone-800', 'bg-stone-50');
+                btn1.classList.add('font-medium', 'text-stone-500');
+            }
+
+            renderTimeline();
+        }
+
+        function updateUI() {
+            // Update Titles
+            const titleContainer = document.getElementById('title-container');
+            titleContainer.innerHTML = courseTitles[currentMode].map((title, index) => `
+                <div class="p-3 border border-stone-100 rounded bg-stone-50 hover:bg-orange-50 hover:border-orange-200 transition-colors cursor-pointer" onclick="selectTitle(this)">
+                    <div class="flex items-start gap-2">
+                        <span class="bg-stone-200 text-stone-600 text-xs font-bold px-1.5 py-0.5 rounded mt-0.5">${index + 1}안</span>
+                        <p class="text-sm font-medium text-stone-700">${title}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            // Update Tab Labels for Executive (Optional override)
+            const tab1 = document.getElementById('tab-day1');
+            const tab2 = document.getElementById('tab-day2');
+            if (currentMode === 'executive') {
+                tab1.textContent = "Day 1: 트렌드 & 기술 이해";
+                tab2.textContent = "Day 2: 전략 수립 & 워크숍";
+            } else {
+                tab1.textContent = "Day 1: AI 로봇 기초 및 인식";
+                tab2.textContent = "Day 2: 자율주행 및 제어 심화";
+            }
+
+            switchDay(currentDay);
+        }
+
+        function renderTimeline() {
+            const container = document.getElementById('curriculum-content');
+            const data = currentMode === 'engineer' ? curriculumData.engineer : curriculumData.executive;
+            const dayData = currentDay === 1 ? data.day1 : data.day2;
+
+            container.innerHTML = dayData.map((item, index) => `
+                <div class="relative pl-8 pb-8 last:pb-0 group cursor-pointer" onclick="showDetail(${currentDay}, ${index})">
+                    <!-- Timeline Line -->
+                    <div class="absolute left-2.5 top-0 h-full w-0.5 bg-stone-200 group-last:h-4"></div>
+                    <!-- Timeline Dot -->
+                    <div class="absolute left-0 top-1.5 w-5 h-5 rounded-full border-2 border-orange-500 bg-white group-hover:bg-orange-500 transition-colors"></div>
+                    
+                    <div class="bg-white p-4 rounded-lg border border-stone-200 shadow-sm group-hover:border-orange-300 group-hover:shadow-md transition-all">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-xs font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded">${item.time}</span>
+                            <div class="flex gap-1">
+                                ${item.tags.slice(0, 2).map(t => `<span class="text-[10px] bg-stone-100 text-stone-500 px-1.5 py-0.5 rounded">${t}</span>`).join('')}
+                            </div>
+                        </div>
+                        <h4 class="text-md font-bold text-stone-800 mb-1 group-hover:text-orange-700">${item.title}</h4>
+                        <p class="text-sm text-stone-500 line-clamp-2">${item.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showDetail(day, index) {
+            const data = currentMode === 'engineer' ? curriculumData.engineer : curriculumData.executive;
+            const dayData = day === 1 ? data.day1 : data.day2;
+            const item = dayData[index];
+
+            const panel = document.getElementById('detail-panel');
+            const title = document.getElementById('detail-title');
+            const desc = document.getElementById('detail-desc');
+            const tags = document.getElementById('detail-tags');
+
+            panel.classList.remove('hidden');
+            title.textContent = item.title;
+            desc.textContent = item.detail; // Use detailed text here
+            tags.innerHTML = item.tags.map(t => `<span class="px-2 py-1 bg-white border border-orange-200 text-orange-700 text-xs rounded-full shadow-sm">${t}</span>`).join('');
+            
+            // Visual feedback - scroll to detail if needed
+            // panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function selectTitle(element) {
+            // Remove active class from all
+            const allTitles = document.getElementById('title-container').children;
+            for(let el of allTitles) {
+                el.classList.remove('ring-2', 'ring-orange-500', 'bg-orange-50');
+                el.classList.add('bg-stone-50');
+            }
+            // Add active class
+            element.classList.remove('bg-stone-50');
+            element.classList.add('ring-2', 'ring-orange-500', 'bg-orange-50');
+        }
+
+        // --- Charts ---
+        function initCharts() {
+            // Composition Chart (Doughnut)
+            const ctxComp = document.getElementById('compositionChart').getContext('2d');
+            compChartInstance = new Chart(ctxComp, {
+                type: 'doughnut',
+                data: {
+                    labels: ['이론/전략', '실습/데모', '프로젝트/토론'],
+                    datasets: [{
+                        data: chartData.engineer.composition,
+                        backgroundColor: ['#d6d3d1', '#f97316', '#44403c'], // stone-300, orange-500, stone-700
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } }
+                    },
+                    cutout: '70%'
+                }
+            });
+
+            // Skill Chart (Radar)
+            const ctxSkill = document.getElementById('skillChart').getContext('2d');
+            skillChartInstance = new Chart(ctxSkill, {
+                type: 'radar',
+                data: {
+                    labels: ['ROS 2', 'Python AI', 'Navigation', 'Manipulation', 'System Integration'],
+                    datasets: [
+                        {
+                            label: '현재 수준',
+                            data: [10, 30, 10, 5, 10],
+                            fill: true,
+                            backgroundColor: 'rgba(168, 162, 158, 0.2)', // stone-400
+                            borderColor: 'rgb(168, 162, 158)',
+                            pointBackgroundColor: 'rgb(168, 162, 158)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgb(168, 162, 158)'
+                        },
+                        {
+                            label: '교육 후',
+                            data: chartData.engineer.skills,
+                            fill: true,
+                            backgroundColor: 'rgba(234, 88, 12, 0.2)', // orange-600
+                            borderColor: 'rgb(234, 88, 12)',
+                            pointBackgroundColor: 'rgb(234, 88, 12)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgb(234, 88, 12)'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: '#e7e5e4' },
+                            grid: { color: '#e7e5e4' },
+                            pointLabels: { font: { size: 11 }, color: '#44403c' },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } }
+                    }
+                }
+            });
+        }
+
+        function updateCharts() {
+            // Update Composition
+            const newData = currentMode === 'engineer' ? chartData.engineer : chartData.executive;
+            
+            compChartInstance.data.datasets[0].data = newData.composition;
+            compChartInstance.update();
+
+            // Update Radar
+            if (currentMode === 'engineer') {
+                skillChartInstance.data.labels = ['ROS 2', 'Python AI', 'Navigation', 'Manipulation', 'Integration'];
+                skillChartInstance.data.datasets[1].data = newData.skills;
+            } else {
+                skillChartInstance.data.labels = ['비즈니스 전략', '기술 이해도', '시장 분석', '도입 기획', '조직 관리'];
+                skillChartInstance.data.datasets[1].data = newData.skills;
+            }
+            skillChartInstance.update();
+        }
+
+    </script>
+</body>
+</html>

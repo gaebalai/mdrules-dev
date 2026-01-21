@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD룰 AI교육 - AI에이전트 개발교육: GPT-5 기반 실전 AI 에이전트 개발 과정</title>
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="15x15"
+    href="./dist/images/favicon.png"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            max-height: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #2563eb, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav-item.active {
+            border-bottom: 2px solid #2563eb;
+            color: #2563eb;
+            font-weight: 700;
+        }
+    </style>
+    <!-- Chosen Palette: Corporate Tech (Slate, Blue, Violet) - Professional, trustworthy, yet innovative. -->
+    <!-- Application Structure Plan: 
+         1. Hero Section: Clear Value Proposition tailored to Enterprise needs.
+         2. Key Metrics Dashboard: Visual breakdown of Theory vs. Practice and Skill Areas.
+         3. Interactive Curriculum Roadmap: Tabbed view for Day 1 vs Day 2 to reduce cognitive load.
+         4. Skill Gap Analysis (Radar): Visualizing the "Before & After" to justify investment.
+         5. Persona Targeting: Clickable tabs to show specific benefits for Devs, PMs, etc.
+         6. Call to Action: Final summary.
+         Why this structure? It moves from the "Big Picture" (Why buy?) to "Details" (What do we learn?) to "Outcome" (What do we get?), typical for B2B proposals.
+    -->
+    <!-- Visualization & Content Choices:
+         - Metrics: Donut chart for Theory/Practice ratio (Goal: Inform balance).
+         - Skill Radar: Radar chart comparing current GenAI skills vs. Post-course Agentic skills (Goal: Compare/Impact).
+         - Roadmap: Interactive List (Goal: Change/Explore timeline).
+         - Libraries: Chart.js for responsive, clean visualizations. Tailwind for layout. NO SVG.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+            <img src="mdrules-logo.png" alt="MD룰 AI교육" width="116px">
+            <div class="hidden md:flex space-x-8">
+                <button onclick="scrollToSection('overview')" class="nav-item text-slate-600 hover:text-blue-600 transition-colors">개요</button>
+                <button onclick="scrollToSection('curriculum')" class="nav-item text-slate-600 hover:text-blue-600 transition-colors">커리큘럼</button>
+                <button onclick="scrollToSection('impact')" class="nav-item text-slate-600 hover:text-blue-600 transition-colors">기대효과</button>
+                <button onclick="scrollToSection('target')" class="nav-item text-slate-600 hover:text-blue-600 transition-colors">대상</button>
+                <a href="https://mdrules.dev" target="_self" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">
+                    사이트로 이동
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="overview" class="pt-20 pb-16 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <div class="inline-block bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-bold mb-4 border border-blue-100">
+                2026년형 최신 커리큘럼
+            </div>
+            <h1 class="text-4xl md:text-5xl font-black mb-6 leading-tight">
+                GPT-5 API로 만드는<br>
+                <span class="gradient-text">실전 AI 애플리케이션 개발</span>
+            </h1>
+            <p class="text-lg text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
+                단순 텍스트 생성을 넘어, <strong>사내 데이터(RAG)</strong>를 연동하고 <strong>외부 도구(Function Calling)</strong>를 제어하는
+                <strong>멀티모달 AI 에이전트</strong> 기술을 2일 만에 내재화하십시오.
+            </p>
+            
+            <!-- Key Stats Cards -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center">
+                    <div class="text-3xl font-bold text-slate-800">2<span class="text-sm font-normal text-slate-500">일</span></div>
+                    <div class="text-xs text-slate-500 mt-1">집중 교육 (16H)</div>
+                </div>
+                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center">
+                    <div class="text-3xl font-bold text-blue-600">60<span class="text-sm font-normal text-slate-500">%</span></div>
+                    <div class="text-xs text-slate-500 mt-1">실습 비중</div>
+                </div>
+                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center">
+                    <div class="text-3xl font-bold text-purple-600">o1</div>
+                    <div class="text-xs text-slate-500 mt-1">Reasoning Model</div>
+                </div>
+                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center">
+                    <div class="text-3xl font-bold text-slate-800">Pro</div>
+                    <div class="text-xs text-slate-500 mt-1">Agent 개발</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <main class="container mx-auto px-4 pb-20 space-y-24">
+
+        <!-- Section 1: Curriculum Composition -->
+        <section>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-2xl font-bold mb-4 border-l-4 border-blue-600 pl-4">실무 중심의 교육 설계</h2>
+                    <p class="text-slate-600 mb-6">
+                        본 과정은 이론 학습을 최소화하고, 현업에서 즉시 사용 가능한 코드와 아키텍처를 구현하는 데 집중합니다.
+                        특히 최신 트렌드인 <strong>Reasoning(추론)</strong> 모델과 <strong>Function Calling</strong>을 활용한 에이전트 개발에 높은 비중을 두고 있습니다.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center text-sm text-slate-700">
+                            <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                            이론: LLM의 원리와 최신 트렌드 이해 (6시간)
+                        </li>
+                        <li class="flex items-center text-sm text-slate-700">
+                            <span class="w-2 h-2 bg-emerald-500 rounded-full mr-3"></span>
+                            실습: 사내 보고서 요약, API 연동 봇, RAG 구현 (10시간)
+                        </li>
+                        <li class="flex items-center text-sm text-slate-700">
+                            <span class="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
+                            도구: Google Colab, OpenAI API (GPT-5/o1)
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-100">
+                    <div class="chart-container">
+                        <canvas id="compositionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Interactive Curriculum Timeline -->
+        <section id="curriculum" class="scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-3">상세 커리큘럼 로드맵</h2>
+                <p class="text-slate-500">Day 1은 기초 및 도구 활용, Day 2는 심화 아키텍처 및 통합 프로젝트로 구성됩니다.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
+                <!-- Tabs -->
+                <div class="flex border-b border-slate-200">
+                    <button id="btn-day1" onclick="switchDay('day1')" class="flex-1 py-4 text-center font-bold text-blue-600 border-b-2 border-blue-600 bg-blue-50 transition-all">
+                        Day 1: Foundation & Tools
+                    </button>
+                    <button id="btn-day2" onclick="switchDay('day2')" class="flex-1 py-4 text-center font-bold text-slate-500 hover:bg-slate-50 transition-all">
+                        Day 2: Advanced Architecture (RAG & Agents)
+                    </button>
+                </div>
+
+                <!-- Content Area -->
+                <div class="p-8 min-h-[400px]">
+                    <div id="content-day1" class="space-y-6 animate-fade-in">
+                        <!-- Day 1 Items -->
+                    </div>
+                    <div id="content-day2" class="hidden space-y-6 animate-fade-in">
+                        <!-- Day 2 Items (Populated via JS) -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Impact Analysis (Radar Chart) -->
+        <section id="impact" class="scroll-mt-24">
+            <div class="bg-slate-900 text-white rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden relative">
+                <!-- Decorative background elements -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500 opacity-10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center relative z-10">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-6">교육 전/후 역량 변화 분석</h2>
+                        <p class="text-slate-300 mb-8 leading-relaxed">
+                            기존의 단순 프롬프트 엔지니어링 교육과 달리, 본 과정은 
+                            <strong>시스템 통합(Integration)</strong>과 <strong>복합 추론(Reasoning)</strong> 능력을 극대화합니다.
+                            수강생은 '챗봇 사용자'에서 'AI 서비스 개발자'로 성장합니다.
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div class="bg-slate-800 p-4 rounded-lg border-l-4 border-blue-500">
+                                <h4 class="font-bold text-blue-400 mb-1">Before</h4>
+                                <p class="text-sm text-slate-400">단순 API 호출, 1회성 텍스트 생성, 기본 프롬프트 작성</p>
+                            </div>
+                            <div class="bg-slate-800 p-4 rounded-lg border-l-4 border-purple-500">
+                                <h4 class="font-bold text-purple-400 mb-1">After</h4>
+                                <p class="text-sm text-slate-400">사내 데이터 연동(RAG), 외부 API 제어(Function Calling), 멀티모달 서비스 구현</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800/50 p-6 rounded-2xl backdrop-blur-sm border border-slate-700">
+                        <div class="chart-container">
+                            <canvas id="skillRadarChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Target Audience & Benefits -->
+        <section id="target" class="scroll-mt-24">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold mb-3">누구에게 필요한 과정인가요?</h2>
+                <p class="text-slate-500">직무별 맞춤형 학습 성과를 확인해보세요.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="card bg-white p-6 rounded-xl shadow-sm border border-slate-200 cursor-pointer group" onclick="highlightCard(this)">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 text-2xl group-hover:bg-blue-600 group-hover:text-white transition-colors">💻</div>
+                    <h3 class="text-xl font-bold mb-2">백엔드/앱 개발자</h3>
+                    <p class="text-sm text-slate-500 mb-4">AI 기능을 자사 서비스에 직접 구현해야 하는 엔지니어</p>
+                    <ul class="text-sm space-y-2 text-slate-700 bg-slate-50 p-3 rounded-lg">
+                        <li>✅ Python 기반 OpenAI API 연동</li>
+                        <li>✅ Legacy DB/API와 LLM 연결</li>
+                        <li>✅ RAG 아키텍처 설계 및 구축</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card bg-white p-6 rounded-xl shadow-sm border border-slate-200 cursor-pointer group" onclick="highlightCard(this)">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 text-2xl group-hover:bg-purple-600 group-hover:text-white transition-colors">⚙️</div>
+                    <h3 class="text-xl font-bold mb-2">DevOps/데이터 엔지니어</h3>
+                    <p class="text-sm text-slate-500 mb-4">사내 업무 자동화 및 데이터 파이프라인 구축 담당자</p>
+                    <ul class="text-sm space-y-2 text-slate-700 bg-slate-50 p-3 rounded-lg">
+                        <li>✅ 사내 문서 자동 요약 봇 구축</li>
+                        <li>✅ 비정형 데이터(이미지/음성) 구조화</li>
+                        <li>✅ Code Interpreter 데이터 분석</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card bg-white p-6 rounded-xl shadow-sm border border-slate-200 cursor-pointer group" onclick="highlightCard(this)">
+                    <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4 text-2xl group-hover:bg-emerald-600 group-hover:text-white transition-colors">🚀</div>
+                    <h3 class="text-xl font-bold mb-2">Technical PM/PO</h3>
+                    <p class="text-sm text-slate-500 mb-4">최신 기술 트렌드를 이해하고 서비스 기획에 접목할 리더</p>
+                    <ul class="text-sm space-y-2 text-slate-700 bg-slate-50 p-3 rounded-lg">
+                        <li>✅ GPT-5/o1 기술의 한계와 가능성 이해</li>
+                        <li>✅ 멀티모달 서비스 시나리오 기획</li>
+                        <li>✅ 개발팀과의 효율적인 커뮤니케이션</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-100 border-t border-slate-200 py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-2xl font-bold mb-4">지금 바로, 실전형 AI 개발자로 성장하세요.</h3>
+            <p class="text-slate-500 mb-8">GPT-5 API와 최신 Agent 기술을 활용한 기업 맞춤형 교육 제안</p>
+            <p class="text-slate-400 text-sm mb-4">Copyright &copy;2026 JAEWOO, KIM.</p>
+            <p class="text-slate-400 text-xs">Email: jaewoo@mdrules.dev</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Data Definitions ---
+        const curriculumData = {
+            day1: [
+                { time: "2H", type: "이론+실습", title: "GPT-5 & Prompt Engineering", desc: "GPT-5/o1 모델의 특징, JSON 모드, Reasoning Model을 활용한 복잡한 논리 처리, 사내 보고서 요약 봇 제작" },
+                { time: "2H", type: "이론+실습", title: "Function Calling & 외부 연동", desc: "LLM과 레거시 시스템(DB, API) 연결, 자연어로 사내 API 호출 봇 구현" },
+                { time: "2H", type: "이론+실습", title: "멀티모달 (Vision & Audio)", desc: "GPT-5 Vision API 이미지 분석, TTS/Whisper 활용, 영수증/문서 인식 음성 안내 서비스" },
+                { time: "1H", type: "이론+실습", title: "Built-in Tools 활용", desc: "Code Interpreter 데이터 분석 및 시각화, DALL-E 3 이미지 생성 통합" }
+            ],
+            day2: [
+                { time: "2H", type: "이론+실습", title: "RAG 아키텍처 이해", desc: "LLM의 환각(Hallucination) 문제 해결을 위한 검색 증강 생성(RAG) 개념 및 벡터 DB 기초" },
+                { time: "3H", type: "집중실습", title: "[심화] RAG 기반 사내 지식 봇 구축", desc: "문서 임베딩, 벡터 검색, GPT-5를 결합한 사내 규정/기술 문서 질의응답 시스템 구현" },
+                { time: "2H", type: "이론+실습", title: "Agents & Realtime API", desc: "스스로 계획하고 도구를 사용하는 Agent 설계, 실시간 음성 대화 API 활용" },
+                { time: "1H", type: "프로젝트", title: "종합 실습 및 배포", desc: "배운 기술을 통합하여 미니 프로젝트 완성 및 클라우드 배포 전략 논의" }
+            ]
+        };
+
+        // --- Init Function ---
+        document.addEventListener('DOMContentLoaded', () => {
+            initCharts();
+            renderCurriculum('day1');
+        });
+
+        // --- 1. Charts Implementation ---
+        function initCharts() {
+            // Chart 1: Composition (Donut)
+            const ctx1 = document.getElementById('compositionChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'doughnut',
+                data: {
+                    labels: ['실습 (Hands-on)', '이론 (Theory)', '프로젝트 (Project)'],
+                    datasets: [{
+                        data: [50, 40, 10],
+                        backgroundColor: ['#2563eb', '#94a3b8', '#7c3aed'],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        title: { display: true, text: '교육 과정 구성 비율', font: { size: 16 } }
+                    }
+                }
+            });
+
+            // Chart 2: Skill Radar
+            const ctx2 = document.getElementById('skillRadarChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'radar',
+                data: {
+                    labels: ['Prompting', 'RAG 구축', 'API 연동', '멀티모달', '데이터 분석', 'Agent 설계'],
+                    datasets: [
+                        {
+                            label: '교육 전 (Before)',
+                            data: [30, 10, 20, 10, 20, 5],
+                            fill: true,
+                            backgroundColor: 'rgba(148, 163, 184, 0.2)',
+                            borderColor: '#94a3b8',
+                            pointBackgroundColor: '#94a3b8'
+                        },
+                        {
+                            label: '교육 후 (After)',
+                            data: [90, 85, 95, 80, 75, 85],
+                            fill: true,
+                            backgroundColor: 'rgba(37, 99, 235, 0.2)',
+                            borderColor: '#3b82f6',
+                            pointBackgroundColor: '#3b82f6',
+                            pointBorderColor: '#fff'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(255, 255, 255, 0.2)' },
+                            grid: { color: 'rgba(255, 255, 255, 0.2)' },
+                            pointLabels: { color: '#fff', font: { size: 12 } },
+                            ticks: { display: false, max: 100 }
+                        }
+                    },
+                    plugins: {
+                        legend: { labels: { color: '#fff' } }
+                    }
+                }
+            });
+        }
+
+        // --- 2. Curriculum Interaction ---
+        function switchDay(day) {
+            // Update Tab Styles
+            const btnDay1 = document.getElementById('btn-day1');
+            const btnDay2 = document.getElementById('btn-day2');
+            
+            if (day === 'day1') {
+                btnDay1.className = "flex-1 py-4 text-center font-bold text-blue-600 border-b-2 border-blue-600 bg-blue-50 transition-all";
+                btnDay2.className = "flex-1 py-4 text-center font-bold text-slate-500 hover:bg-slate-50 transition-all";
+                
+                document.getElementById('content-day1').classList.remove('hidden');
+                document.getElementById('content-day2').classList.add('hidden');
+                renderCurriculum('day1');
+            } else {
+                btnDay1.className = "flex-1 py-4 text-center font-bold text-slate-500 hover:bg-slate-50 transition-all";
+                btnDay2.className = "flex-1 py-4 text-center font-bold text-blue-600 border-b-2 border-blue-600 bg-blue-50 transition-all";
+                
+                document.getElementById('content-day1').classList.add('hidden');
+                document.getElementById('content-day2').classList.remove('hidden');
+                renderCurriculum('day2');
+            }
+        }
+
+        function renderCurriculum(dayKey) {
+            const container = document.getElementById(`content-${dayKey}`);
+            container.innerHTML = ''; // Clear existing
+
+            curriculumData[dayKey].forEach((item, index) => {
+                const el = document.createElement('div');
+                el.className = "flex gap-4 p-4 rounded-xl border border-slate-100 hover:bg-slate-50 transition-colors";
+                el.innerHTML = `
+                    <div class="flex-shrink-0 w-16 text-center pt-1">
+                        <div class="text-sm font-bold text-slate-400">${item.time}</div>
+                        <div class="text-[10px] text-blue-500 bg-blue-50 rounded px-1 mt-1 inline-block">${item.type}</div>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold text-slate-800 mb-1 flex items-center">
+                            ${index + 1}. ${item.title}
+                        </h4>
+                        <p class="text-slate-600 text-sm leading-relaxed">${item.desc}</p>
+                    </div>
+                `;
+                container.appendChild(el);
+            });
+        }
+
+        // --- 3. UI Helpers ---
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function highlightCard(card) {
+            // Remove active class from all
+            document.querySelectorAll('.card').forEach(c => {
+                c.classList.remove('ring-2', 'ring-blue-500', 'bg-blue-50');
+            });
+            // Add to clicked
+            card.classList.add('ring-2', 'ring-blue-500', 'bg-blue-50');
+        }
+    </script>
+</body>
+</html>

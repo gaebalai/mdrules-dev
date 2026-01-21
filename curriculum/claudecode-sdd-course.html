@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD룰 AI교육 - Claude Code & SDD 차세대 개발 실무</title>
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="15x15"
+    href="./dist/images/favicon.png"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #F8FAFC; /* Slate-50: Light, neutral background */
+            color: #1E293B; /* Slate-800: High contrast text */
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A3B8;
+        }
+
+        /* Chart Container Utilities */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* Interactive Element Styles */
+        .tab-btn {
+            transition: all 0.3s ease;
+        }
+        .tab-btn.active {
+            border-bottom: 2px solid #6366F1; /* Indigo-500 */
+            color: #4338CA; /* Indigo-700 */
+            font-weight: 700;
+        }
+        
+        .concept-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        .concept-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .concept-card.active {
+            background-color: #EEF2FF; /* Indigo-50 */
+            border-color: #6366F1;
+        }
+
+        /* Utility for No SVG Icons - using CSS shapes/Unicode */
+        .icon-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.5rem;
+            font-size: 1.5rem;
+            background-color: #E0E7FF;
+            color: #4338CA;
+        }
+    </style>
+    <!-- Chosen Palette: Warm Neutrals (Slate) with Indigo/Violet Accents for a calm, professional, yet tech-forward feel. -->
+    <!-- Application Structure Plan: 
+         1. Hero: Immediate Value Prop.
+         2. Executive Summary: Key Logistics (Time, Target, Goal).
+         3. The Shift (Chart): Visualizing the productivity leap.
+         4. Competency Radar: Demonstrating ROI in skills.
+         5. Curriculum Explorer: Tabs for Day 1/2 to manage information density.
+         6. Deep Dive (Concepts): Interactive definitions for SDD, MCP, etc.
+         7. Methodology (Pie Chart): Showing Theory vs Practice balance.
+    -->
+    <!-- Visualization & Content Choices:
+         - Line Chart: Productivity trends (Context).
+         - Radar Chart: Skill Gap Analysis (Goal: Compare).
+         - Donut Chart: Curriculum Balance (Goal: Inform).
+         - Tabbed Lists: Daily Schedules (Goal: Organize).
+         - Interactive Cards: Concept Explanations (Goal: Inform/Engage).
+         NO SVG used. Chart.js for all graphs.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <img src="mdrules-logo.png" alt="MD룰 AI교육" width="116px">
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#overview" class="text-slate-600 hover:text-indigo-600 font-medium transition">개요</a>
+                    <a href="#roi" class="text-slate-600 hover:text-indigo-600 font-medium transition">기대효과</a>
+                    <a href="#curriculum" class="text-slate-600 hover:text-indigo-600 font-medium transition">커리큘럼</a>
+                    <a href="#methodology" class="text-slate-600 hover:text-indigo-600 font-medium transition">교육방식</a>
+                    <a href="https://mdrules.dev" target="_self" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">
+                    사이트로 이동
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-white border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 text-center">
+            <span class="inline-block py-1 px-3 rounded-full bg-indigo-50 text-indigo-700 text-sm font-semibold mb-4">AI-Driven Developer Workshop</span>
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-6">
+                자연어로 지휘하는 <br class="hidden sm:block" />
+                <span class="text-indigo-600">차세대 개발 실무</span>
+            </h1>
+            <p class="max-w-2xl mx-auto text-xl text-slate-600 mb-10 leading-relaxed">
+                단순 자동완성을 넘어, <strong>Claude Code</strong>와 <strong>SDD(스펙 주도 개발)</strong>로 
+                기획부터 배포까지 AI와 협업하는 <strong>Vibe Coding</strong> 시대를 준비하십시오.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="flex items-center px-6 py-3 bg-slate-50 rounded-lg border border-slate-200 shadow-sm">
+                    <span class="text-2xl mr-3">⏱️</span>
+                    <div class="text-left">
+                        <p class="text-xs text-slate-500 uppercase font-bold">Duration</p>
+                        <p class="font-bold text-slate-800">2일 (16시간)</p>
+                    </div>
+                </div>
+                <div class="flex items-center px-6 py-3 bg-slate-50 rounded-lg border border-slate-200 shadow-sm">
+                    <span class="text-2xl mr-3">👥</span>
+                    <div class="text-left">
+                        <p class="text-xs text-slate-500 uppercase font-bold">Target</p>
+                        <p class="font-bold text-slate-800">Senior / Lead Dev</p>
+                    </div>
+                </div>
+                <div class="flex items-center px-6 py-3 bg-slate-50 rounded-lg border border-slate-200 shadow-sm">
+                    <span class="text-2xl mr-3">🛠️</span>
+                    <div class="text-left">
+                        <p class="text-xs text-slate-500 uppercase font-bold">Tools</p>
+                        <p class="font-bold text-slate-800">Claude CLI, MCP, Git</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section 2: Why Now? (Charts) -->
+    <section id="roi" class="py-16 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 text-center">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">왜 지금 변화해야 합니까?</h2>
+                <p class="text-slate-600 max-w-3xl mx-auto">
+                    기존의 IDE 중심 개발 방식에서 <strong>자연어 명령 중심의 에이전트 협업</strong>으로 패러다임이 이동하고 있습니다.
+                    본 과정은 단순 코딩 속도가 아닌, <strong>설계 및 구조화 역량</strong>을 극대화합니다.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <!-- Line Chart: Productivity Paradigm -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="mb-6">
+                        <h3 class="text-lg font-bold text-slate-800 flex items-center">
+                            <span class="w-2 h-6 bg-indigo-500 rounded-full mr-3"></span>
+                            개발 생산성 패러다임 변화
+                        </h3>
+                        <p class="text-sm text-slate-500 mt-2">시간 흐름에 따른 생산성 변화 및 AI 도구의 영향</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="productivityChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Radar Chart: Competency Growth -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="mb-6">
+                        <h3 class="text-lg font-bold text-slate-800 flex items-center">
+                            <span class="w-2 h-6 bg-purple-500 rounded-full mr-3"></span>
+                            수강 전/후 역량 변화 (예측)
+                        </h3>
+                        <p class="text-sm text-slate-500 mt-2">단순 코더에서 AI 지휘자(Conductor)로의 성장</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="competencyChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Core Concepts (Interactive) -->
+    <section class="py-16 bg-white border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1 space-y-4">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">핵심 학습 개념</h2>
+                    <p class="text-slate-600 mb-6 text-sm">
+                        본 과정은 단순한 툴 사용법을 넘어, 아래 3가지 핵심 철학을 바탕으로 개발 프로세스를 재정의합니다. 
+                        버튼을 클릭하여 상세 내용을 확인하세요.
+                    </p>
+                    <!-- Interaction Buttons -->
+                    <div onclick="updateConcept('vibe')" class="concept-card active p-4 rounded-xl border-2 border-slate-100 bg-white cursor-pointer" id="btn-vibe">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-slate-800">1. Vibe Coding</span>
+                            <span class="text-2xl">🌊</span>
+                        </div>
+                    </div>
+                    <div onclick="updateConcept('sdd')" class="concept-card p-4 rounded-xl border-2 border-slate-100 bg-white cursor-pointer" id="btn-sdd">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-slate-800">2. SDD (Spec-Driven)</span>
+                            <span class="text-2xl">📝</span>
+                        </div>
+                    </div>
+                    <div onclick="updateConcept('mcp')" class="concept-card p-4 rounded-xl border-2 border-slate-100 bg-white cursor-pointer" id="btn-mcp">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-slate-800">3. MCP & Agents</span>
+                            <span class="text-2xl">🔌</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Content Area -->
+                <div class="lg:col-span-2 bg-slate-50 rounded-2xl p-8 border border-slate-200 flex flex-col justify-center min-h-[300px]">
+                    <div id="concept-display">
+                        <!-- Content injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Detailed Curriculum -->
+    <section id="curriculum" class="py-16 bg-slate-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900">상세 커리큘럼</h2>
+                <p class="text-slate-600 mt-2">이론 6시간(37%) + 실습 10시간(63%)의 실무 중심 구성</p>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="flex space-x-8 border-b border-slate-300 mb-8 justify-center">
+                <button onclick="switchTab('day1')" id="tab-day1" class="tab-btn active pb-4 text-lg font-medium text-slate-500 hover:text-indigo-600">
+                    Day 1: 패러다임 전환 & SDD
+                </button>
+                <button onclick="switchTab('day2')" id="tab-day2" class="tab-btn pb-4 text-lg font-medium text-slate-500 hover:text-indigo-600">
+                    Day 2: MCP & 에이전트 확장
+                </button>
+            </div>
+
+            <!-- Day 1 Content -->
+            <div id="content-day1" class="space-y-6 animate-fade-in">
+                <!-- Module 1 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-4">
+                        <h3 class="text-xl font-bold text-slate-800">1. Vibe Coding 개론 및 환경설정</h3>
+                        <span class="mt-2 sm:mt-0 px-3 py-1 bg-blue-100 text-blue-800 text-xs font-bold rounded-full w-fit">2시간</span>
+                    </div>
+                    <ul class="space-y-2 text-slate-600 text-sm">
+                        <li class="flex items-start"><span class="mr-2 text-indigo-500">✓</span>Copilot(Autocomplete)과 Claude Code(Agent)의 차이점 이해</li>
+                        <li class="flex items-start"><span class="mr-2 text-indigo-500">✓</span>Claude Code CLI 설치 및 권한(Auth) 관리</li>
+                        <li class="flex items-start"><span class="mr-2 text-indigo-500">✓</span>비용 관리 및 토큰 최적화 전략</li>
+                    </ul>
+                </div>
+
+                <!-- Module 2 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-4">
+                        <h3 class="text-xl font-bold text-slate-800">2. SDD (Spec-Driven Development)</h3>
+                        <span class="mt-2 sm:mt-0 px-3 py-1 bg-green-100 text-green-800 text-xs font-bold rounded-full w-fit">3시간 (실습)</span>
+                    </div>
+                    <p class="text-sm text-slate-500 mb-4">코드를 직접 짜지 않고, 요구사항 명세(Spec)로 코드를 지휘하는 방법론</p>
+                    <ul class="space-y-2 text-slate-600 text-sm">
+                        <li class="flex items-start"><span class="mr-2 text-indigo-500">✓</span>Markdown(.md) 형식을 활용한 명확한 요구사항 정의</li>
+                        <li class="flex items-start"><span class="mr-2 text-indigo-500">✓</span>Claude Code에게 스펙 문서를 전달하여 프로젝트 스캐폴딩 생성</li>
+                        <li class="flex items-start"><span class="mr-2 text-indigo-500">✓</span>실습: To-Do 리스트 앱의 스펙 작성부터 구현까지</li>
+                    </ul>
+                </div>
+
+                <!-- Module 3 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-4">
+                        <h3 class="text-xl font-bold text-slate-800">3. TDD & Refactoring with AI</h3>
+                        <span class="mt-2 sm:mt-0 px-3 py-1 bg-green-100 text-green-800 text-xs font-bold rounded-full w-fit">3시간 (실습)</span>
+                    </div>
+                    <ul class="space-y-2 text-slate-600 text-sm">
+                        <li class="flex items-start"><span class="mr-2 text-indigo-500">✓</span>테스트 코드 자동 생성 및 에러 디버깅 워크플로우</li>
+                        <li class="flex items-start"><span class="mr-2 text-indigo-500">✓</span>레거시 코드 분석 요청 및 리팩토링 제안 받기</li>
+                        <li class="flex items-start"><span class="mr-2 text-indigo-500">✓</span>Git 명령어(Commit, PR) 자동화 실습</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Day 2 Content (Hidden by default) -->
+            <div id="content-day2" class="space-y-6 hidden animate-fade-in">
+                <!-- Module 4 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-4">
+                        <h3 class="text-xl font-bold text-slate-800">4. 심화 설정(Config) & IDE 통합</h3>
+                        <span class="mt-2 sm:mt-0 px-3 py-1 bg-blue-100 text-blue-800 text-xs font-bold rounded-full w-fit">3시간</span>
+                    </div>
+                    <ul class="space-y-2 text-slate-600 text-sm">
+                        <li class="flex items-start"><span class="mr-2 text-indigo-500">✓</span>Hooks System: PreTool/PostTool 트리거 설정</li>
+                        <li class="flex items-start"><span class="mr-2 text-indigo-500">✓</span>실습: 코드 생성 후 자동으로 Linter/Formatter 실행 Hook 작성</li>
+                        <li class="flex items-start"><span class="mr-2 text-indigo-500">✓</span>Thinking Mode: Claude의 CoT(Chain of Thought) 유도하여 복잡한 문제 해결</li>
+                        <li class="flex items-start"><span class="mr-2 text-indigo-500">✓</span>VS Code (Cursor) 터미널 통합 전략</li>
+                    </ul>
+                </div>
+
+                <!-- Module 5 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-4">
+                        <h3 class="text-xl font-bold text-slate-800">5. MCP (Model Context Protocol) 확장</h3>
+                        <span class="mt-2 sm:mt-0 px-3 py-1 bg-green-100 text-green-800 text-xs font-bold rounded-full w-fit">2시간 (실습)</span>
+                    </div>
+                    <p class="text-sm text-slate-500 mb-4">AI에게 '손(Tools)'과 '눈(Resources)'을 달아주는 표준 프로토콜 이해</p>
+                    <ul class="space-y-2 text-slate-600 text-sm">
+                        <li class="flex items-start"><span class="mr-2 text-indigo-500">✓</span>Built-in MCP: 파일 시스템 조작, Edit 도구 원리</li>
+                        <li class="flex items-start"><span class="mr-2 text-indigo-500">✓</span>External MCP: GitHub, Postgres, Slack 연동 실습</li>
+                    </ul>
+                </div>
+
+                <!-- Module 6 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-4">
+                        <h3 class="text-xl font-bold text-slate-800">6. [캡스톤] 커스텀 MCP 서버 구축</h3>
+                        <span class="mt-2 sm:mt-0 px-3 py-1 bg-green-100 text-green-800 text-xs font-bold rounded-full w-fit">3시간 (프로젝트)</span>
+                    </div>
+                    <div class="p-4 bg-indigo-50 rounded-lg mb-3 text-sm text-indigo-900 border border-indigo-100">
+                        <strong>🎯 최종 목표:</strong> 우리 회사 내부 데이터(DB)를 Claude Code가 조회하고 코딩에 반영하도록 만들기
+                    </div>
+                    <ul class="space-y-2 text-slate-600 text-sm">
+                        <li class="flex items-start"><span class="mr-2 text-indigo-500">✓</span>FastMCP(Python)를 활용한 API 연동 서버 제작</li>
+                        <li class="flex items-start"><span class="mr-2 text-indigo-500">✓</span>실습: 사내 용어집(DB)을 조회하는 에이전트 구축</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Methodology Stats -->
+    <section id="methodology" class="py-16 bg-white border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6">압도적인 실습 비중</h2>
+                    <p class="text-lg text-slate-600 mb-6">
+                        이론만 듣고 끝나는 강의가 아닙니다. <br>
+                        전체 16시간 중 <strong>10시간(63%)</strong>이 핸즈온 실습으로 구성되어, 
+                        현업에 즉시 적용 가능한 수준으로 훈련합니다.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center p-3 bg-slate-50 rounded-lg">
+                            <span class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mr-4 font-bold">1</span>
+                            <span class="text-slate-700"><strong>UCCC 환경:</strong> 자체 실습 환경 제공</span>
+                        </li>
+                        <li class="flex items-center p-3 bg-slate-50 rounded-lg">
+                            <span class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mr-4 font-bold">2</span>
+                            <span class="text-slate-700"><strong>프로젝트 기반:</strong> To-Do 앱부터 사내 DB 연동까지</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+                    <div class="chart-container">
+                        <canvas id="ratioChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-300 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-6 md:mb-0">
+                <span class="text-2xl mr-2">🤖</span>
+                <span class="font-bold text-xl tracking-tight text-white">MDRules Claude Code & SDD 교육</span>
+                <p class="text-sm mt-2 text-slate-400">자연어로 지휘하는 차세대 개발 실무 워크숍</p>
+            </div>
+            <div class="text-center md:text-right">
+            <p class="text-slate-400 text-sm mb-4">Copyright &copy;2026 JAEWOO, KIM.</p>
+            <p class="text-slate-400 text-xs">Email: jaewoo@mdrules.dev</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // --- 1. Data & State Management ---
+        const concepts = {
+            vibe: {
+                title: "Vibe Coding이란?",
+                desc: "코드를 한 줄씩 타이핑하는 것이 아니라, <strong>'분위기(Vibe)'와 '의도'를 자연어로 설명</strong>하여 AI가 구현하게 만드는 새로운 개발 패러다임입니다. <br><br>개발자는 구현의 디테일보다 <strong>구조 설계(Architecture)</strong>와 <strong>검증(Verification)</strong>에 집중하게 됩니다.",
+                icon: "🌊"
+            },
+            sdd: {
+                title: "SDD (Spec-Driven Development)",
+                desc: "<strong>스펙 주도 개발</strong>은 코드를 작성하기 전에 완벽한 요구사항 문서(Markdown)를 먼저 작성하는 방법론입니다. <br><br>명확한 스펙 문서는 AI에게 최고의 프롬프트가 되며, 이를 통해 <strong>코드 품질의 일관성</strong>을 보장하고 <strong>재사용성</strong>을 높입니다.",
+                icon: "📝"
+            },
+            mcp: {
+                title: "MCP (Model Context Protocol)",
+                desc: "Anthropic이 제안한 개방형 표준으로, AI 모델을 외부 데이터나 도구와 안전하게 연결합니다. <br><br>Claude Code가 <strong>GitHub, Slack, 사내 DB(Postgres)</strong>와 직접 대화하며 데이터를 조회하고 작업을 수행할 수 있게 만드는 <strong>'연결 고리'</strong>입니다.",
+                icon: "🔌"
+            }
+        };
+
+        // --- 2. Chart Configurations (Chart.js) ---
+        
+        // 2.1 Productivity Line Chart
+        const ctxProd = document.getElementById('productivityChart').getContext('2d');
+        new Chart(ctxProd, {
+            type: 'line',
+            data: {
+                labels: ['Manual Coding', 'IDE Auto-complete', 'Copilot Era', 'Vibe Coding (Agent)'],
+                datasets: [{
+                    label: '개발 속도 및 복잡도 처리 능력',
+                    data: [20, 45, 65, 95],
+                    borderColor: '#6366F1', // Indigo-500
+                    backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                    borderWidth: 3,
+                    tension: 0.3,
+                    fill: true,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#6366F1',
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#1E293B',
+                        titleColor: '#F8FAFC',
+                        bodyColor: '#CBD5E1',
+                        padding: 10,
+                        cornerRadius: 4
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#F1F5F9' },
+                        ticks: { display: false } // Hide numbers for conceptual chart
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // 2.2 Competency Radar Chart
+        const ctxComp = document.getElementById('competencyChart').getContext('2d');
+        new Chart(ctxComp, {
+            type: 'radar',
+            data: {
+                labels: ['프롬프트 엔지니어링', '아키텍처 설계', '디버깅/검증', '자동화 파이프라인', '레거시 코드 분석', 'API 연동'],
+                datasets: [{
+                    label: '수강 전',
+                    data: [30, 40, 50, 20, 40, 50],
+                    fill: true,
+                    backgroundColor: 'rgba(148, 163, 184, 0.2)', // Slate-400
+                    borderColor: '#94A3B8',
+                    pointBackgroundColor: '#94A3B8',
+                    borderWidth: 2
+                }, {
+                    label: '수강 후',
+                    data: [90, 85, 80, 85, 90, 95],
+                    fill: true,
+                    backgroundColor: 'rgba(168, 85, 247, 0.2)', // Purple-500
+                    borderColor: '#A855F7',
+                    pointBackgroundColor: '#A855F7',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: '#E2E8F0' },
+                        grid: { color: '#E2E8F0' },
+                        pointLabels: {
+                            font: { size: 12, family: "'Noto Sans KR', sans-serif" },
+                            color: '#475569'
+                        },
+                        ticks: { display: false, max: 100 }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+        // 2.3 Ratio Donut Chart
+        const ctxRatio = document.getElementById('ratioChart').getContext('2d');
+        new Chart(ctxRatio, {
+            type: 'doughnut',
+            data: {
+                labels: ['실습 (10H)', '이론 (6H)'],
+                datasets: [{
+                    data: [10, 6],
+                    backgroundColor: [
+                        '#4F46E5', // Indigo-600
+                        '#CBD5E1'  // Slate-300
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    legend: { position: 'bottom', labels: { padding: 20 } },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                let value = context.raw || 0;
+                                let total = context.chart._metasets[context.datasetIndex].total;
+                                let percentage = Math.round((value / total) * 100) + '%';
+                                return label + ': ' + percentage;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // --- 3. Interaction Logic ---
+
+        // 3.1 Tab Switching
+        function switchTab(day) {
+            // Reset Buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active', 'border-indigo-500', 'text-indigo-700');
+                btn.classList.remove('border-transparent', 'text-slate-500'); // Clean up
+            });
+            
+            // Activate Clicked Button
+            const activeBtn = document.getElementById(`tab-${day}`);
+            activeBtn.classList.add('active');
+            
+            // Toggle Content
+            document.getElementById('content-day1').classList.add('hidden');
+            document.getElementById('content-day2').classList.add('hidden');
+            
+            const content = document.getElementById(`content-${day}`);
+            content.classList.remove('hidden');
+        }
+
+        // 3.2 Concept Display Update
+        function updateConcept(key) {
+            // Update Visual State of Cards
+            document.querySelectorAll('.concept-card').forEach(card => {
+                card.classList.remove('active', 'bg-indigo-50', 'border-indigo-500');
+                card.classList.add('border-slate-100', 'bg-white');
+            });
+            
+            const activeCard = document.getElementById(`btn-${key}`);
+            activeCard.classList.remove('border-slate-100', 'bg-white');
+            activeCard.classList.add('active');
+
+            // Update Content Area
+            const data = concepts[key];
+            const display = document.getElementById('concept-display');
+            
+            // Simple fade effect
+            display.style.opacity = 0;
+            setTimeout(() => {
+                display.innerHTML = `
+                    <div class="text-center sm:text-left animate-fade-in">
+                        <div class="inline-block p-3 rounded-full bg-indigo-100 text-3xl mb-4">${data.icon}</div>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-4">${data.title}</h3>
+                        <p class="text-lg text-slate-600 leading-relaxed">${data.desc}</p>
+                    </div>
+                `;
+                display.style.opacity = 1;
+            }, 150);
+        }
+
+        // --- 4. Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Concept Display
+            updateConcept('vibe');
+            
+            // Add fade transition styles dynamically
+            const style = document.createElement('style');
+            style.innerHTML = `
+                .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+                @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+                #concept-display { transition: opacity 0.3s ease; }
+            `;
+            document.head.appendChild(style);
+        });
+
+    </script>
+</body>
+</html>

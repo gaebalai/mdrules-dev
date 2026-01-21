@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD룰 AI교육 - Cursor 2.x 바이브코딩 실무 교육 제안서</title>
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="15x15"
+    href="./dist/images/favicon.png"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f5f5f4; /* Warm neutral background */
+            color: #292524;
+        }
+
+        /* Chart Container Styling - MANDATORY */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        .chart-container-large {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            max-height: 500px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e7e5e4;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a8a29e;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #78716c;
+        }
+
+        /* Interactive Element Styling */
+        .nav-item {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .nav-item.active {
+            background-color: #ea580c; /* Orange-600 */
+            color: white;
+            font-weight: 700;
+        }
+        
+        .interactive-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        .interactive-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: #ea580c;
+        }
+
+        .process-step {
+            transition: all 0.3s ease;
+        }
+        .process-step.active {
+            background-color: #ffedd5;
+            border-color: #ea580c;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- REQUIRED PLACEHOLDERS -->
+    <!-- Chosen Palette: Warm Neutrals (Stone) with Orange Accent (#ea580c) for energy/action -->
+    <!-- Application Structure Plan: Dashboard Layout. 
+         1. Header: Branding & Navigation.
+         2. Main Content Area: Dynamic switching between 4 views:
+            - Overview: Hero metrics, Target audience, "Why Cursor?".
+            - Vibe Coding Model: Interactive block diagram explaining the core concept.
+            - Curriculum Timeline: Interactive Gantt/Bar chart for the 2-day schedule. Clicking bars shows details.
+            - ROI & Skills: Radar chart showing skill transformation and efficiency tables.
+         3. Footer: Simple credits.
+         Why? This allows the stakeholder to jump between the "Business Value" (ROI) and "Technical Detail" (Curriculum) easily without scrolling a long document.
+    -->
+    <!-- Visualization & Content Choices:
+         - Curriculum: Stacked Horizontal Bar Chart (Chart.js). Goal: Visualize time distribution (Theory vs Practice). Interaction: Click to reveal module details.
+         - Skill Shift: Radar Chart (Chart.js). Goal: Show the qualitative shift in developer capabilities (e.g., Coding Speed vs Architecture Design).
+         - Vibe Coding Flow: HTML/CSS Flex Layout with JS classes. Goal: Explain the "Manager (Human) -> Agent (AI)" workflow. Interaction: Hover/Click to highlight steps.
+         - Justification: These visuals turn abstract text into tangible mental models.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <img src="mdrules-logo.png" alt="MD룰 AI교육" width="116px">
+                </div>
+                <div class="hidden sm:flex space-x-4 items-center" id="nav-container">
+                    <button class="nav-item active px-3 py-2 rounded-md text-sm font-medium" data-target="overview">과정 개요</button>
+                    <button class="nav-item px-3 py-2 rounded-md text-sm font-medium text-stone-600 hover:text-stone-900" data-target="concept">바이브 코딩이란?</button>
+                    <button class="nav-item px-3 py-2 rounded-md text-sm font-medium text-stone-600 hover:text-stone-900" data-target="curriculum">상세 커리큘럼</button>
+                    <button class="nav-item px-3 py-2 rounded-md text-sm font-medium text-stone-600 hover:text-stone-900" data-target="roi">기대 효과 (ROI)</button>
+                    <a href="https://mdrules.dev" target="_self" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">
+                    사이트로 이동
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+
+        <!-- VIEW 1: OVERVIEW -->
+        <section id="overview" class="view-section space-y-8">
+            <div class="bg-white rounded-xl shadow-lg p-8 border-l-4 border-orange-600">
+                <h1 class="text-3xl font-bold text-stone-800 mb-4">AI-Driven Developer: 코드 작성에서 "설계"로의 전환</h1>
+                <p class="text-lg text-stone-600 mb-6 leading-relaxed">
+                    본 과정은 단순한 AI 자동완성 기능을 넘어, <strong>Cursor 2.x의 Composer, MCP, Agent Mode</strong>를 활용해 
+                    자연어 프롬프트만으로 프론트엔드와 백엔드를 실무 수준으로 구축하는 방법을 교육합니다. 
+                    <br><span class="text-orange-600 font-bold">"타이핑하는 코더"에서 "지휘하는 아키텍트"로 진화하십시오.</span>
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
+                    <div class="bg-stone-50 p-4 rounded-lg text-center">
+                        <div class="text-3xl font-bold text-stone-800">2일</div>
+                        <div class="text-sm text-stone-500">교육 기간</div>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-lg text-center">
+                        <div class="text-3xl font-bold text-stone-800">16H</div>
+                        <div class="text-sm text-stone-500">총 시수</div>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-lg text-center">
+                        <div class="text-3xl font-bold text-orange-600">75%</div>
+                        <div class="text-sm text-stone-500">실습 비중</div>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-lg text-center">
+                        <div class="text-3xl font-bold text-stone-800">MVP</div>
+                        <div class="text-sm text-stone-500">완성 프로젝트</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-xl shadow p-6">
+                    <h2 class="text-xl font-bold text-stone-800 mb-4 border-b pb-2">🎯 수강 대상</h2>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="mr-2 text-green-500">✔</span>
+                            <span class="text-stone-600">AI를 단순 자동완성 용도로만 쓰고 있는 주니어/미들 개발자</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2 text-green-500">✔</span>
+                            <span class="text-stone-600">프론트엔드/백엔드 풀스택 개발을 빠르게 경험하고 싶은 엔지니어</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2 text-green-500">✔</span>
+                            <span class="text-stone-600">빠르게 프로토타입(MVP)을 검증해야 하는 기획자 겸 개발자</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl shadow p-6">
+                    <h2 class="text-xl font-bold text-stone-800 mb-4 border-b pb-2">🛠️ 핵심 학습 도구</h2>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="mr-2 text-orange-500">⚡</span>
+                            <div>
+                                <strong class="block text-stone-800">Cursor 2.x (Composer)</strong>
+                                <span class="text-sm text-stone-500">다중 파일 편집 및 전체 프로젝트 문맥 이해</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2 text-orange-500">🔗</span>
+                            <div>
+                                <strong class="block text-stone-800">MCP (Model Context Protocol)</strong>
+                                <span class="text-sm text-stone-500">사내 DB, 로컬 문서, 외부 API를 AI에 연결</span>
+                            </div>
+                        </li>
+                         <li class="flex items-start">
+                            <span class="mr-2 text-orange-500">🤖</span>
+                            <div>
+                                <strong class="block text-stone-800">Agent Mode (Auto-Debug)</strong>
+                                <span class="text-sm text-stone-500">에러 발생 시 스스로 터미널을 실행하고 수정</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 2: CONCEPT (VIBE CODING) -->
+        <section id="concept" class="view-section hidden space-y-8">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-stone-800 mb-2">바이브 코딩 (Vibe Coding)이란?</h2>
+                <p class="text-stone-600 mb-8">
+                    안드레아 카파시(Andrej Karpathy)가 제안한 개념으로, 개발자가 코드를 한 줄씩 작성하는 것이 아니라, 
+                    <strong>"전체적인 흐름(Vibe)과 의도"</strong>를 AI에게 지시하고 검토하는 관리자 역할을 수행하는 방식을 의미합니다.
+                </p>
+
+                <!-- Conceptual Flow Chart (Interactive) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 relative">
+                    <!-- Step 1 -->
+                    <div class="process-step border-2 border-stone-200 rounded-lg p-6 text-center bg-stone-50 hover:bg-white" onmouseover="highlightStep(1)">
+                        <div class="text-4xl mb-3">🗣️</div>
+                        <h3 class="font-bold text-lg mb-2">1. Natural Language Intent</h3>
+                        <p class="text-sm text-stone-500">"로그인 페이지 만들어줘. 디자인은 모던하게."</p>
+                        <div class="mt-4 text-xs bg-stone-200 inline-block px-2 py-1 rounded">개발자 = PM/Architect</div>
+                    </div>
+                    
+                    <!-- Arrow -->
+                    <div class="hidden md:flex items-center justify-center text-stone-300 text-2xl">➔</div>
+
+                    <!-- Step 2 -->
+                    <div class="process-step border-2 border-stone-200 rounded-lg p-6 text-center bg-stone-50 hover:bg-white" onmouseover="highlightStep(2)">
+                        <div class="text-4xl mb-3">⚡</div>
+                        <h3 class="font-bold text-lg mb-2">2. Cursor Agent (Composer)</h3>
+                        <p class="text-sm text-stone-500">파일 생성, 코드 작성, 터미널 실행, 에러 수정 (Self-Healing)</p>
+                        <div class="mt-4 text-xs bg-orange-100 text-orange-800 inline-block px-2 py-1 rounded">AI = Senior Dev</div>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="hidden md:flex items-center justify-center text-stone-300 text-2xl">➔</div>
+
+                    <!-- Step 3 -->
+                    <div class="process-step border-2 border-stone-200 rounded-lg p-6 text-center bg-stone-50 hover:bg-white" onmouseover="highlightStep(3)">
+                        <div class="text-4xl mb-3">🎁</div>
+                        <h3 class="font-bold text-lg mb-2">3. Verified Output (MVP)</h3>
+                        <p class="text-sm text-stone-500">작동하는 웹 애플리케이션 & 테스트 코드</p>
+                        <div class="mt-4 text-xs bg-green-100 text-green-800 inline-block px-2 py-1 rounded">Result = Product</div>
+                    </div>
+                </div>
+
+                <div id="step-detail" class="mt-6 p-4 bg-stone-100 rounded-lg text-stone-700 min-h-[80px] flex items-center justify-center font-medium">
+                    마우스를 위 단계에 올려 상세 내용을 확인하세요.
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow p-6">
+                 <h3 class="text-xl font-bold text-stone-800 mb-4">전통적 개발 vs 바이브 코딩 비교</h3>
+                 <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b-2 border-stone-100">
+                                <th class="p-4 text-stone-500 font-medium">구분</th>
+                                <th class="p-4 text-stone-500 font-medium">전통적 개발 (Copilot Era)</th>
+                                <th class="p-4 text-orange-600 font-bold">바이브 코딩 (Agent Era)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-stone-50 hover:bg-stone-50">
+                                <td class="p-4 font-bold text-stone-700">핵심 활동</td>
+                                <td class="p-4 text-stone-600">구문(Syntax) 작성 및 검색</td>
+                                <td class="p-4 text-stone-800 font-medium">의도(Intent) 정의 및 리뷰</td>
+                            </tr>
+                            <tr class="border-b border-stone-50 hover:bg-stone-50">
+                                <td class="p-4 font-bold text-stone-700">작업 단위</td>
+                                <td class="p-4 text-stone-600">단일 함수/라인 (Autocomplete)</td>
+                                <td class="p-4 text-stone-800 font-medium">전체 기능/모듈 (Multi-file Edit)</td>
+                            </tr>
+                            <tr class="border-b border-stone-50 hover:bg-stone-50">
+                                <td class="p-4 font-bold text-stone-700">에러 처리</td>
+                                <td class="p-4 text-stone-600">스택오버플로우 검색 후 수동 수정</td>
+                                <td class="p-4 text-stone-800 font-medium">Auto-Debug (터미널 로그 자동 분석)</td>
+                            </tr>
+                            <tr class="hover:bg-stone-50">
+                                <td class="p-4 font-bold text-stone-700">컨텍스트</td>
+                                <td class="p-4 text-stone-600">현재 열린 파일 위주</td>
+                                <td class="p-4 text-stone-800 font-medium">전체 코드베이스 + 외부 문서(MCP)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                 </div>
+            </div>
+        </section>
+
+        <!-- VIEW 3: CURRICULUM (Interactive Timeline) -->
+        <section id="curriculum" class="view-section hidden space-y-8">
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-stone-800">상세 교육 과정 (Timeline)</h2>
+                    <p class="text-stone-500 text-sm">차트의 막대를 클릭하여 세부 실습 내용을 확인하세요.</p>
+                </div>
+                
+                <!-- Chart Container -->
+                <div class="chart-container-large">
+                    <canvas id="curriculumChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Dynamic Detail Panel -->
+            <div id="module-detail-panel" class="bg-stone-800 text-white rounded-xl shadow-lg p-8 transition-all duration-300 opacity-100">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 border-b border-stone-600 pb-4">
+                    <div>
+                        <span id="detail-day" class="bg-orange-600 text-xs px-2 py-1 rounded uppercase font-bold tracking-wide">Day 1</span>
+                        <h3 id="detail-title" class="text-2xl font-bold mt-2">차트를 클릭하여 상세 내용을 확인하세요</h3>
+                    </div>
+                    <div id="detail-time" class="text-stone-400 text-sm mt-2 md:mt-0"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-orange-400 font-bold mb-2 text-sm uppercase">학습 내용</h4>
+                        <ul id="detail-content" class="list-disc list-inside text-stone-300 space-y-1">
+                            <li>교육 과정의 전체적인 흐름을 파악하기 위해 위의 타임라인을 클릭해보세요.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-orange-400 font-bold mb-2 text-sm uppercase">실습 도구 & 키워드</h4>
+                        <div id="detail-tools" class="flex flex-wrap gap-2">
+                            <span class="bg-stone-700 px-3 py-1 rounded-full text-sm">Cursor</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 4: ROI & STATS -->
+        <section id="roi" class="view-section hidden space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Radar Chart: Skill Shift -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h2 class="text-xl font-bold text-stone-800 mb-4">📊 역량 변화 시뮬레이션</h2>
+                    <p class="text-sm text-stone-500 mb-4">교육 전후 개발자의 핵심 역량 변화 예상치</p>
+                    <div class="chart-container">
+                        <canvas id="skillRadarChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- ROI Metrics -->
+                <div class="space-y-6">
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <h2 class="text-xl font-bold text-stone-800 mb-4">📈 기대 효과 (ROI)</h2>
+                        <ul class="space-y-4">
+                            <li class="flex justify-between items-center border-b border-stone-100 pb-2">
+                                <span class="text-stone-600">프로토타입(MVP) 제작 속도</span>
+                                <span class="text-orange-600 font-bold text-lg">300% ↑</span>
+                            </li>
+                            <li class="flex justify-between items-center border-b border-stone-100 pb-2">
+                                <span class="text-stone-600">레거시 코드 분석 시간</span>
+                                <span class="text-orange-600 font-bold text-lg">70% ↓</span>
+                            </li>
+                            <li class="flex justify-between items-center border-b border-stone-100 pb-2">
+                                <span class="text-stone-600">테스트 코드(TC) 커버리지</span>
+                                <span class="text-orange-600 font-bold text-lg">20% → 80%</span>
+                            </li>
+                            <li class="flex justify-between items-center pb-2">
+                                <span class="text-stone-600">기술 부채 해결 능력</span>
+                                <span class="text-green-600 font-bold text-lg">향상</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-orange-50 rounded-xl shadow p-6 border border-orange-100">
+                        <h2 class="text-xl font-bold text-orange-800 mb-2">💡 교육의 차별점</h2>
+                        <p class="text-stone-700 text-sm mb-4">단순 툴 사용법이 아닌, <strong>AI와 협업하는 방법론</strong>을 가르칩니다.</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-orange-600 font-bold mr-3 shadow-sm">1</div>
+                                <span class="text-sm text-stone-700"><strong>Real-World:</strong> 사내 문서를 연결하는 MCP 실습 포함</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-orange-600 font-bold mr-3 shadow-sm">2</div>
+                                <span class="text-sm text-stone-700"><strong>Full-Cycle:</strong> 기획부터 배포까지 전 과정 경험</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-orange-600 font-bold mr-3 shadow-sm">3</div>
+                                <span class="text-sm text-stone-700"><strong>Debugging:</strong> AI가 에러를 고치는 패턴 체득</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-stone-200 mt-auto py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+                        <p class="text-slate-400 text-sm mb-4">Copyright &copy;2026 JAEWOO, KIM.</p>
+            <p class="text-slate-400 text-xs">Email: jaewoo@mdrules.dev</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Data Definitions ---
+        
+        // Curriculum Data based on PDF
+        const curriculumData = [
+            // Day 1
+            { 
+                id: 'd1-1', day: '1일차', time: '오전 (2H)', title: 'Cursor 시작 & 환경 구축', 
+                content: ['바이브코딩(Vibe Coding) 개념 이해', 'Cursor 설치 및 설정 (VS Code 마이그레이션)', 'OpenAI/Claude API Key 연동'], 
+                tools: ['Cursor Settings', 'Extensions'],
+                start: 9, end: 11, type: 'Theory'
+            },
+            { 
+                id: 'd1-2', day: '1일차', time: '오전 (2H)', title: 'Prompt Engineering & AIDD', 
+                content: ['Context(맥락) 관리: @Codebase, @Docs 활용법', 'Instruction(지시문) 최적화 패턴', '.cursorrules 파일 설정으로 팀 컨벤션 통일'], 
+                tools: ['@Symbols', 'Chat Mode'],
+                start: 11, end: 13, type: 'Practice' 
+            },
+            { 
+                id: 'd1-3', day: '1일차', time: '오후 (2H)', title: '[구현] 자연어로 만드는 웹앱(MVP)', 
+                content: ['Composer(Ctrl+I)를 활용한 멀티파일 생성', 'Frontend: Tailwind CSS + Shadcn UI 자동 생성', 'Logic: "게시판 CRUD 짜줘" 등 기능 구현'], 
+                tools: ['Composer', 'Shadcn UI', 'React'],
+                start: 14, end: 16, type: 'Practice'
+            },
+            { 
+                id: 'd1-4', day: '1일차', time: '오후 (2H)', title: '[심화] Agent Mode와 MCP', 
+                content: ['Agent Mode: 스스로 터미널 실행 및 파일 수정', 'MCP: 로컬 문서/DB를 Cursor에 연결하기', 'Auto-Debug: 에러 로그 기반 자동 수정'], 
+                tools: ['Agent Mode', 'MCP Server', 'Terminal'],
+                start: 16, end: 18, type: 'Practice'
+            },
+            // Day 2
+            { 
+                id: 'd2-1', day: '2일차', time: '오전 (2H)', title: '백엔드 개발 (Spring Boot/NestJS)', 
+                content: ['Java/TS 보일러플레이트 제거', 'REST API 설계 및 DB 스키마 자동 생성', 'Controller-Service-Repository 레이어 자동화'], 
+                tools: ['Spring Boot', 'NestJS', 'PostgreSQL'],
+                start: 9, end: 11, type: 'Practice'
+            },
+            { 
+                id: 'd2-2', day: '2일차', time: '오전 (2H)', title: '테스트 코드 & 리팩토링', 
+                content: ['테스트 코드(ViTest/Jest/JUnit) 자동 생성', '엣지 케이스(Edge Case) 발굴 프롬프트', '레거시 코드 리팩토링: "클린 코드 원칙 적용해줘"'], 
+                tools: ['ViTest', 'Jest', 'Refactoring'],
+                start: 11, end: 13, type: 'Practice'
+            },
+            { 
+                id: 'd2-3', day: '2일차', time: '오후 (3H)', title: '[협업] 팀 프로젝트 & 배포', 
+                content: ['팀 단위 개발 환경: .cursorrules 공유', 'Docker Compose 설정 파일 생성', 'CI/CD 파이프라인 초안 작성'], 
+                tools: ['Docker', 'Github Actions', 'Vercel'],
+                start: 14, end: 17, type: 'Practice'
+            },
+            { 
+                id: 'd2-4', day: '2일차', time: '오후 (1H)', title: 'Final Review & Q&A', 
+                content: ['프로젝트 최종 시연', '실무 적용 로드맵 수립', '질의응답'], 
+                tools: ['Review'],
+                start: 17, end: 18, type: 'Theory'
+            }
+        ];
+
+        // --- Interaction Logic ---
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Navigation
+            const navItems = document.querySelectorAll('.nav-item');
+            const sections = document.querySelectorAll('.view-section');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    // Update Nav UI
+                    navItems.forEach(nav => nav.classList.remove('active', 'bg-orange-600', 'text-white'));
+                    navItems.forEach(nav => nav.classList.add('text-stone-600'));
+                    item.classList.add('active', 'bg-orange-600', 'text-white');
+                    item.classList.remove('text-stone-600');
+
+                    // Switch Section
+                    const targetId = item.getAttribute('data-target');
+                    sections.forEach(section => {
+                        section.classList.add('hidden');
+                        if(section.id === targetId) section.classList.remove('hidden');
+                    });
+                });
+            });
+
+            // Init Charts
+            initCurriculumChart();
+            initSkillChart();
+        });
+
+        // --- Chart 1: Curriculum Timeline (Gantt-ish) ---
+        let curriculumChartInstance = null;
+
+        function initCurriculumChart() {
+            const ctx = document.getElementById('curriculumChart').getContext('2d');
+            
+            // Transform data for chart
+            const labels = ['오전 (09-13)', '오후 (14-18)'];
+            
+            // We need to visually represent Day 1 and Day 2 items.
+            // Using a horizontal bar chart where y-axis is Day, x-axis is Time.
+            // Simplified for better visual: Y-axis = Modules, X-axis = Hours
+            
+            const day1Data = curriculumData.filter(d => d.day === '1일차');
+            const day2Data = curriculumData.filter(d => d.day === '2일차');
+
+            const allModules = [...day1Data, ...day2Data];
+            
+            // Prepare datasets
+            // We will map each module to a floating bar
+            const dataPoints = allModules.map((module, index) => {
+                // Map Day 1 to y=0, Day 2 to y=1 grouping? 
+                // Better: Just list all modules on Y axis, organized by time.
+                return {
+                    x: [module.start, module.end],
+                    y: `${module.day} - ${module.title}`,
+                    moduleData: module // Attach custom data
+                };
+            });
+
+            const bgColors = allModules.map(m => m.type === 'Theory' ? 'rgba(168, 162, 158, 0.7)' : 'rgba(234, 88, 12, 0.7)'); // Stone vs Orange
+            const borderColors = allModules.map(m => m.type === 'Theory' ? 'rgba(168, 162, 158, 1)' : 'rgba(234, 88, 12, 1)');
+
+            curriculumChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: dataPoints.map(d => d.y),
+                    datasets: [{
+                        label: '교육 시간 (09:00 ~ 18:00)',
+                        data: dataPoints,
+                        backgroundColor: bgColors,
+                        borderColor: borderColors,
+                        borderWidth: 1,
+                        borderSkipped: false,
+                        borderRadius: 4,
+                        barPercentage: 0.6
+                    }]
+                },
+                options: {
+                    indexAxis: 'y', // Horizontal Bar
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            min: 9,
+                            max: 18,
+                            title: { display: true, text: '시간 (Hour)' },
+                            ticks: { stepSize: 1 }
+                        },
+                        y: {
+                            ticks: {
+                                autoSkip: false,
+                                font: { size: 11, weight: 'bold' }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const d = context.raw.moduleData;
+                                    return `${d.time}: ${d.title}`;
+                                }
+                            }
+                        }
+                    },
+                    onClick: (e, activeElements) => {
+                        if (activeElements.length > 0) {
+                            const index = activeElements[0].index;
+                            const module = dataPoints[index].moduleData;
+                            updateDetailPanel(module);
+                        }
+                    }
+                }
+            });
+            
+            // Load first module by default
+            updateDetailPanel(curriculumData[0]);
+        }
+
+        function updateDetailPanel(module) {
+            document.getElementById('detail-day').textContent = module.day;
+            document.getElementById('detail-day').className = module.day === '1일차' 
+                ? 'bg-orange-600 text-xs px-2 py-1 rounded uppercase font-bold tracking-wide text-white' 
+                : 'bg-stone-600 text-xs px-2 py-1 rounded uppercase font-bold tracking-wide text-white';
+                
+            document.getElementById('detail-title').textContent = module.title;
+            document.getElementById('detail-time').textContent = module.time;
+            
+            const contentList = document.getElementById('detail-content');
+            contentList.innerHTML = '';
+            module.content.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                contentList.appendChild(li);
+            });
+
+            const toolsContainer = document.getElementById('detail-tools');
+            toolsContainer.innerHTML = '';
+            module.tools.forEach(tool => {
+                const span = document.createElement('span');
+                span.className = 'bg-stone-700 px-3 py-1 rounded-full text-xs font-mono mr-2 mb-2 inline-block';
+                span.textContent = tool;
+                toolsContainer.appendChild(span);
+            });
+        }
+
+        // --- Chart 2: Skill Radar Chart ---
+        function initSkillChart() {
+            const ctx = document.getElementById('skillRadarChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        '코딩 속도 (Speed)', 
+                        '아키텍처 설계', 
+                        '디버깅/문제해결', 
+                        '테스트 코드 작성', 
+                        '새로운 언어 적응력'
+                    ],
+                    datasets: [{
+                        label: '교육 전 (Traditional)',
+                        data: [40, 30, 50, 20, 30],
+                        fill: true,
+                        backgroundColor: 'rgba(168, 162, 158, 0.2)',
+                        borderColor: 'rgb(168, 162, 158)',
+                        pointBackgroundColor: 'rgb(168, 162, 158)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(168, 162, 158)'
+                    }, {
+                        label: '교육 후 (Vibe Coding)',
+                        data: [90, 70, 85, 80, 90],
+                        fill: true,
+                        backgroundColor: 'rgba(234, 88, 12, 0.2)',
+                        borderColor: 'rgb(234, 88, 12)',
+                        pointBackgroundColor: 'rgb(234, 88, 12)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(234, 88, 12)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    elements: {
+                        line: { borderWidth: 3 }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: { display: true },
+                            suggestedMin: 0,
+                            suggestedMax: 100,
+                            ticks: { backdropColor: 'transparent' } // Hide label background
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- Concept Interaction ---
+        function highlightStep(stepNum) {
+            const details = [
+                "",
+                "1단계: 개발자는 PM처럼 생각합니다. '어떤 기능'이 필요한지, '어떤 기술스택'을 쓸지 자연어로 정의합니다. (Codebase Context 활용)",
+                "2단계: Cursor(Composer)가 전체 프로젝트 구조를 파악하고, 여러 파일을 동시에 생성/수정합니다. 에러 발생 시 스스로 터미널 로그를 읽고 고칩니다.",
+                "3단계: 개발자는 최종 결과물(웹앱)을 확인하고, 비즈니스 로직의 결함이나 UX 개선점만 피드백합니다."
+            ];
+            
+            document.getElementById('step-detail').textContent = details[stepNum];
+            document.getElementById('step-detail').classList.add('bg-orange-50', 'text-orange-900', 'border', 'border-orange-200');
+            document.getElementById('step-detail').classList.remove('bg-stone-100', 'text-stone-700');
+        }
+
+    </script>
+</body>
+</html>

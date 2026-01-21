@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD룰 AI교육 - ITDA-SDD 프레임워크 교육</title>
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="15x15"
+    href="./dist/images/favicon.png"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #fafaf9; /* stone-50 */
+            color: #44403c; /* stone-700 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        .interactive-card {
+            transition: all 0.3s ease;
+        }
+        .interactive-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .timeline-line {
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #d6d3d1; /* stone-300 */
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Placeholder Comments -->
+    <!-- Chosen Palette: Warm Neutrals (Stone) with Teal/Slate Accents. Creates a calm, professional, and academic atmosphere suitable for corporate training proposals. -->
+    
+    <!-- Application Structure Plan: 
+         1. Header/Hero: Features an interactive 'Title Selector' to allow HR managers to visualize different marketing angles immediately.
+         2. Dashboard Overview: Key metrics (Time, Audience, Goal) presented as clear cards.
+         3. Concept Visualizer: An interactive HTML-based diagram explaining the 'Vibe Coding + SDD' loop. This replaces static images to engage the user in the methodology.
+         4. Impact Analysis: A Chart.js Radar chart comparing Traditional Development vs. ITDA-SDD across key KPIs (Speed, Documentation, Quality).
+         5. Curriculum Timeline: A dynamic Day 1 / Day 2 tabbed interface to avoid information overload and allow focused exploration of the schedule.
+         6. Footer: Environment details.
+         This structure prioritizes "Selling the Concept" first, then "Proving the Value," and finally "Detailing the Execution."
+    -->
+
+    <!-- Visualization & Content Choices:
+         - Title Selector: Text Interaction -> Goals: Inform & Engage -> Allows user to choose the 'vibe' of the course -> JS updates DOM.
+         - Radar Chart: Chart.js -> Goal: Compare -> Visualizes the multi-faceted benefits (not just speed) of the framework -> No SVG.
+         - Concept Flow: HTML Grid + JS Hover -> Goal: Explain Process -> Shows the flow from Spec to AI to Code -> Replaces static Mermaid diagrams.
+         - Timeline: Dynamic List -> Goal: Organize -> Breaks down the 16-hour content into digestible chunks.
+    -->
+
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Navigation/Header -->
+    <header class="bg-white border-b border-stone-200 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <img src="mdrules-logo.png" alt="MD룰 AI교육" width="116px">
+                <span class="text-sm px-2 py-1 bg-teal-100 text-teal-800 rounded-full font-medium">ITDA-SDD 프레임워크 활용 Course </span>
+            </div>
+            <nav class="hidden md:flex gap-6 text-sm font-medium text-stone-500">
+                <a href="#overview" class="hover:text-teal-600 transition-colors">개요</a>
+                <a href="#framework" class="hover:text-teal-600 transition-colors">방법론</a>
+                <a href="#curriculum" class="hover:text-teal-600 transition-colors">커리큘럼</a>
+                <a href="https://mdrules.dev" target="_self" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">
+                    사이트로 이동
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- Section 1: Hero & Title Selection -->
+        <section id="overview" class="space-y-6">
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-stone-100">
+                <div class="mb-4">
+                    <span class="text-stone-400 font-medium tracking-widest text-xs uppercase">Course Title Proposal</span>
+                    <h1 id="main-title" class="text-3xl md:text-4xl font-bold text-stone-800 mt-2 min-h-[4rem] flex items-center">
+                        AI 협업의 정석: 스펙 주도 개발(SDD)과 바이브 코딩
+                    </h1>
+                </div>
+                
+                <div class="flex flex-wrap gap-3 mt-6">
+                    <button onclick="setTitle(0)" class="title-btn px-4 py-2 rounded-lg text-sm font-medium border transition-colors bg-teal-600 text-white border-teal-600 shadow-md">
+                        제안 1: AI 협업의 정석
+                    </button>
+                    <button onclick="setTitle(1)" class="title-btn px-4 py-2 rounded-lg text-sm font-medium border border-stone-200 text-stone-600 hover:bg-stone-50 transition-colors">
+                        제안 2: ITDA 프레임워크 마스터
+                    </button>
+                    <button onclick="setTitle(2)" class="title-btn px-4 py-2 rounded-lg text-sm font-medium border border-stone-200 text-stone-600 hover:bg-stone-50 transition-colors">
+                        제안 3: 엔지니어링 생산성 혁명
+                    </button>
+                </div>
+
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 pt-8 border-t border-stone-100">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center text-xl">⏳</div>
+                        <div>
+                            <p class="text-sm text-stone-500 font-medium">강의 일수</p>
+                            <p class="text-lg font-bold text-stone-800">2일 (16시간)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center text-xl">🎯</div>
+                        <div>
+                            <p class="text-sm text-stone-500 font-medium">대상</p>
+                            <p class="text-lg font-bold text-stone-800">IT 엔지니어 (초/중급)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center text-xl">🚀</div>
+                        <div>
+                            <p class="text-sm text-stone-500 font-medium">목표</p>
+                            <p class="text-sm font-semibold text-stone-800 leading-tight">SDD 기반의 명세 작성법과 AI 프롬프트 설계를 통합하여, 고품질 코드를 빠르게 생산하는 '바이브 코딩' 방법론 체득</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Framework & Value (Layout: 2 Columns) -->
+        <section id="framework" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Left: Methodology Interaction -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-100">
+                <div class="mb-6">
+                    <h2 class="text-xl font-bold text-stone-800 flex items-center gap-2">
+                        <span class="w-2 h-8 bg-teal-500 rounded-full"></span>
+                        ITDA-SDD 방법론
+                    </h2>
+                    <p class="text-stone-500 text-sm mt-2">
+                        각 단계를 클릭하여 상세 내용을 확인하세요.
+                    </p>
+                </div>
+
+                <div class="space-y-3">
+                    <div onclick="showDetail('identify')" class="framework-step cursor-pointer group p-4 border border-stone-200 rounded-xl hover:border-teal-400 hover:bg-teal-50 transition-all">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-stone-700 group-hover:text-teal-700">1. Identify & Think (명세)</h3>
+                            <span class="text-stone-300 group-hover:text-teal-500">▼</span>
+                        </div>
+                        <p class="text-xs text-stone-500 mt-1">구현할 기능의 본질과 요구사항을 정의 (README 주도)</p>
+                    </div>
+
+                    <div onclick="showDetail('design')" class="framework-step cursor-pointer group p-4 border border-stone-200 rounded-xl hover:border-teal-400 hover:bg-teal-50 transition-all">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-stone-700 group-hover:text-teal-700">2. Design & Prompt (설계)</h3>
+                            <span class="text-stone-300 group-hover:text-teal-500">▼</span>
+                        </div>
+                        <p class="text-xs text-stone-500 mt-1">SDD 명세를 기반으로 AI 프롬프트 설계</p>
+                    </div>
+
+                    <div onclick="showDetail('act')" class="framework-step cursor-pointer group p-4 border border-stone-200 rounded-xl hover:border-teal-400 hover:bg-teal-50 transition-all">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-stone-700 group-hover:text-teal-700">3. Act (Vibe Coding)</h3>
+                            <span class="text-stone-300 group-hover:text-teal-500">▼</span>
+                        </div>
+                        <p class="text-xs text-stone-500 mt-1">AI 생성 코드 검증 및 'Vibe(느낌)'를 더한 리팩토링</p>
+                    </div>
+                </div>
+
+                <div id="framework-detail" class="mt-4 p-4 bg-stone-100 rounded-lg text-sm text-stone-600 min-h-[80px]">
+                    <strong>방법론 개요:</strong> ITDA는 문제 정의부터 해결까지의 흐름을 체계화합니다. SDD를 통해 명세를 먼저 작성하고, 이를 AI에게 입력하여 구현을 자동화하는 것이 핵심입니다.
+                </div>
+            </div>
+
+            <!-- Right: Impact Chart -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-stone-100 flex flex-col">
+                <div class="mb-4">
+                    <h2 class="text-xl font-bold text-stone-800 flex items-center gap-2">
+                        <span class="w-2 h-8 bg-orange-400 rounded-full"></span>
+                        학습 기대 효과
+                    </h2>
+                    <p class="text-stone-500 text-sm mt-2">
+                        기존 방식 vs ITDA-SDD 방식 비교 분석
+                    </p>
+                </div>
+                
+                <div class="flex-grow flex items-center justify-center bg-stone-50 rounded-xl p-4">
+                    <!-- Chart Container as specified -->
+                    <div class="chart-container">
+                        <canvas id="impactChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Detailed Curriculum -->
+        <section id="curriculum">
+            <div class="bg-white rounded-2xl shadow-sm border border-stone-100 overflow-hidden">
+                <div class="p-8 pb-0 border-b border-stone-100 bg-stone-50/50">
+                    <h2 class="text-2xl font-bold text-stone-800 mb-2">상세 커리큘럼</h2>
+                    <p class="text-stone-500 mb-6">2일간 진행되는 몰입형 실습 과정입니다.</p>
+                    
+                    <div class="flex gap-1">
+                        <button id="btn-day1" onclick="switchDay(1)" class="px-6 py-3 font-bold text-sm rounded-t-lg bg-white border-t border-l border-r border-stone-200 text-teal-600 relative top-[1px] z-10">
+                            Day 1: 기본 및 설계
+                        </button>
+                        <button id="btn-day2" onclick="switchDay(2)" class="px-6 py-3 font-bold text-sm rounded-t-lg bg-stone-100 text-stone-500 hover:bg-stone-200 border-b border-stone-200">
+                            Day 2: 심화 및 통합
+                        </button>
+                    </div>
+                </div>
+
+                <div class="p-8 min-h-[400px]">
+                    <!-- Day 1 Content -->
+                    <div id="day1-content" class="relative pl-8 space-y-8 block">
+                        <div class="timeline-line"></div>
+                        
+                        <!-- Module 1 -->
+                        <div class="relative">
+                            <div class="absolute -left-10 top-1 w-6 h-6 rounded-full bg-teal-500 text-white flex items-center justify-center text-xs font-bold z-10">1</div>
+                            <div class="bg-white border border-stone-200 p-5 rounded-xl interactive-card">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-bold text-lg text-stone-800">ITDA 프레임워크와 Vibe Coding 이해</h3>
+                                    <span class="text-xs font-mono bg-stone-100 px-2 py-1 rounded text-stone-500">4H</span>
+                                </div>
+                                <ul class="list-disc list-inside text-stone-600 space-y-1 text-sm">
+                                    <li>AI 시대의 개발 패러다임 변화 (Chat-driven Development)</li>
+                                    <li>ITDA (Identify, Think, Design, Act) 방법론 소개</li>
+                                    <li>Vibe Coding의 개념: AI와 인간의 리듬감 있는 협업</li>
+                                    <li><span class="text-teal-600 font-semibold">[실습]</span> 기존 코딩 방식과 AI 협업 방식의 속도 비교</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Module 2 -->
+                        <div class="relative">
+                            <div class="absolute -left-10 top-1 w-6 h-6 rounded-full bg-teal-500 text-white flex items-center justify-center text-xs font-bold z-10">2</div>
+                            <div class="bg-white border border-stone-200 p-5 rounded-xl interactive-card">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-bold text-lg text-stone-800">스펙 주도 개발 (SDD) 기초</h3>
+                                    <span class="text-xs font-mono bg-stone-100 px-2 py-1 rounded text-stone-500">4H</span>
+                                </div>
+                                <ul class="list-disc list-inside text-stone-600 space-y-1 text-sm">
+                                    <li>자연어 명세(Spec)의 중요성과 작성법</li>
+                                    <li>README.md를 활용한 프로젝트 청사진 그리기</li>
+                                    <li>요구사항을 구조적 데이터로 변환하기</li>
+                                    <li><span class="text-teal-600 font-semibold">[실습]</span> 간단한 To-Do 앱의 명세서 작성 및 구조 설계</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 2 Content -->
+                    <div id="day2-content" class="relative pl-8 space-y-8 hidden">
+                        <div class="timeline-line"></div>
+                        
+                        <!-- Module 3 -->
+                        <div class="relative">
+                            <div class="absolute -left-10 top-1 w-6 h-6 rounded-full bg-orange-500 text-white flex items-center justify-center text-xs font-bold z-10">3</div>
+                            <div class="bg-white border border-stone-200 p-5 rounded-xl interactive-card">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-bold text-lg text-stone-800">프롬프트 엔지니어링과 SDD 통합</h3>
+                                    <span class="text-xs font-mono bg-stone-100 px-2 py-1 rounded text-stone-500">4H</span>
+                                </div>
+                                <ul class="list-disc list-inside text-stone-600 space-y-1 text-sm">
+                                    <li>SDD 명세를 LLM(ChatGPT/Claude) 프롬프트로 변환하는 패턴</li>
+                                    <li>Context 유지 및 연속적인 코드 생성을 위한 전략</li>
+                                    <li>AI 생성 코드의 오류 수정 및 디버깅 테크닉</li>
+                                    <li><span class="text-teal-600 font-semibold">[실습]</span> 복잡한 API 연동 로직을 SDD+AI로 구현하기</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Module 4 -->
+                        <div class="relative">
+                            <div class="absolute -left-10 top-1 w-6 h-6 rounded-full bg-orange-500 text-white flex items-center justify-center text-xs font-bold z-10">4</div>
+                            <div class="bg-white border border-stone-200 p-5 rounded-xl interactive-card">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-bold text-lg text-stone-800">실전 프로젝트 & 회고</h3>
+                                    <span class="text-xs font-mono bg-stone-100 px-2 py-1 rounded text-stone-500">4H</span>
+                                </div>
+                                <ul class="list-disc list-inside text-stone-600 space-y-1 text-sm">
+                                    <li>개인/팀 프로젝트: 나만의 유틸리티 서비스 만들기</li>
+                                    <li>SDD 문서화부터 배포까지의 전 과정 수행</li>
+                                    <li>코드 품질 리뷰 및 프롬프트 최적화 토론</li>
+                                    <li><span class="text-teal-600 font-semibold">[워크숍]</span> 우리 팀에 맞는 ITDA-SDD 컨벤션 수립</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Prerequisites & Environment -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-stone-800 text-stone-100 rounded-2xl p-6">
+                <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+                    <span>📋</span> 사전 지식 (Prerequisites)
+                </h3>
+                <ul class="space-y-3 text-sm text-stone-300">
+                    <li class="flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>
+                        기본적인 프로그래밍 문법 이해 (언어 무관)
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>
+                        IDE(VS Code 등) 설치 및 기본 사용법 숙지
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>
+                        Git/GitHub 기본 명령어 사용 경험 권장
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white border border-stone-200 rounded-2xl p-6">
+                <h3 class="font-bold text-lg text-stone-800 mb-4 flex items-center gap-2">
+                    <span>💻</span> 실습 환경 (Environment)
+                </h3>
+                <ul class="space-y-3 text-sm text-stone-600">
+                    <li class="flex items-center gap-2">
+                        <span class="text-teal-500">✓</span>
+                        개인 노트북 (Windows / Mac / Linux)
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-teal-500">✓</span>
+                        Visual Studio Code (최신 버전)
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-teal-500">✓</span>
+                        LLM 계정 (ChatGPT Plus, Claude Pro, or API Key)
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-teal-500">✓</span>
+                        Node.js / Python 런타임 환경
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+    <footer class="bg-slate-900 text-slate-400 py-8 text-center text-sm">
+        <div class="flex justify-center items-center">
+            <img src="mdrules-logo.png" alt="MD룰 AI교육" width="116px">
+        </div>
+        <p class="text-slate-400 text-sm mb-4">Copyright &copy;2026 JAEWOO, KIM.</p>
+        <p class="text-slate-400 text-xs">Email: jaewoo@mdrules.dev</p>
+    </footer>
+    <script>
+        // Data for Title Proposals
+        const titles = [
+            "AI 협업의 정석: 스펙 주도 개발(SDD)과 바이브 코딩",
+            "ITDA 프레임워크: AI와 함께하는 고효율 엔지니어링",
+            "미래형 개발자 워크숍: 프롬프트 설계부터 SDD 구현까지"
+        ];
+
+        // Function to set active title
+        function setTitle(index) {
+            const mainTitle = document.getElementById('main-title');
+            mainTitle.innerText = titles[index];
+            
+            // Update buttons styling
+            const buttons = document.querySelectorAll('.title-btn');
+            buttons.forEach((btn, idx) => {
+                if(idx === index) {
+                    btn.classList.remove('border-stone-200', 'text-stone-600', 'hover:bg-stone-50', 'bg-white');
+                    btn.classList.add('bg-teal-600', 'text-white', 'border-teal-600', 'shadow-md');
+                } else {
+                    btn.classList.add('border-stone-200', 'text-stone-600', 'hover:bg-stone-50', 'bg-white');
+                    btn.classList.remove('bg-teal-600', 'text-white', 'border-teal-600', 'shadow-md');
+                }
+            });
+        }
+
+        // Interaction for Framework Details
+        const frameworkDetails = {
+            'identify': '<strong>1. Identify & Think (명세):</strong> 무엇을 만들 것인가? 핵심은 코딩이 아니라 "정의"입니다. 불명확한 생각은 불명확한 코드를 낳습니다. SDD는 README.md와 같은 문서에 자연어로 기능 명세를 명확히 적는 것에서 시작합니다.',
+            'design': '<strong>2. Design & Prompt (설계):</strong> 작성된 명세를 AI가 이해할 수 있는 "프롬프트"로 변환합니다. 단순한 질문이 아니라, 구조화된 컨텍스트와 제약사항을 제공하여 AI가 아키텍트 수준의 코드를 뱉어내게 만듭니다.',
+            'act': '<strong>3. Act (Vibe Coding):</strong> AI가 생성한 코드를 실행하고 검증합니다. 여기서 개발자는 타자수가 아닌 "지휘자"가 됩니다. 코드의 "Vibe(흐름과 뉘앙스)"를 읽고 수정하며 완성도를 높입니다.'
+        };
+
+        function showDetail(key) {
+            const detailBox = document.getElementById('framework-detail');
+            detailBox.innerHTML = frameworkDetails[key];
+        }
+
+        // Tab Switching Logic for Curriculum
+        function switchDay(day) {
+            const content1 = document.getElementById('day1-content');
+            const content2 = document.getElementById('day2-content');
+            const btn1 = document.getElementById('btn-day1');
+            const btn2 = document.getElementById('btn-day2');
+
+            if (day === 1) {
+                content1.classList.remove('hidden');
+                content1.classList.add('block');
+                content2.classList.add('hidden');
+                content2.classList.remove('block');
+
+                // Style updates
+                btn1.classList.add('bg-white', 'text-teal-600', 'border-t', 'border-l', 'border-r', 'relative', 'z-10', 'border-b-0');
+                btn1.classList.remove('bg-stone-100', 'text-stone-500', 'border-b');
+                
+                btn2.classList.add('bg-stone-100', 'text-stone-500', 'border-b');
+                btn2.classList.remove('bg-white', 'text-teal-600', 'border-t', 'border-l', 'border-r', 'relative', 'z-10', 'border-b-0');
+            } else {
+                content1.classList.add('hidden');
+                content1.classList.remove('block');
+                content2.classList.remove('hidden');
+                content2.classList.add('block');
+
+                // Style updates
+                btn2.classList.add('bg-white', 'text-teal-600', 'border-t', 'border-l', 'border-r', 'relative', 'z-10', 'border-b-0');
+                btn2.classList.remove('bg-stone-100', 'text-stone-500', 'border-b');
+
+                btn1.classList.add('bg-stone-100', 'text-stone-500', 'border-b');
+                btn1.classList.remove('bg-white', 'text-teal-600', 'border-t', 'border-l', 'border-r', 'relative', 'z-10', 'border-b-0');
+            }
+        }
+
+        // Chart.js Initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('impactChart').getContext('2d');
+            
+            const data = {
+                labels: ['개발 속도', '문서화 품질', '코드 안정성', '유지보수성', '창의적 설계'],
+                datasets: [{
+                    label: 'ITDA-SDD 방식',
+                    data: [90, 95, 85, 90, 80],
+                    fill: true,
+                    backgroundColor: 'rgba(20, 184, 166, 0.2)', // teal-500
+                    borderColor: 'rgb(20, 184, 166)',
+                    pointBackgroundColor: 'rgb(20, 184, 166)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(20, 184, 166)'
+                }, {
+                    label: '전통적 개발 방식',
+                    data: [60, 40, 75, 60, 65],
+                    fill: true,
+                    backgroundColor: 'rgba(120, 113, 108, 0.2)', // stone-500
+                    borderColor: 'rgb(120, 113, 108)',
+                    pointBackgroundColor: 'rgb(120, 113, 108)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(120, 113, 108)'
+                }]
+            };
+
+            const config = {
+                type: 'radar',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false, // Important for the container restriction
+                    elements: {
+                        line: {
+                            borderWidth: 2
+                        }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true,
+                                color: '#e7e5e4'
+                            },
+                            grid: {
+                                color: '#e7e5e4'
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 100,
+                            ticks: {
+                                display: false // Hide numbers for cleaner look
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    family: "'Noto Sans KR', sans-serif"
+                                },
+                                padding: 20
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            titleColor: '#1c1917',
+                            bodyColor: '#44403c',
+                            borderColor: '#e7e5e4',
+                            borderWidth: 1,
+                            padding: 10,
+                            boxPadding: 4
+                        }
+                    }
+                }
+            };
+
+            new Chart(ctx, config);
+        });
+    </script>
+</body>
+</html>

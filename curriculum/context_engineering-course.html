@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD룰 AI교육 - Context Engineering 실전 아키텍처</title>
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="15x15"
+    href="./dist/images/favicon.png"
+    />
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts (Noto Sans KR) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8fafc; /* Slate 50 - Warm Neutral Background */
+            color: #334155; /* Slate 700 */
+        }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            height: 300px;
+            max-height: 350px;
+        }
+
+        .step-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .step-card:hover, .step-card.active {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: #3b82f6; /* Blue 500 */
+        }
+
+        .step-card.active {
+            background-color: #eff6ff; /* Blue 50 */
+            border-left: 4px solid #2563eb; /* Blue 600 */
+        }
+
+        /* Custom Scrollbar for content areas */
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+
+    <!-- Chosen Palette: Warm Professional (Slate, Blue, Indigo) to convey stability and tech expertise -->
+    <!-- Application Structure Plan: 
+         1. Hero Section: Clear value proposition and title.
+         2. Executive Summary Dashboard: High-level metrics (Duration, Ratio, Skills) using Charts.
+         3. The Architecture Pipeline (Interactive): Core navigation mimicking the 'Context Engineering' flow. Clicking nodes reveals curriculum details.
+         4. Detailed Syllabus: Accordion/List view for detailed line items of the PDF.
+         5. Why This Course (External Insight): Validating the need for MCP/RAG architectures.
+         Rationale: Users (Decision makers/Devs) need to see the 'Structure' of the learning, not just a list. 
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="antialiased">
+
+    <!-- Navigation / Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="mdrules-logo.png" alt="MD룰 AI교육" width="116px">
+                <div>
+                    <h1 class="text-lg font-bold text-slate-900 leading-tight">Context Engineering 실전</h1>
+                    <p class="text-xs text-slate-500">엔터프라이즈 AI 아키텍처 마스터 과정</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex gap-6 text-sm font-medium text-slate-600">
+                <a href="#dashboard" class="hover:text-blue-600 transition">개요 & 효과</a>
+                <a href="#curriculum-map" class="hover:text-blue-600 transition">학습 로드맵</a>
+                <a href="#schedule" class="hover:text-blue-600 transition">상세 커리큘럼</a>
+                <a href="https://mdrules.dev" target="_self" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">
+                사이트로 이동
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- Section 1: Introduction & Value Prop -->
+        <section class="text-center max-w-4xl mx-auto mb-12">
+            <span class="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-800 text-xs font-bold tracking-wide uppercase mb-4">2026년 핵심 기술 </span>
+            <h2 class="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight">
+                단순 프롬프팅을 넘어,<br>
+                <span class="text-blue-600">엔터프라이즈 AI 엔진</span>을 설계하다
+            </h2>
+            <p class="text-lg text-slate-600 leading-relaxed mb-8">
+                단순 API 호출이 아닌, <strong>시맨틱 블루프린트</strong> 설계부터 <strong>MCP 기반 멀티 에이전트</strong>, 
+                그리고 <strong>운영/보안(Guardrail)</strong>까지. <br class="hidden md:inline">
+                실무에 즉시 적용 가능한 2일(16H) 완성 아키텍처링 집중 과정입니다.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm border border-slate-200 text-sm font-medium text-slate-700">
+                    <i class="fas fa-clock text-blue-500"></i> 2일 (16시간)
+                </div>
+                <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm border border-slate-200 text-sm font-medium text-slate-700">
+                    <i class="fas fa-laptop-code text-blue-500"></i> 실습 비중 63%
+                </div>
+                <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm border border-slate-200 text-sm font-medium text-slate-700">
+                    <i class="fas fa-users text-blue-500"></i> 아키텍트/엔지니어 대상
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Executive Dashboard (Charts) -->
+        <!-- Visualization & Content Choices: 
+             Goal: Visualize the impact of the course. 
+             Viz 1: Radar Chart to show skill expansion across 5 dimensions (Architecture, Engineering, Security, Ops, Strategy).
+             Viz 2: Doughnut Chart to emphasize the high ratio of hands-on practice (critical for devs).
+             Library: Chart.js for responsive canvas rendering.
+        -->
+        <section id="dashboard" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-10">
+            <div class="mb-8 border-b border-slate-100 pb-4">
+                <h3 class="text-2xl font-bold text-slate-800">교육 효과 및 구성 분석</h3>
+                <p class="text-slate-500">본 과정 수료 시 기대되는 역량 변화와 이론/실습 배분율입니다.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Skill Growth Chart -->
+                <div class="flex flex-col items-center">
+                    <h4 class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">핵심 역량 향상 (Before vs After)</h4>
+                    <div class="chart-container">
+                        <canvas id="skillRadarChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-slate-400 mt-4 max-w-xs">
+                        * 아키텍처 설계 및 보안/운영(Ops) 능력의 비약적 상승에 초점
+                    </p>
+                </div>
+
+                <!-- Theory vs Practice Chart -->
+                <div class="flex flex-col items-center">
+                    <h4 class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">이론 vs 실습 구성 비율</h4>
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="ratioChart"></canvas>
+                    </div>
+                    <div class="mt-6 grid grid-cols-2 gap-4 w-full max-w-sm">
+                        <div class="bg-slate-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-blue-600">10H</div>
+                            <div class="text-xs text-slate-500 font-medium">Hands-on Lab</div>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-slate-600">6H</div>
+                            <div class="text-xs text-slate-500 font-medium">Theory & Strategy</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Interactive Learning Pipeline -->
+        <!-- Application Structure Plan: Use a pipeline metaphor (Blueprint -> Tools -> Orchestration -> Hardening) to map the curriculum. 
+             This matches the "Context Engineering" mental model better than a simple list. -->
+        <section id="curriculum-map">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-6">
+                <div>
+                    <h3 class="text-2xl font-bold text-slate-800">Context Engineering 학습 로드맵</h3>
+                    <p class="text-slate-500 mt-2">아래의 <span class="text-blue-600 font-bold">파이프라인 단계</span>를 클릭하여 상세 학습 내용을 확인하세요.</p>
+                </div>
+                <div class="text-right hidden md:block">
+                    <span class="text-xs text-slate-400">Interactive Preview</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-auto lg:h-[600px]">
+                
+                <!-- Pipeline Navigation (Left/Top) -->
+                <div class="lg:col-span-4 flex flex-col gap-3 custom-scroll overflow-y-auto pr-2">
+                    <!-- Step 1 -->
+                    <div class="step-card bg-white p-4 rounded-xl border border-slate-200 active" onclick="updatePipeline(0)">
+                        <div class="flex justify-between items-start">
+                            <div class="text-xs font-bold text-blue-600 mb-1">STEP 01</div>
+                            <i class="fas fa-compass text-slate-300"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-lg">Foundation & Blueprint</h4>
+                        <p class="text-sm text-slate-500 mt-1">LLM 작동원리와 시맨틱 블루프린트 설계</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="step-card bg-white p-4 rounded-xl border border-slate-200" onclick="updatePipeline(1)">
+                        <div class="flex justify-between items-start">
+                            <div class="text-xs font-bold text-slate-500 mb-1">STEP 02</div>
+                            <i class="fas fa-tools text-slate-300"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-lg">Tools & MCP</h4>
+                        <p class="text-sm text-slate-500 mt-1">도구 정의 및 MCP 프로토콜 활용</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="step-card bg-white p-4 rounded-xl border border-slate-200" onclick="updatePipeline(2)">
+                        <div class="flex justify-between items-start">
+                            <div class="text-xs font-bold text-slate-500 mb-1">STEP 03</div>
+                            <i class="fas fa-network-wired text-slate-300"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-lg">Multi-Agent Orchestration</h4>
+                        <p class="text-sm text-slate-500 mt-1">에이전트 협업 및 라우팅 전략</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="step-card bg-white p-4 rounded-xl border border-slate-200" onclick="updatePipeline(3)">
+                        <div class="flex justify-between items-start">
+                            <div class="text-xs font-bold text-slate-500 mb-1">STEP 04</div>
+                            <i class="fas fa-brain text-slate-300"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-lg">Context Engine Assembly</h4>
+                        <p class="text-sm text-slate-500 mt-1">RAG 연결 및 엔진 조립</p>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="step-card bg-white p-4 rounded-xl border border-slate-200" onclick="updatePipeline(4)">
+                        <div class="flex justify-between items-start">
+                            <div class="text-xs font-bold text-slate-500 mb-1">STEP 05</div>
+                            <i class="fas fa-shield-alt text-slate-300"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-lg">Hardening & Security</h4>
+                        <p class="text-sm text-slate-500 mt-1">가드레일, 안정성, 프롬프트 인젝션 방어</p>
+                    </div>
+                     <!-- Step 6 -->
+                     <div class="step-card bg-white p-4 rounded-xl border border-slate-200" onclick="updatePipeline(5)">
+                        <div class="flex justify-between items-start">
+                            <div class="text-xs font-bold text-slate-500 mb-1">STEP 06</div>
+                            <i class="fas fa-chart-line text-slate-300"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-lg">Evaluation & Deployment</h4>
+                        <p class="text-sm text-slate-500 mt-1">LLM 평가(Judges) 및 엔터프라이즈 운영</p>
+                    </div>
+                </div>
+
+                <!-- Dynamic Content Display (Right/Main) -->
+                <div class="lg:col-span-8 bg-slate-800 rounded-2xl p-8 text-white relative overflow-hidden flex flex-col justify-center min-h-[400px]">
+                    <!-- Decorative Background Circle -->
+                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-blue-600 rounded-full opacity-20 blur-3xl"></div>
+                    
+                    <div id="pipeline-content" class="relative z-10 transition-opacity duration-300">
+                        <!-- Content injected via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: External Insights & Justification -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="col-span-1 md:col-span-3 mb-2">
+                <h3 class="text-xl font-bold text-slate-800">Why Context Engineering?</h3>
+                <p class="text-slate-500">단순한 모델 사용을 넘어 엔터프라이즈 도입을 위해 고려해야 할 외부 트렌드</p>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center mb-4">
+                    <i class="fas fa-project-diagram text-indigo-600"></i>
+                </div>
+                <h4 class="font-bold text-slate-800 mb-2">MCP (Model Context Protocol)</h4>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    Anthropic과 업계가 주도하는 표준 프로토콜인 MCP를 통해, 
+                    LLM이 데이터 소스에 안전하고 표준화된 방식으로 접근하는 방법을 학습합니다. 
+                    사일로화된 데이터를 연결하는 핵심 기술입니다.
+                </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center mb-4">
+                    <i class="fas fa-layer-group text-emerald-600"></i>
+                </div>
+                <h4 class="font-bold text-slate-800 mb-2">Goal Preservation</h4>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    단순 요약이 아닌 '의도(Intent) 유지' 기반의 Context Reduction 기술은 
+                    긴 문맥 비용을 절감하면서도 에이전트의 수행 능력을 유지하는 
+                    엔터프라이즈 필수 최적화 기술입니다.
+                </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                <div class="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center mb-4">
+                    <i class="fas fa-balance-scale text-rose-600"></i>
+                </div>
+                <h4 class="font-bold text-slate-800 mb-2">LLM-as-a-Judge</h4>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    정량적 평가가 어려운 생성형 AI의 출력을 
+                    또 다른 LLM이 평가하는 'LLM-as-a-Judge' 프레임워크를 통해, 
+                    서비스 배포 전 신뢰성 점수(Confidence Score)를 산출하는 방법을 다룹니다.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 5: Detailed Curriculum List (Day 1 & Day 2) -->
+        <section id="schedule" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="p-6 border-b border-slate-100 bg-slate-50 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <h3 class="text-xl font-bold text-slate-800">상세 커리큘럼 테이블</h3>
+                <div class="flex gap-2">
+                    <button onclick="filterSchedule('all')" class="schedule-filter active px-3 py-1 text-sm rounded-md bg-white border border-slate-300 text-slate-600 font-medium hover:bg-slate-100 transition shadow-sm">전체</button>
+                    <button onclick="filterSchedule('day1')" class="schedule-filter px-3 py-1 text-sm rounded-md bg-white border border-slate-300 text-slate-600 font-medium hover:bg-slate-100 transition shadow-sm">Day 1</button>
+                    <button onclick="filterSchedule('day2')" class="schedule-filter px-3 py-1 text-sm rounded-md bg-white border border-slate-300 text-slate-600 font-medium hover:bg-slate-100 transition shadow-sm">Day 2</button>
+                </div>
+            </div>
+            
+            <div id="schedule-container" class="divide-y divide-slate-100">
+                <!-- Schedule items generated by JS -->
+            </div>
+        </section>
+
+        <!-- Footer / CTA -->
+        <footer class="bg-slate-900 text-white rounded-2xl p-8 md:p-12 text-center mt-12 mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">엔터프라이즈 AI 전환, 아키텍처가 결정합니다.</h2>
+            <p class="text-slate-400 mb-8 max-w-2xl mx-auto">
+                이론 학습을 넘어 실제 작동하는 Context Engine을 구축해보는 16시간의 몰입 과정.
+                귀사의 엔지니어링 팀을 한 단계 업그레이드 하세요.
+            </p>
+            <div class="flex justify-center gap-4">
+<p class="text-slate-400 text-sm mb-4">Copyright &copy;2026 JAEWOO, KIM.</p>
+            <p class="text-slate-400 text-xs">Email: jaewoo@mdrules.dev</p>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- DATA STORAGE ---
+        // Storing the content from the PDF for dynamic rendering
+        const pipelineData = [
+            {
+                title: "Fundamentals & Blueprint",
+                day: "Day 1",
+                icon: "fa-compass",
+                desc: "AI 모델이 이해할 수 있는 구조화된 설계도 작성",
+                details: [
+                    "Context Engineering의 정의와 중요성",
+                    "LLM 작동 원리와 Context Window의 한계 이해",
+                    "Semantic Blueprint(의미론적 설계도) 작성법",
+                    "Function Calling의 원리와 Schema 설계 실습"
+                ],
+                tag: "Theory + Practice"
+            },
+            {
+                title: "Tools & MCP Integration",
+                day: "Day 1",
+                icon: "fa-tools",
+                desc: "모델과 외부 세상을 연결하는 표준 프로토콜",
+                details: [
+                    "Agentic Tool의 개념과 구현",
+                    "MCP(Model Context Protocol) 아키텍처 이해",
+                    "SQLite/Filesystem 연동 MCP Server 구축 실습",
+                    "Cursor IDE를 활용한 MCP 디버깅 및 통합"
+                ],
+                tag: "Hands-on Focus"
+            },
+            {
+                title: "Multi-Agent System",
+                day: "Day 1",
+                icon: "fa-network-wired",
+                desc: "단일 에이전트의 한계를 넘는 협업 시스템",
+                details: [
+                    "Single vs Multi-Agent 패턴 비교",
+                    "Handoff(이관) 전략과 Router 설계",
+                    "Supervisor Agent 디자인 패턴",
+                    "실습: '여행 계획' 멀티 에이전트 시스템 구축"
+                ],
+                tag: "Theory + Practice"
+            },
+            {
+                title: "Context Engine Assembly",
+                day: "Day 2",
+                icon: "fa-brain",
+                desc: "RAG와 추론 모듈의 결합",
+                details: [
+                    "Retrieval(검색) 모듈과 Reasoning(추론) 모듈 연결",
+                    "Context 계층 구조 설계 (Blueprint -> Orchestrator -> Output)",
+                    "단기/장기 메모리 연동 전략",
+                    "실습: '미팅 기록 -> 의사결정 문서' 생성 엔진 구축"
+                ],
+                tag: "Intensive Lab"
+            },
+            {
+                title: "Hardening (Security)",
+                day: "Day 2",
+                icon: "fa-shield-alt",
+                desc: "엔터프라이즈 수준의 안정성 확보",
+                details: [
+                    "Prompt Injection 및 Data Poisoning 방어 전략",
+                    "Policy Layer 설계 및 Moderation 적용",
+                    "Context Reduction (요약 에이전트) 구성",
+                    "실습: Guardrail 정책 적용 및 안전성 필터링"
+                ],
+                tag: "Theory + Practice"
+            },
+            {
+                title: "Evaluation & Ops",
+                day: "Day 2",
+                icon: "fa-chart-line",
+                desc: "정량적 평가와 운영 전략",
+                details: [
+                    "LLM-as-a-Judge 개념과 구현",
+                    "RAGAS 프레임워크 활용 평가 지표 설정",
+                    "Logging 및 Tracing 전략 (LangSmith 등)",
+                    "실습: 자동화된 평가 파이프라인 구축"
+                ],
+                tag: "Ops Strategy"
+            }
+        ];
+
+        const scheduleData = [
+            { day: 1, time: "2H", type: "이론", topic: "Context Engineering 개론", detail: "LLM 작동원리, Context Window 한계, 시맨틱 블루프린트 개념" },
+            { day: 1, time: "3H", type: "실습", topic: "Tools & MCP 기초", detail: "Function Calling, MCP(Model Context Protocol) 서버 구축, Cursor 연동" },
+            { day: 1, time: "3H", type: "실습", topic: "Multi-Agent Orchestration", detail: "Agent 패턴, Handoff 전략, Supervisor 아키텍처 설계" },
+            { day: 2, time: "2H", type: "이론+실습", topic: "Hardening & Security", detail: "프롬프트 인젝션 방어, 가드레일 정책, Policy Layer 설계" },
+            { day: 2, time: "1H", type: "이론+실습", topic: "Summarizer & Reduction", detail: "의도 유지(Goal Preservation) 요약, Context 압축 전략" },
+            { day: 2, time: "2H", type: "이론+실습", topic: "Context Engine 조립", detail: "Retrieval + Reasoning 모듈 연결, 미팅기록 분석 엔진 구축" },
+            { day: 2, time: "3H", type: "실습", topic: "Evaluation & Deployment", detail: "LLM-as-a-Judge, RAGAS 평가, 엔터프라이즈 배포 전략" }
+        ];
+
+        // --- CHART INITIALIZATION ---
+        function initCharts() {
+            // Radar Chart: Skill Growth
+            const ctxRadar = document.getElementById('skillRadarChart').getContext('2d');
+            new Chart(ctxRadar, {
+                type: 'radar',
+                data: {
+                    labels: ['Architecture Design', 'Prompt Eng', 'Agentic Workflow', 'Security/Guardrail', 'Ops/Eval'],
+                    datasets: [{
+                        label: '교육 전 (Before)',
+                        data: [20, 40, 10, 10, 10],
+                        fill: true,
+                        backgroundColor: 'rgba(148, 163, 184, 0.2)',
+                        borderColor: 'rgb(148, 163, 184)',
+                        pointBackgroundColor: 'rgb(148, 163, 184)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(148, 163, 184)'
+                    }, {
+                        label: '교육 후 (After)',
+                        data: [90, 85, 95, 80, 85],
+                        fill: true,
+                        backgroundColor: 'rgba(37, 99, 235, 0.2)',
+                        borderColor: 'rgb(37, 99, 235)',
+                        pointBackgroundColor: 'rgb(37, 99, 235)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(37, 99, 235)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    elements: { line: { borderWidth: 3 } },
+                    scales: {
+                        r: {
+                            angleLines: { display: true, color: '#e2e8f0' },
+                            grid: { color: '#e2e8f0' },
+                            suggestedMin: 0,
+                            suggestedMax: 100,
+                            ticks: { display: false } // Hide numbers for cleaner look
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+
+            // Doughnut Chart: Theory vs Practice
+            const ctxDoughnut = document.getElementById('ratioChart').getContext('2d');
+            new Chart(ctxDoughnut, {
+                type: 'doughnut',
+                data: {
+                    labels: ['이론 (Theory)', '실습 (Hands-on)'],
+                    datasets: [{
+                        data: [6, 10], // 16 hours total
+                        backgroundColor: [
+                            '#94a3b8', // Slate 400
+                            '#2563eb'  // Blue 600
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    let value = context.raw;
+                                    let total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    let percentage = Math.round((value / total) * 100) + '%';
+                                    return `${label}: ${value}시간 (${percentage})`;
+                                }
+                            }
+                        }
+                    },
+                    cutout: '70%',
+                }
+            });
+        }
+
+        // --- INTERACTIVITY LOGIC ---
+
+        // Pipeline Update Function
+        function updatePipeline(index) {
+            const data = pipelineData[index];
+            const contentDiv = document.getElementById('pipeline-content');
+            
+            // 1. Update Active State of Cards
+            document.querySelectorAll('.step-card').forEach((card, i) => {
+                if (i === index) {
+                    card.classList.add('active', 'bg-blue-50', 'border-blue-500');
+                    card.classList.remove('border-slate-200');
+                } else {
+                    card.classList.remove('active', 'bg-blue-50', 'border-blue-500');
+                    card.classList.add('border-slate-200');
+                }
+            });
+
+            // 2. Animate and Update Content
+            contentDiv.style.opacity = '0';
+            
+            setTimeout(() => {
+                contentDiv.innerHTML = `
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="bg-blue-500/20 text-blue-200 text-xs font-bold px-3 py-1 rounded-full border border-blue-400/30">${data.day}</span>
+                        <span class="bg-indigo-500/20 text-indigo-200 text-xs font-bold px-3 py-1 rounded-full border border-indigo-400/30">${data.tag}</span>
+                    </div>
+                    <h2 class="text-3xl font-bold mb-2">${data.title}</h2>
+                    <p class="text-blue-200 text-lg mb-6">${data.desc}</p>
+                    
+                    <div class="bg-slate-900/50 rounded-xl p-6 border border-slate-600/50 backdrop-blur-sm">
+                        <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">학습 상세 내용</h4>
+                        <ul class="space-y-3">
+                            ${data.details.map(detail => `
+                                <li class="flex items-start gap-3">
+                                    <i class="fas fa-check-circle text-blue-400 mt-1"></i>
+                                    <span class="text-slate-200 leading-relaxed">${detail}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                `;
+                contentDiv.style.opacity = '1';
+            }, 300);
+        }
+
+        // Schedule Filter Function
+        function filterSchedule(filter) {
+            const container = document.getElementById('schedule-container');
+            const buttons = document.querySelectorAll('.schedule-filter');
+            
+            // Button styles
+            buttons.forEach(btn => {
+                if (btn.innerText.toLowerCase().includes(filter === 'all' ? '전체' : filter.replace('day', 'day '))) {
+                    btn.classList.add('bg-blue-50', 'text-blue-700', 'border-blue-200');
+                    btn.classList.remove('bg-white', 'text-slate-600', 'border-slate-300');
+                } else {
+                    btn.classList.remove('bg-blue-50', 'text-blue-700', 'border-blue-200');
+                    btn.classList.add('bg-white', 'text-slate-600', 'border-slate-300');
+                }
+            });
+
+            // Filter Logic
+            const filteredData = filter === 'all' 
+                ? scheduleData 
+                : scheduleData.filter(item => `day${item.day}` === filter);
+
+            // Render
+            container.innerHTML = filteredData.map(item => `
+                <div class="p-6 hover:bg-slate-50 transition flex flex-col md:flex-row gap-4 items-start md:items-center">
+                    <div class="flex-shrink-0 w-full md:w-32 flex flex-row md:flex-col justify-between md:justify-center gap-2">
+                        <span class="text-xs font-bold text-slate-400 uppercase">Day ${item.day}</span>
+                        <span class="text-lg font-bold text-slate-800">${item.time}</span>
+                    </div>
+                    <div class="flex-shrink-0">
+                         <span class="inline-block px-3 py-1 rounded-full text-xs font-bold 
+                            ${item.type.includes('실습') ? 'bg-blue-100 text-blue-700' : 'bg-slate-200 text-slate-600'}">
+                            ${item.type}
+                        </span>
+                    </div>
+                    <div class="flex-grow">
+                        <h4 class="text-lg font-bold text-slate-900">${item.topic}</h4>
+                        <p class="text-sm text-slate-600 mt-1">${item.detail}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initialize on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            initCharts();
+            updatePipeline(0); // Show first step by default
+            filterSchedule('all'); // Show all schedule items by default
+        });
+
+    </script>
+</body>
+</html>

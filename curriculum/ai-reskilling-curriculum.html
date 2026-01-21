@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD룰 AI교육 - AI Reskilling 교육</title>
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="15x15"
+    href="./dist/images/favicon.png"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f5f5f4; /* Warm neutral background */
+            color: #1c1917;
+        }
+        
+        /* Smooth transitions */
+        .transition-all-300 {
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Chart Container Styling - Critical for Responsiveness */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px; /* Constrain width for readability */
+            height: 300px;
+            max-height: 350px;
+            margin: 0 auto; /* Center horizontally */
+        }
+
+        /* Custom scrollbar for agenda items if needed */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d6d3d1; 
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #a8a29e; 
+        }
+
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Application Structure Plan: 
+         The app is structured as a "Course Proposal Dashboard". 
+         1. Header/Hero: Immediate value proposition with interactive Title Selection to engage the stakeholder.
+         2. Overview (Course Identity): Defining the target and goals visually.
+         3. Dynamic Curriculum Engine (The Core): A toggle-able timeline view allowing comparison between the 2-day and 1-day tracks without reloading.
+         4. Impact Analytics: Charts proving the effectiveness (Radar chart for skills, Doughnut for time allocation).
+         5. Methodology: Explaining the "No-Code Agent" approach.
+    -->
+
+    <!-- Chosen Palette: Warm Neutrals (Stone/Warm Gray) with Deep Blue and Burnt Orange accents for professional yet energetic feel. -->
+
+    <!-- Header & Title Selector -->
+    <header class="bg-stone-900 text-stone-50 pt-10 pb-16 px-4 md:px-8 shadow-lg">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-xl md:text-2xl font-light text-stone-400 mb-2">기업/기관 맞춤형 AI 리스킬링 교육 제안서</h1>
+            <div id="main-title-display" class="text-3xl md:text-5xl font-bold mb-8 leading-tight">
+                AI Agent Skills: <br/>코딩 없이 완성하는 오피스 혁신
+            </div>
+            
+            <p class="mb-6 text-stone-400">교육 담당자님을 위한 추천 타이틀 (클릭하여 변경)</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+                <button onclick="updateTitle(0)" class="title-btn p-4 border border-stone-600 rounded-lg hover:bg-stone-800 transition-all-300 bg-stone-800 text-left group">
+                    <span class="block text-xs text-orange-400 mb-1">제안 1 (실무 강조)</span>
+                    <span class="font-semibold group-hover:text-white">AI Agent Skills: 코딩 없이 완성하는 오피스 혁신</span>
+                </button>
+                <button onclick="updateTitle(1)" class="title-btn p-4 border border-stone-600 rounded-lg hover:bg-stone-800 transition-all-300 text-left group">
+                    <span class="block text-xs text-blue-400 mb-1">제안 2 (대상 강조)</span>
+                    <span class="font-semibold text-stone-300 group-hover:text-white">비전공자를 위한 AI 리터러시와 에이전트 협업</span>
+                </button>
+                <button onclick="updateTitle(2)" class="title-btn p-4 border border-stone-600 rounded-lg hover:bg-stone-800 transition-all-300 text-left group">
+                    <span class="block text-xs text-emerald-400 mb-1">제안 3 (결과 강조)</span>
+                    <span class="font-semibold text-stone-300 group-hover:text-white">Create with AI: 텍스트에서 문서까지 올인원</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow -mt-8 px-4 md:px-8 pb-12">
+        <div class="max-w-6xl mx-auto space-y-8">
+
+            <!-- Intro Section: Course Metadata -->
+            <!-- Visualization & Content Choices:
+                 Goal: Inform the user about the basic constraints (Target, Knowledge, Env).
+                 Method: Grid layout with icon-like text headers.
+                 Interaction: None (Information display).
+                 Justification: Clear, scannable summary before diving into details.
+            -->
+            <section class="bg-white rounded-xl shadow-md p-6 md:p-8">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center md:text-left divide-y md:divide-y-0 md:divide-x divide-stone-100">
+                    <div class="p-2">
+                        <div class="text-sm text-stone-500 font-bold uppercase tracking-wider mb-1">대상</div>
+                        <div class="text-lg font-medium">대학생, 일반인, 회사원</div>
+                        <div class="text-sm text-stone-400 mt-1">비전공자/비개발자 특화</div>
+                    </div>
+                    <div class="p-2">
+                        <div class="text-sm text-stone-500 font-bold uppercase tracking-wider mb-1">사전 지식</div>
+                        <div class="text-lg font-medium">Zero-Base</div>
+                        <div class="text-sm text-stone-400 mt-1">프로그래밍 지식 불필요</div>
+                    </div>
+                    <div class="p-2">
+                        <div class="text-sm text-stone-500 font-bold uppercase tracking-wider mb-1">실습 환경</div>
+                        <div class="text-lg font-medium">No-Code Tools</div>
+                        <div class="text-sm text-stone-400 mt-1">Claude, Cursor, ChatGPT</div>
+                    </div>
+                    <div class="p-2">
+                        <div class="text-sm text-stone-500 font-bold uppercase tracking-wider mb-1">강의 목표</div>
+                        <div class="text-sm leading-relaxed">
+                            AI 리터러시 함양 및 노코드 에이전트(Agent) 기술을 활용하여, 
+                            <span class="font-bold text-blue-600">PPT, PDF, 보고서</span> 등 실제 업무 산출물을 
+                            즉시 제작할 수 있는 실무 역량 확보.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard Row: Charts & Key Stats -->
+            <!-- Visualization & Content Choices:
+                 Goal: Show the "Why". Why take this course?
+                 Method: Radar Chart for Skill Growth (Before/After) and Doughnut for Time Allocation.
+                 Interaction: Hover tooltips on charts.
+                 Justification: Visual proof of the "Reskilling" promise. Charts explain the balance of theory vs practice.
+            -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Skill Impact Chart -->
+                <section class="bg-white rounded-xl shadow-md p-6">
+                    <div class="mb-4 border-b border-stone-100 pb-2">
+                        <h2 class="text-lg font-bold text-stone-800">🎯 기대 효과 (Skill Growth)</h2>
+                        <p class="text-sm text-stone-500">교육 전후 핵심 역량 변화 예상도</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="skillRadarChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center text-sm text-stone-500">
+                        * 프로그래밍 지식 없이도 <span class="font-bold text-stone-700">구현 능력</span>이 극대화됨
+                    </div>
+                </section>
+
+                <!-- Curriculum Balance Chart -->
+                <section class="bg-white rounded-xl shadow-md p-6">
+                    <div class="mb-4 border-b border-stone-100 pb-2">
+                        <h2 class="text-lg font-bold text-stone-800">⚖️ 교육 구성 비율</h2>
+                        <p class="text-sm text-stone-500">이론과 실습의 황금 비율</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="compositionDoughnutChart"></canvas>
+                    </div>
+                    <div class="mt-4 flex justify-center gap-4 text-xs font-medium text-stone-600">
+                        <span class="flex items-center"><span class="w-2 h-2 rounded-full bg-blue-500 mr-1"></span>실습/프로젝트</span>
+                        <span class="flex items-center"><span class="w-2 h-2 rounded-full bg-stone-300 mr-1"></span>이론/원리</span>
+                        <span class="flex items-center"><span class="w-2 h-2 rounded-full bg-orange-400 mr-1"></span>사례 분석</span>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Curriculum Toggle Section -->
+            <!-- Visualization & Content Choices:
+                 Goal: The main interactive element. Allow users to switch between the 2-Day (Full) and 1-Day (Condensed) curriculums.
+                 Method: Custom Toggle Buttons + Javascript DOM manipulation to swap content arrays.
+                 Interaction: Click toggle buttons updates the timeline view below.
+                 Justification: Meets the user requirement for two distinct curriculum versions in one interface.
+            -->
+            <section class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="bg-stone-50 p-6 md:p-8 border-b border-stone-100 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-stone-800">📅 교육 커리큘럼 상세</h2>
+                        <p class="text-stone-500 mt-1">교육 기간 및 심도에 따른 두 가지 옵션</p>
+                    </div>
+                    
+                    <div class="bg-stone-200 p-1 rounded-lg flex shadow-inner">
+                        <button onclick="switchPlan('2day')" id="btn-2day" class="px-6 py-2 rounded-md text-sm font-bold shadow-sm transition-all bg-white text-stone-800">
+                            2일 완성 (16H)
+                        </button>
+                        <button onclick="switchPlan('1day')" id="btn-1day" class="px-6 py-2 rounded-md text-sm font-bold text-stone-500 hover:text-stone-700 transition-all">
+                            1일 단기 (7H)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="p-6 md:p-8 bg-white min-h-[500px]">
+                    <!-- Plan Description -->
+                    <div id="plan-description" class="mb-8 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-md text-blue-900 text-sm md:text-base transition-all-300">
+                        <!-- Dynamic Text Injected Here -->
+                    </div>
+
+                    <!-- Timeline Container -->
+                    <div id="curriculum-timeline" class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-stone-300 before:to-transparent">
+                        <!-- Dynamic Modules Injected Here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tools Section -->
+            <!-- Visualization & Content Choices:
+                 Goal: Show "How" the work gets done.
+                 Method: Simple Grid of Cards.
+                 Interaction: None (Static display).
+                 Justification: Clarifies that this is NOT a coding course but a tool utilization course.
+            -->
+            <section class="mt-12">
+                <h3 class="text-xl font-bold text-stone-800 mb-6 border-l-4 border-stone-800 pl-4">활용 도구 (No-Code Stack)</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-stone-100 text-center card-hover">
+                        <div class="text-3xl mb-2">🤖</div>
+                        <h4 class="font-bold text-stone-800">Claude</h4>
+                        <p class="text-xs text-stone-500 mt-2">자연스러운 한국어 및 문서 작성 특화</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-stone-100 text-center card-hover">
+                        <div class="text-3xl mb-2">🖱️</div>
+                        <h4 class="font-bold text-stone-800">Cursor (Agent)</h4>
+                        <p class="text-xs text-stone-500 mt-2">코딩 없이 앱/웹 기능을 구현하는 에이전트</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-stone-100 text-center card-hover">
+                        <div class="text-3xl mb-2">📊</div>
+                        <h4 class="font-bold text-stone-800">Gamma / PPT</h4>
+                        <p class="text-xs text-stone-500 mt-2">AI 기반 프레젠테이션 자동 생성</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-stone-100 text-center card-hover">
+                        <div class="text-3xl mb-2">📝</div>
+                        <h4 class="font-bold text-stone-800">Notion AI</h4>
+                        <p class="text-xs text-stone-500 mt-2">블로그 및 보고서 초안 정리</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="bg-stone-900 text-stone-400 py-8 mt-12 text-center text-sm">
+        <p>&copy; 2026 JAEWOO, KIM by AIVIBECODING.kr</p>
+        <p class="mt-2 text-xs text-stone-600">이메일: jaewoo@mdrules.dev</p>
+        <a href="https://mdrules.dev" target="_self" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">
+            사이트로 이동
+        </a>
+    </footer>
+
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <script>
+        // --- Data Definitions ---
+
+        // Titles
+        const titles = [
+            "AI Agent Skills: 코딩 없이 완성하는 오피스 혁신 실무",
+            "비전공자를 위한 AI 리터러시와 에이전트 협업 워크숍",
+            "Create with AI: 텍스트에서 문서까지, 리스킬링 올인원 과정"
+        ];
+
+        // Curriculum Data Source
+        const plans = {
+            '2day': {
+                description: "<strong>2일 (16시간) 집중 과정:</strong> 기초 이론부터 시작하여 다양한 실무 산출물(보고서, PPT, PDF)을 직접 만들어보는 프로젝트 중심의 완전 정복 코스입니다.",
+                modules: [
+                    {
+                        day: "1일차 오전",
+                        time: "09:00 - 13:00 (4H)",
+                        title: "AI 리터러시 & 프롬프트 엔지니어링 기초",
+                        content: [
+                            "Generative AI의 이해와 업무 환경의 변화 (Why AI?)",
+                            "LLM(거대언어모델)의 환각(Hallucination) 이해와 대처법",
+                            "프롬프트 엔지니어링의 핵심 3요소 (Context, Instruction, Output)",
+                            "실습: 업무 이메일 및 공지사항 작성 최적화 프롬프트 만들기"
+                        ],
+                        icon: "🧠"
+                    },
+                    {
+                        day: "1일차 오후",
+                        time: "14:00 - 18:00 (4H)",
+                        title: "Meta-Prompting & 텍스트 콘텐츠 마스터리",
+                        content: [
+                            "메타 프롬프트(Meta-Prompt): AI에게 역할을 부여하고 생각을 유도하는 법",
+                            "블로그 글 및 사내 뉴스레터 자동화 워크플로우 설계",
+                            "긴 보고서 요약 및 인사이트 추출 기법",
+                            "실습: '판매 실적 보고서' 초안 3분 만에 완성하기 (Claude 활용)"
+                        ],
+                        icon: "✍️"
+                    },
+                    {
+                        day: "2일차 오전",
+                        time: "09:00 - 13:00 (4H)",
+                        title: "No-Code Agent Skills: 문서 생성 자동화",
+                        content: [
+                            "Agent Skills란? (단순 대화를 넘어 행동하는 AI)",
+                            "Cursor/Claude Code 소개: 코딩 없이 기능 구현하기",
+                            "자연어로 지시하여 PDF 문서 만들기 (Report Generator)",
+                            "실습: CSV 데이터를 읽어 분석 리포트 PDF로 변환하기 (No-Code)"
+                        ],
+                        icon: "🤖"
+                    },
+                    {
+                        day: "2일차 오후",
+                        time: "14:00 - 18:00 (4H)",
+                        title: "Visual Output & 파이널 프로젝트",
+                        content: [
+                            "텍스트에서 프레젠테이션(PPTX)으로: 마크다운 변환 기법",
+                            "AI로 적절한 이미지 및 도표 생성하여 문서에 삽입하기",
+                            "종합 실습: 주제 선정부터 블로그 발행, PPT 발표자료, PDF 배포본까지 풀패키지 제작",
+                            "실습 공유 및 피드백"
+                        ],
+                        icon: "🚀"
+                    }
+                ]
+            },
+            '1day': {
+                description: "<strong>1일 (7시간) 단기 속성 과정:</strong> 이론을 최소화하고 즉시 활용 가능한 핵심 'Agent Skills'와 프롬프트 기법만을 엄선하여 전달합니다.",
+                modules: [
+                    {
+                        day: "오전",
+                        time: "09:30 - 12:30 (3H)",
+                        title: "AI 에센셜 & 프롬프트 작성의 정석",
+                        content: [
+                            "AI가 바꿀 나의 업무: 리스킬링의 필요성",
+                            "프롬프트 엔지니어링 속성: 명확하게 지시하는 법 (Chain of Thought)",
+                            "메타 프롬프트를 활용한 고품질 텍스트(기획안, 블로그) 생성 실습",
+                            "빠른 업무 처리를 위한 '만능 프롬프트' 템플릿 제작"
+                        ],
+                        icon: "⚡"
+                    },
+                    {
+                        day: "오후",
+                        time: "13:30 - 17:30 (4H)",
+                        title: "Agent Skills 실무: 텍스트를 넘어 결과물로",
+                        content: [
+                            "대화형 AI(Claude/Cursor)를 업무 파트너(Agent)로 설정하기",
+                            "No-Code 실습: 자연어로 대학 과제/업무 리포트 PDF 생성하기",
+                            "No-Code 실습: 기획안 텍스트를 PPT 초안으로 변환하기",
+                            "Q&A 및 실무 적용 로드맵 수립"
+                        ],
+                        icon: "💼"
+                    }
+                ]
+            }
+        };
+
+        // --- Core Functions ---
+
+        // 1. Title Updater
+        function updateTitle(index) {
+            const display = document.getElementById('main-title-display');
+            const buttons = document.querySelectorAll('.title-btn');
+            
+            // Animation reset
+            display.classList.remove('opacity-100');
+            display.classList.add('opacity-0');
+
+            setTimeout(() => {
+                display.innerHTML = titles[index].replace(':', ':<br/>');
+                display.classList.remove('opacity-0');
+                display.classList.add('opacity-100');
+            }, 300);
+
+            // Button styling
+            buttons.forEach((btn, i) => {
+                if (i === index) {
+                    btn.classList.add('bg-stone-800');
+                    btn.querySelector('span:last-child').classList.add('text-white');
+                    btn.querySelector('span:last-child').classList.remove('text-stone-300');
+                } else {
+                    btn.classList.remove('bg-stone-800');
+                    btn.querySelector('span:last-child').classList.remove('text-white');
+                    btn.querySelector('span:last-child').classList.add('text-stone-300');
+                }
+            });
+        }
+
+        // 2. Curriculum Plan Switcher
+        function switchPlan(planType) {
+            const container = document.getElementById('curriculum-timeline');
+            const desc = document.getElementById('plan-description');
+            const data = plans[planType];
+            
+            // Toggle Buttons Style
+            const btn2 = document.getElementById('btn-2day');
+            const btn1 = document.getElementById('btn-1day');
+            
+            if (planType === '2day') {
+                btn2.className = "px-6 py-2 rounded-md text-sm font-bold shadow-sm transition-all bg-white text-stone-800";
+                btn1.className = "px-6 py-2 rounded-md text-sm font-bold text-stone-500 hover:text-stone-700 transition-all";
+            } else {
+                btn1.className = "px-6 py-2 rounded-md text-sm font-bold shadow-sm transition-all bg-white text-stone-800";
+                btn2.className = "px-6 py-2 rounded-md text-sm font-bold text-stone-500 hover:text-stone-700 transition-all";
+            }
+
+            // Update Description
+            desc.innerHTML = data.description;
+
+            // Render Modules
+            let html = '';
+            data.modules.forEach((mod, index) => {
+                const isEven = index % 2 === 0;
+                
+                html += `
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                    <!-- Icon Point -->
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-blue-500 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 text-xl">
+                        ${mod.icon}
+                    </div>
+                    
+                    <!-- Content Card -->
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded-lg border border-stone-200 shadow-sm hover:shadow-md transition-all-300">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2 border-b border-stone-100 pb-2">
+                            <span class="font-bold text-blue-600 text-xs uppercase tracking-wider">${mod.day}</span>
+                            <span class="text-xs text-stone-400 font-mono bg-stone-50 px-2 py-0.5 rounded">${mod.time}</span>
+                        </div>
+                        <h3 class="font-bold text-stone-800 mb-2">${mod.title}</h3>
+                        <ul class="text-sm text-stone-600 space-y-1">
+                            ${mod.content.map(item => `<li class="flex items-start"><span class="mr-2 text-blue-400">•</span>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        // 3. Chart Initialization
+        function initCharts() {
+            // Radar Chart: Skill Growth
+            const ctxRadar = document.getElementById('skillRadarChart').getContext('2d');
+            new Chart(ctxRadar, {
+                type: 'radar',
+                data: {
+                    labels: ['프롬프트 작성력', '문서 자동화', '도구 활용성', 'AI 이해도', '문제 해결력'],
+                    datasets: [{
+                        label: '교육 후',
+                        data: [90, 85, 80, 95, 85],
+                        fill: true,
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgb(59, 130, 246)',
+                        pointBackgroundColor: 'rgb(59, 130, 246)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(59, 130, 246)'
+                    }, {
+                        label: '교육 전',
+                        data: [20, 10, 15, 30, 40],
+                        fill: true,
+                        backgroundColor: 'rgba(168, 162, 158, 0.2)',
+                        borderColor: 'rgb(168, 162, 158)',
+                        pointBackgroundColor: 'rgb(168, 162, 158)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(168, 162, 158)'
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    elements: { line: { tension: 0.3 } },
+                    scales: { r: { min: 0, max: 100, ticks: { display: false } } },
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+
+            // Doughnut Chart: Curriculum Composition
+            const ctxDoughnut = document.getElementById('compositionDoughnutChart').getContext('2d');
+            new Chart(ctxDoughnut, {
+                type: 'doughnut',
+                data: {
+                    labels: ['실습/프로젝트', '이론/원리', '사례 분석'],
+                    datasets: [{
+                        data: [60, 25, 15],
+                        backgroundColor: ['#3b82f6', '#d6d3d1', '#fb923c'],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ` ${context.label}: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            switchPlan('2day'); // Default view
+            initCharts();
+            
+            // Subtle entrance animation
+            document.querySelector('main').classList.add('opacity-0');
+            setTimeout(() => {
+                document.querySelector('main').classList.remove('opacity-0');
+                document.querySelector('main').classList.add('transition-opacity', 'duration-700', 'opacity-100');
+            }, 100);
+        });
+
+    </script>
+</body>
+</html>

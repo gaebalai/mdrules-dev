@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD룰 AI교육 - LangGraph 자율수행 AI 에이전트 개발 과정</title>
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="15x15"
+    href="./dist/images/favicon.png"
+    />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) { .chart-container { height: 350px; } }
+        
+        .nav-item.active {
+            background-color: #EEF2FF;
+            color: #4F46E5;
+            border-right: 4px solid #4F46E5;
+        }
+        .timeline-line {
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #E5E7EB;
+            z-index: 0;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .hidden-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased overflow-x-hidden">
+
+    <!-- Placeholder Comments as Required -->
+    <!-- Chosen Palette: Indigo & Slate (Professional, Tech-focused, Trustworthy) -->
+    <!-- Application Structure Plan: A Dashboard-style Single Page Application. 
+         - Sidebar Navigation: For quick access to Overview, Curriculum, Tech Stack, and Outcomes.
+         - Header: Key Proposal Stats (Duration, Level, Goal).
+         - Section 1 (Overview): Visualizing the "Why" (Agentic Workflow shift).
+         - Section 2 (Curriculum): Interactive timeline revealing details per module.
+         - Section 3 (Tech Stack): Explaining tools (LangGraph, Cursor) with context.
+         - Section 4 (Outcomes): Radar chart showing skill acquisition.
+         This structure transforms a static PDF list into a persuasive narrative. -->
+    <!-- Visualization & Content Choices:
+         - Radar Chart (Chart.js): Visualizing "Skill Growth" (Before vs After) to show ROI.
+         - Doughnut Chart (Chart.js): Showing Theory (40%) vs Practice (60%) balance.
+         - Interactive Timeline (HTML/Tailwind/JS): To handle dense curriculum text without overwhelming the user.
+         - Cards & Grids: To organize "Features" and "Tech Stack" cleanly. 
+         - NO SVG/Mermaid confirmed. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <div class="flex flex-col md:flex-row min-h-screen">
+        
+        <!-- Sidebar Navigation -->
+        <nav class="w-full md:w-64 bg-white border-r border-slate-200 flex-shrink-0 z-20">
+            <div class="p-6 border-b border-slate-100">
+                <img src="mdrules-logo.png" alt="MD룰 AI교육" width="116px">
+                <h1 class="text-xl font-bold text-slate-900 tracking-tight">LangGraph 자율수행 AI 에이전트 <span class="text-indigo-600">개발 교육</span></h1>
+            </div>
+            <ul class="flex md:flex-col overflow-x-auto md:overflow-visible">
+                <li class="nav-item active flex-1 md:flex-none cursor-pointer p-4 font-medium text-slate-600 hover:bg-slate-50 transition-colors" onclick="navigate('overview', this)">
+                    <span class="mr-2">📊</span> 과정 개요
+                </li>
+                <li class="nav-item flex-1 md:flex-none cursor-pointer p-4 font-medium text-slate-600 hover:bg-slate-50 transition-colors" onclick="navigate('curriculum', this)">
+                    <span class="mr-2">📅</span> 상세 커리큘럼
+                </li>
+                <li class="nav-item flex-1 md:flex-none cursor-pointer p-4 font-medium text-slate-600 hover:bg-slate-50 transition-colors" onclick="navigate('techstack', this)">
+                    <span class="mr-2">🛠️</span> 기술 스택
+                </li>
+                <li class="nav-item flex-1 md:flex-none cursor-pointer p-4 font-medium text-slate-600 hover:bg-slate-50 transition-colors" onclick="navigate('outcomes', this)">
+                    <span class="mr-2">🚀</span> 기대 효과
+                </li>
+            </ul>
+            <div class="hidden md:block p-6 mt-auto">
+                <div class="bg-indigo-50 rounded-lg p-4">
+                    <p class="text-xs font-bold text-indigo-800 uppercase mb-2">교육 요약</p>
+                    <div class="text-sm text-indigo-700 mb-1">⏱️ 2일 (16시간)</div>
+                    <div class="text-sm text-indigo-700 mb-1">💻 60% 실습 중심</div>
+                    <div class="text-sm text-indigo-700">🎓 중급 개발자 대상</div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 p-4 md:p-8 overflow-y-auto">
+            
+            <!-- Header -->
+            <header class="mb-8">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-bold text-slate-900">LangGraph 1.x 자율수행 에이전트 개발</h2>
+                        <p class="text-slate-500 mt-2">단순 LLM 연동을 넘어, 스스로 판단하고 행동하는 AI 에이전트 구축 실무 과정</p>
+                    </div>
+
+                   <a href="https://mdrules.dev" target="_self" rel="noopener noreferrer" class="inline-block bg-blue-600 mt-4 md:mt-0 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg shadow-sm transition-all font-medium text-sm">
+                    사이트로 이동
+                    </a>
+                </div>
+            </header>
+
+            <!-- Section 1: Overview -->
+            <section id="overview" class="content-section block">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                    <!-- Key Value 1 -->
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm card-hover">
+                        <div class="text-3xl mb-3">🔄</div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">Cyclic Architecture</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            기존 LangChain의 단방향(DAG) 구조를 넘어, 반복(Loop)과 제어 흐름이 가능한 <strong>LangGraph</strong>의 순환형 아키텍처를 마스터합니다.
+                        </p>
+                    </div>
+                    <!-- Key Value 2 -->
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm card-hover">
+                        <div class="text-3xl mb-3">⚡</div>
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-lg font-bold text-slate-800 mb-2">AI Pair Programming</h3>
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-bold">New</span>
+                        </div>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            <strong>Cursor 2.0</strong>을 활용하여 복잡한 그래프 로직 작성을 가속화하고, AI 네이티브 개발 환경에서의 생산성 혁신을 경험합니다.
+                        </p>
+                    </div>
+                    <!-- Key Value 3 -->
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm card-hover">
+                        <div class="text-3xl mb-3">🤝</div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2">Human-in-the-Loop</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            완전 자율이 아닌, 결정적인 순간에 <strong>사람의 개입(승인/수정)</strong>을 허용하는 안전하고 신뢰할 수 있는 엔터프라이즈급 에이전트를 설계합니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 md:p-8">
+                    <h3 class="text-xl font-bold text-slate-800 mb-6 border-l-4 border-indigo-500 pl-3">왜 지금 '에이전트(Agent)'인가?</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <p class="text-slate-600 mb-4 leading-relaxed">
+                                <strong class="text-slate-900">2025년의 핵심 키워드는 'Agentic Workflow'입니다.</strong><br>
+                                단순히 질문에 답하는 LLM(Copilot)을 넘어, 도구를 사용하고 웹을 검색하며 스스로 계획을 수정하는 '에이전트'가 비즈니스 프로세스를 혁신하고 있습니다.
+                            </p>
+                            <ul class="space-y-3">
+                                <li class="flex items-center text-sm text-slate-700">
+                                    <span class="w-2 h-2 bg-indigo-500 rounded-full mr-3"></span>
+                                    <span>Andrew Ng: "AI 에이전트 워크플로우가 모델 성능 향상보다 더 큰 효과를 낼 것"</span>
+                                </li>
+                                <li class="flex items-center text-sm text-slate-700">
+                                    <span class="w-2 h-2 bg-indigo-500 rounded-full mr-3"></span>
+                                    <span>기업 요구: 환각(Hallucination) 방지를 위한 명시적 제어 필요성 증대</span>
+                                </li>
+                                <li class="flex items-center text-sm text-slate-700">
+                                    <span class="w-2 h-2 bg-indigo-500 rounded-full mr-3"></span>
+                                    <span>복잡도 증가: 단일 프롬프트로는 해결 불가능한 복합 업무 자동화</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50 rounded-lg p-6 border border-slate-100">
+                            <h4 class="text-sm font-bold text-slate-500 uppercase mb-4 text-center">교육 구성 비율</h4>
+                            <div class="chart-container">
+                                <canvas id="compositionChart"></canvas>
+                            </div>
+                            <p class="text-center text-xs text-slate-400 mt-2">* 실습 비중 60% 이상의 현장 지향적 커리큘럼</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Curriculum -->
+            <section id="curriculum" class="content-section hidden-content">
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">상세 커리큘럼 로드맵</h3>
+                    <p class="text-slate-500 text-sm">총 2일(16시간) 과정. 클릭하여 상세 실습 내용을 확인하세요.</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2">
+                        <!-- Day 1 Column -->
+                        <div class="p-6 border-b md:border-b-0 md:border-r border-slate-100">
+                            <div class="flex items-center justify-between mb-6">
+                                <h4 class="text-lg font-bold text-indigo-700 bg-indigo-50 px-3 py-1 rounded-lg">Day 1: Foundation</h4>
+                                <span class="text-sm text-slate-400">8 Hours</span>
+                            </div>
+                            
+                            <div class="relative pl-6 space-y-8">
+                                <div class="timeline-line"></div>
+                                
+                                <!-- Module 1 -->
+                                <div class="relative group cursor-pointer" onclick="toggleDetails('d1-m1')">
+                                    <div class="absolute -left-6 top-1 w-4 h-4 rounded-full bg-slate-300 group-hover:bg-indigo-500 transition-colors border-2 border-white"></div>
+                                    <h5 class="font-bold text-slate-800 group-hover:text-indigo-600 transition-colors">LangGraph 기초와 구조 이해</h5>
+                                    <p class="text-sm text-slate-500 mt-1">Agentic Workflow vs Copilot, Graph 기본 요소</p>
+                                    <div id="d1-m1" class="hidden mt-3 bg-slate-50 p-3 rounded text-sm text-slate-600 border border-slate-100">
+                                        <ul class="list-disc list-inside space-y-1">
+                                            <li><strong>이론:</strong> StateGraph, Node, Edge 개념 정립</li>
+                                            <li><strong>실습:</strong> LangChain Chain을 Graph로 변환하기</li>
+                                            <li><strong>도구:</strong> Google Colab, OpenAI API</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- Module 2 -->
+                                <div class="relative group cursor-pointer" onclick="toggleDetails('d1-m2')">
+                                    <div class="absolute -left-6 top-1 w-4 h-4 rounded-full bg-slate-300 group-hover:bg-indigo-500 transition-colors border-2 border-white"></div>
+                                    <h5 class="font-bold text-slate-800 group-hover:text-indigo-600 transition-colors">기억(Memory)과 도구(Tools)</h5>
+                                    <p class="text-sm text-slate-500 mt-1">대화 맥락 유지와 외부 기능 호출</p>
+                                    <div id="d1-m2" class="hidden mt-3 bg-slate-50 p-3 rounded text-sm text-slate-600 border border-slate-100">
+                                        <ul class="list-disc list-inside space-y-1">
+                                            <li><strong>이론:</strong> Persistence & Checkpointer 원리</li>
+                                            <li><strong>실습:</strong> DB 연동 없이 대화 기억하는 챗봇 구현</li>
+                                            <li><strong>실습:</strong> 검색 도구(Tavily)를 호출하는 라우터 구현</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- Module 3 -->
+                                <div class="relative group cursor-pointer" onclick="toggleDetails('d1-m3')">
+                                    <div class="absolute -left-6 top-1 w-4 h-4 rounded-full bg-slate-300 group-hover:bg-indigo-500 transition-colors border-2 border-white"></div>
+                                    <h5 class="font-bold text-slate-800 group-hover:text-indigo-600 transition-colors">[Project 1] Q&A 챗봇 구축</h5>
+                                    <p class="text-sm text-slate-500 mt-1">Cursor 활용 디버깅 및 시각화</p>
+                                    <div id="d1-m3" class="hidden mt-3 bg-slate-50 p-3 rounded text-sm text-slate-600 border border-slate-100">
+                                        <ul class="list-disc list-inside space-y-1">
+                                            <li><strong>목표:</strong> 조건부 엣지(Conditional Edge)를 활용한 지능형 라우팅</li>
+                                            <li><strong>특징:</strong> LangGraph Studio/LangSmith를 통한 실행 흐름 추적</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Day 2 Column -->
+                        <div class="p-6 bg-slate-50 md:bg-white">
+                            <div class="flex items-center justify-between mb-6">
+                                <h4 class="text-lg font-bold text-indigo-700 bg-indigo-50 px-3 py-1 rounded-lg">Day 2: Advanced Control</h4>
+                                <span class="text-sm text-slate-400">8 Hours</span>
+                            </div>
+
+                            <div class="relative pl-6 space-y-8">
+                                <div class="timeline-line"></div>
+                                
+                                <!-- Module 4 -->
+                                <div class="relative group cursor-pointer" onclick="toggleDetails('d2-m1')">
+                                    <div class="absolute -left-6 top-1 w-4 h-4 rounded-full bg-slate-300 group-hover:bg-indigo-500 transition-colors border-2 border-white"></div>
+                                    <h5 class="font-bold text-slate-800 group-hover:text-indigo-600 transition-colors">[제어] Human-in-the-Loop (HITL)</h5>
+                                    <p class="text-sm text-slate-500 mt-1">사람의 승인, 개입, 수정 프로세스</p>
+                                    <div id="d2-m1" class="hidden mt-3 bg-white p-3 rounded text-sm text-slate-600 border border-slate-200 shadow-sm">
+                                        <ul class="list-disc list-inside space-y-1">
+                                            <li><strong>핵심:</strong> Interrupt(중단) & Resume(재개) 메커니즘</li>
+                                            <li><strong>실습:</strong> 이메일 발송 전 사람의 '승인'을 기다리는 에이전트</li>
+                                            <li><strong>실습:</strong> 에이전트의 계획(State)을 사람이 직접 수정하고 실행</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- Module 5 -->
+                                <div class="relative group cursor-pointer" onclick="toggleDetails('d2-m2')">
+                                    <div class="absolute -left-6 top-1 w-4 h-4 rounded-full bg-slate-300 group-hover:bg-indigo-500 transition-colors border-2 border-white"></div>
+                                    <h5 class="font-bold text-slate-800 group-hover:text-indigo-600 transition-colors">[최적화] 상태 관리와 구조화</h5>
+                                    <p class="text-sm text-slate-500 mt-1">State Reducer & Pydantic</p>
+                                    <div id="d2-m2" class="hidden mt-3 bg-white p-3 rounded text-sm text-slate-600 border border-slate-200 shadow-sm">
+                                        <ul class="list-disc list-inside space-y-1">
+                                            <li><strong>최적화:</strong> 병렬 실행 시 상태 병합 전략(Reducer)</li>
+                                            <li><strong>안정성:</strong> Pydantic을 활용한 Type-Safe 데이터 관리</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- Module 6 -->
+                                <div class="relative group cursor-pointer" onclick="toggleDetails('d2-m3')">
+                                    <div class="absolute -left-6 top-1 w-4 h-4 rounded-full bg-slate-300 group-hover:bg-indigo-500 transition-colors border-2 border-white"></div>
+                                    <h5 class="font-bold text-slate-800 group-hover:text-indigo-600 transition-colors">[Project 2] 자율 논문 리서치 에이전트</h5>
+                                    <p class="text-sm text-slate-500 mt-1">Subgraph, Map-Reduce 패턴 적용</p>
+                                    <div id="d2-m3" class="hidden mt-3 bg-white p-3 rounded text-sm text-slate-600 border border-slate-200 shadow-sm">
+                                        <ul class="list-disc list-inside space-y-1">
+                                            <li><strong>최종 프로젝트:</strong> 웹 검색 -> 요약 -> 보고서 작성을 수행</li>
+                                            <li><strong>심화:</strong> '자료수집팀'과 '작성팀'을 Subgraph로 모듈화</li>
+                                            <li><strong>결과물:</strong> 복잡한 리서치 업무를 자동 수행하는 에이전트</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Tech Stack -->
+            <section id="techstack" class="content-section hidden-content">
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">활용 기술 스택</h3>
+                    <p class="text-slate-500 text-sm">최신 AI 에이전트 개발을 위한 표준 도구들을 학습합니다.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Tool 1 -->
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:border-indigo-300 transition-all">
+                        <div class="flex items-center mb-4">
+                            <span class="text-2xl mr-3">🦜🕸️</span>
+                            <h4 class="font-bold text-slate-800">LangGraph 1.x</h4>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">LangChain이 만든 에이전트 및 멀티 에이전트 오케스트레이션 프레임워크입니다. 순환형 그래프 구조로 복잡한 로직을 제어합니다.</p>
+                        <div class="bg-indigo-50 text-indigo-700 text-xs p-2 rounded inline-block">State Management, Cyclic Graph</div>
+                    </div>
+
+                    <!-- Tool 2 -->
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:border-indigo-300 transition-all">
+                        <div class="flex items-center mb-4">
+                            <span class="text-2xl mr-3">🖱️</span>
+                            <h4 class="font-bold text-slate-800">Cursor 2.0</h4>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">VS Code 기반의 AI 네이티브 코드 에디터입니다. 'Composer' 기능을 통해 에이전트 로직을 자연어로 빠르게 구현합니다.</p>
+                        <div class="bg-indigo-50 text-indigo-700 text-xs p-2 rounded inline-block">AI Pair Programming, Efficiency</div>
+                    </div>
+
+                    <!-- Tool 3 -->
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:border-indigo-300 transition-all">
+                        <div class="flex items-center mb-4">
+                            <span class="text-2xl mr-3">🐍</span>
+                            <h4 class="font-bold text-slate-800">Pydantic</h4>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">Python 데이터 유효성 검사 라이브러리입니다. LLM의 출력을 구조화된 데이터로 강제하여 시스템 안정성을 높입니다.</p>
+                        <div class="bg-indigo-50 text-indigo-700 text-xs p-2 rounded inline-block">Structured Output, Type Safety</div>
+                    </div>
+
+                    <!-- Tool 4 -->
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:border-indigo-300 transition-all">
+                        <div class="flex items-center mb-4">
+                            <span class="text-2xl mr-3">🛠️</span>
+                            <h4 class="font-bold text-slate-800">LangSmith</h4>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">LLM 애플리케이션의 실행 과정을 추적(Trace)하고 디버깅하는 플랫폼입니다. 에이전트의 사고 과정을 시각화합니다.</p>
+                        <div class="bg-indigo-50 text-indigo-700 text-xs p-2 rounded inline-block">Observability, Debugging</div>
+                    </div>
+
+                    <!-- Tool 5 -->
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:border-indigo-300 transition-all">
+                        <div class="flex items-center mb-4">
+                            <span class="text-2xl mr-3">☁️</span>
+                            <h4 class="font-bold text-slate-800">Google Colab</h4>
+                        </div>
+                        <p class="text-sm text-slate-600 mb-4">클라우드 기반의 Python 실행 환경입니다. 별도의 로컬 환경 설정 없이 즉시 실습을 진행할 수 있습니다.</p>
+                        <div class="bg-indigo-50 text-indigo-700 text-xs p-2 rounded inline-block">Zero Configuration</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Outcomes -->
+            <section id="outcomes" class="content-section hidden-content">
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">기대 효과 및 역량 성장</h3>
+                    <p class="text-slate-500 text-sm">본 과정 수료 후 달성하게 될 기술적 성취입니다.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Text Outcomes -->
+                    <div class="space-y-6">
+                        <div class="bg-white p-5 rounded-lg border-l-4 border-indigo-500 shadow-sm">
+                            <h4 class="font-bold text-slate-800 mb-2">1. 복잡한 로직의 자율화</h4>
+                            <p class="text-sm text-slate-600">단순 RAG(검색 증강 생성)를 넘어, 루프(Loop)와 조건 분기(Conditional Logic)가 포함된 복잡한 업무 프로세스를 자동화할 수 있습니다.</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-lg border-l-4 border-emerald-500 shadow-sm">
+                            <h4 class="font-bold text-slate-800 mb-2">2. 안전한 에이전트 시스템 구축</h4>
+                            <p class="text-sm text-slate-600">Human-in-the-Loop 패턴을 적용하여, AI의 환각이나 오작동을 사람이 통제할 수 있는 안전장치를 구현할 수 있습니다.</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-lg border-l-4 border-amber-500 shadow-sm">
+                            <h4 class="font-bold text-slate-800 mb-2">3. 모듈형 아키텍처 설계</h4>
+                            <p class="text-sm text-slate-600">서브그래프(Subgraph)를 통해 거대한 에이전트 시스템을 작은 단위로 쪼개어 개발하고 관리하는 마이크로서비스 패턴을 익힙니다.</p>
+                        </div>
+                    </div>
+
+                    <!-- Radar Chart -->
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                        <h4 class="text-sm font-bold text-slate-500 uppercase mb-4 text-center">교육 전후 역량 비교</h4>
+                        <div class="chart-container">
+                            <canvas id="skillsChart"></canvas>
+                        </div>
+                        <div class="mt-4 flex justify-center space-x-6 text-xs text-slate-500">
+                            <div class="flex items-center"><span class="w-3 h-3 bg-slate-300 rounded-full mr-2"></span>Before (일반 개발자)</div>
+                            <div class="flex items-center"><span class="w-3 h-3 bg-indigo-500 rounded-full mr-2"></span>After (과정 수료)</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- JavaScript for Interactions & Charts -->
+    <script>
+        // --- 1. Navigation Logic ---
+        function navigate(sectionId, navElement) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(el => {
+                el.classList.add('hidden-content');
+                el.classList.remove('block');
+            });
+            
+            // Show selected section
+            const selectedSection = document.getElementById(sectionId);
+            selectedSection.classList.remove('hidden-content');
+            selectedSection.classList.add('block');
+            selectedSection.style.display = 'block'; // Force block for animation trigger logic if needed
+
+            // Update Nav State
+            document.querySelectorAll('.nav-item').forEach(el => {
+                el.classList.remove('active', 'bg-indigo-50', 'text-indigo-600', 'border-r-4', 'border-indigo-600');
+                el.classList.add('text-slate-600');
+                el.style.borderRight = 'none';
+            });
+            navElement.classList.add('active');
+        }
+
+        // --- 2. Timeline Detail Toggle ---
+        function toggleDetails(id) {
+            const el = document.getElementById(id);
+            if (el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        }
+
+        // --- 3. Chart Initialization ---
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Composition Chart (Doughnut)
+            const ctxComp = document.getElementById('compositionChart').getContext('2d');
+            new Chart(ctxComp, {
+                type: 'doughnut',
+                data: {
+                    labels: ['실습 (Hands-on)', '이론 (Theory)'],
+                    datasets: [{
+                        data: [62.5, 37.5], // Based on 10H Practice / 6H Theory
+                        backgroundColor: ['#4F46E5', '#CBD5E1'], // Indigo-600, Slate-300
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { font: { family: 'Noto Sans KR', size: 10 } } },
+                        tooltip: { 
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.raw + '%';
+                                }
+                            }
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+
+            // Skills Radar Chart
+            const ctxSkills = document.getElementById('skillsChart').getContext('2d');
+            new Chart(ctxSkills, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        '상태 관리 (State)', 
+                        '그래프 로직 설계', 
+                        '도구 활용 (Tool Use)', 
+                        '에이전트 디버깅', 
+                        'Human-in-the-Loop',
+                        '구조화 출력 (Pydantic)'
+                    ],
+                    datasets: [{
+                        label: 'Before',
+                        data: [20, 30, 40, 30, 10, 40],
+                        fill: true,
+                        backgroundColor: 'rgba(203, 213, 225, 0.2)', // Slate-300
+                        borderColor: 'rgba(203, 213, 225, 1)',
+                        pointBackgroundColor: 'rgba(203, 213, 225, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(203, 213, 225, 1)'
+                    }, {
+                        label: 'After',
+                        data: [90, 85, 95, 80, 90, 85],
+                        fill: true,
+                        backgroundColor: 'rgba(79, 70, 229, 0.2)', // Indigo-600
+                        borderColor: 'rgba(79, 70, 229, 1)',
+                        pointBackgroundColor: 'rgba(79, 70, 229, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(79, 70, 229, 1)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { display: true, color: '#F1F5F9' },
+                            grid: { color: '#E2E8F0' },
+                            pointLabels: {
+                                font: { family: 'Noto Sans KR', size: 11, weight: 'bold' },
+                                color: '#475569'
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 100,
+                            ticks: { display: false } // Hide numbers on axis for cleaner look
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            // Initial view setup
+            document.getElementById('overview').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

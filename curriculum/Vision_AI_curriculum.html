@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD룰 AI교육 - Vision AI 실무 과정</title>
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="15x15"
+    href="./dist/images/favicon.png"
+    />
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Noto Sans KR -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8fafc; /* Slate 50 */
+            color: #1e293b; /* Slate 800 */
+        }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #e2e8f0;
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        .active-tab {
+            border-bottom: 2px solid #2563eb;
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+        .inactive-tab {
+            color: #64748b;
+        }
+        
+        /* Custom scrollbar for module details */
+        .details-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .details-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        .details-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 3px;
+        }
+        .details-scroll::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- REQUIRED PLACEHOLDERS -->
+    <!-- Chosen Palette: Slate & Blue (Professional, Trustworthy, Corporate) -->
+    <!-- Application Structure Plan: A dashboard-style proposal viewer. Top section presents the core course value propositions (Titles, Goals). The middle section is an interactive Curriculum Timeline allowing users to drill down into Day 1 vs Day 2 content derived from the book chapters. The bottom section visualizes the skill distribution and environment details. Designed to be persuasive for an Education Manager. -->
+    <!-- Visualization & Content Choices: 
+         1. Curriculum Timeline: Vertical flow to show the 2-day progression. Interactive cards reveal specific book chapters (e.g., ViTPose, Mask2Former) mapped to time slots.
+         2. Proposal Cards: 3 distinct titles as requested, selectable to see different emphases.
+         3. Skill Radar Chart: Visualizes the balance between Theory, Implementation, and specific AI domains (Pose, Seg, Captioning) using Chart.js.
+         4. Tech Stack Grid: Simple grid for tools (Colab, Cursor, PyTorch).
+         Confirmation: NO SVG graphics used. NO Mermaid JS used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Navigation / Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <img src="mdrules-logo.png" alt="MD룰 AI교육" width="116px">
+                    <h1 class="text-xl font-bold text-slate-800 tracking-tight">Vision AI 실무 과정</h1>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <button onclick="scrollToSection('overview')" class="text-slate-600 hover:text-blue-600 font-medium">개요</button>
+                    <button onclick="scrollToSection('curriculum')" class="text-slate-600 hover:text-blue-600 font-medium">커리큘럼</button>
+                    <button onclick="scrollToSection('environment')" class="text-slate-600 hover:text-blue-600 font-medium">실습 환경</button>
+                    <a href="https://mdrules.dev" target="_self" rel="noopener noreferrer" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30">
+                        사이트로 이동
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Introduction Section -->
+        <section id="overview" class="mb-12">
+            <div class="bg-white rounded-2xl shadow-sm p-8 border border-slate-100">
+                <p class="text-blue-600 font-semibold text-sm uppercase tracking-wide mb-2">과정 제안 개요</p>
+                <h2 class="text-3xl font-extrabold text-slate-900 mb-6">IT 엔지니어를 위한 Vision AI 실무 과정</h2>
+                <p class="text-slate-600 text-lg leading-relaxed mb-8">
+                    본 과정은 AI Agent 개발 경험이 있는 엔지니어를 대상으로, 
+                    <strong>Keypoint Detection, Segmentation, Captioning</strong> 등 최신 Vision AI 기술을 
+                    <strong>밑바닥부터(From Scratch) 구현</strong>하며 원리를 파악하고 실무 역량을 강화하는 2일 집중 교육입니다.
+                </p>
+
+                <!-- 3 Title Proposals -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Title Option 1 -->
+                    <div class="border border-blue-100 bg-blue-50/50 p-6 rounded-xl hover:shadow-md transition-shadow cursor-pointer border-l-4 border-l-blue-500" onclick="selectTitle(1)">
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded">제안 1 (직관적)</span>
+                            <span class="text-slate-400" id="check-1">✓</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-800 leading-tight">Colab과 Cursor로 완성하는 Vision AI 핵심 기술 실무</h3>
+                    </div>
+                    <!-- Title Option 2 -->
+                    <div class="border border-slate-200 bg-white p-6 rounded-xl hover:shadow-md transition-shadow cursor-pointer border-l-4 border-l-purple-500" onclick="selectTitle(2)">
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="bg-purple-100 text-purple-700 text-xs font-bold px-2 py-1 rounded">제안 2 (기술 중심)</span>
+                            <span class="text-slate-400" id="check-2"></span>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-800 leading-tight">Transformer 기반의 Pose Estimation 및 Segmentation 마스터</h3>
+                    </div>
+                    <!-- Title Option 3 -->
+                    <div class="border border-slate-200 bg-white p-6 rounded-xl hover:shadow-md transition-shadow cursor-pointer border-l-4 border-l-emerald-500" onclick="selectTitle(3)">
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-2 py-1 rounded">제안 3 (성과 중심)</span>
+                            <span class="text-slate-400" id="check-3"></span>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-800 leading-tight">Vision AI 아키텍처: 이론부터 구현까지 End-to-End 완전 정복</h3>
+                    </div>
+                </div>
+
+                <!-- Key Specs -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 border-t border-slate-100 pt-6">
+                    <div class="text-center">
+                        <p class="text-slate-500 text-sm mb-1">교육 기간</p>
+                        <p class="text-xl font-bold text-slate-800">2일 (16시간)</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-slate-500 text-sm mb-1">대상</p>
+                        <p class="text-xl font-bold text-slate-800">IT 개발자</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-slate-500 text-sm mb-1">수준</p>
+                        <p class="text-xl font-bold text-slate-800">중급 (Intermediate)</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-slate-500 text-sm mb-1">핵심 도구</p>
+                        <p class="text-xl font-bold text-slate-800">Colab, Cursor, PyTorch</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <!-- Skill Distribution Chart -->
+            <div class="bg-white rounded-2xl shadow-sm p-6 border border-slate-100">
+                <h3 class="font-bold text-lg text-slate-800 mb-4">교육 역량 구성</h3>
+                <p class="text-slate-500 text-sm mb-6">본 과정이 포괄하는 기술적 영역과 비중입니다.</p>
+                <div class="chart-container">
+                    <canvas id="skillChart"></canvas>
+                </div>
+            </div>
+            <!-- Time Allocation Chart -->
+            <div class="bg-white rounded-2xl shadow-sm p-6 border border-slate-100">
+                <h3 class="font-bold text-lg text-slate-800 mb-4">시간 배분 (Time Allocation)</h3>
+                <p class="text-slate-500 text-sm mb-6">이론 학습과 실습(Hands-on)의 균형 잡힌 구성</p>
+                <div class="chart-container flex items-center justify-center">
+                    <canvas id="timeChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Curriculum Timeline -->
+        <section id="curriculum" class="mb-12">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-2xl font-bold text-slate-900">상세 커리큘럼 (Syllabus)</h2>
+                <div class="flex space-x-2 bg-slate-100 p-1 rounded-lg">
+                    <button id="btn-day1" class="px-4 py-2 rounded-md text-sm font-medium bg-white shadow-sm text-blue-700 transition-all" onclick="filterDay(1)">Day 1</button>
+                    <button id="btn-day2" class="px-4 py-2 rounded-md text-sm font-medium text-slate-500 hover:text-slate-700 transition-all" onclick="filterDay(2)">Day 2</button>
+                    <button id="btn-all" class="px-4 py-2 rounded-md text-sm font-medium text-slate-500 hover:text-slate-700 transition-all" onclick="filterDay(0)">전체 보기</button>
+                </div>
+            </div>
+
+            <div class="relative pb-8">
+                <div class="timeline-line hidden md:block"></div>
+                
+                <div id="timeline-container" class="space-y-8">
+                    <!-- Dynamic Content populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Environment & Tools -->
+        <section id="environment" class="bg-slate-900 rounded-3xl p-8 md:p-12 text-white overflow-hidden relative">
+            <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-4">최적의 실습 환경</h2>
+                    <p class="text-slate-300 mb-8 leading-relaxed">
+                        고사양 GPU 장비 없이도 가능한 클라우드 기반 환경과 AI 코딩 어시스턴트를 활용하여,
+                        실무와 가장 유사한 생산성 높은 개발 경험을 제공합니다.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center space-x-3">
+                            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center font-bold text-sm">1</span>
+                            <div>
+                                <strong class="block text-white">Google Colab (Pro/Free)</strong>
+                                <span class="text-slate-400 text-sm">별도 설치 없는 GPU 환경, T4/A100 활용</span>
+                            </div>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center font-bold text-sm">2</span>
+                            <div>
+                                <strong class="block text-white">Cursor IDE</strong>
+                                <span class="text-slate-400 text-sm">AI 에이전트 개발자를 위한 차세대 AI IDE 활용</span>
+                            </div>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center font-bold text-sm">3</span>
+                            <div>
+                                <strong class="block text-white">PyTorch & Hugging Face</strong>
+                                <span class="text-slate-400 text-sm">최신 SOTA 모델(ViT, Mask2Former) 즉시 활용</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                    <h3 class="text-lg font-bold mb-4 border-b border-slate-700 pb-2">사용 데이터셋 & 라이브러리</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-4 bg-slate-700/50 rounded-lg">
+                            <div class="text-blue-400 font-mono text-xs mb-1">DATASET</div>
+                            <div class="font-bold">COCO 2017</div>
+                            <div class="text-xs text-slate-400 mt-1">Object Detection, Segmentation 표준</div>
+                        </div>
+                        <div class="p-4 bg-slate-700/50 rounded-lg">
+                            <div class="text-blue-400 font-mono text-xs mb-1">DATASET</div>
+                            <div class="font-bold">StanfordExtra</div>
+                            <div class="text-xs text-slate-400 mt-1">강아지 키포인트 검출용</div>
+                        </div>
+                        <div class="p-4 bg-slate-700/50 rounded-lg">
+                            <div class="text-purple-400 font-mono text-xs mb-1">LIBRARY</div>
+                            <div class="font-bold">timm</div>
+                            <div class="text-xs text-slate-400 mt-1">PyTorch Image Models</div>
+                        </div>
+                        <div class="p-4 bg-slate-700/50 rounded-lg">
+                            <div class="text-purple-400 font-mono text-xs mb-1">LIBRARY</div>
+                            <div class="font-bold">Transformers</div>
+                            <div class="text-xs text-slate-400 mt-1">Hugging Face Ecosystem</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Detailed Modal (Hidden by default) -->
+    <div id="detail-modal" class="fixed inset-0 bg-black/50 hidden z-50 flex items-center justify-center p-4 backdrop-blur-sm transition-opacity">
+        <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[80vh] flex flex-col shadow-2xl">
+            <div class="p-6 border-b border-slate-100 flex justify-between items-center">
+                <h3 id="modal-title" class="text-xl font-bold text-slate-900">Module Details</h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 text-2xl">&times;</button>
+            </div>
+            <div id="modal-content" class="p-6 overflow-y-auto details-scroll text-slate-600 leading-relaxed">
+                <!-- Content goes here -->
+            </div>
+            <div class="p-4 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end">
+                <button onclick="closeModal()" class="px-5 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 text-sm font-medium">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- DATA SOURCE ---
+        // Based on the provided Japanese book content, mapped to a 2-day curriculum.
+        const curriculumData = [
+            {
+                id: 1,
+                day: 1,
+                time: "09:00 - 10:30",
+                title: "개발 환경 구축 및 Transformer 개요",
+                summary: "Google Colab, Cursor 설정 및 최신 Vision AI의 핵심인 Transformer 아키텍처 이해",
+                tags: ["Chapter 1", "Environment"],
+                details: `
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>Google Colab 활용:</strong> GPU(T4/A100) 리소스 관리 및 Notebook 환경 설정.</li>
+                        <li><strong>Cursor IDE 연동:</strong> AI 에이전트 개발을 위한 Cursor의 코드 생성 기능 활용법.</li>
+                        <li><strong>데이터셋 준비:</strong> Google Drive 마운트 및 Kaggle/COCO API 설정.</li>
+                        <li><strong>Vision Transformer(ViT) 리뷰:</strong> CNN에서 Transformer로의 패러다임 변화와 Self-Attention 메커니즘의 시각적 이해.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 2,
+                day: 1,
+                time: "10:45 - 12:30",
+                title: "Keypoint Detection 기초 (PyTorch/Keras)",
+                summary: "StanfordExtra 데이터셋을 활용한 강아지 키포인트 검출 모델 구현",
+                tags: ["Chapter 2", "Chapter 3"],
+                details: `
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>데이터 전처리:</strong> JSON 어노테이션 파싱, 히트맵(Heatmap) 생성 원리.</li>
+                        <li><strong>모델 아키텍처:</strong> ViT를 백본(Backbone)으로 하는 키포인트 검출기 설계.</li>
+                        <li><strong>PyTorch 구현:</strong> Custom Dataset, DataLoader, Model Class 정의.</li>
+                        <li><strong>결과 가시화:</strong> 예측된 히트맵에서 좌표 추출 및 원본 이미지 오버레이.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 3,
+                day: 1,
+                time: "13:30 - 15:30",
+                title: "심화: ViTPose 스타일 자세 추정",
+                summary: "SOTA 모델인 ViTPose 구조를 모방한 고성능 자세 추정 모델 구현",
+                tags: ["Chapter 4", "Advanced"],
+                details: `
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>ViTPose 구조 분석:</strong> Plain ViT 백본과 Simple Decoder의 조합.</li>
+                        <li><strong>MAE(Masked Autoencoder) Pre-training:</strong> 사전 학습 가중치 로드 및 파인튜닝(Fine-tuning).</li>
+                        <li><strong>Top-down 방식:</strong> 사람 검출(Person Detection) 후 자세 추정 파이프라인 이해.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 4,
+                day: 1,
+                time: "15:45 - 17:30",
+                title: "실습: COCO Multi-person Pose Estimation",
+                summary: "복잡한 환경(다수 인물)에서의 자세 추정 및 스켈레톤 시각화",
+                tags: ["Chapter 5", "Project"],
+                details: `
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>COCO 2017 데이터셋:</strong> 'person' 키포인트 데이터 구조 이해.</li>
+                        <li><strong>복수 인물 처리:</strong> 히트맵 디코딩 및 인스턴스 매칭 전략.</li>
+                        <li><strong>실전 구현:</strong> 입력 이미지 내 모든 사람의 관절을 추정하고 스켈레톤을 그리는 전체 파이프라인 완성.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 5,
+                day: 2,
+                time: "09:00 - 11:00",
+                title: "Semantic Segmentation (Segmenter)",
+                summary: "픽셀 단위 분류를 위한 Transformer 기반 Segmenter 모델 구현",
+                tags: ["Chapter 6", "Segmentation"],
+                details: `
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>세그멘테이션 개요:</strong> Semantic vs Instance vs Panoptic의 차이.</li>
+                        <li><strong>Segmenter 아키텍처:</strong> Vision Transformer + Mask Transformer 구조.</li>
+                        <li><strong>COCO Stuff 데이터셋:</strong> 배경(Stuff)과 객체(Thing)의 픽셀 단위 학습.</li>
+                        <li><strong>평가 지표:</strong> mIoU(mean Intersection over Union) 계산 및 시각화.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 6,
+                day: 2,
+                time: "11:15 - 13:00",
+                title: "Instance Segmentation (Mask2Former)",
+                summary: "객체별 구분이 가능한 Mask2Former 모델의 원리와 구현",
+                tags: ["Chapter 7", "SOTA"],
+                details: `
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>Mask2Former 핵심:</strong> Masked Attention을 이용한 쿼리 기반 학습.</li>
+                        <li><strong>Mask Classification:</strong> 픽셀 분류가 아닌 마스크 예측 문제로의 전환.</li>
+                        <li><strong>Hungarian Matching:</strong> 예측 마스크와 정답 마스크의 최적 매칭 알고리즘.</li>
+                        <li><strong>Loss Function:</strong> Dice Loss와 Focal Loss의 결합.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 7,
+                day: 2,
+                time: "14:00 - 15:30",
+                title: "Panoptic Segmentation 완전 정복",
+                summary: "Semantic과 Instance를 통합한 Panoptic Segmentation 파인튜닝",
+                tags: ["Chapter 8", "Integrated"],
+                details: `
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>Panoptic Quality (PQ):</strong> 통합 세그멘테이션 성능 평가 방법.</li>
+                        <li><strong>Hugging Face 활용:</strong> 사전 학습된 MaskFormer를 COCO Panoptic 데이터셋에 파인튜닝.</li>
+                        <li><strong>결과 해석:</strong> 배경과 개별 객체가 완벽히 분리된 추론 결과 시각화.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 8,
+                day: 2,
+                time: "15:45 - 17:30",
+                title: "Image Captioning & Multimodal",
+                summary: "이미지를 보고 설명을 생성하는 Vision-Language 모델 구현",
+                tags: ["Chapter 9", "GenAI"],
+                details: `
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>Encoder-Decoder 구조:</strong> ViT(이미지 인코더) + GPT/BERT(텍스트 디코더).</li>
+                        <li><strong>토큰화(Tokenization):</strong> 이미지 캡션을 위한 텍스트 전처리 및 Vocab 구축.</li>
+                        <li><strong>학습 루프:</strong> Teacher Forcing을 이용한 시퀀스 생성 학습.</li>
+                        <li><strong>추론:</strong> 새로운 이미지를 입력받아 자연어 문장을 생성하는 캡셔닝 에이전트 완성.</li>
+                    </ul>
+                `
+            }
+        ];
+
+        // --- STATE & RENDERING ---
+        let currentDayFilter = 0; // 0 = all
+
+        function renderTimeline() {
+            const container = document.getElementById('timeline-container');
+            container.innerHTML = '';
+
+            const filteredData = currentDayFilter === 0 
+                ? curriculumData 
+                : curriculumData.filter(item => item.day === currentDayFilter);
+
+            filteredData.forEach((item, index) => {
+                const isLeft = index % 2 === 0;
+                // For mobile, always left aligned visually, but logic keeps structure
+                
+                const cardHtml = `
+                    <div class="relative flex items-center justify-between md:justify-normal md:${isLeft ? 'flex-row-reverse' : 'flex-row'} group">
+                        
+                        <!-- Center Node -->
+                        <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-8 h-8 rounded-full ${item.day === 1 ? 'bg-blue-500' : 'bg-emerald-500'} items-center justify-center text-white font-bold z-10 border-4 border-white shadow-sm">
+                            ${item.day}
+                        </div>
+                        <div class="md:hidden absolute left-[11px] w-5 h-5 rounded-full ${item.day === 1 ? 'bg-blue-500' : 'bg-emerald-500'} border-2 border-white z-10"></div>
+
+                        <!-- Spacer for Desktop Layout -->
+                        <div class="hidden md:block w-5/12"></div>
+
+                        <!-- Content Card -->
+                        <div class="w-full md:w-5/12 ml-8 md:ml-0 pl-4 md:pl-0">
+                            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 card-hover cursor-pointer transition-all hover:border-blue-300" onclick="openModal(${item.id})">
+                                <div class="flex justify-between items-start mb-2">
+                                    <span class="inline-block px-2 py-1 text-xs font-semibold rounded ${item.day === 1 ? 'bg-blue-100 text-blue-800' : 'bg-emerald-100 text-emerald-800'}">
+                                        Day ${item.day}
+                                    </span>
+                                    <span class="text-sm text-slate-500 font-mono">${item.time}</span>
+                                </div>
+                                <h3 class="text-lg font-bold text-slate-800 mb-2">${item.title}</h3>
+                                <p class="text-slate-600 text-sm line-clamp-2">${item.summary}</p>
+                                <div class="mt-3 flex flex-wrap gap-2">
+                                    ${item.tags.map(tag => `<span class="text-xs text-slate-400 bg-slate-100 px-2 py-1 rounded">#${tag}</span>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardHtml;
+            });
+        }
+
+        // --- FILTER LOGIC ---
+        function filterDay(day) {
+            currentDayFilter = day;
+            
+            // Update Buttons
+            document.getElementById('btn-all').className = `px-4 py-2 rounded-md text-sm font-medium transition-all ${day === 0 ? 'bg-white shadow-sm text-blue-700' : 'text-slate-500 hover:text-slate-700'}`;
+            document.getElementById('btn-day1').className = `px-4 py-2 rounded-md text-sm font-medium transition-all ${day === 1 ? 'bg-white shadow-sm text-blue-700' : 'text-slate-500 hover:text-slate-700'}`;
+            document.getElementById('btn-day2').className = `px-4 py-2 rounded-md text-sm font-medium transition-all ${day === 2 ? 'bg-white shadow-sm text-blue-700' : 'text-slate-500 hover:text-slate-700'}`;
+
+            renderTimeline();
+        }
+
+        // --- SELECTION LOGIC ---
+        function selectTitle(id) {
+            // Reset checks
+            document.getElementById('check-1').textContent = '';
+            document.getElementById('check-2').textContent = '';
+            document.getElementById('check-3').textContent = '';
+            
+            // Set styles
+            const cards = document.querySelectorAll('[onclick^="selectTitle"]');
+            cards.forEach(card => {
+                card.classList.remove('bg-blue-50/50', 'bg-purple-50/50', 'bg-emerald-50/50', 'border-blue-100', 'border-purple-100', 'border-emerald-100');
+                card.classList.add('bg-white', 'border-slate-200');
+            });
+
+            // Activate specific
+            const activeCard = cards[id-1];
+            activeCard.classList.remove('bg-white', 'border-slate-200');
+            
+            if(id === 1) {
+                activeCard.classList.add('bg-blue-50/50', 'border-blue-100');
+                document.getElementById('check-1').textContent = '✓';
+                document.getElementById('check-1').className = 'text-blue-600 font-bold';
+            } else if(id === 2) {
+                activeCard.classList.add('bg-purple-50/50', 'border-purple-100');
+                document.getElementById('check-2').textContent = '✓';
+                document.getElementById('check-2').className = 'text-purple-600 font-bold';
+            } else {
+                activeCard.classList.add('bg-emerald-50/50', 'border-emerald-100');
+                document.getElementById('check-3').textContent = '✓';
+                document.getElementById('check-3').className = 'text-emerald-600 font-bold';
+            }
+        }
+
+        // --- MODAL LOGIC ---
+        function openModal(id) {
+            const item = curriculumData.find(d => d.id === id);
+            if (!item) return;
+
+            document.getElementById('modal-title').textContent = item.title;
+            document.getElementById('modal-content').innerHTML = `
+                <div class="mb-4">
+                    <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold ${item.day === 1 ? 'bg-blue-100 text-blue-800' : 'bg-emerald-100 text-emerald-800'} mb-2">Day ${item.day} | ${item.time}</span>
+                </div>
+                <div class="prose prose-slate">
+                    <p class="text-lg text-slate-700 font-medium mb-4">${item.summary}</p>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                        <h4 class="font-bold text-slate-800 mb-2">상세 학습 내용</h4>
+                        ${item.details}
+                    </div>
+                </div>
+            `;
+            
+            const modal = document.getElementById('detail-modal');
+            modal.classList.remove('hidden');
+            // Small timeout for fade transition if implemented in CSS, simple toggle here
+        }
+
+        function closeModal() {
+            document.getElementById('detail-modal').classList.add('hidden');
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // --- CHARTS ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTimeline();
+
+            // Skill Radar Chart
+            const skillCtx = document.getElementById('skillChart').getContext('2d');
+            new Chart(skillCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Keypoint/Pose', 'Segmentation', 'Image Captioning', 'Transformer Theory', 'PyTorch/Coding', 'Data Processing'],
+                    datasets: [{
+                        label: 'Skill Level Target',
+                        data: [90, 85, 75, 80, 95, 85],
+                        fill: true,
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgb(59, 130, 246)',
+                        pointBackgroundColor: 'rgb(59, 130, 246)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(59, 130, 246)'
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: '#e2e8f0' },
+                            grid: { color: '#e2e8f0' },
+                            pointLabels: {
+                                font: { size: 12, family: "'Noto Sans KR', sans-serif" },
+                                color: '#64748b'
+                            },
+                            ticks: { display: false, max: 100 }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            // Time Allocation Pie Chart
+            const timeCtx = document.getElementById('timeChart').getContext('2d');
+            new Chart(timeCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['이론 및 아키텍처 이해', 'Live Coding & 구현', '미니 프로젝트 & 활용'],
+                    datasets: [{
+                        data: [30, 45, 25],
+                        backgroundColor: [
+                            '#94a3b8', // Slate 400
+                            '#3b82f6', // Blue 500
+                            '#10b981'  // Emerald 500
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: { family: "'Noto Sans KR', sans-serif" },
+                                padding: 20,
+                                usePointStyle: true
+                            }
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
